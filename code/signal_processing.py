@@ -14,7 +14,7 @@ from scipy.integrate import simps
 from sklearn import preprocessing
 from peak_detect import *
 from get_data import *
-
+from data_processing import *
 def butter_bandpass(lowcut, highcut, sampling_freq, order=5):
 	"""
 	Band pass filter parameters:
@@ -139,9 +139,9 @@ def get_bpfo(data):
 	this is the dupicate of the function
 	BPFO. Used for testing.
 	"""
-	faults = {"BPFO":236.2}
+	faults = {"BPFO":236.4}
 	freq_peaks,amp_peaks,freq,amp = get_peaks(data)
-	bpfo = list(filter(lambda f: round(f,0)==faults["BPFO"] ,freq_peaks))
+	bpfo = list(filter(lambda f: round(f,0)==round(faults["BPFO"],0) ,freq_peaks))
 	bpfo_amp = []
 	if len(bpfo) == 1:
 		idx = list(freq).index(bpfo[0])
@@ -150,19 +150,31 @@ def get_bpfo(data):
 	else:
 		return None, None
 
-def get_bpfi(data):
+
+def get_fault_frequency(data,fault_freq):
 	"""
-	this is the dupicate of the function
-	BPFO. Used for testing.
+	This function returns the bpfi frequency
+	and the corresponding amplitude.
+
+	Arguments:
+	----------
+	data:
+	array containing the vibration time signal.
+
+	fault_freq:
+	fault frequency in HERTZ (cycle per second)
+
+	Returns:
+	--------
+	None or fault frequency and amplitude
 	"""
-	faults = {"BPFI":296.8}
 	freq_peaks,amp_peaks,freq,amp = get_peaks(data)
-	bpfo = list(filter(lambda f: round(f,0)==faults["BPFI"] ,freq_peaks))
-	bpfo_amp = []
-	if len(bpfo) == 1:
-		idx = list(freq).index(bpfo[0])
-		bpfo_amp = [amp[idx]]
-		return bpfo, bpfo_amp
+	bpfi = list(filter(lambda f: round(f,0) == round(fault_freq,0) ,freq_peaks))
+	bpfi_amp = []
+	if len(bpfi) == 1:
+		idx = list(freq).index(bpfi[0])
+		bpfi_amp = [amp[idx]]
+		return bpfi, bpfi_amp
 	else:
 		return None, None
 
@@ -240,30 +252,35 @@ def get_imfs(data):
 	pass
 
 
+
+
 if __name__ == '__main__':
-
-	k=0
-	#for k in [0,1,2,3]:
-	save_data(k)
-
-	# k = 0
-	# bpfo,amp = get_bpfo_amplitude(k)
-	# print(amp)
-
-
-	# harmonics_name = "BPFO"
-	# k=0
-	# bpfo,bpfo_amp = BPFO(date,k)
-	# harmonics, amplitude = get_harmonics(harmonics_name,date,k)
-	# print(harmonics, "---",amplitude)
-
-
-
-
-
-
-
-
+	path_to_files = "../data/3rd_test"
+	files = get_all_files(path_to_files,type=None)
+	fault_freqs = {"bpfo":236.4, "bpfi":296.8, "rdf":280.4}
+	indexes = list(fault_freqs.keys())
+	temp_container = []
+	json_data = {}
+	file_name = "3rd_test_len2.json"
+	#get bearing number k
+	for k in [0,1,2,3]:
+		key = "bearing{}".format(k+1)
+		value = {}
+		for fault_name in fault_freqs:
+			fault_freq = fault_freqs[fault_name]
+			for path in files:
+				print("processing {} for {}".format(path,key))
+				data = get_data(path,k)
+				#data = scale_data(data)
+				bpfi, amplitude = get_fault_frequency(data,fault_freq)
+				if amplitude is not None:
+					temp_container.append(amplitude[0])
+			averge_amp = len(temp_container)
+			value[fault_name] = averge_amp
+			temp_container = []
+		json_data[key] = value
+	print("saving data to json file")
+	create_json_data(json_data,file_name)
 
 
 
