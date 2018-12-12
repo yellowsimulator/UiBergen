@@ -164,6 +164,8 @@ def create_labeled_csv_files(input_folder, output_folder, data_columns,label):
 
 
 
+
+
 if __name__ == '__main__':
     input_folder = "../data/1st_test"
     output_folder = "../data/bpfi_data"
@@ -174,11 +176,11 @@ if __name__ == '__main__':
             "bearing4":{"bpfo":20.1,"bpfo":30.001,"rdf":40.0003},
 
     }
-    path_to_json = "3rd_test_len2.json"
+    path_to_json = "labeled_data_test1.json"
     d = read_json_data(path_to_json)
-    print("bearing 1",d["bearing1"])
-    print("bearing 2",d["bearing2"])
-    print("bearing 3",d["bearing3"])
-    print("bearing 4",d["bearing4"])
+    print("bearing 1",d["chanel1"])
+    print("bearing 2",d["chanel3"])
+    print("bearing 3",d["chanel5"])
+    print("bearing 4",d["chanel7"])
     #print(d["bearing1"]["bpfo"])
     #create_json_data(data)

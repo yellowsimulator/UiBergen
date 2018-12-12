@@ -112,8 +112,6 @@ def get_envelop_spectrum(accelaration):
 
 
 
-
-
 def get_peaks(data):
 	#data = get_data(date,k)
 	freq, amp = get_envelop_spectrum(data)
@@ -121,6 +119,7 @@ def get_peaks(data):
 	freq_peaks = freq[peaks_index]
 	amp_peaks = amp[peaks_index]
 	return freq_peaks,amp_peaks,freq,amp
+
 
 
 def BPFO(date,k):
@@ -132,6 +131,31 @@ def BPFO(date,k):
 		idx = list(freq).index(bpfo[0])
 		bpfo_amp = [amp[idx]]
 	return bpfo, bpfo_amp
+
+
+
+def BPFI(date,k):
+	faults = {"BPFI":236.}
+	freq_peaks,amp_peaks,freq,amp = get_peaks(data,k)
+	bpfi = list(filter(lambda f: round(f,0)==faults["BPFI"] ,freq_peaks))
+	bpfi_amp = []
+	if len(bpfi) == 1:
+		idx = list(freq).index(bpfi[0])
+		bpfi_amp = [amp[idx]]
+	return bpfi, bpfi_amp
+
+
+
+def RDF(date,k):
+	faults = {"RDF":280.4}
+	freq_peaks,amp_peaks,freq,amp = get_peaks(data,k)
+	rdf = list(filter(lambda f: round(f,0)==faults["RDF"] ,freq_peaks))
+	rdf_amp = []
+	if len(rdf) == 1:
+		idx = list(freq).index(rdf[0])
+		rdf_amp = [amp[idx]]
+	return rdf, rdf_amp
+
 
 
 def get_bpfo(data):
@@ -149,6 +173,7 @@ def get_bpfo(data):
 		return bpfo, bpfo_amp
 	else:
 		return None, None
+
 
 
 def get_fault_frequency(data,fault_freq):
@@ -253,18 +278,22 @@ def get_imfs(data):
 
 
 
-
 if __name__ == '__main__':
-	path_to_files = "../data/3rd_test"
+	import matplotlib
+	import os
+	matplotlib.use('Agg')
+	import matplotlib.pyplot as plt
+	path_to_files = "../data/1st_test"
 	files = get_all_files(path_to_files,type=None)
 	fault_freqs = {"bpfo":236.4, "bpfi":296.8, "rdf":280.4}
 	indexes = list(fault_freqs.keys())
 	temp_container = []
 	json_data = {}
-	file_name = "3rd_test_len2.json"
+	file_name = "labeled_data_test1.json"
 	#get bearing number k
-	for k in [0,1,2,3]:
-		key = "bearing{}".format(k+1)
+	for k in [0,2,4,6]:
+		#os.mkdir("{}".format(k+1))
+		key = "chanel{}".format(k+1)
 		value = {}
 		for fault_name in fault_freqs:
 			fault_freq = fault_freqs[fault_name]
@@ -274,9 +303,15 @@ if __name__ == '__main__':
 				#data = scale_data(data)
 				bpfi, amplitude = get_fault_frequency(data,fault_freq)
 				if amplitude is not None:
-					temp_container.append(amplitude[0])
-			averge_amp = len(temp_container)
-			value[fault_name] = averge_amp
+					temp_container.append(path)
+			# plt.plot(temp_container)
+			# plt.ylim([0,0.005])
+			# plt.title("amplitude for {} and {}".format(key,fault_name))
+			# plt.savefig("{}/{}_{}.png".format(k+1,key,fault_name))
+			# plt.close()
+			# temp_container = []
+			#averge_amp = np.mean(temp_container)
+			value[fault_name] = temp_container
 			temp_container = []
 		json_data[key] = value
 	print("saving data to json file")
