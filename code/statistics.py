@@ -86,6 +86,7 @@ def pdist_distance(u,v,metric):
     the disimilarity measure between u
     and v
     """
+    print("in distance 1: metric is {}".format(metric))
     if metric == "mahalanobis":
         cov_uv = inv_covariance(u,v)
         V = np.array(list(map(lambda w: np.var(w),[u,v]))).reshape(-1,1).T
@@ -94,6 +95,70 @@ def pdist_distance(u,v,metric):
         X = np.array([u,v]).T
         d = pdist(X,metric=metric)
     return d
+
+
+def limit_plot(test_number,method):
+    """
+    use the wavelet transform to generate two new
+    features and use the feature to compute the variance.
+    plot the limit
+    """
+    stats = {"iqr":iqr,"var":np.var,"mahalanobis":mahalanobis}
+    statistic = stats[method]
+    path_to_files = "../data/{}".format(test_number)
+    files = get_all_files(path_to_files,type=None)
+    print(len(files))
+    exit()
+    temp=[]
+    bearing1=[]; bearing2=[]; bearing3=[]; bearing4=[]
+    container =[bearing1,bearing2,bearing3,bearing4]
+    #reference_limit_path = files[0]
+
+    for chanel in [0,1,2,3]:
+        #reference_limit_data = get_data(ref_path,chanel)
+        if method == "mahalanobis":
+            ref_path = files[0]
+            ref_data = get_data(ref_path,chanel)
+            cA_ref, cD_ref = pywt.dwt(ref_data, 'db1')
+            files = files[1:]
+        for path in files:
+            print("processing {}".format(path))
+            data = get_data(path,chanel)
+            print("teste1")
+            cA, cD = pywt.dwt(data, 'db1')
+            print("teste2")
+            if method == "mahalanobis":
+                print("computing mahalanobis for {} bearing{}".format(path,chanel+1))
+                result_cA = pdist_distance(cA,cA_ref,method)
+                result_cD = pdist_distance(cD,cD_ref,method)
+            else:
+                result_cA = statistic(cA)
+                result_cD = statistic(cD)
+            health_index = np.sqrt(result_cA**2 + result_cD**2)
+            temp.append(health_index[0][0])
+            #cD_temp.append(result_cD)
+        container[chanel].append(temp)
+        temp = []
+
+
+
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+    mx = max(bearing3[0])
+
+    ax1.plot(range(len(bearing3[0])),[mx for _ in range(len(bearing3[0]))],c="orangeru",label="limit")
+    ax1.plot(range(len(bearing1[0])),bearing1[0],c="red",label="bearing1")
+    ax1.plot(range(len(bearing2[0])),bearing2[0],c="yellow", label="bearing2")
+    ax1.plot(range(len(bearing3[0])),bearing3[0],c="green",label="bearing3")
+    ax1.plot(range(len(bearing4[0])),bearing4[0],c="blue",label="bearing4")
+    plt.xlabel("{} date range ".format(method))
+    plt.ylabel("{} health index".format(method))
+    plt.title(" plot for {}".format(method))
+
+    plt.legend(loc='upper left')
+    plt.savefig("bearings_{}_health.png".format(method))
+
+
 
 
 
@@ -130,24 +195,39 @@ def normal_distribution(test_number,metric):
 
 
 def variance_plot_wavelet(test_number,method):
-    stats = {"iqr":iqr,"var":np.var}
+    """
+    use the wavelet transform to generate two new
+    features and use the feature to compute the variance.
+    """
+    stats = {"iqr":iqr,"var":np.var,"mahalanobis":mahalanobis}
     statistic = stats[method]
     path_to_files = "../data/{}".format(test_number)
     files = get_all_files(path_to_files,type=None)
-    cA_temp = []
-    cD_temp =[]
-    bearing1 = []
-    bearing2 = []
-    bearing3 = []
-    bearing4 = []
+    cA_temp=[]; cD_temp=[]
+    bearing1=[]; bearing2=[]; bearing3=[]; bearing4=[]
     container =[bearing1,bearing2,bearing3,bearing4]
     for chanel in [0,1,2,3]:
+        if method == "mahalanobis":
+            ref_path = files[0]
+            ref_data = get_data(ref_path,chanel)
+            cA_ref, cD_ref = pywt.dwt(ref_data, 'db1')
+            files = files[1:]
         for path in files:
             print("processing {}".format(path))
             data = get_data(path,chanel)
+            print("teste1")
             cA, cD = pywt.dwt(data, 'db1')
-            cA_temp.append(statistic(cA))
-            cD_temp.append(statistic(cD))
+            print("teste2")
+            if method == "mahalanobis":
+                print("computing mahalanobis for {} bearing{}".format(path,chanel+1))
+                result_cA = pdist_distance(cA,cA_ref,method)
+                result_cD = pdist_distance(cD,cD_ref,method)
+            else:
+                result_cA = statistic(cA)
+                result_cD = statistic(cD)
+
+            cA_temp.append(result_cA)
+            cD_temp.append(result_cD)
         container[chanel].append([cD_temp, cA_temp])
         cA_temp = []
         cD_temp =[]
@@ -163,7 +243,7 @@ def variance_plot_wavelet(test_number,method):
     plt.title(" plot for {}".format(method))
 
     plt.legend(loc='upper left')
-    plt.savefig("bearings_{}.png".format(method))
+    plt.savefig("bearings_{}_mean.png".format(method))
 
     #plt.show()
 
@@ -176,10 +256,10 @@ def variance_plot_wavelet(test_number,method):
 if __name__ == '__main__':
     chanel = 2
     test_number = "2nd_test"
-    metric = "mahalanobis"
-    method = "var"
-
-    variance_plot_wavelet(test_number,method)
+    #metric = "mahalanobis"
+    method = "mahalanobis"
+    limit_plot(test_number,method)
+    #variance_plot_wavelet(test_number,method)
     #metric = "jaccard"
     #d = pdist_distance(u,v,metric)
     #normal_distribution(test_number,metric)
