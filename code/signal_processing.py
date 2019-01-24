@@ -178,20 +178,6 @@ def get_bpfo(data):
 
 def get_fault_frequency(data,fault_freq):
 	"""
-	This function returns the bpfi frequency
-	and the corresponding amplitude.
-
-	Arguments:
-	----------
-	data:
-	array containing the vibration time signal.
-
-	fault_freq:
-	fault frequency in HERTZ (cycle per second)
-
-	Returns:
-	--------
-	None or fault frequency and amplitude
 	"""
 	freq_peaks,amp_peaks,freq,amp = get_peaks(data)
 	bpfi = list(filter(lambda f: round(f,0) == round(fault_freq,0) ,freq_peaks))
@@ -278,7 +264,7 @@ def get_imfs(data):
 
 
 
-if __name__ == '__main__':
+def some_job():
 	import matplotlib
 	import os
 	matplotlib.use('Agg')
@@ -304,12 +290,12 @@ if __name__ == '__main__':
 				bpfi, amplitude = get_fault_frequency(data,fault_freq)
 				if amplitude is not None:
 					temp_container.append(path)
-			# plt.plot(temp_container)
-			# plt.ylim([0,0.005])
-			# plt.title("amplitude for {} and {}".format(key,fault_name))
-			# plt.savefig("{}/{}_{}.png".format(k+1,key,fault_name))
-			# plt.close()
-			# temp_container = []
+			plt.plot(temp_container)
+			plt.ylim([0,0.005])
+			plt.title("amplitude for {} and {}".format(key,fault_name))
+			plt.savefig("{}/{}_{}.png".format(k+1,key,fault_name))
+			plt.close()
+			temp_container = []
 			#averge_amp = np.mean(temp_container)
 			value[fault_name] = temp_container
 			temp_container = []
@@ -319,6 +305,10 @@ if __name__ == '__main__':
 
 
 
+
+
+if __name__ == '__main__':
+	print("ok")
 
 
 

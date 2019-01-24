@@ -1,7 +1,12 @@
+import os
 import json
+import matplotlib
 import pandas as pd
 from glob import glob
+#matplotlib.use('Agg')
 from sklearn import preprocessing
+import matplotlib.pyplot as plt
+from signal_processing import *
 
 
 def scale_data(data):
@@ -16,6 +21,7 @@ def get_average_amplitude():
 def create_json_data(data,file_name):
     with open(file_name, 'w') as outfile:
         json.dump(data, outfile)
+
 
 def read_json_data(path_to_json):
     with open(path_to_json) as json_data:
@@ -161,26 +167,40 @@ def create_labeled_csv_files(input_folder, output_folder, data_columns,label):
             print("{} data saved to csv".format(date))
 
 
+def plot_chanels_data(chanels,test_number):
+    if not os.path.exists("{}_pictures".format(test_number)):
+        os.makedirs("{}_pictures".format(test_number))
+    path_to_files = "../data/{}".format(test_number)
+    files = get_all_files(path_to_files,type=None)
+    fault_freqs = {"bpfo":236.4, "bpfi":296.8, "rdf":280.4}
+    indexes = list(fault_freqs.keys())
+    for k in chanels:
+        if not os.path.exists("{}_pictures/{}".format(test_number,k+1)):
+            os.mkdir("{}_pictures/{}".format(test_number,k+1))
+        key = "chanel{}".format(k+1)
+        for fault_name in fault_freqs:
+            fault_freq = fault_freqs[fault_name]
+            temp_container = []
+            for path in files:
+                print("processing {} for {}".format(path,key))
+                data = get_data(path,k)
+                print(data)
+                exit()
+                bpfi, amplitude = get_fault_frequency(data,fault_freq)
+                if amplitude is not None:
+                    temp_container.append(amplitude)
+            print("ploting for {} chanel {}".format(fault_name,k+1))
+            plt.plot(temp_container)
+            plt.ylim([0,0.03])
+            plt.title("amplitude for {} and {}".format(key,fault_name))
+            plt.savefig("{}_pictures/{}/{}_{}.png".format(test_number,k+1,key,fault_name))
+            plt.close()
 
 
 
 
 
 if __name__ == '__main__':
-    input_folder = "../data/1st_test"
-    output_folder = "../data/bpfi_data"
-    data = {
-            "bearing1":{"bpfo":0.1,"bpfo":0.001,"rdf":0.0003},
-            "bearing2":{"bpfo":0.143,"bpfo":0.101,"rdf":2.0003},
-            "bearing3":{"bpfo":2.1,"bpfo":3.001,"rdf":10.0003},
-            "bearing4":{"bpfo":20.1,"bpfo":30.001,"rdf":40.0003},
-
-    }
-    path_to_json = "labeled_data_test1.json"
-    d = read_json_data(path_to_json)
-    print("bearing 1",d["chanel1"])
-    print("bearing 2",d["chanel3"])
-    print("bearing 3",d["chanel5"])
-    print("bearing 4",d["chanel7"])
-    #print(d["bearing1"]["bpfo"])
-    #create_json_data(data)
+    chanels = [0,1,2,3]
+    test_number = "2nd_test"
+    plot_chanels_data(chanels,test_number)
