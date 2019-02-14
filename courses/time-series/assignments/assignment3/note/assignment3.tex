@@ -1,0 +1,147 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb,amsmath}
+\usepackage{float}
+
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\Cov}{\operatorname{Cov}}
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{DarkGreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{DarkGreen},
+     %frame=single, % adds a frame around the code
+     backgroundcolor=\color{lightgray},
+}
+\usepackage[svgnames]{xcolor}
+\title{STAT211 Mandatory Homework 2}
+\author{Yapi Donatien Achou}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\section{Problem 3.1}
+\section{Problem 3.2}
+Consider the MA(1) process given by 
+\begin{equation}\label{eq:y}
+Y_{t} = Z_{t} + \theta Z_{t-1}
+\end{equation}
+where $Z_{t}$ id iid. N(0,4).
+\subsection{Part a}
+Show that 
+\begin{equation}\label{eq:z}
+Z_{t} = \sum_{j=0}^{\infty}(-\theta)^{j}Y_{t-j}.
+\end{equation}
+By rearranging equation (\ref{eq:y}) we get
+\begin{equation}\label{eq:y1}
+ Z_{t} + \theta Z_{t-1} -Y_{t}  = 0.
+\end{equation}
+Now we want to show that $Z_{t}$ given by equation (\ref{eq:z}) is solution of (\ref{eq:y1}). By inserting the expression of $Z_{t}$ from equation (\ref{eq:z}) into equation 
+(\ref{eq:y1}), we get
+\begin{equation}\label{eq:p1}
+\begin{aligned}
+Z_{t} + \theta Z_{t-1} -Y_{t} &= \sum_{j=0}^{\infty}(-\theta)^{j}Y_{t-j}+ \theta\left( \sum_{j=0}^{\infty}(-\theta)^{j}Y_{t-1-j}  \right)-Y_{t}\\
+&=Y_{t} + \sum_{j=1}^{\infty}(-\theta)^{j}Y_{t-j}+ \theta\left( \sum_{j=0}^{\infty}(-\theta)^{j}Y_{t-1-j}  \right)-Y_{t}\\
+&= \sum_{j=1}^{\infty}(-\theta)^{j}Y_{t-j}+ \theta \sum_{j=0}^{\infty}(-\theta)^{j}Y_{t-1-j}  
+\end{aligned}
+\end{equation}
+Now the first sum in the right expression of equation (\ref{eq:p1}) can be written as 
+\begin{equation}
+\begin{aligned}
+\sum_{j=1}^{\infty}(-\theta)^{j}Y_{t-j}&=-\theta Y_{t-1} + \theta^{2} Y_{t-2} -\theta^{3} Y_{t-3} + \theta^{4} Y_{t-4} - \cdots \\
+&=-\theta(Y_{t-1} - \theta^{1} Y_{t-2} +\theta^{2} Y_{t-3} - \theta^{3} Y_{t-4} + \cdots)\\
+&=-\theta\sum_{j=0}^{\infty}(-\theta)^{j}Y_{t-j-1}
+\end{aligned}
+\end{equation}
+
+Therefore equation (\ref{eq:p1}) can be rewritten as
+\begin{equation}
+Z_{t} + \theta Z_{t-1} -Y_{t} = -\theta\sum_{j=0}^{\infty}(-\theta)^{j}Y_{t-j-1} + \theta \sum_{j=0}^{\infty}(-\theta)^{j}Y_{t-1-j}  = 0.
+\end{equation}
+And we are done.
+
+
+\section{All R code Code}
+
+\begin{lstlisting}
+options( warn = -1 )
+
+library(astsa)
+data(varve)
+
+# plot data
+plot_data <- function(data){
+  plot(varve,col="blue")
+  title(main="Logarithm of glacial varve timeseries", col.main="blue")
+  title(xlab="Time", col.lab="blue")
+  title(ylab="Varve", col.lab="blue")
+}
+
+#histogram plot
+
+histogram <- function(sample){
+  hist(sample,main="Histogram of logarithm of varve data", col="blue", prob=TRUE,ylim=c(0,1))
+
+  lines(density(sample),lwd=2,col="green")
+}
+
+# compute variance of a sample
+get_variance <- function(sample){
+  sample_variance <- var(sample)
+  return(sample_variance)
+}
+
+# compute the logarithm of a sample
+get_log <- function(sample){
+  log_sample <- log(sample)
+  plot(log_sample,col="blue",xlab="Time",ylab="Log varve", col.lab="blue")
+  title(main="Logarithm of glacial varve timeseries", col.main="blue")
+}
+
+plot_difference <- function(sample){
+  difference <- diff(sample,lag=1, differences=1)
+  plot(difference,col="blue")
+  title(main="Difference of log of varve data", col.main="blue")
+  #title(xlab="Time", col.lab="blue")
+  #title(ylab="Varve", col.lab="blue")
+
+}
+
+
+
+Y <- log(varve)
+U <- diff(Y,lag=1, differences=1)
+#emp_auto_corr_rho <- acf(U,type = "correlation")
+#emp_auo_variance_gamma <- acf(U, type = "covariance")
+#print(emp_auo_variance_gamma[1])
+#print(emp_auo_variance_gamma[0])
+
+x1 <- var(U)/(1-2*0.49+0.49*0.47)
+x2 <- var(U)/(1-2*2+2*2)
+
+print(x1)
+
+print(x2)
+
+print(var(U))
+
+\end{lstlisting}
+
+
+\end{document}  

@@ -1,0 +1,203 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{float}
+
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\Cov}{\operatorname{Cov}}
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{DarkGreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{DarkGreen},
+     %frame=single, % adds a frame around the code
+     backgroundcolor=\color{lightgray},
+}
+\usepackage[svgnames]{xcolor}
+\title{STAT211 Mandatory Homework 4}
+\author{Yapi Donatien Achou}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\section{Problem 4.1}
+Considere an ARMA(p,q) model 
+\begin{equation}\label{eq:arma}
+X_{t}-\sum_{k=1}^{p}\phi_{k}X_{t-k} = Z_{t}+\sum_{k=1}^{p}\theta_{k}Z_{t-k}
+\end{equation}
+\subsection{Part a: invertibility}
+An ARMA(p,q) process $\{  X_{t}\}$ is invertible if there exist constant $\{  \pi_{j}\}$ such that 
+\begin{equation}
+\sum_{j=0}^{\infty}|\pi_{j}| \le \infty
+\end{equation}
+and 
+\begin{equation}\label{eq:z}
+Z_{t} = \sum_{j=0}^{\infty}\pi_{j}X_{t-j} \quad \text{for all t}.
+\end{equation}
+In other word $\{  X_{t}\}$ is invertible if $Z_{t}$ can be written as a linear combination of $X_{t-j}$, $j = 0,1, \dots, \infty$, \cite{petter}.
+
+\begin{flushleft}
+Invertibility is equivalent to 
+\begin{equation}\label{eq:theta}
+\theta(z) = 1+ \theta_{1}z+ \cdots + \theta_{q}z^{q}\neq 0 \quad \text{for all} \quad |z| \leq 1
+\end{equation}
+where $\theta(z)$ is the moving average polynomial.
+\end{flushleft}
+
+\begin{flushleft}
+The process $X_{t}$ is invertible if and only if the zeros of the moving average polynomial $\theta(B)$ lie outside the unit circle.
+%Now let prove that if a process is invertible then $Z_{t}$ is expressible in terms of $X_{s}$, $s\leq t$, given that $|\theta| < 1$.
+\end{flushleft}
+
+\subsection{Part b}
+The sequence in (\ref{eq:z}) is determined by the relation
+\begin{equation}\label{eq:main}
+(1+\theta_{1}z +\theta_{2}z^{2} + \cdots + \theta_{q}z^{q})(\pi_{0} + \pi_{1}z + \cdots) = (1-\phi_{1}z-\phi_{2}z^{2}-\cdots-\phi_{p}z^{q}).
+\end{equation}
+Multiplying the left hand side together gives 
+\begin{equation}
+\begin{aligned}
+(1+\theta_{1}z +\theta_{2}z^{2} + \cdots + \theta_{q}z^{q})(\pi_{0} + \pi_{1}z + \cdots)&=\pi_{0}+\pi_{1}z+\pi_{2}z^{2}+\cdots +\theta_{1}\pi_{0}z+\theta_{1}\pi_{1}z^{2}+\cdots+\theta_{2}\pi_{0}z^{2}\\
+&=\pi_{0}+(\pi_{1}+\theta_{1}\pi_{0})z+(\pi_{2}+\theta_{1}\pi_{1}+\theta_{2}\pi_{0})z^{2}+ \cdots \nonumber
+\end{aligned}
+\end{equation}
+and equation (\ref{eq:main}) can be rewritten as 
+\begin{equation}\label{eq:main1}
+\pi_{0}+(\pi_{1}+\theta_{1}\pi_{0})z+(\pi_{2}+\theta_{1}\pi_{1}+\theta_{2}\pi_{0})z^{2}+ \cdots = (1-\phi_{1}z-\phi_{2}z^{2}-\cdots-\phi_{p}z^{q}).
+\end{equation}
+And equating the coefficients of $z^{j}, j = 0, 1, \cdots$, we obtain
+\begin{equation}
+\begin{aligned}
+\pi_{0} &= 1\\
+\pi_{1}+\theta_{1}\pi_{0}&=-\phi_{1}\\
+\pi_{2}+\theta_{1}\pi_{1}+\theta_{2}\pi_{0} &=-\phi_{2}\\
+\vdots\nonumber
+\end{aligned}
+\end{equation}
+or equivalently
+\begin{equation}
+\pi_{j}+\sum_{k=1}^{q}\theta_{k}\pi_{j-1} = -\phi_{j}, \quad j =0,1, \cdots
+\end{equation}
+
+
+%\begin{flushleft}
+%\begin{proof}
+%Equation (\ref{eq:arma}) can be written as
+%\begin{equation}\label{eq:arma1}
+%\phi(B)X_{t} = \theta(B)Z_{t}
+%\end{equation}
+%where $B$ is the backshift operator defined by 
+%\begin{equation}
+%B^{j}X_{t} = X_{t-j}
+%\end{equation}
+%\begin{equation}
+%B^{j}Z_{t} = Z_{t-j}
+%\end{equation}
+% $\phi(.)$ and $\theta(.)$ are the p-th and q-th autoregressive and moving average polynomial 
+% \begin{equation}\label{eq:ar}
+% \phi(B) = 1-\phi_{1}B-\dots \phi_{p}B^{p}
+% \end{equation}
+%  \begin{equation}\label{eq:ma}
+% \theta(B) = 1+\theta_{1}B+\dots \theta_{q}B^{q}.
+% \end{equation}
+% The n-th order Taylor series expansion of $\theta(B)$ around $a=0$ is given by
+% \begin{equation}\label{eq:tayl}
+% \theta(B) = \sum_{j=0}^{n}\frac{\theta^{n}(0)}{n!}B^{n}.
+% \end{equation}
+% Setting $\theta_{1} = \theta$ and $\theta(0) = 1$, the first order Taylor series expansion of $\theta(B)$ is given by 
+% \begin{equation}
+% \begin{aligned}
+% \theta(B) &= \theta(0) + \theta^{\prime}(0)B\\
+%               &= 1+\theta B
+% \end{aligned}
+% \end{equation}
+% where $\theta^{\prime}(0)$ is the derivative of $\theta$ evaluated at 0.
+% 
+% \begin{flushleft}
+% Now we know that the Maclaurin series for $\frac{1}{1-x}$ is 
+% \begin{equation}\label{eq:mac}
+% \frac{1}{1-x} = 1+x+x^{2}\cdots+ = \sum_{j=0}^{\infty}x^{j}, \quad \text{for $|x| < 1$}
+% \end{equation}
+% Setting 
+% \begin{equation}
+% 1-x = \theta(B) 
+% \end{equation}
+% we get 
+% \begin{equation}
+% x = 1-\theta(B) = 1- (1+\theta B) = -\theta B
+% \end{equation}
+% And inserting the value of $x$ back into (\ref{eq:mac}) we get
+% \begin{equation}\label{eq:series}
+% \frac{1}{\theta(B)} =  \sum_{j=0}^{\infty}(-\theta B)^{j} = \sum_{j=0}^{\infty}(-\theta)^{j} (B)^{j}, \quad \text{for $|\theta| <1$}
+% \end{equation}
+% Multiplying (\ref{eq:series}) by (\ref{eq:arma1}) give
+% \begin{equation}\label{eq:arma2}
+% \begin{aligned}
+%Z_{t}&=\theta(B)\phi(B)X_{t} \\
+%        &= \sum_{j=0}^{\infty}(-\theta)^{j} (B)^{j}\phi(B)X_{t}
+%\end{aligned}
+%\end{equation}
+%From (\ref{eq:tayl}),the first order Taylor series expansion of $\phi(B)$ is given by 
+%\begin{equation}
+%\phi(B) = 1-\phi B
+%\end{equation}
+%So 
+%\begin{equation}
+%\begin{aligned}
+%Z_{t} &= \sum_{j=0}^{\infty}(-\theta)^{j} (B)^{j}(1-\phi B)X_{t} \\
+%        &=(1-\theta B+(-\theta)^{2} B^{2} + \cdots )(1-\phi B)X_{t}\\
+%        &=(X_{t}-\phi BX_{t})(1-\theta B+(-\theta)^{2} B^{2} + \cdots )\\
+%        &=(X_{t}-\phi X_{t-1})(1-\theta B+(-\theta)^{2} B^{2} + \cdots )\\
+%        &=X_{t}-\theta BX_{t} + \theta^{2}B^{2}X_{t} - \theta^{3}B^{3}X_{t} + \cdots -\phi X_{t-1} + \phi\theta BX_{t-1} -\phi\theta^{2}B^{2} X_{t-1} + \phi\theta^{3}B^{3} X_{t-1}-\cdots\\
+%        &=X_{t}-\theta X_{t-1} + \theta^{2}X_{t-2} - \theta^{3}X_{t-3} + \cdots -\phi X_{t-1} + \phi\theta X_{t-2} -\phi\theta^{2} X_{t-3} + \phi\theta^{3} X_{t-4}-\cdots\\
+%        &=X_{t}-(\theta + \phi)X_{t-1} + (\theta + \phi)\theta X_{t-2} -(\theta + \phi)\theta^{2} X_{t-3} + (\theta + \phi)\theta^{3} X_{t-4} - \cdots \\
+%        &=X_{t} -(\theta + \phi)(X_{t-1} -\theta X_{t-2} + \theta^{2} X_{t-3} - \theta^{3} X_{t-4} + \cdots)\\
+%        &=X_{t}-(\theta + \phi)\sum_{j=1}^{\infty}(-\theta)^{j-1}X_{t-j}
+%\end{aligned}
+%\end{equation}
+%So that $Z_{t}$ can be expressed in terms of the present and past values of the process $X_{s}$, $s\leq t$
+% \end{flushleft}
+% 
+% 
+% 
+%\end{proof}
+%\end{flushleft}
+
+
+
+
+
+\section{All R code Code}
+
+\begin{lstlisting}
+\end{lstlisting}
+
+
+
+\begin{thebibliography}{9}
+\bibitem{petter} 
+Petter J. Brockwell. Richard A. Davis
+\textit{Introduction to Time Series and Forecasting}. 
+Springer. Second edition. 2001
+ 
+\end{thebibliography}
+
+
+\end{document}  
