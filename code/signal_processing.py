@@ -1,5 +1,8 @@
 import numpy as np
 import numpy
+import seaborn as sns
+from pyhht.emd import EMD
+
 import statsmodels.api as sm
 from scipy.signal import butter, lfilter, freqz
 import pandas as pd
@@ -528,6 +531,36 @@ if __name__ == '__main__':
     path_to_files = "../data/1st_test"
     files = get_all_files(path_to_files,type=None)
     colors = ["red","blue","green","yellow"]
+    path = files[10]
+    _, y = get_wevelets(get_data(path,0))
+
+    decomposer = EMD(y)
+    d = {}
+    #imfs1 = decomposer1.decompose()
+    #decomposer = EMD(imfs[0])
+    imfs = decomposer.decompose()
+    #print(len(imfs))
+    #exit()
+    for j, series in enumerate(imfs):
+        d["imf{}".format(j+1)] = imfs[j]
+
+    t = np.linspace(0,1,len(imfs[0]))
+    d["Time"] = t
+    df = pd.DataFrame(d)
+    #df = pd.DataFrame({"Time":x,"imf1":imfs[0]})
+    import seaborn as sns; sns.set()
+    import matplotlib.pyplot as plt
+    #fmri = sns.load_dataset("fmri")
+    for name in d:
+        print("plotting {}".format(name))
+        sns.lineplot(x="Time", y=name, data=df)
+        plt.savefig("imf/{}.png".format(name))
+        plt.close()
+    #sns.lineplot(x="Time", y="imf{}".format(2), data=df)
+    #sns.lineplot(x="Time", y="imf{}".format(4), data=df)
+    #plt.show()
+
+    exit()
     #j = 0
     m = len(files)
     j = m-1

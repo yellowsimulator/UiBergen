@@ -1,0 +1,18 @@
+\contentsline {section}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {2}Preview work}{3}
+\contentsline {section}{\numberline {3}Signal processing methods}{3}
+\contentsline {subsection}{\numberline {3.1}Overview}{3}
+\contentsline {subsection}{\numberline {3.2}Fourier transform}{3}
+\contentsline {subsubsection}{\numberline {3.2.1}Theory}{3}
+\contentsline {subsubsection}{\numberline {3.2.2}Application}{3}
+\contentsline {subsection}{\numberline {3.3}Wavelet transform}{3}
+\contentsline {subsubsection}{\numberline {3.3.1}Theory}{3}
+\contentsline {subsubsection}{\numberline {3.3.2}Application}{3}
+\contentsline {subsection}{\numberline {3.4}Hilbert Huang transform}{3}
+\contentsline {subsubsection}{\numberline {3.4.1}Theory}{3}
+\contentsline {subsubsection}{\numberline {3.4.2}Application for bearings fault detection}{6}
+\contentsline {section}{\numberline {4}Machine learning methods}{9}
+\contentsline {subsection}{\numberline {4.1}Overview}{9}
+\contentsline {section}{\numberline {5}Result}{9}
+\contentsline {subsection}{\numberline {5.1}Overview}{9}
+\contentsline {section}{\numberline {6}Conclusion}{9}

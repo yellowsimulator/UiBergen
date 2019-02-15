@@ -59,7 +59,11 @@ showstringspaces=false            %
 %\date{}							% Activate to display a given date or no date
 
 \begin{document}
+
+
 \maketitle
+\tableofcontents
+\newpage
 %\begin{figure}[H] %  figure placement: here, top, bottom, or page
 %   \centering
 %   \includegraphics[width=5in]{front4} 
@@ -109,18 +113,183 @@ f(x) = \sum_{j=0}^{j=n}\alpha_{j}\varphi_{j}.
 \end{equation}
 In the context of this work, the basis functions $\{ \varphi_{j} \}_{j=0}^{n}$ are the features derived from the original dataset.
 \subsection{Fourier transform}
+\subsubsection{Theory}
+\subsubsection{Application}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Wavelet transform}
+\subsubsection{Theory}
+\subsubsection{Application}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Hilbert Huang transform}
+\subsubsection{Theory}
+The Hilbert-Huang transform is a data decomposition methods that consists of decomposing data in an adaptive fashion. Adaptivity means that rather than imposing an a priory basis such as trigonometric functions, a posteriori basis functions are derived from the data itself \cite{norden2008}. In doing so, the method deals better with nonlinearity and non stationarity which are inherently present in real world data.
+
+\begin{flushleft}
+This method gives an alternative approach of time-frequency-energy paradigm by using Hilbert spectral analysis and the so call empirical mode decomposition (EMD) to express the nonlinearity and the non stationary in data 
+with instantaneous frequency and instantaneous amplitude \cite{norden2008}.
+\end{flushleft}
+\begin{flushleft}
+The empirical mode decomposition (EMD) originated from the quest of functions that can be expressed by a time-frequency-amplitude expression, such that the frequency is physically meaningful.
+Consider a time series $x(t)$. Its Hilbert transform H(t) is given by 
+
+\begin{equation}
+H(t) = \frac{1}{\pi}P\int_{_\infty}^{\infty}\frac{x(\tau)}{t-\tau}\mathrm{d}\tau,
+\end{equation}
+where $P$ is the Cauchy principal value. The corresponding time-frequency-amplitude function of $x(t)$ is the analytical function
+\begin{equation}
+z(t) = x(t) + iy(t) = a(t)e^{i\theta(t)},
+\end{equation}
+where the instantaneous amplitude $a(t)$ and phase $\theta(t)$ can be computed by 
+\begin{equation}\label{eq:amp}
+a(t) = \sqrt{x(t)^{2}+ y(t)^{2}}
+\end{equation}
+\begin{equation}
+\theta(t) = \tan^{-1}\left(\frac{y(t)}{x(t)}\right).
+\end{equation}
+Furthermore, the instantaneous frequency $w(t)$ can be derived from the phase $\theta(t)$ as
+\begin{equation}\label{eq:freq}
+w(t) = \frac{d\theta}{dt}.
+\end{equation}
+By setting 
+\begin{equation}
+f(t) = \frac{y(t)}{x(t)}, \nonumber
+\end{equation}
+the expression of the instantaneous  amplitude $w(t)$ in (\ref{eq:freq}) can be expanded as
+\begin{equation}
+w(t) = \frac{f^{\prime}(t)}{1+f(t)^{2}} = \frac{y^{\prime}(t)x(t)-y(t)x^{\prime}(t)}{x(t)(x(t)+y(t)^{2})}.
+\end{equation}
+The instantaneous frequency $w(t)$ using the Hilbert transform is not always physically meaning. For example for an arbitrarily function, the instantaneous physical frequency values should be positive. However this is not always the case. 
+
+\begin{flushleft} 
+For example if 
+\begin{equation}
+f(x) = \cos(ct) +d 
+\end{equation}
+where $c$ and $d$ are constants, the instantaneous frequency is given by
+\begin{equation}
+w(t) = \frac{-c\sin(ct)}{1+(\cos(ct) +d)^{2} }
+\end{equation}
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2.5in]{f} 
+     \includegraphics[width=2.5in]{frequency} 
+   \caption{function f and its corresponding frequency}
+   \label{fig:freq}
+\end{figure}
+From Figure \ref{fig:freq}, we see that the instantaneous frequency takes negative values, which is not physically meaning full. 
+\end{flushleft}
+
+\begin{flushleft}
+To circumvent this, the Hilbert-Huang transform offers a methodology to obtain from an arbitrarily function or time series $x(t)$ a set of finite subcomponents whose instantaneous frequency are physically meaningful. This methodology let to the empirical mode decomposition.
+\end{flushleft}
+
+
+
+%Once the instantaneous frequency and amplitude are defined, we can define the Hilbert-Huang spectrum H(w,t), \cite{hui2007} as 
+%\begin{equation}\label{eq:hs}
+%H(w,t) = Re\sum_{i=1}^{n}a_{i}(t)\exp\left(\int w_{i}(t)\mathrm{d}t\right),
+%\end{equation}
+%and compute the marginal spectrum 
+%\begin{equation}
+%h(w) = \int_{0}^{T}H(w,t)\mathrm{d}t.
+%\end{equation}
+%While the Hilbert spectrum is the energy contribution of each instantaneous frequency, the marginal spectrum is the total energy contribution of all instantaneous frequency
+%\cite{norden2008, hui2007}. 
+\end{flushleft}
+
+\begin{flushleft}
+ The necessary condition for obtaining a physical frequency is that $x(t)$ satisfies the approximate local envelope symmetry condition \cite{norden1998}. 
+
+
+
+This condition 
+is expressed in the empirical mode decomposition (EMD) such that an arbitrarily time series $x(t)$ can be decomposed by a sifting process into intrinsic mode function $c_{i}$
+\begin{equation}
+x(t) = \sum_{i=1}^{n}c_{i} + r_{n}
+\end{equation}
+where the $c_{i}$ satisfies the approximate local envelope symmetry condition
+\begin{equation}
+SD_{k} = \frac{\sum_{t=0}^{T}}{\sum_{t=0}^{T}} < \epsilon
+\end{equation}
+where $\epsilon$ is a small predefined real number.
+\end{flushleft}
+
+\subsubsection{Application for bearings fault detection}
+we consider a vibration signal with sample frequency of 20000Hz rotating speed of 2000 RPM
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{signal} 
+   \caption{Vibration signal of 1 second snapshot}
+   \label{fig:signal}
+\end{figure}
+\begin{flushleft}
+After applying the empirical mode decomposition on the vibration data from figure \ref{fig:signal} we get sixteen  intrinsic mode functions
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2.5in]{imf/imf1.png} 
+     \includegraphics[width=2.5in]{imf/imf2.png} 
+   \caption{1th and 2nd intrinsic mode function (imf)}
+   \label{fig:imf11}
+\end{figure}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2in]{imf/imf3.png} 
+     \includegraphics[width=2in]{imf/imf4.png} 
+   \caption{3rd and 4th intrinsic mode function (imf)}
+   \label{fig:imf34}
+\end{figure}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2in]{imf/imf5.png} 
+     \includegraphics[width=2in]{imf/imf6.png} 
+   \caption{5th and 6th intrinsic mode function (imf)}
+   \label{fig:imf56}
+\end{figure}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2in]{imf/imf7.png} 
+     \includegraphics[width=2in]{imf/imf8.png} 
+   \caption{7th and 8th intrinsic mode function (imf)}
+   \label{fig:imf78}
+\end{figure}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2in]{imf/imf9.png} 
+     \includegraphics[width=2in]{imf/imf10.png} 
+   \caption{9th and 10th intrinsic mode function (imf)}
+   \label{fig:imf910}
+\end{figure}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2in]{imf/imf11.png} 
+     \includegraphics[width=2in]{imf/imf12.png} 
+   \caption{11th and 12th intrinsic mode function (imf)}
+   \label{fig:imf1112}
+\end{figure}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2in]{imf/imf13.png} 
+     \includegraphics[width=2in]{imf/imf14.png} 
+   \caption{13th and 14th intrinsic mode function (imf)}
+   \label{fig:imf1314}
+\end{figure}
+
+\end{flushleft}
+
 %\begin{figure}[H] %  figure placement: here, top, bottom, or page
 %   \centering
 %   \includegraphics[width=4in]{vibration} 
@@ -173,119 +342,15 @@ In the context of this work, the basis functions $\{ \varphi_{j} \}_{j=0}^{n}$ a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Statistical approach: dissimilarity measure}
-In this approach we compute the dissimilarity between each sample. Let $X_{i}$ and $X_{j}$ be two samples from the same distribution. Then the Mahalanobis distance between the two random variables with corresponding covariance matrix $S$ and inverse $S^{-1}$ is given by
-\begin{equation}
-d(X_{i}, X_{j}) = \sqrt{  \left(  X_{i}- X_{j} \right)^{T}S^{-1} \left(  X_{i}- X_{j} \right)    }
-\end{equation}
-The Mahalobis distance then gives the dissimilarity between the two samples $X_{i}$ and $X_{j}$.
-\begin{flushleft}
-Our dissimilarity measure is inspired by the Mahalanobis distance. Rather then using $X_{i}-X_{j}$ we will form a vector $\left(\Var[X_{i}], \Var[X_{j}]\right)$ where $\Var[X_{i}]$ and$\Var[X_{i}]$ are the variance of sample $X_{i}$ and $X_{j}$ respectively. With this change the new dissimilarity measure is given by 
-\begin{equation}
-d(Z, Y) =  \left(  \Var[Z], \Var[Y] \right)^{T}S^{-1} \left( \Var[Z], \Var[Y] \right]) .
-\end{equation}
-\end{flushleft}
-Once we have a way to measure the dissimilarity between samples, we set a reference sample $X_{0}$ which represents a sample with no defect. Afterwards,  we compute the dissimilarity between $X_{0}$ and subsequent samples for each bearing.
-We can implement the above formula in python:
-
-\begin{python}
-def dissimilarity_measure(u,v):
-	#inverse of the covariance matrix
-	U=np.array([u,v])
-	covariance=np.cov(U)
-	cov_inv=np.linal.inv(covariance)
-	#dissimilarity between u and v
-	V=np.array(list(map(lambda w: np.var(w),[u,v]))).reshape(-1,1).T
-	d=np.matmul(np.matmul(V,cov_inv), V.T)
-	return d
-\end{python}
-\begin{figure}[H] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=7in]{statistics_dissimilarity_bpfo} 
-   \caption{Dissimilarity measure for four bearings. In red a bearing with ball pass frequency outer race defect}
-   \label{fig:example}
-\end{figure}
-
-\begin{figure}[H] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=7in]{statistics_dissimilarity_bpfi} 
-   \caption{Dissimilarity measure for four bearings. In red a bearing with ball pass frequency inner race defect}
-   \label{fig:example}
-\end{figure}
-
-As we can see on the above figures, the bearings with outer race and inner race defect have the highest dissimilarity measure. The dissimilarity measures quantifies the health index of a bearing. A higher dissimilarity implies bearing degradation.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Mixed method: statistical and wavelet approach}
-\begin{figure}[H] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=4in]{mixed4} 
-   \caption{}
-   \label{fig:example}
-\end{figure}
-For the mixed method, we use wavelet transform to generate two extra features from the vibration time signal, namely the discrete detailed coefficient cD and the approximate coefficient cA. The detail coefficient cD represents the hight frequency component of the vibration time signal and the approximate coefficient cA represents  
-the low frequency component.  For the mother wavelet we use Daubechies 20 or db20.
-
-\begin{figure}[H] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=2in]{dbscaling}
-    \includegraphics[width=2in]{dbwavelet}  
-   \caption{The scaling function $\varphi$ (left) and the wavelet function $\Psi$ (right) }
-   \label{fig:example}
-\end{figure}
-
- A pseudo code in python to implement the method:
-\begin{python}
-pip install pywavelet
-\end{python}
-\begin{python}
-import pywt
-import numpy as np
-container = []
-mother_wavelet = 'db20'
-ref_cA, ref_cD = pywt.dwt(ref_sample, mother_wavelet)
-for sample in samples:
-	cA, cD = pywt.dwt(ref_sample, mother_wavelet)
-	cA_dissimilarity = dissimilarity_measure(ref_cA,cA)
-	cD_dissimilarity = dissimilarity_measure(ref_cD,cD)
-	container.append((cA_dissimilarity,cD_dissimilarity))
-\end{python}
-\begin{flushleft}
-Once we have the two extra features, we compute the dissimilarity between a reference sample and subsequent samples for each feature. 
-This process generates a set of points $(x,y)$ that represent the health index of each sample. As can be seen in the figure bellow, a bearing can go through three main stages:
-\begin{enumerate}
-\item A healthy stage characterised by a low health index
-\item A warning stage characterised by an increasing health index
-\item An alarm stage characterised by a high health index
-\end{enumerate}
-
-\end{flushleft}
-
-K.C. Deekshit Kompella a, Venu Gopala Rao Mannam b, Srinivasa Rao Rayapudi
-\begin{figure}[H] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=6in]{mixed_method_bpfo.png} 
-   \caption{}
-   \label{fig:example}
-\end{figure}
-\begin{figure}[H] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=6in]{mixed_method_bpfi.png} 
-   \caption{}
-   \label{fig:example}
-\end{figure}
-In the alarm stage, as the degradation becomes more severe, the distance between the points increases.
-\section{Comparison}
-The Signal processing method allows finding the nature or type of the fault and monitor the amplitude of the fault frequency. In the mixed method, we can only detect if there is fault but we cant specify for sure which kind of fault. The same goes for the mixed method. However in the mixed method we can estimate the time of failure based on the distance between the points formed by the dissimilarity of the detailed and approximate coefficients of the time signal wavelet transform.
-\begin{flushleft}
-The signal processing method relies on the RPM (the speed of the motor) to compute the fault frequency. If the RPM is inaccurate, it can be challenging to find a fault frequency. The statistical and mixed method only rely on the time signal. 
-\end{flushleft}
+\section{Machine learning methods}
+\subsection{Overview}
 
 
 
 
-\section{Defining the use case}
+\section{Result}
+\subsection{Overview}
+We apply the methodology described in this work to an application for bearing fault detection.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=4in]{experiment} 
@@ -295,6 +360,25 @@ The signal processing method relies on the RPM (the speed of the motor) to compu
 The data used in this use case was generated by the Intelligence Maintenance system (IMS) [link to the IMS].
 Three separate experiments involving four bearings were performed on a motor. In each experiment, a 1-second vibration signal snapshots was recorded every 10 minutes, for a specified time. Each vibrational signal sample consists of 20 480 data points with sampling rate of 20 000 Hz.
 In this post I will be using the first and the second experiment data [available here (give a link to the data)].
+
+
+\section{Conclusion}
+\begin{thebibliography}{9}
+\bibitem{norden2008} 
+Norden E. Huang and Zhaohua Wu 
+\textit{A review on Hilbert-Huang Transform: Methods and its Application to Geophysical Studies}. 
+Review of Geophysics, 2008
+ 
+\bibitem{norden1998} 
+Norden E. Huang, Zheng Shen, Steven R. Long, Manlic C. Wu, Hsing H.Shih, Quanan Zheng, Nai-Chyuan Yen, Chi Chao Tung and Henry H. Liu
+\textit{The Empirical mode decomposition and the Hilbert Spectrum for nonlinear and non-stationary time series analysis}
+Proc. R. Soc. Lond. A (1998) 455, 903:?995.
+ 
+\bibitem{hui2007} 
+Hui Li, Yuping Zhang and Haiqi Zheng
+\textit{Hilbert-Huang transform and marginal spectrum for detecting and diagnosis of localized defects in roller bearings}
+Journal of Mechanical Technology, 2007
+\end{thebibliography}
 
 
 
