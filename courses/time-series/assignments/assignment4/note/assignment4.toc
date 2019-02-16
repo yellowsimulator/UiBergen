@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Problem 4.1}{2}
+\contentsline {subsection}{\numberline {1.1}Part a: Invertibility}{2}
+\contentsline {subsection}{\numberline {1.2}Part b: Linear filter ${\pi _{j}}$}{2}
+\contentsline {section}{\numberline {2}Problem 4.2}{3}
+\contentsline {subsection}{\numberline {2.1}Part a: Finding $\{ \psi _{j}, j=0,1,2\}$ }{3}
+\contentsline {subsection}{\numberline {2.2}Part b: Check causality and invertibility}{4}
+\contentsline {subsection}{\numberline {2.3}Part c: Plot $\{\psi _{j},j=0,\cdots ,50 \}$}{5}
+\contentsline {section}{\numberline {3}Problem 4.3}{7}
+\contentsline {subsection}{\numberline {3.1}Part a: Finding $\{ \gamma (h), h = 0, \cdots , 4\}$ for ARMA(2,3)}{7}
+\contentsline {subsection}{\numberline {3.2}Part b: Homogeneous difference equation $\phi (B)\gamma (h)=0$}{8}
+\contentsline {subsection}{\numberline {3.3}Part c: Plot of $\{ \gamma (h), h = 0 , \cdots ,50 \}$ }{8}
+\contentsline {section}{\numberline {4}Problem 4.4}{10}
+\contentsline {section}{\numberline {5}All R code Code}{10}
