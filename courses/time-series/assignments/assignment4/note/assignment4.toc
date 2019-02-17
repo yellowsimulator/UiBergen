@@ -9,5 +9,10 @@
 \contentsline {subsection}{\numberline {3.1}Part a: Finding $\{ \gamma (h), h = 0, \cdots , 4\}$ for ARMA(2,3)}{7}
 \contentsline {subsection}{\numberline {3.2}Part b: Homogeneous difference equation $\phi (B)\gamma (h)=0$}{8}
 \contentsline {subsection}{\numberline {3.3}Part c: Plot of $\{ \gamma (h), h = 0 , \cdots ,50 \}$ }{8}
-\contentsline {section}{\numberline {4}Problem 4.4}{10}
-\contentsline {section}{\numberline {5}All R code Code}{10}
+\contentsline {section}{\numberline {4}Problem 4.4}{11}
+\contentsline {subsection}{\numberline {4.1}Part a: Deduce $\gamma (h) = \DOTSB \sum@ \slimits@ _{k=1}^{p}\phi _{k}\gamma (h-k)+\delta _{0,h}\sigma ^{2}$}{11}
+\contentsline {subsection}{\numberline {4.2}Part b: Some verification}{11}
+\contentsline {subsection}{\numberline {4.3}Part c: Solution of equations}{12}
+\contentsline {subsection}{\numberline {4.4}Part d: Boundary condition for causal AR(2) model}{13}
+\contentsline {subsection}{\numberline {4.5}Part e: Finding $\operatorname {E}[X_{3}|X_{1}]$}{13}
+\contentsline {section}{\numberline {5}All R code Code}{13}

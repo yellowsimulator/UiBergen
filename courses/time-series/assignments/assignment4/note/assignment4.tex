@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{bm}
 
+
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
 \newcommand{\Var}{\operatorname{Var}}
@@ -294,7 +295,7 @@ From \cite{petter}, page 88, equation (3.2.3) given by
 \end{equation}
 holds true for an ARMA(p,q) process. So we can compute $\gamma(0), \gamma(1)$ as 
 \begin{equation}
-\gamma(0) =  \sigma^{2}\sum_{j=0}^{3}\psi_{j}\psi_{j}
+\gamma(0) =  1
 \end{equation}
 
 \begin{equation}
@@ -303,8 +304,8 @@ holds true for an ARMA(p,q) process. So we can compute $\gamma(0), \gamma(1)$ as
 And from (\ref{eq:gamma0}) we have 
 \begin{equation}
 \begin{aligned}
-\gamma(0) &= 0 + \sigma^{2}\sum_{j=0}^{3}\psi_{j}\psi_{j}\\
-\gamma(1) &= 0 + \sigma^{2}\sum_{j=0}^{3}\psi_{j}\psi_{j+1}\\
+\gamma(0) &= 1\\
+\gamma(1) &=  \sigma^{2}\sum_{j=0}^{3}\psi_{j}\psi_{j+1}\\
 \gamma(2) &= \phi_{1}\gamma(1) + \phi_{2}\gamma(0) + \sigma^{2}(\theta_{2}\psi_{0} + \theta_{3}\psi_{1} + \theta_{4}\psi_{2}+\theta_{5}\psi_{3} )\\
 \gamma(3) &= \phi_{1}\gamma(2) + \phi_{2}\gamma(1) + \sigma^{2}(\theta_{3}\psi_{0} + \theta_{4}\psi_{1} + \theta_{5}\psi_{2}+\theta_{6}\psi_{3} )\\
 \gamma(4) &= \phi_{1}\gamma(3) + \phi_{2}\gamma(2) + \sigma^{2}(\theta_{4}\psi_{0} + \theta_{5}\psi_{1} + \theta_{6}\psi_{2}+\theta_{7}\psi_{3} )
@@ -401,7 +402,7 @@ plot(Rfunction, col='green')
 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=2.5in]{gamma} 
+   \includegraphics[width=2.5in]{Rplots} 
     \includegraphics[width=2.5in]{Rfunction} 
    \caption{Plot of $\gamma$ for $j = 0, 50$. Computed in blue vs R function (green)}
    \label{fig:gamma}
@@ -411,12 +412,128 @@ Figure \ref{fig:gamma} shows the computed $\gamma$ versus the $\gamma$ computed 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\clearpage
 \section{Problem 4.4}
 Let $\{X_{t}\}$ be a causal AR(2) process with white noise process $WN(0,\sigma^{2})$,
-\begin{equation}
-X_{t}-\phi_{1}X_{t-1}-\phi_{2}X_{t-2} = Z_{t}, \quad X_{t} = \sum_{j=0}^{\infty}\psi_{j}Z_{t-j}
+\begin{equation}\label{eq:main}
+X_{t}-\phi_{1}X_{t-1}-\phi_{2}X_{t-2} = Z_{t}, \quad X_{t} = \sum_{j=0}^{\infty}\psi_{j}Z_{t-j}.
 \end{equation}
+
+\subsection{Part a: Deduce $\gamma(h) = \sum_{k=1}^{p}\phi_{k}\gamma(h-k)+\delta_{0,h}\sigma^{2}$}
+First we know that
+\begin{equation}\label{eq:gam}
+\gamma(h) = \Cov(X_{t+h}, X_{t}) \Rightarrow \gamma(h-k) = \Cov(X_{t+h}, X_{t-k})
+\end{equation}
+Multiplying (\ref{eq:main}) by $X_{t+h}$,  and taking the expectation, gives 
+\begin{equation}
+\begin{aligned}
+X_{t+h}X_{t}-\phi_{1}X_{t+h}X_{t-1}-\phi_{2}X_{t+h}X_{t-2} &= X_{t+h}Z_{t}\\
+\E[X_{t+h}X_{t}]-\phi_{1}\E[X_{t+h}X_{t-1}]-\phi_{2}\E[X_{t+h}X_{t-2}] &= E[X_{t+h}Z_{t}]\\
+\Cov(X_{t+h},X_{t})-\phi_{1}\Cov(X_{t+h},X_{t-1})-\phi_{2}\Cov(X_{t+h},X_{t-2}) &= \Cov(X_{t+h},Z_{t})\\ \nonumber
+&= \Cov\left(\sum_{j=0}^{\infty}\psi_{j}Z_{t+h-j},Z_{t}\right)\\
+&=\Cov(  \psi_{0}Z_{t+h}+ \psi_{1}Z_{t+h-1}, +\cdots, Z_{t})\\
+&=\psi_{0}\Cov(Z_{t+h}, Z_{t}) + \psi_{1}\Cov(Z_{t+h-1}, Z_{t}) + \cdots\\
+\Cov(X_{t+h},X_{t})-\phi_{1}\Cov(X_{t+h},X_{t-1})-\phi_{2}\Cov(X_{t+h},X_{t-2}) &= 1\Cov(Z_{t+h},Z_{t}) \\
+\gamma(h)- \phi_{1}\gamma(h-1)-\phi_{2}\gamma(h-2) &= \sigma^{2}\delta_{h,0}\\
+\gamma(h) - \sum_{k=1}^{p=2}\phi_{k}\gamma(h-k) &= \sigma^{2}\delta_{h,0}\\
+\gamma(h) &= \sum_{k=1}^{p=2}\phi_{k}\gamma(h-k) + \sigma^{2}\delta_{h,0}
+\end{aligned}
+\end{equation}
+
+\subsection{Part b: Some verification}
+\begin{equation}
+\begin{aligned}
+\frac{\gamma(h)}{\gamma(0)} &= \rho(h)\\
+&=\phi_{1}\frac{\gamma(h-1)}{\gamma(0)} + \phi_{2}\frac{\gamma(h-2)}{\gamma(0)} + \frac{\sigma^{2}\delta_{h,0}}{\gamma(0)}\\
+\end{aligned}
+\end{equation}
+from which we get
+\begin{equation}\label{eq:e1}
+\begin{aligned}
+\rho(1) &= \phi_{1}\frac{\gamma(0)}{\gamma(0)} + \phi_{2}\frac{\gamma(-1)}{\gamma(0)} + \frac{\sigma^{2}\delta_{1,0}}{\gamma(0)}\\
+\rho(1)&=\phi_{1}\frac{\gamma(0)}{\gamma(0)} + \phi_{2}\frac{\gamma(1)}{\gamma(0)} + \frac{\sigma^{2}\delta_{1,0}}{\gamma(0)}\\
+\rho(1)&=\phi_{1} + \phi_{2}\rho(1)\\
+\rho(1)-\phi_{2}\rho(1)&=\phi_{1} \\
+\textcolor{blue}{(1-\phi_{2})\rho(1)} &= \textcolor{blue}{\phi_{1}}
+\end{aligned}
+\end{equation}
+and 
+
+\begin{equation}\label{eq:e2}
+\begin{aligned}
+\rho(2) &= \phi_{1}\frac{\gamma(1)}{\gamma(0)} + \phi_{2}\frac{\gamma(0)}{\gamma(0)} + \frac{\sigma^{2}\delta_{2,0}}{\gamma(0)}\\
+\rho(2)&= \phi_{1}\rho(1) + \phi_{2}\\
+\textcolor{blue}{\rho(2) -\phi_{1}\rho(1)} &= \textcolor{blue}{\phi_{2}}\\
+\end{aligned}
+\end{equation}
+and
+\begin{equation}\label{eq:e3}
+\begin{aligned}
+\rho(0) &= \phi_{1}\frac{\gamma(-1)}{\gamma(0)} + \phi_{2}\frac{\gamma(-2)}{\gamma(0)} + \frac{\sigma^{2}\delta_{0,0}}{\gamma(0)}\\
+1 &= \phi_{1}\frac{\gamma(1)}{\gamma(0)} + \phi_{2}\frac{\gamma(2)}{\gamma(0)} + \frac{\sigma^{2}}{\gamma(0)}\\
+1 &= \phi_{1}\rho(1) + \phi_{2}\rho(2) + \frac{\sigma^{2}}{\gamma(0)}\\
+1 -\phi_{1}\rho(1) - \phi_{2}\rho(2) &= \frac{\sigma^{2}}{\gamma(0)}\\
+\textcolor{blue}{\gamma(0)(1 -\phi_{1}\rho(1) - \phi_{2}\rho(2))} &= \textcolor{blue}{\sigma^{2}}\\
+\end{aligned}
+\end{equation}
+
+\subsection{Part c: Solution of equations}
+From equation (\ref{eq:e1})
+\begin{equation}
+(1-\phi_{2})\rho(1) = \phi_{1} \Longrightarrow \rho(1) = \frac{\phi_{1}}{1-\phi_{2}}.
+\end{equation}
+From equation (\ref{eq:e2})
+\begin{equation}
+\begin{aligned}
+\rho(2) -\phi_{1}\rho(1) &= \phi_{2}\\
+\rho(2) -\phi_{1} \frac{\phi_{1}}{1-\phi_{2}} &= \phi_{2}\\
+\rho(2) - \frac{\phi^{2}_{1}}{1-\phi_{2}} &= \phi_{2} \Longrightarrow \rho(2) = \phi_{2}+\frac{\phi^{2}_{1}}{1-\phi_{2}},
+\end{aligned}
+\end{equation}
+now inserting the expression of $\rho(1), \rho(2)$ into equation (\ref{eq:e3}) and solving for $\gamma(0)$ we get
+\begin{equation}\label{eq:gma}
+\begin{aligned}
+\gamma(0) &= \frac{\sigma^{2}}{ 1-\phi_{1}\rho(1)-\phi_{2}\rho(2)}\\
+\gamma(0)&= \frac{\sigma^{2}}{   1-\phi_{1}\frac{\phi_{1}}{1-\phi_{2}}-\phi_{2}\left( \phi_{2}+\frac{\phi^{2}_{1}}{1-\phi_{2}}\right)   }\\
+\end{aligned}
+\end{equation}
+
+\subsection{Part d: Boundary condition for causal AR(2) model}
+From equation (\ref{eq:gma}), at the boundary we have for a causal model
+\begin{equation}
+\begin{aligned}
+1-\phi_{1}\frac{\phi_{1}}{1-\phi_{2}}-\phi_{2}\left( \phi_{2}+\frac{\phi^{2}_{1}}{1-\phi_{2}}\right) &= 0\\
+1-\phi^{2}_{2} - \frac{\phi^{2}_{1}}{1-\phi_{2}} -\frac{  \phi_{2}\phi^{2}_{1}   }{1-\phi_{2}} &= 0\\
+(1-\phi^{2}_{2})(1-\phi_{2} ) -\phi^{2}_{1} - \phi_{2}\phi^{2}_{1} &= 0\\
+(1+\phi_{2})(1-\phi_{2})(1-\phi_{2}) &= \phi^{2}_{1}(1+\phi_{2})\\
+(1-\phi_{2})(1-\phi_{2}) &= \phi^{2}_{1}\\
+(1-\phi_{2})^{2} &= \phi^{2}_{1}\\
+(1-\phi_{2})^{2}-\phi^{2}_{1} &=0\\
+(1-\phi_{2}+\phi_{1})(1-\phi_{2}-\phi_{1})& = 0
+\end{aligned}
+\end{equation}
+From which we get 
+\begin{equation}
+1-\phi_{2}+\phi_{1} = 0 \Longrightarrow \phi_{2}-\phi_{1} = 1
+\end{equation}
+
+\begin{equation}
+1-\phi_{2}-\phi_{1}  = 0 \Longrightarrow \phi_{2}+\phi_{1} = 1
+\end{equation}
+and solving for $\phi_{2}$ we get
+\begin{equation}
+\phi_{2} = 1
+\end{equation}
+And we have 
+\begin{equation}
+\begin{aligned}
+\phi_{2}& = 1\\
+\phi_{2}-\phi_{1} &= 1\\
+\phi_{2}+\phi_{1} &= 1
+\end{aligned}
+\end{equation}
+
+\subsection{Part e: Finding $\E[X_{3}|X_{1}]$}
 %\begin{flushleft}
 %\begin{proof}
 %Equation (\ref{eq:arma}) can be written as
@@ -434,7 +551,7 @@ X_{t}-\phi_{1}X_{t-1}-\phi_{2}X_{t-2} = Z_{t}, \quad X_{t} = \sum_{j=0}^{\infty}
 % \begin{equation}\label{eq:ar}
 % \phi(B) = 1-\phi_{1}B-\dots \phi_{p}B^{p}
 % \end{equation}
-%  \begin{equation}\label{eq:ma}
+%  \beg\in{equation}\label{eq:ma}
 % \theta(B) = 1+\theta_{1}B+\dots \theta_{q}B^{q}.
 % \end{equation}
 % The n-th order Taylor series expansion of $\theta(B)$ around $a=0$ is given by
