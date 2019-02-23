@@ -534,97 +534,81 @@ And we have
 \end{equation}
 
 \subsection{Part e: Finding $\E[X_{3}|X_{1}]$}
-%\begin{flushleft}
-%\begin{proof}
-%Equation (\ref{eq:arma}) can be written as
-%\begin{equation}\label{eq:arma1}
-%\phi(B)X_{t} = \theta(B)Z_{t}
-%\end{equation}
-%where $B$ is the backshift operator defined by 
-%\begin{equation}
-%B^{j}X_{t} = X_{t-j}
-%\end{equation}
-%\begin{equation}
-%B^{j}Z_{t} = Z_{t-j}
-%\end{equation}
-% $\phi(.)$ and $\theta(.)$ are the p-th and q-th autoregressive and moving average polynomial 
-% \begin{equation}\label{eq:ar}
-% \phi(B) = 1-\phi_{1}B-\dots \phi_{p}B^{p}
-% \end{equation}
-%  \beg\in{equation}\label{eq:ma}
-% \theta(B) = 1+\theta_{1}B+\dots \theta_{q}B^{q}.
-% \end{equation}
-% The n-th order Taylor series expansion of $\theta(B)$ around $a=0$ is given by
-% \begin{equation}\label{eq:tayl}
-% \theta(B) = \sum_{j=0}^{n}\frac{\theta^{n}(0)}{n!}B^{n}.
-% \end{equation}
-% Setting $\theta_{1} = \theta$ and $\theta(0) = 1$, the first order Taylor series expansion of $\theta(B)$ is given by 
-% \begin{equation}
-% \begin{aligned}
-% \theta(B) &= \theta(0) + \theta^{\prime}(0)B\\
-%               &= 1+\theta B
-% \end{aligned}
-% \end{equation}
-% where $\theta^{\prime}(0)$ is the derivative of $\theta$ evaluated at 0.
-% 
-% \begin{flushleft}
-% Now we know that the Maclaurin series for $\frac{1}{1-x}$ is 
-% \begin{equation}\label{eq:mac}
-% \frac{1}{1-x} = 1+x+x^{2}\cdots+ = \sum_{j=0}^{\infty}x^{j}, \quad \text{for $|x| < 1$}
-% \end{equation}
-% Setting 
-% \begin{equation}
-% 1-x = \theta(B) 
-% \end{equation}
-% we get 
-% \begin{equation}
-% x = 1-\theta(B) = 1- (1+\theta B) = -\theta B
-% \end{equation}
-% And inserting the value of $x$ back into (\ref{eq:mac}) we get
-% \begin{equation}\label{eq:series}
-% \frac{1}{\theta(B)} =  \sum_{j=0}^{\infty}(-\theta B)^{j} = \sum_{j=0}^{\infty}(-\theta)^{j} (B)^{j}, \quad \text{for $|\theta| <1$}
-% \end{equation}
-% Multiplying (\ref{eq:series}) by (\ref{eq:arma1}) give
-% \begin{equation}\label{eq:arma2}
-% \begin{aligned}
-%Z_{t}&=\theta(B)\phi(B)X_{t} \\
-%        &= \sum_{j=0}^{\infty}(-\theta)^{j} (B)^{j}\phi(B)X_{t}
-%\end{aligned}
-%\end{equation}
-%From (\ref{eq:tayl}),the first order Taylor series expansion of $\phi(B)$ is given by 
-%\begin{equation}
-%\phi(B) = 1-\phi B
-%\end{equation}
-%So 
-%\begin{equation}
-%\begin{aligned}
-%Z_{t} &= \sum_{j=0}^{\infty}(-\theta)^{j} (B)^{j}(1-\phi B)X_{t} \\
-%        &=(1-\theta B+(-\theta)^{2} B^{2} + \cdots )(1-\phi B)X_{t}\\
-%        &=(X_{t}-\phi BX_{t})(1-\theta B+(-\theta)^{2} B^{2} + \cdots )\\
-%        &=(X_{t}-\phi X_{t-1})(1-\theta B+(-\theta)^{2} B^{2} + \cdots )\\
-%        &=X_{t}-\theta BX_{t} + \theta^{2}B^{2}X_{t} - \theta^{3}B^{3}X_{t} + \cdots -\phi X_{t-1} + \phi\theta BX_{t-1} -\phi\theta^{2}B^{2} X_{t-1} + \phi\theta^{3}B^{3} X_{t-1}-\cdots\\
-%        &=X_{t}-\theta X_{t-1} + \theta^{2}X_{t-2} - \theta^{3}X_{t-3} + \cdots -\phi X_{t-1} + \phi\theta X_{t-2} -\phi\theta^{2} X_{t-3} + \phi\theta^{3} X_{t-4}-\cdots\\
-%        &=X_{t}-(\theta + \phi)X_{t-1} + (\theta + \phi)\theta X_{t-2} -(\theta + \phi)\theta^{2} X_{t-3} + (\theta + \phi)\theta^{3} X_{t-4} - \cdots \\
-%        &=X_{t} -(\theta + \phi)(X_{t-1} -\theta X_{t-2} + \theta^{2} X_{t-3} - \theta^{3} X_{t-4} + \cdots)\\
-%        &=X_{t}-(\theta + \phi)\sum_{j=1}^{\infty}(-\theta)^{j-1}X_{t-j}
-%\end{aligned}
-%\end{equation}
-%So that $Z_{t}$ can be expressed in terms of the present and past values of the process $X_{s}$, $s\leq t$
-% \end{flushleft}
-% 
-% 
-% 
-%\end{proof}
-%\end{flushleft}
+\begin{equation}
+\begin{aligned}
+\E[X_{3}|X_{1}] &=\E\left[\sum_{j=0}^{\infty}\psi_{j}Z_{3-j}\bigg|\sum_{j=0}^{\infty}\psi_{j}Z_{1-j}\right] \\
+&=\E\left[ \psi_{0}Z_{3}+\psi_{1}Z_{2}+\cdots \bigg| \sum_{j=0}^{\infty}\psi_{j}Z_{1-j}    \right]\\
+&=\psi_{0}\E\left[ Z_{3}\bigg|\sum_{j=0}^{\infty}\psi_{j}Z_{1-j}    \right] + \psi_{1}\E\left[ Z_{2}\bigg|\sum_{j=0}^{\infty}\psi_{j}Z_{1-j}    \right] +\cdots\\
+&=\psi_{0}\E\left[  Z_{3}|\psi_{0}Z_{1}+\psi_{1}Z_{0}+\cdots  \right]+\psi_{1}\E\left[  Z_{2}|\psi_{0}Z_{1}+\psi_{1}Z_{0}+\cdots  \right]+\cdots\\
+&=\psi_{0}\left(   \psi_{0}\E[Z_{3}|Z_{1}]+\psi_{1}\E[Z_{3}|Z_{0}]+\cdots  \right) +  \psi_{1}\left(   \psi_{0}\E[Z_{2}|Z_{1}]+\psi_{1}\E[Z_{2}|Z_{0}]+\cdots  \right) + \cdots\\
+&=\psi_{0}\sum_{j=0}^{\infty}\psi_{j}\E[Z_{3}|Z_{1-j}] + \psi_{1}\sum_{j=0}^{\infty}\psi_{j}\E[Z_{2}|Z_{1-j}] +\cdots\\
+&=\sum_{k=0}^{\infty}\psi_{k}\left(\sum_{j=0}^{\infty}\psi_{j}\E[Z_{3-k}|Z_{1-j}]\right)
+\end{aligned}
+\end{equation}
+
+\subsection{Part f: Asymptotic covariance matrix}
+setting
+\begin{equation}
+\Gamma_{p} = \{ \gamma(i-j), 1\leq i,j \leq p  \}
+\end{equation}
+We compute $\sigma^{2}\Gamma_{1}^{-1}$ and $\sigma^{2}\Gamma_{2}^{-1}$ as follow:
+
+\begin{equation}
+   \sigma^{2}\Gamma_{1}=
+  \sigma^{2} \left[ {\begin{array}{cc}
+   \gamma(0)  \\
+  \end{array} } \right]
+\end{equation}
+
+\begin{equation}
+   \sigma^{2}\Gamma_{2}=
+  \sigma^{2} \left[ {\begin{array}{cc}
+   \gamma(0) & \gamma(1) \\
+   \gamma(1)& \gamma(0) \\
+  \end{array} } \right]
+\end{equation}
+and 
+\begin{equation}
+   \sigma^{2}\Gamma_{1}^{-1}=
+  \sigma^{2} \left[ {\begin{array}{cc}
+   \frac{1}{\gamma(0)}  \\
+  \end{array} } \right]
+\end{equation}
+
+\begin{equation}
+   \sigma^{2}\Gamma_{2}^{-1}=
+\frac{\sigma^{2}}{\gamma(0)^{2}-\gamma(1)^{2}} \left[ {\begin{array}{cc}
+   \gamma(0) & -\gamma(1) \\
+   -\gamma(1)& \gamma(0) \\
+  \end{array} } \right]
+\end{equation}
+Where 
+\begin{equation}
+\gamma(h) = \sigma^{2}\delta_{h,0} 
+\end{equation}
+so that
+\begin{equation}
+   \sigma^{2}\Gamma_{1}^{-1}=
+  \sigma^{2} \left[ {\begin{array}{cc}
+   \frac{1}{\sigma^{2}}  \\
+  \end{array} } \right]
+  = 
+  \sigma^{2} \left[ {\begin{array}{cc}
+   1  \\
+  \end{array} } \right]
+\end{equation}
+
+\begin{equation}
+   \sigma^{2}\Gamma_{2}^{-1}=
+\sigma^{2} \left[ {\begin{array}{cc}
+   1 & 0 \\
+   0& 1 \\
+  \end{array} } \right]
+\end{equation}
 
 
-
-
-
-\section{All R code Code}
-
-\begin{lstlisting}
-\end{lstlisting}
+%\begin{lstlisting}
+%\end{lstlisting}
 
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  15 FEB 2019 12:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  18 FEB 2019 12:52
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -414,7 +414,11 @@ File: listings.cfg 2014/09/06 1.5e listings configuration
 ))
 Package: listings 2014/09/06 1.5e (Carsten Heinz)
 
-(./dissimilarity_copy.aux)
+(./dissimilarity_copy.aux
+
+LaTeX Warning: Label `fig:exp' multiply defined.
+
+)
 \openout1 = `dissimilarity_copy.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
@@ -545,143 +549,249 @@ File: pie.png Graphic file (type png)
 Package pdftex.def Info: pie.png used on input line 80.
 (pdftex.def)             Requested size: 361.34999pt x 240.62099pt.
 
-[2 <./pie.png>] [3] [4] <f.png, id=30, 462.528pt x 346.896pt>
-File: f.png Graphic file (type png)
- <use f.png>
-Package pdftex.def Info: f.png used on input line 182.
-(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
-
-<frequency.png, id=32, 462.528pt x 346.896pt>
-File: frequency.png Graphic file (type png)
- <use frequency.png>
-Package pdftex.def Info: frequency.png used on input line 183.
-(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
-
-<signal.png, id=33, 462.528pt x 346.896pt>
-File: signal.png Graphic file (type png)
- <use signal.png>
-Package pdftex.def Info: signal.png used on input line 229.
-(pdftex.def)             Requested size: 289.07999pt x 216.82004pt.
- [5 <./f.png> <./frequency.png>] <imf/imf1.png, id=39, 462.528pt x 346.896pt>
-File: imf/imf1.png Graphic file (type png)
- <use imf/imf1.png>
-Package pdftex.def Info: imf/imf1.png used on input line 237.
-(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
-
-<imf/imf2.png, id=40, 462.528pt x 346.896pt>
-File: imf/imf2.png Graphic file (type png)
- <use imf/imf2.png>
-Package pdftex.def Info: imf/imf2.png used on input line 238.
-(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
-
-<imf/imf3.png, id=41, 462.528pt x 346.896pt>
-File: imf/imf3.png Graphic file (type png)
- <use imf/imf3.png>
-Package pdftex.def Info: imf/imf3.png used on input line 245.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf4.png, id=42, 462.528pt x 346.896pt>
-File: imf/imf4.png Graphic file (type png)
- <use imf/imf4.png>
-Package pdftex.def Info: imf/imf4.png used on input line 246.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- [6 <./signal.png> <./imf/imf1.png> <./imf/imf2.png>]
-<imf/imf5.png, id=49, 462.528pt x 346.896pt>
-File: imf/imf5.png Graphic file (type png)
- <use imf/imf5.png>
-Package pdftex.def Info: imf/imf5.png used on input line 253.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf6.png, id=50, 462.528pt x 346.896pt>
-File: imf/imf6.png Graphic file (type png)
- <use imf/imf6.png>
-Package pdftex.def Info: imf/imf6.png used on input line 254.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf7.png, id=51, 462.528pt x 346.896pt>
-File: imf/imf7.png Graphic file (type png)
- <use imf/imf7.png>
-Package pdftex.def Info: imf/imf7.png used on input line 261.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf8.png, id=52, 462.528pt x 346.896pt>
-File: imf/imf8.png Graphic file (type png)
- <use imf/imf8.png>
-Package pdftex.def Info: imf/imf8.png used on input line 262.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf9.png, id=53, 462.528pt x 346.896pt>
-File: imf/imf9.png Graphic file (type png)
- <use imf/imf9.png>
-Package pdftex.def Info: imf/imf9.png used on input line 269.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf10.png, id=54, 462.528pt x 346.896pt>
-File: imf/imf10.png Graphic file (type png)
- <use imf/imf10.png>
-Package pdftex.def Info: imf/imf10.png used on input line 270.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- [7 <./imf/imf3.png> <./imf/imf4.png> <./imf/imf5.png> <./imf/imf6.png> <./imf/
-imf7.png> <./imf/imf8.png>] <imf/imf11.png, id=65, 462.528pt x 346.896pt>
-File: imf/imf11.png Graphic file (type png)
-
-<use imf/imf11.png>
-Package pdftex.def Info: imf/imf11.png used on input line 277.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- <imf/imf12.png, id=66, 462.528pt x 346.896pt>
-File: imf/imf12.png Graphic file (type png)
-
-<use imf/imf12.png>
-Package pdftex.def Info: imf/imf12.png used on input line 278.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- <imf/imf13.png, id=67, 462.528pt x 346.896pt>
-File: imf/imf13.png Graphic file (type png)
-
-<use imf/imf13.png>
-Package pdftex.def Info: imf/imf13.png used on input line 285.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- <imf/imf14.png, id=68, 462.528pt x 346.896pt>
-File: imf/imf14.png Graphic file (type png)
-
-<use imf/imf14.png>
-Package pdftex.def Info: imf/imf14.png used on input line 286.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- <experiment.png, id=69, 629.35126pt x 298.11375pt>
+[2 <./pie.png>] <experiment.png, id=16, 629.35126pt x 298.11375pt>
 File: experiment.png Graphic file (type png)
 
 <use experiment.png>
-Package pdftex.def Info: experiment.png used on input line 356.
+Package pdftex.def Info: experiment.png used on input line 119.
 (pdftex.def)             Requested size: 289.07999pt x 136.93384pt.
- [8 <./imf/imf9.png> <./imf/imf10.png> <./imf/imf11.png> <./imf/imf12.png> <./i
-mf/imf13.png> <./imf/imf14.png>] [9 <./experiment.png>]
-[10] (./dissimilarity_copy.aux) ) 
+ [3] <bearing.png, id=27, 358.33875pt x 229.85875pt>
+File: bearing.png Graphic file (type png)
+
+<use bearing.png>
+Package pdftex.def Info: bearing.png used on input line 138.
+(pdftex.def)             Requested size: 289.07999pt x 185.44449pt.
+ [4 <./experiment.png>]
+<decomposition.png, id=32, 578.16pt x 578.16pt>
+File: decomposition.png Graphic file (type png)
+ <use decomposition.png>
+Package pdftex.def Info: decomposition.png used on input line 145.
+(pdftex.def)             Requested size: 289.07999pt x 289.07928pt.
+
+[5 <./bearing.png>] <time-signal.png, id=37, 462.528pt x 346.896pt>
+File: time-signal.png Graphic file (type png)
+
+<use time-signal.png>
+Package pdftex.def Info: time-signal.png used on input line 156.
+(pdftex.def)             Requested size: 289.07999pt x 216.82004pt.
+ <spectrum.png, id=38, 462.528pt x 346.896pt>
+File: spectrum.png Graphic file (type png)
+
+<use spectrum.png>
+Package pdftex.def Info: spectrum.png used on input line 157.
+(pdftex.def)             Requested size: 289.07999pt x 216.82004pt.
+ <fault.png, id=39, 462.528pt x 346.896pt>
+File: fault.png Graphic file (type png)
+ <use fault.png>
+Package pdftex.def Info: fault.png used on input line 158.
+(pdftex.def)             Requested size: 289.07999pt x 216.82004pt.
+
+[6 <./decomposition.png>]
+Overfull \vbox (121.71272pt too high) has occurred while \output is active []
+
+
+[7 <./time-signal.png> <./spectrum.png> <./fault.png>]
+
+LaTeX Warning: Reference `fig:signal221' on page 8 undefined on input line 163.
+
+
+<signal_processing_method_bpfo.png, id=51, 1387.584pt x 722.7pt>
+File: signal_processing_method_bpfo.png Graphic file (type png)
+
+<use signal_processing_method_bpfo.png>
+Package pdftex.def Info: signal_processing_method_bpfo.png used on input line 1
+67.
+(pdftex.def)             Requested size: 505.89pt x 263.48004pt.
+
+Overfull \hbox (75.88538pt too wide) in paragraph at lines 167--168
+ [][] 
+ []
+
+<signal_processing_method_bpfi.png, id=52, 1387.584pt x 722.7pt>
+File: signal_processing_method_bpfi.png Graphic file (type png)
+
+<use signal_processing_method_bpfi.png>
+Package pdftex.def Info: signal_processing_method_bpfi.png used on input line 1
+74.
+(pdftex.def)             Requested size: 505.89pt x 263.48004pt.
+
+Overfull \hbox (75.88538pt too wide) in paragraph at lines 174--175
+ [][] 
+ []
+
+[8 <./signal_processing_method_bpfo.png>]
+<dbscaling.png, id=57, 281.05pt x 200.75pt>
+File: dbscaling.png Graphic file (type png)
+ <use dbscaling.png>
+Package pdftex.def Info: dbscaling.png used on input line 194.
+(pdftex.def)             Requested size: 144.54pt x 103.2419pt.
+
+<dbwavelet.png, id=58, 281.05pt x 200.75pt>
+File: dbwavelet.png Graphic file (type png)
+ <use dbwavelet.png>
+Package pdftex.def Info: dbwavelet.png used on input line 195.
+(pdftex.def)             Requested size: 144.54pt x 103.2419pt.
+ [9 <./signal_processing_method_bpfi.png>]
+<mixed_method_bpfo.png, id=63, 1387.584pt x 721.9773pt>
+File: mixed_method_bpfo.png Graphic file (type png)
+
+<use mixed_method_bpfo.png>
+Package pdftex.def Info: mixed_method_bpfo.png used on input line 228.
+(pdftex.def)             Requested size: 433.62pt x 225.61734pt.
+
+Overfull \hbox (3.61537pt too wide) in paragraph at lines 228--229
+ [][] 
+ []
+
+<mixed_method_bpfi.png, id=64, 1387.584pt x 721.9773pt>
+File: mixed_method_bpfi.png Graphic file (type png)
+
+<use mixed_method_bpfi.png>
+Package pdftex.def Info: mixed_method_bpfi.png used on input line 234.
+(pdftex.def)             Requested size: 433.62pt x 225.61734pt.
+
+Overfull \hbox (3.61537pt too wide) in paragraph at lines 234--235
+ [][] 
+ []
+
+[10 <./dbscaling.png> <./dbwavelet.png> <./mixed_method_bpfo.png>] [11 <./mixed
+_method_bpfi.png>] <f.png, id=73, 462.528pt x 346.896pt>
+File: f.png Graphic file (type png)
+ <use f.png>
+Package pdftex.def Info: f.png used on input line 297.
+(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
+
+<frequency.png, id=74, 462.528pt x 346.896pt>
+File: frequency.png Graphic file (type png)
+ <use frequency.png>
+Package pdftex.def Info: frequency.png used on input line 298.
+(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
+ [12]
+<signal.png, id=80, 462.528pt x 346.896pt>
+File: signal.png Graphic file (type png)
+ <use signal.png>
+Package pdftex.def Info: signal.png used on input line 344.
+(pdftex.def)             Requested size: 289.07999pt x 216.82004pt.
+ [13 <./f.png> <./frequency.png>] <imf/imf1.png, id=87, 462.528pt x 346.896pt>
+File: imf/imf1.png Graphic file (type png)
+ <use imf/imf1.png>
+Package pdftex.def Info: imf/imf1.png used on input line 352.
+(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
+
+<imf/imf2.png, id=88, 462.528pt x 346.896pt>
+File: imf/imf2.png Graphic file (type png)
+ <use imf/imf2.png>
+Package pdftex.def Info: imf/imf2.png used on input line 353.
+(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
+
+<imf/imf3.png, id=89, 462.528pt x 346.896pt>
+File: imf/imf3.png Graphic file (type png)
+ <use imf/imf3.png>
+Package pdftex.def Info: imf/imf3.png used on input line 360.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+
+<imf/imf4.png, id=90, 462.528pt x 346.896pt>
+File: imf/imf4.png Graphic file (type png)
+ <use imf/imf4.png>
+Package pdftex.def Info: imf/imf4.png used on input line 361.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+ [14 <./signal.png> <./imf/imf1.png> <./imf/imf2.png>]
+<imf/imf5.png, id=97, 462.528pt x 346.896pt>
+File: imf/imf5.png Graphic file (type png)
+ <use imf/imf5.png>
+Package pdftex.def Info: imf/imf5.png used on input line 368.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+
+<imf/imf6.png, id=98, 462.528pt x 346.896pt>
+File: imf/imf6.png Graphic file (type png)
+ <use imf/imf6.png>
+Package pdftex.def Info: imf/imf6.png used on input line 369.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+
+<imf/imf7.png, id=99, 462.528pt x 346.896pt>
+File: imf/imf7.png Graphic file (type png)
+ <use imf/imf7.png>
+Package pdftex.def Info: imf/imf7.png used on input line 376.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+
+<imf/imf8.png, id=100, 462.528pt x 346.896pt>
+File: imf/imf8.png Graphic file (type png)
+ <use imf/imf8.png>
+Package pdftex.def Info: imf/imf8.png used on input line 377.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+
+<imf/imf9.png, id=101, 462.528pt x 346.896pt>
+File: imf/imf9.png Graphic file (type png)
+ <use imf/imf9.png>
+Package pdftex.def Info: imf/imf9.png used on input line 384.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+
+<imf/imf10.png, id=102, 462.528pt x 346.896pt>
+File: imf/imf10.png Graphic file (type png)
+ <use imf/imf10.png>
+Package pdftex.def Info: imf/imf10.png used on input line 385.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+ [15 <./imf/imf3.png> <./imf/imf4.png> <./imf/imf5.png> <./imf/imf6.png> <./imf
+/imf7.png> <./imf/imf8.png>] <imf/imf11.png, id=112, 462.528pt x 346.896pt>
+File: imf/imf11.png Graphic file (type png)
+
+<use imf/imf11.png>
+Package pdftex.def Info: imf/imf11.png used on input line 392.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+ <imf/imf12.png, id=113, 462.528pt x 346.896pt>
+File: imf/imf12.png Graphic file (type png)
+
+<use imf/imf12.png>
+Package pdftex.def Info: imf/imf12.png used on input line 393.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+ <imf/imf13.png, id=114, 462.528pt x 346.896pt>
+File: imf/imf13.png Graphic file (type png)
+
+<use imf/imf13.png>
+Package pdftex.def Info: imf/imf13.png used on input line 400.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+ <imf/imf14.png, id=115, 462.528pt x 346.896pt>
+File: imf/imf14.png Graphic file (type png)
+
+<use imf/imf14.png>
+Package pdftex.def Info: imf/imf14.png used on input line 401.
+(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
+ [16 <./imf/imf9.png> <./imf/imf10.png> <./imf/imf11.png> <./imf/imf12.png> <./
+imf/imf13.png> <./imf/imf14.png>] [17]
+(./dissimilarity_copy.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4667 strings out of 493089
- 63395 string characters out of 6134842
- 132650 words of memory out of 5000000
- 8052 multiletter control sequences out of 15000+600000
+ 4731 strings out of 493089
+ 64706 string characters out of 6134842
+ 132777 words of memory out of 5000000
+ 8105 multiletter control sequences out of 15000+600000
  12355 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,7n,32p,819b,321s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmti10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/sym
-bols/msbm10.pfb>
-Output written on dissimilarity_copy.pdf (10 pages, 892405 bytes).
+ 38i,7n,32p,916b,321s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on dissimilarity_copy.pdf (17 pages, 1645328 bytes).
 PDF statistics:
- 132 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
+ 174 PDF objects out of 1000 (max. 8388607)
+ 82 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 96 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 151 words of extra memory for PDF output out of 10000 (max. 10000000)
 

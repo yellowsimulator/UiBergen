@@ -14,5 +14,5 @@
 \contentsline {subsection}{\numberline {4.2}Part b: Some verification}{11}
 \contentsline {subsection}{\numberline {4.3}Part c: Solution of equations}{12}
 \contentsline {subsection}{\numberline {4.4}Part d: Boundary condition for causal AR(2) model}{13}
-\contentsline {subsection}{\numberline {4.5}Part e: Finding $\operatorname {E}[X_{3}|X_{1}]$}{13}
-\contentsline {section}{\numberline {5}All R code Code}{13}
+\contentsline {subsection}{\numberline {4.5}Part e: Finding $\operatorname {E}[X_{3}|X_{1}]$}{14}
+\contentsline {subsection}{\numberline {4.6}Part f: Asymptotic covariance matrix}{14}
