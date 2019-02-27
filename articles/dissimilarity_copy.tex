@@ -9,7 +9,7 @@
 \usepackage{amsmath}
 \usepackage{float}
 %SetFonts
-
+\usepackage{romannum}
 \usepackage[utf8]{inputenc}
 \newcommand{\Var}{\operatorname{Var}}
 % Default fixed font does not support bold face
@@ -71,7 +71,23 @@ showstringspaces=false            %
 %   \label{fig:example}
 %\end{figure}
 \section{Introduction}
-Predictive maintenance can be defined as a maintenance philosophy with a set of methods used to predict and prevent machine failure in order to avoid unexpected downtime. This maintenance philosophy when correctly implemented, increases machine life time, and reduces maintenance cost [referecne].
+\begin{flushleft}
+Predictive maintenance can be defined as a maintenance philosophy or more generally a framework with a set of methods used to predict and prevent machine failure in order to avoid unexpected downtime. This maintenance (?) philosophy, when correctly implemented, increases machine life time, and reduces maintenance cost [referecne].
+\end{flushleft}
+
+\begin{flushleft}
+As a framework, predictive maintenance has 4 levels. In level 1, visual inspection of machines or equipments are performed in order to assess any damage. in level 2 and 3, machines characteristics such as vibration, temperature, electrical current etc are monitored continually or periodically depending on the criticality of the machine. This is called condition monitoring. In condition monitoring, the goal is to detect any change in machine normal behaviour, in order to detect failure as early as possible and schedule maintenance. In level 4, big data and associated methods such as artificial intelligence are the main driving forces. 
+\end{flushleft}
+
+\begin{flushleft}
+According to a survey performed by PriceWaterhouseCoopers (PWC) from 280 companies in Belgium, Germany and the Nederland, only 
+$11 \%$ of companies have reached level 4 \cite{pwc}. The application of level 4 requires collecting, saving and analysing large amount of data, from which maintenance decision could be made.
+The analysis of data are performed by using statistical and machine learning methods (?). In statistical methods, time series analysis and anomaly detection methods (?) are used. In machine learning methods, supervised learning methods (?) are used. The challenge is that in supervised learning, in order to predict failure, the machine learning algorithm must be trained with failure data. However, 
+such failure data are not largely available, because machine don?t fail that often.
+
+\end{flushleft}
+
+
 \begin{flushleft}
 In rotating machines, more than 40 $\%$ of machine malfunction can be attributed to bearing defect [references]. 
 \end{flushleft}
@@ -88,15 +104,17 @@ The signal processing methods used are Fourier transform, wavelet transform and 
 
 
 \begin{flushleft}
-The outline of the project is as followed: In section (chapter) one we give an overview of the signal processing methods. In section (chapter) two we present the machine learning methodology and show that the back-propagation in the feedforward neural network can be modelled as a differential equation.
-In section (chapter) 3 we present a case study where we apply the methodology defined in section one and two. In section four we present the conclusion of this work.
+This thesis is structured into five parts organised as follows. In chapter one we give an overview of the signal processing methods. Chapter two outline the machine learning methodology and show that the back-propagation in the feedforward neural network can be modelled as a differential equation.
+We present a case study in chapter three and apply the methodology defined in chapter
+
+ one and two. The thesis is concluded in chapter four where we ...
 \end{flushleft}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Preview work}
+\section{Previous work}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -405,59 +423,11 @@ After applying the empirical mode decomposition on the vibration data from figur
 
 \end{flushleft}
 
-%\begin{figure}[H] %  figure placement: here, top, bottom, or page
-%   \centering
-%   \includegraphics[width=4in]{vibration} 
-%   \caption{}
-%   \label{fig:example}
-%\end{figure}
-%In this approach we use the old goody Fourier transform. Firstly, we need the defect frequency for the outer race defect and the inner race defect. The bearing type used are Rexnor ZA-2115. For this type of bearing, the constant defect frequency (cdf) for ball pass frequency outer race defect is 0.1182 and the constant defect frequency for ball pass frequency inner race defect is 0.1484 [reference]. According to Rexnord product engineering group [reference, last page], to find the defect frequency in Hz we multiply the constant defect frequency (cdf) by the rotational speed of the bearing ( here 2000 RPM), to find the defect frequency in Hz. Note that the defect frequency is computed from the geometry of the bearing, which means that for a specific bearing, this is a constant value.
-%
-
-
-%\begin{flushleft}
-%\begin{figure}[H] %  figure placement: here, top, bottom, or page
-%   \centering
-%   \includegraphics[width=4in]{decomposition} 
-%   \caption{example caption}
-%   \label{fig:example}
-%\end{figure}
-%
-%
-%
-%Next, we compute the envelop spectrum for each vibration signal by using the FFT method (Fast Fourier Transform). The envelop spectrum is used to detect early sign of failure. Recall that a vibration signal can be decomposed into its sub components, where each  sub component 
-%is characterised by its frequency and its amplitude. Early sign of failure can be seen in the high frequency low amplitude sub component. As the failure becomes more pronounced, it becomes visible in the low frequency high amplitude sub component.
-%\end{flushleft}
-%
-%\begin{figure}[H] %  figure placement: here, top, bottom, or page
-%   \centering
-%   \includegraphics[width=4in]{time-signal.png} 
-%   \includegraphics[width=4in]{spectrum.png} 
-%      \includegraphics[width=4in]{fault.png} 
-%   \caption{Vibration time signal}
-%   \label{fig:signal}
-%\end{figure}
-%By computing the envelop spectrum for each time signal and extracting the amplitude of a defect frequency we can visualise the severity of a defect
-%
-%\begin{figure}[H] %  figure placement: here, top, bottom, or page
-%   \centering
-%   \includegraphics[width=7in]{signal_processing_method_bpfo} 
-%   \caption{Ball pass frequency outer race detection}
-%   \label{fig:example}
-%\end{figure}
-%
-%\begin{figure}[H] %  figure placement: here, top, bottom, or page
-%   \centering
-%   \includegraphics[width=7in]{signal_processing_method_bpfi} 
-%   \caption{Ball pass frequency inner race detection}
-%   \label{fig:example}
-%\end{figure}
-%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Machine learning methods}
+\section{Statistical and machine learning methods}
 \subsection{Overview}
 
 
@@ -487,7 +457,14 @@ Review of Geophysics, 2008
 \bibitem{norden1998} 
 Norden E. Huang, Zheng Shen, Steven R. Long, Manlic C. Wu, Hsing H.Shih, Quanan Zheng, Nai-Chyuan Yen, Chi Chao Tung and Henry H. Liu
 \textit{The Empirical mode decomposition and the Hilbert Spectrum for nonlinear and non-stationary time series analysis}
-Proc. R. Soc. Lond. A (1998) 455, 903:?995.
+Proc. R. Soc. Lond. A (1998) 455, 903:995.
+
+
+ 
+\bibitem{pwc} 
+Michel Mulders and Mark Haarman
+\textit{Predictive maintenance 4.0. Predict the unpredictable, June 2017}
+
  
 \bibitem{hui2007} 
 Hui Li, Yuping Zhang and Haiqi Zheng

@@ -1,18 +1,18 @@
-\contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {2}Preview work}{3}
-\contentsline {section}{\numberline {3}Signal processing methods}{3}
-\contentsline {subsection}{\numberline {3.1}Overview}{3}
-\contentsline {subsection}{\numberline {3.2}Fourier transform}{4}
-\contentsline {subsubsection}{\numberline {3.2.1}Theory}{4}
-\contentsline {subsubsection}{\numberline {3.2.2}Application}{4}
-\contentsline {subsection}{\numberline {3.3}Wavelet transform}{9}
-\contentsline {subsubsection}{\numberline {3.3.1}Theory}{9}
-\contentsline {subsubsection}{\numberline {3.3.2}Application}{9}
-\contentsline {subsection}{\numberline {3.4}Hilbert Huang transform}{11}
-\contentsline {subsubsection}{\numberline {3.4.1}Theory}{11}
-\contentsline {subsubsection}{\numberline {3.4.2}Application for bearings fault detection}{13}
-\contentsline {section}{\numberline {4}Machine learning methods}{17}
-\contentsline {subsection}{\numberline {4.1}Overview}{17}
-\contentsline {section}{\numberline {5}Result}{17}
-\contentsline {subsection}{\numberline {5.1}Overview}{17}
-\contentsline {section}{\numberline {6}Conclusion}{17}
+\contentsline {section}{\numberline {1}Introduction}{ii}
+\contentsline {section}{\numberline {2}Previous work}{iv}
+\contentsline {section}{\numberline {3}Signal processing methods}{iv}
+\contentsline {subsection}{\numberline {3.1}Overview}{iv}
+\contentsline {subsection}{\numberline {3.2}Fourier transform}{v}
+\contentsline {subsubsection}{\numberline {3.2.1}Theory}{v}
+\contentsline {subsubsection}{\numberline {3.2.2}Application}{v}
+\contentsline {subsection}{\numberline {3.3}Wavelet transform}{ix}
+\contentsline {subsubsection}{\numberline {3.3.1}Theory}{ix}
+\contentsline {subsubsection}{\numberline {3.3.2}Application}{ix}
+\contentsline {subsection}{\numberline {3.4}Hilbert Huang transform}{xi}
+\contentsline {subsubsection}{\numberline {3.4.1}Theory}{xi}
+\contentsline {subsubsection}{\numberline {3.4.2}Application for bearings fault detection}{xiii}
+\contentsline {section}{\numberline {4}Statistical and machine learning methods}{xvii}
+\contentsline {subsection}{\numberline {4.1}Overview}{xvii}
+\contentsline {section}{\numberline {5}Result}{xvii}
+\contentsline {subsection}{\numberline {5.1}Overview}{xvii}
+\contentsline {section}{\numberline {6}Conclusion}{xvii}
