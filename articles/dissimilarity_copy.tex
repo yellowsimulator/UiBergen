@@ -72,22 +72,27 @@ showstringspaces=false            %
 %\end{figure}
 \section{Introduction}
 \begin{flushleft}
-Predictive maintenance can be defined as a maintenance philosophy or more generally a framework with a set of methods used to predict and prevent machine failure in order to avoid unexpected downtime. This maintenance (?) philosophy, when correctly implemented, increases machine life time, and reduces maintenance cost [referecne].
+Predictive maintenance  for machines and industrial equipments can be defined as a maintenance philosophy or more generally a framework with a set of methods used to predict and prevent machine failure in order to avoid unexpected downtime. This maintenance philosophy, when correctly implemented, increases machine life time, and reduces maintenance cost [reference].
 \end{flushleft}
 
 \begin{flushleft}
-As a framework, predictive maintenance has 4 levels. In level 1, visual inspection of machines or equipments are performed in order to assess any damage. in level 2 and 3, machines characteristics such as vibration, temperature, electrical current etc are monitored continually or periodically depending on the criticality of the machine. This is called condition monitoring. In condition monitoring, the goal is to detect any change in machine normal behaviour, in order to detect failure as early as possible and schedule maintenance. In level 4, big data and associated methods such as artificial intelligence are the main driving forces. 
+As a framework, predictive maintenance has 4 levels. In level 1, visual inspection of machines or equipments are performed in order to assess any damage. in level 2 and 3, machines characteristics such as vibration, temperature, electrical current, voltage etc are monitored continually or periodically depending on the criticality of the machine. This is called condition monitoring. In condition monitoring, the goal is to detect any change in machine normal behaviour, in order to detect failure as early as possible and schedule maintenance accordantly. In level 4, big data and associated methods such as machine learning are the main driving forces in detecting failure and planning maintenance optimally. 
 \end{flushleft}
 
 \begin{flushleft}
-According to a survey performed by PriceWaterhouseCoopers (PWC) from 280 companies in Belgium, Germany and the Nederland, only 
+According to PriceWaterhouseCoopers (PWC) which is one of the four largest auditing and consulting company in the world,  a survey from 280 companies in Belgium, Germany and the Nederland, revealed that only 
 $11 \%$ of companies have reached level 4 \cite{pwc}. The application of level 4 requires collecting, saving and analysing large amount of data, from which maintenance decision could be made.
-The analysis of data are performed by using statistical and machine learning methods (?). In statistical methods, time series analysis and anomaly detection methods (?) are used. In machine learning methods, supervised learning methods (?) are used. The challenge is that in supervised learning, in order to predict failure, the machine learning algorithm must be trained with failure data. However, 
-such failure data are not largely available, because machine don?t fail that often.
-
+The anomaly detection procedure are performed by using statistical and machine learning methods.
 \end{flushleft}
 
+\begin{flushleft}
+%These methods, detect early sign of anomalies such as machines defect and predict their remaining useful life, which is the time left before catastrophic break down. 
+The statistical and machine learning methods can be classified into two categories. Supervise learning and unsupervised learning methods. In supervised learning, based on available failure data from defect machine, a learning algorithm is trained to recognise the failure pattern in the data. This is sometime achieved by fitting the algorithm parameters to the data, which result in a model called a classifier or a regressor. A classifier is a model derived from a classification algorithm while a regressor is a model derived from a regression algorithm. In machine learning, the failure data is called a labeled data because we can assign a categorical label such as fail or a numerical label such as 1 to specify the condition of the machine through the data measuring its characteristics. In the absence of labeled data, unsupervised learning methods can detect pattern in the data without prior knowledge and classify data regions as anomalous or not.
+\end{flushleft}
 
+\begin{flushleft}
+The procedure of classifying a data region as anomalous or not is called anomaly detection. In this sense, an anomaly is defined as a pattern in the data, that does not conform to expected normal behaviour \cite{chandola}. A general anomaly detection strategy will first detect normal behaviour, secondly set a boundary around the normal behaviour and finaly declare any data out of the boundary as anomaly.
+\end{flushleft}
 \begin{flushleft}
 In rotating machines, more than 40 $\%$ of machine malfunction can be attributed to bearing defect [references]. 
 \end{flushleft}
@@ -457,6 +462,11 @@ Review of Geophysics, 2008
 \bibitem{norden1998} 
 Norden E. Huang, Zheng Shen, Steven R. Long, Manlic C. Wu, Hsing H.Shih, Quanan Zheng, Nai-Chyuan Yen, Chi Chao Tung and Henry H. Liu
 \textit{The Empirical mode decomposition and the Hilbert Spectrum for nonlinear and non-stationary time series analysis}
+Proc. R. Soc. Lond. A (1998) 455, 903:995.
+
+\bibitem{chandola} 
+Varun Chandola, Arindam Banerjee, and Vipin Kumar.
+\textit{Anomaly detection: A survey}
 Proc. R. Soc. Lond. A (1998) 455, 903:995.
 
 
