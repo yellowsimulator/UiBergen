@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  4 MAR 2019 15:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  4 MAR 2019 14:42
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
-**dissimilarity_copy.tex
-(./dissimilarity_copy.tex
+**assignment6.tex
+(./assignment6.tex
 LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
@@ -151,13 +151,33 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2015/03/04 v2.20.2
+\thm@style=\toks22
+\thm@bodyfont=\toks23
+\thm@headfont=\toks24
+\thm@notefont=\toks25
+\thm@headpunct=\toks26
+\thm@preskip=\skip46
+\thm@postskip=\skip47
+\thm@headsep=\skip48
+\dth@everypar=\toks27
+)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count103
-\float@exts=\toks22
+\float@exts=\toks28
 \float@box=\box28
-\@float@everytoks=\toks23
+\@float@everytoks=\toks29
 \@floatcapt=\box29
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/tools/bm.sty
+Package: bm 2014/10/28 v1.1c Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup6
+\symboldletters=\mathgroup7
+\symboldsymbols=\mathgroup8
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
+LaTeX Info: Redefining \bm on input line 207.
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/ms/ragged2e.sty
 Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
@@ -165,20 +185,20 @@ Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/ms/everysel.sty
 Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 )
-\CenteringLeftskip=\skip46
-\RaggedLeftLeftskip=\skip47
-\RaggedRightLeftskip=\skip48
-\CenteringRightskip=\skip49
-\RaggedLeftRightskip=\skip50
-\RaggedRightRightskip=\skip51
-\CenteringParfillskip=\skip52
-\RaggedLeftParfillskip=\skip53
-\RaggedRightParfillskip=\skip54
-\JustifyingParfillskip=\skip55
-\CenteringParindent=\skip56
-\RaggedLeftParindent=\skip57
-\RaggedRightParindent=\skip58
-\JustifyingParindent=\skip59
+\CenteringLeftskip=\skip49
+\RaggedLeftLeftskip=\skip50
+\RaggedRightLeftskip=\skip51
+\CenteringRightskip=\skip52
+\RaggedLeftRightskip=\skip53
+\RaggedRightRightskip=\skip54
+\CenteringParfillskip=\skip55
+\RaggedLeftParfillskip=\skip56
+\RaggedRightParfillskip=\skip57
+\JustifyingParfillskip=\skip58
+\CenteringParindent=\skip59
+\RaggedLeftParindent=\skip60
+\RaggedRightParindent=\skip61
+\JustifyingParindent=\skip62
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/adjustbox/adjustbox.sty
 Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
@@ -188,8 +208,8 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks24
-\XKV@tempa@toks=\toks25
+\XKV@toks=\toks30
+\XKV@tempa@toks=\toks31
 )
 \XKV@depth=\count104
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
@@ -255,10 +275,35 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \c@blind@pangramcount=\count123
 \c@blind@pangrammax=\count124
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count125
+\lst@gtempboxa=\box32
+\lst@token=\toks32
+\lst@length=\count126
+\lst@currlwidth=\dimen132
+\lst@column=\count127
+\lst@pos=\count128
+\lst@lostspace=\dimen133
+\lst@width=\dimen134
+\lst@newlines=\count129
+\lst@lineno=\count130
+\lst@maxwidth=\dimen135
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+\c@lstnumber=\count131
+\lst@skipnumbers=\count132
+\lst@framebox=\box33
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2014/09/06 1.5e listings configuration
+))
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
+
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks26
-\inpenc@posthook=\toks27
+\inpenc@prehook=\toks33
+\inpenc@posthook=\toks34
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2014/09/29 v1.1m UTF-8 support for inputenc
@@ -472,67 +517,55 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-LaTeX Font Info:    Try loading font information for T1+txtt on input line 19.
+LaTeX Font Info:    Try loading font information for T1+txtt on input line 22.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/txfonts/t1txtt.fd
 File: t1txtt.fd 2000/12/15 v3.1
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/enumitem/enumitem.sty
-Package: enumitem 2011/09/28 v3.5.2 Customized lists
-\labelindent=\skip60
-\enit@outerparindent=\dimen132
-\enit@toks=\toks28
-\enit@inbox=\box32
-\enitdp@description=\count125
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2014/09/06 1.5e listings language file
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2014/09/06 1.5e listings language file
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
-Package color Info: Driver file: pdftex.def on input line 142.
-)
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count126
-\lst@gtempboxa=\box33
-\lst@token=\toks29
-\lst@length=\count127
-\lst@currlwidth=\dimen133
-\lst@column=\count128
-\lst@pos=\count129
-\lst@lostspace=\dimen134
-\lst@width=\dimen135
-\lst@newlines=\count130
-\lst@lineno=\count131
-\lst@maxwidth=\dimen136
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-\c@lstnumber=\count132
-\lst@skipnumbers=\count133
-\lst@framebox=\box34
-)
-(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2014/09/06 1.5e listings configuration
+(/usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/svgnam.def
+File: svgnam.def 2007/01/21 v2.11 Predefined colors according to SVG 1.1 (UK)
 ))
-Package: listings 2014/09/06 1.5e (Carsten Heinz)
+(./assignment6.aux)
+\openout1 = `assignment6.aux'.
 
-(./dissimilarity_copy.aux)
-\openout1 = `dissimilarity_copy.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -570,17 +603,17 @@ LaTeX Font Info:    ... okay on input line 64.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count134
-\scratchdimen=\dimen137
-\scratchbox=\box35
-\nofMPsegments=\count135
-\nofMParguments=\count136
-\everyMPshowfont=\toks30
-\MPscratchCnt=\count137
-\MPscratchDim=\dimen138
-\MPnumerator=\count138
-\makeMPintoPDFobject=\count139
-\everyMPtoPDFconversion=\toks31
+\scratchcounter=\count133
+\scratchdimen=\dimen136
+\scratchbox=\box34
+\nofMPsegments=\count134
+\nofMParguments=\count135
+\everyMPshowfont=\toks35
+\MPscratchCnt=\count136
+\MPscratchDim=\dimen137
+\MPnumerator=\count137
+\makeMPintoPDFobject=\count138
+\everyMPtoPDFconversion=\toks36
 ) (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -626,271 +659,61 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 64.
-\c@lstlisting=\count140
-LaTeX Font Info:    Try loading font information for U+msa on input line 67.
+LaTeX Info: Redefining \selectfont on input line 41.
+\c@lstlisting=\count139
+LaTeX Font Info:    Try loading font information for U+msa on input line 43.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 67.
+LaTeX Font Info:    Try loading font information for U+msb on input line 43.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-(./dissimilarity_copy.toc)
+(./assignment6.toc)
 \tf@toc=\write3
-\openout3 = `dissimilarity_copy.toc'.
+\openout3 = `assignment6.toc'.
 
  [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] <pi
-e.png, id=14, 853.1875pt x 568.1225pt>
-File: pie.png Graphic file (type png)
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 62.
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 62.
 
-<use pie.png>
-Package pdftex.def Info: pie.png used on input line 100.
-(pdftex.def)             Requested size: 361.34999pt x 240.62099pt.
- [3] [4 <./pie.png>]
-<experiment.png, id=22, 629.35126pt x 298.11375pt>
-File: experiment.png Graphic file (type png)
- <use experiment.png>
-Package pdftex.def Info: experiment.png used on input line 139.
-(pdftex.def)             Requested size: 289.07999pt x 136.93384pt.
-
-[5 <./experiment.png>] <bearing.png, id=34, 358.33875pt x 229.85875pt>
-File: bearing.png Graphic file (type png)
-
-<use bearing.png>
-Package pdftex.def Info: bearing.png used on input line 158.
-(pdftex.def)             Requested size: 289.07999pt x 185.44449pt.
- <decomposition.png, id=35, 578.16pt x 578.16pt>
-File: decomposition.png Graphic file (type png)
-
-<use decomposition.png>
-Package pdftex.def Info: decomposition.png used on input line 165.
-(pdftex.def)             Requested size: 289.07999pt x 289.07928pt.
- [6 <./bearing.png>]
-<time-signal.png, id=40, 462.528pt x 346.896pt>
-File: time-signal.png Graphic file (type png)
- <use time-signal.png>
-Package pdftex.def Info: time-signal.png used on input line 176.
-(pdftex.def)             Requested size: 289.07999pt x 216.82004pt.
-
-<spectrum.png, id=41, 462.528pt x 346.896pt>
-File: spectrum.png Graphic file (type png)
- <use spectrum.png>
-Package pdftex.def Info: spectrum.png used on input line 177.
-(pdftex.def)             Requested size: 289.07999pt x 216.82004pt.
-
-<fault.png, id=42, 462.528pt x 346.896pt>
-File: fault.png Graphic file (type png)
- <use fault.png>
-Package pdftex.def Info: fault.png used on input line 178.
-(pdftex.def)             Requested size: 289.07999pt x 216.82004pt.
- [7 <./decomposition.png>]
-Overfull \vbox (121.71272pt too high) has occurred while \output is active []
-
-
-[8 <./time-signal.png> <./spectrum.png> <./fault.png>]
-
-LaTeX Warning: Reference `fig:signal221' on page 9 undefined on input line 183.
-
-
-<signal_processing_method_bpfo.png, id=54, 1387.584pt x 722.7pt>
-File: signal_processing_method_bpfo.png Graphic file (type png)
-
-<use signal_processing_method_bpfo.png>
-Package pdftex.def Info: signal_processing_method_bpfo.png used on input line 1
-87.
-(pdftex.def)             Requested size: 505.89pt x 263.48004pt.
-
-Overfull \hbox (75.88538pt too wide) in paragraph at lines 187--188
- [][] 
- []
-
-<signal_processing_method_bpfi.png, id=55, 1387.584pt x 722.7pt>
-File: signal_processing_method_bpfi.png Graphic file (type png)
-
-<use signal_processing_method_bpfi.png>
-Package pdftex.def Info: signal_processing_method_bpfi.png used on input line 1
-94.
-(pdftex.def)             Requested size: 505.89pt x 263.48004pt.
-
-Overfull \hbox (75.88538pt too wide) in paragraph at lines 194--195
- [][] 
- []
-
-[9 <./signal_processing_method_bpfo.png>]
-<dbscaling.png, id=60, 281.05pt x 200.75pt>
-File: dbscaling.png Graphic file (type png)
- <use dbscaling.png>
-Package pdftex.def Info: dbscaling.png used on input line 214.
-(pdftex.def)             Requested size: 144.54pt x 103.2419pt.
-
-<dbwavelet.png, id=61, 281.05pt x 200.75pt>
-File: dbwavelet.png Graphic file (type png)
- <use dbwavelet.png>
-Package pdftex.def Info: dbwavelet.png used on input line 215.
-(pdftex.def)             Requested size: 144.54pt x 103.2419pt.
- [10 <./signal_processing_method_bpfi.png>]
-<mixed_method_bpfo.png, id=66, 1387.584pt x 721.9773pt>
-File: mixed_method_bpfo.png Graphic file (type png)
-
-<use mixed_method_bpfo.png>
-Package pdftex.def Info: mixed_method_bpfo.png used on input line 248.
-(pdftex.def)             Requested size: 433.62pt x 225.61734pt.
-
-Overfull \hbox (3.61537pt too wide) in paragraph at lines 248--249
- [][] 
- []
-
-<mixed_method_bpfi.png, id=67, 1387.584pt x 721.9773pt>
-File: mixed_method_bpfi.png Graphic file (type png)
-
-<use mixed_method_bpfi.png>
-Package pdftex.def Info: mixed_method_bpfi.png used on input line 254.
-(pdftex.def)             Requested size: 433.62pt x 225.61734pt.
-
-Overfull \hbox (3.61537pt too wide) in paragraph at lines 254--255
- [][] 
- []
-
-[11 <./dbscaling.png> <./dbwavelet.png> <./mixed_method_bpfo.png>] [12 <./mixed
-_method_bpfi.png>] <f.png, id=76, 462.528pt x 346.896pt>
-File: f.png Graphic file (type png)
- <use f.png>
-Package pdftex.def Info: f.png used on input line 317.
-(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
-
-<frequency.png, id=77, 462.528pt x 346.896pt>
-File: frequency.png Graphic file (type png)
- <use frequency.png>
-Package pdftex.def Info: frequency.png used on input line 318.
-(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
- [13]
-<signal.png, id=84, 462.528pt x 346.896pt>
-File: signal.png Graphic file (type png)
- <use signal.png>
-Package pdftex.def Info: signal.png used on input line 364.
-(pdftex.def)             Requested size: 289.07999pt x 216.82004pt.
- [14 <./f.png> <./frequency.png>] <imf/imf1.png, id=90, 462.528pt x 346.896pt>
-File: imf/imf1.png Graphic file (type png)
- <use imf/imf1.png>
-Package pdftex.def Info: imf/imf1.png used on input line 372.
-(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
-
-<imf/imf2.png, id=91, 462.528pt x 346.896pt>
-File: imf/imf2.png Graphic file (type png)
- <use imf/imf2.png>
-Package pdftex.def Info: imf/imf2.png used on input line 373.
-(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
-
-<imf/imf3.png, id=92, 462.528pt x 346.896pt>
-File: imf/imf3.png Graphic file (type png)
- <use imf/imf3.png>
-Package pdftex.def Info: imf/imf3.png used on input line 380.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf4.png, id=93, 462.528pt x 346.896pt>
-File: imf/imf4.png Graphic file (type png)
- <use imf/imf4.png>
-Package pdftex.def Info: imf/imf4.png used on input line 381.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- [15 <./signal.png> <./imf/imf1.png> <./imf/imf2.png>]
-<imf/imf5.png, id=100, 462.528pt x 346.896pt>
-File: imf/imf5.png Graphic file (type png)
- <use imf/imf5.png>
-Package pdftex.def Info: imf/imf5.png used on input line 388.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf6.png, id=101, 462.528pt x 346.896pt>
-File: imf/imf6.png Graphic file (type png)
- <use imf/imf6.png>
-Package pdftex.def Info: imf/imf6.png used on input line 389.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf7.png, id=102, 462.528pt x 346.896pt>
-File: imf/imf7.png Graphic file (type png)
- <use imf/imf7.png>
-Package pdftex.def Info: imf/imf7.png used on input line 396.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf8.png, id=103, 462.528pt x 346.896pt>
-File: imf/imf8.png Graphic file (type png)
- <use imf/imf8.png>
-Package pdftex.def Info: imf/imf8.png used on input line 397.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf9.png, id=104, 462.528pt x 346.896pt>
-File: imf/imf9.png Graphic file (type png)
- <use imf/imf9.png>
-Package pdftex.def Info: imf/imf9.png used on input line 404.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
-
-<imf/imf10.png, id=105, 462.528pt x 346.896pt>
-File: imf/imf10.png Graphic file (type png)
- <use imf/imf10.png>
-Package pdftex.def Info: imf/imf10.png used on input line 405.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- [16 <./imf/imf3.png> <./imf/imf4.png> <./imf/imf5.png> <./imf/imf6.png> <./imf
-/imf7.png> <./imf/imf8.png>] <imf/imf11.png, id=115, 462.528pt x 346.896pt>
-File: imf/imf11.png Graphic file (type png)
-
-<use imf/imf11.png>
-Package pdftex.def Info: imf/imf11.png used on input line 412.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- <imf/imf12.png, id=116, 462.528pt x 346.896pt>
-File: imf/imf12.png Graphic file (type png)
-
-<use imf/imf12.png>
-Package pdftex.def Info: imf/imf12.png used on input line 413.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- <imf/imf13.png, id=117, 462.528pt x 346.896pt>
-File: imf/imf13.png Graphic file (type png)
-
-<use imf/imf13.png>
-Package pdftex.def Info: imf/imf13.png used on input line 420.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- <imf/imf14.png, id=118, 462.528pt x 346.896pt>
-File: imf/imf14.png Graphic file (type png)
-
-<use imf/imf14.png>
-Package pdftex.def Info: imf/imf14.png used on input line 421.
-(pdftex.def)             Requested size: 144.54pt x 108.40472pt.
- [17 <./imf/imf9.png> <./imf/imf10.png> <./imf/imf11.png> <./imf/imf12.png> <./
-imf/imf13.png> <./imf/imf14.png>] [18]
-(./dissimilarity_copy.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[2] [3] (./assignment6.aux) ) 
 Here is how much of TeX's memory you used:
- 5995 strings out of 493089
- 85954 string characters out of 6134842
- 158051 words of memory out of 5000000
- 9316 multiletter control sequences out of 15000+600000
- 12355 words of font info for 46 fonts, out of 8000000 for 9000
+ 6396 strings out of 493089
+ 89438 string characters out of 6134842
+ 199581 words of memory out of 5000000
+ 9720 multiletter control sequences out of 15000+600000
+ 15430 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,7n,35p,1218b,357s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
-l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on dissimilarity_copy.pdf (18 pages, 1650512 bytes).
+ 38i,23n,72p,251b,300s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
+pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.p
+fb>
+Output written on assignment6.pdf (3 pages, 150843 bytes).
 PDF statistics:
- 177 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 74 PDF objects out of 1000 (max. 8388607)
+ 53 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 151 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

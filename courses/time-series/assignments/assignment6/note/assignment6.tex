@@ -1,0 +1,138 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{bm}
+
+\usepackage{ragged2e}
+\usepackage{adjustbox}
+\usepackage{blindtext}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\Cov}{\operatorname{Cov}}
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{DarkGreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{DarkGreen},
+     %frame=single, % adds a frame around the code
+     backgroundcolor=\color{lightgray},
+}
+\usepackage[svgnames]{xcolor}
+\title{STAT211 Mandatory Homework 6}
+\author{Yapi Donatien Achou}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+ 
+\section{Problem 6.6}
+Let $\textbf{P}_{k}$ be the linear projection onto
+\begin{equation}\label{eq:e}
+\textbf{S}_{k} = span\{ X_{1},\cdots, X_{k}  \}
+\end{equation}
+and 
+\begin{equation}\label{eq:e0}
+e_{k} = \frac{X_{k}-\hat{X}_{k}}{\nu_{k-1}}.
+\end{equation}
+$\{e_{1},\cdots,e_{n}\}$
+is orthonormal basis for $\textbf{S}_{n}$ if $\{e_{1},\cdots,e_{n}\}$ is a linearly independent subset of $\textbf{S}_{n}$ that span $\textbf{S}_{n}$, and for any $e_{j}, e_{i}$ in $\{e_{1},\cdots,e_{n}\}$
+the inner product of $e_{j}$ and $e_{i}$ is zero and any $e_{i}$ as norm 1.
+\justify
+\begin{proof}
+\begin{itemize}
+\item Linearly independence.
+%\justify
+Assume that 
+\begin{equation}
+  a_{1}e_{1}+\cdots+a_{n}e_{n} = 0
+  \end{equation}
+  where $a_{i}$ are real numbers. The we have 
+\begin{equation}\label{eq:e1}
+\begin{split}
+a_{1}e_{1}+\cdots+a_{n}e_{n} &= 0\\
+a_{1}\frac{X_{1}-\hat{X}_{1}}{\nu_{0}}+\cdots+a_{n}\frac{X_{n}-\hat{X}_{n}}{\nu_{n-1}} &= 0\\
+\frac{a_{1}}{\nu_{0}}(X_{1}-\hat{X}_{1}) + \cdots+ \frac{a_{n}}{\nu_{n-1}}(X_{n}-\hat{X}_{n}) &=0\\
+%\frac{a_{1}}{\nu_{0}}X_{1} + \cdots+ \frac{a_{n}}{\nu_{n-1}}X_{n} &=\frac{a_{1}}{\nu_{0}}\hat{X}_{1} + \cdots+ \frac{a_{n}}{\nu_{n-1}}\hat{X}_{n}\\
+\end{split}
+\end{equation}
+The last expression in (\ref{eq:e1}) holds true if 
+\begin{equation}
+X_{1} -\hat{X_{1}} = 0 , \cdots, X_{n}-\hat{X_{n}} = 0 
+\end{equation} 
+But from (\ref{eq:e0}) we know that 
+\begin{equation}
+X_{k}-\hat{X_{k}} = e_{k}\nu_{k-1}.
+\end{equation}
+Therefor equation (\ref{eq:e1}) is true if 
+\begin{equation}
+\frac{a_{1}}{\nu_{1}} = \cdots =\frac{a_{n}}{\nu_{n-1}} = 0
+\end{equation} 
+equivalently 
+\begin{equation}
+a_{1} = \cdots =a_{n} = 0
+\end{equation}
+This means that $\{e_{1},\cdots,e_{n}\}$ is a linearly independent
+ 
+%\justify
+\item $\{e_{1},\cdots,e_{n}\}$ span $\textbf{S}_{n}$. We want to show that any vector in $\textbf{S}_{n}$ can be written as a linear combination of $\{e_{1},\cdots,e_{n}\}$.
+Let $Z \in \textbf{S}_{n}$. Since $\textbf{S}_{n} = span\{ X_{1},\cdots, X_{n}  \}$, we have 
+\begin{equation}
+Z = b_{1}X_{1} + \cdots + b_{n}X_{n}
+\end{equation}
+where $b_{i}$ are real numbers. Then we have 
+
+\begin{equation}
+\begin{split}
+Z &= b_{1}X_{1} + \cdots + b_{n}X_{n}\\
+Z&=b_{1}(\nu_{0}e_{1} + \hat{X}_{1}) + \cdots + b_{n}(\nu_{n-1}e_{n} + \hat{X}_{n})\\
+Z&=b_{1}\nu_{0}e_{1}  + \cdots + b_{n}\nu_{n-1}e_{n} + \underbrace{b_{1}\hat{X}_{1} + \cdots + b_{n}\hat{X}_{n}}_{Z^{\prime}}\\
+\underbrace{Z-Z^{\prime}}_{Z^{\prime\prime}}&=\underbrace{b_{1}\nu_{0}}_{\alpha_{1}}e_{1}  + \cdots + \underbrace{b_{n}\nu_{n-1}}_{\alpha_{n}}e_{n} 
+\end{split}
+\end{equation} 
+Since $Z^{\prime\prime} \in \textbf{S}_{n}$
+We have 
+\begin{equation}
+Z^{\prime\prime} = \alpha_{1}e_{1}  + \cdots + \alpha_{n}e_{n} 
+\end{equation}
+
+\item Horthogonality
+Let $Z_{1}, Z_{2}$ be two arbitrarily vectors in $\textbf{S}_{n}$
+\begin{equation}
+\begin{split}
+\langle\,Z_{1},Z_{2}\rangle & = \langle\,\alpha_{1}e_{1}  + \cdots + \alpha_{n}e_{n} ,\beta_{1}e_{1}  + \cdots + \beta_{n}e_{n} \rangle\\
+&=\alpha_{1}\beta_{1} + \cdots+ \alpha_{n}\beta_{n}
+\end{split}
+\end{equation}
+\end{itemize}
+\end{proof}
+
+
+\begin{thebibliography}{9}
+\bibitem{petter} 
+Petter J. Brockwell. Richard A. Davis
+\textit{Introduction to Time Series and Forecasting}. 
+Springer. Second edition. 2001
+ 
+\end{thebibliography}
+
+
+\end{document}  
