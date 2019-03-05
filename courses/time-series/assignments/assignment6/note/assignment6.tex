@@ -40,9 +40,53 @@
 
 \begin{document}
 
-\maketitle
+\maketitle 
 \tableofcontents
 \newpage
+ 
+ 
+ \section{Problem 6.2}
+ \subsection{Part a}
+ Root of 
+ \begin{equation}
+ X_{t} = Z_{t} + Z_{t-2}
+ \end{equation}
+ We can rewrite this as 
+ \begin{equation}
+ X_{t} = Z_{t} + 0Z_{t-1} + 1Z_{t-2}
+ \end{equation}
+ and the corresponding moving average polynomial is then 
+ \begin{equation}
+ \theta(z) = 1+ 0z + 1.z^{2} = 1 + z^{2}.
+ \end{equation}
+ whose roots are 
+ \begin{equation}
+ z_{1} = i, \quad z_{2} = -i
+ \end{equation}
+ \subsection{Part b}
+ Root of 
+ \begin{equation}
+ X_{t} = Z_{t}  -2\cos(w)Z_{t-1} + Z_{t-2}
+ \end{equation}
+ and the corresponding moving average polynomial is 
+ \begin{equation}
+ \begin{split}
+ \theta(z) &= 1-2\cos(w)z + z^{2}\\
+ &=(z-\cos(w))^{2} - \cos(w)^{2} +1 \\
+ &=(z-\cos(w))^{2} - (\cos(w)^{2} -1) \\
+ &(z-\cos(w))^{2}  - (-\sin(w)^{2})\\
+ &(z-\cos(w))^{2}  - (i^{2}\sin(w)^{2})\\
+ &(z-\cos(w))^{2}  - (i\sin(w))^{2}\\
+&(z-\cos(w) + i\sin(w))(z-\cos(w) - i\sin(w))
+ \end{split}
+ \end{equation}
+ and the roots are 
+ \begin{equation}
+ z_{1} = \cos(w) -i\sin(w), \quad  z_{2} = \cos(w) +i\sin(w)
+ \end{equation}
+ 
+ \section{Problem 6.3}
+ 
  
 \section{Problem 6.6}
 Let $\textbf{P}_{k}$ be the linear projection onto
@@ -74,17 +118,17 @@ a_{1}\frac{X_{1}-\hat{X}_{1}}{\nu_{0}}+\cdots+a_{n}\frac{X_{n}-\hat{X}_{n}}{\nu_
 %\frac{a_{1}}{\nu_{0}}X_{1} + \cdots+ \frac{a_{n}}{\nu_{n-1}}X_{n} &=\frac{a_{1}}{\nu_{0}}\hat{X}_{1} + \cdots+ \frac{a_{n}}{\nu_{n-1}}\hat{X}_{n}\\
 \end{split}
 \end{equation}
-The last expression in (\ref{eq:e1}) holds true if 
-\begin{equation}
-X_{1} -\hat{X_{1}} = 0 , \cdots, X_{n}-\hat{X_{n}} = 0 
-\end{equation} 
-But from (\ref{eq:e0}) we know that 
+From (\ref{eq:e0}) we know that 
 \begin{equation}
 X_{k}-\hat{X_{k}} = e_{k}\nu_{k-1}.
 \end{equation}
-Therefor equation (\ref{eq:e1}) is true if 
+Thus 
 \begin{equation}
-\frac{a_{1}}{\nu_{1}} = \cdots =\frac{a_{n}}{\nu_{n-1}} = 0
+X_{1} -\hat{X_{1}} \neq 0 , \cdots, X_{n}-\hat{X_{n}} \neq 0 
+\end{equation} 
+Therefor the last expression in equation (\ref{eq:e1}) is true if 
+\begin{equation}
+\frac{a_{1}}{\nu_{0}} = \cdots =\frac{a_{n}}{\nu_{n-1}} = 0
 \end{equation} 
 equivalently 
 \begin{equation}
@@ -115,16 +159,41 @@ Z^{\prime\prime} = \alpha_{1}e_{1}  + \cdots + \alpha_{n}e_{n}
 \end{equation}
 
 \item Horthogonality
-Let $Z_{1}, Z_{2}$ be two arbitrarily vectors in $\textbf{S}_{n}$
+Let $e_{r}, e_{r}$ be two arbitrarily vectors in $\{ e_{1}, \cdots, e_{n}   \}$ such that $r \neq s$.
 \begin{equation}
 \begin{split}
-\langle\,Z_{1},Z_{2}\rangle & = \langle\,\alpha_{1}e_{1}  + \cdots + \alpha_{n}e_{n} ,\beta_{1}e_{1}  + \cdots + \beta_{n}e_{n} \rangle\\
-&=\alpha_{1}\beta_{1} + \cdots+ \alpha_{n}\beta_{n}
+\langle\,e_{r},e_{s}\rangle & = \left\langle\,\frac{X_{r}-\hat{X}_{r}}{\nu_{r-1}} ,\frac{X_{s}-\hat{X}_{s}}{\nu_{s-1}}\right\rangle\\
+&=\frac{1}{\nu_{r-1}\nu_{i-s}}\left\langle\,X_{r}-\hat{X}_{r} ,X_{s}-\hat{X}_{s}\right\rangle\\
 \end{split}
 \end{equation}
+From the innovation algorithm \cite{petter}, the coefficient of $X_{n}-\hat{X}_{n}, \cdots, X_{1}-\hat{X}_{1}$ are of the form 
+\begin{equation}
+\theta_{n,n-k}, \quad k=0, \cdots, n.
+\end{equation}
+
+so that 
+\begin{equation}
+\begin{split}
+\langle\,e_{r},e_{s}\rangle & = \left\langle\,\frac{X_{r}-\hat{X}_{r}}{\nu_{r-1}} ,\frac{X_{s}-\hat{X}_{s}}{\nu_{s-1}}\right\rangle\\
+&=\frac{1}{\nu_{r-1}\nu_{i-s}}\left\langle\,X_{r}-\hat{X}_{r} ,X_{s}-\hat{X}_{s}\right\rangle\\
+&= \frac{\theta_{r,r-k} \theta_{s,s-k}}{\nu_{r-1}\nu_{s-1}}
+\end{split}
+\end{equation}
+And from \cite{petter} equation 2.5.26, for $r\neq s$ we get 
+\begin{equation}
+\theta_{r,r-k} \theta_{s,s-k} = 0, \Rightarrow \langle\,e_{r},e_{s}\rangle = 0
+\end{equation}
+
+\item Normality
+The
+
+
+
+
+
+
 \end{itemize}
 \end{proof}
-
 
 \begin{thebibliography}{9}
 \bibitem{petter} 
