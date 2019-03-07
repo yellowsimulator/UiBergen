@@ -22,6 +22,21 @@
 \DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
 \DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
 
+
+\usepackage{scalerel,stackengine}
+\stackMath
+\newcommand\reallywidehat[1]{%
+\savestack{\tmpbox}{\stretchto{%
+  \scaleto{%
+    \scalerel*[\widthof{\ensuremath{#1}}]{\kern-.6pt\bigwedge\kern-.6pt}%
+    {\rule[-\textheight/2]{1ex}{\textheight}}%WIDTH-LIMITED BIG WEDGE
+  }{\textheight}% 
+}{0.5ex}}%
+\stackon[1pt]{#1}{\tmpbox}%
+}
+\parskip 1ex
+
+
 \lstset{language=R,
     basicstyle=\small\ttfamily,
     stringstyle=\color{DarkGreen},
@@ -46,29 +61,29 @@
  
  
  \section{Problem 6.2}
- \subsection{Part a}
- Root of 
+ \subsection{Part a: Polynomial roots of moving average model}
+ The model
  \begin{equation}
  X_{t} = Z_{t} + Z_{t-2}
  \end{equation}
- We can rewrite this as 
+ can be rewritten as 
  \begin{equation}
- X_{t} = Z_{t} + 0Z_{t-1} + 1Z_{t-2}
+ X_{t} = Z_{t} + 0Z_{t-1} + 1Z_{t-2},
  \end{equation}
- and the corresponding moving average polynomial is then 
+ and the corresponding moving average polynomial is
  \begin{equation}
- \theta(z) = 1+ 0z + 1.z^{2} = 1 + z^{2}.
+ \theta(z) = 1+ 0z + 1.z^{2} = 1 + z^{2},
  \end{equation}
  whose roots are 
  \begin{equation}
  z_{1} = i, \quad z_{2} = -i
  \end{equation}
- \subsection{Part b}
- Root of 
+ \subsection{Part b: Polynomial roots of moving average model}
+ The corresponding moving average polynomial for the model
  \begin{equation}
  X_{t} = Z_{t}  -2\cos(w)Z_{t-1} + Z_{t-2}
  \end{equation}
- and the corresponding moving average polynomial is 
+  is 
  \begin{equation}
  \begin{split}
  \theta(z) &= 1-2\cos(w)z + z^{2}\\
@@ -80,16 +95,285 @@
 &(z-\cos(w) + i\sin(w))(z-\cos(w) - i\sin(w))
  \end{split}
  \end{equation}
- and the roots are 
+ whose roots are 
  \begin{equation}
  z_{1} = \cos(w) -i\sin(w), \quad  z_{2} = \cos(w) +i\sin(w)
  \end{equation}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
  
  \section{Problem 6.3}
+ Consider a causal AR(2) model with 
+ \begin{equation}
+ \{Z_{t} \} \sim WN(0,\sigma^{2})
+  \end{equation}
+ The two step predictor $\widehat{X}_{n+2}$ is defined by $\mathcal{P}_{n}(X_{n+2})$. From \cite{petter}, page 65 property 1,
+ we have 
+ \begin{equation}\label{eq:pn}
+\mathcal{P}_{n}(X_{n+h}) = \sum_{i=1}^{n}a_{i}X_{n+1-i}
+\end{equation} 
+ where the $a_{i}$ satisfy
+ \begin{equation}
+ \Gamma_{n}\textbf{a}_{n} = \gamma_{n}(h), \quad \text{equation 2.5.7 from \cite{petter}},
+ \end{equation}
+ where
+ \begin{equation}
+ \textbf{a}_{n} = (a_{1}, \cdots,a_{n})
+ \end{equation}
+ 
+ \begin{equation}
+ \Gamma_{n} = [\gamma(i-j) ]_{i,j=0}^{n}
+ \end{equation}
+ and 
+ \begin{equation}
+ \gamma_{n}(h) = (\gamma(h), \gamma(h+1),\cdots,\gamma(h+n-1)
+ \end{equation}
+ 
+ \begin{equation}
+ \gamma(h) = \Cov(X_{t+h},X_{t}).
+ \end{equation}
+ To compute $\mathcal{P}_{n}(X_{n+2})$, we set $h = 2$ in equation (\ref{eq:pn}) and compute the coefficient $a_{i}$ by solving 
+ \begin{equation}
+ \Gamma_{n}\textbf{a}_{n} = \gamma_{n}(2)
+ \end{equation}
+ or more generally
+ 
+ \begin{equation}
+  \underbrace{
+  \begin{pmatrix}
+  \gamma(0) & \gamma(1) & \cdots & \gamma(n) \\
+  \gamma(1) & \gamma(0) & \cdots & \gamma(n-1) \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  \gamma(n) & \gamma(n-1) & \cdots & \gamma(0) 
+ \end{pmatrix}
+ }_{\Gamma_{n}}
+ \underbrace{
+  \begin{pmatrix}
+ a_{1}\\
+ a_{2}\\
+ \vdots\\
+ a_{n}
+ \end{pmatrix}
+ }_{\textbf{a}_{n}}
+  = 
+  \underbrace{
+  \begin{pmatrix}
+ \gamma(2)\\
+ \gamma(3)\\
+ \vdots\\
+ \gamma(n+1)
+ \end{pmatrix}
+  }_{\gamma_{n}(2)}
+ \end{equation}
+ To evaluate $\gamma(h)$, we note that the process is causal, which leads to 
+ \begin{equation}
+ X_{t} = Z_{t} + \psi_{1}Z_{t-1} +\psi_{2}Z_{t-2} 
+ \end{equation}
+ and
+ \begin{equation}
+ \begin{split}
+ \gamma(h) &= \Cov(X_{t+h},X_{t})\\
+ &=\Cov( Z_{t+h} + \psi_{1}Z_{t+h-1} +\psi_{2}Z_{t+h-2} , Z_{t} + \psi_{1}Z_{t-1} +\psi_{2}Z_{t-2} )\\
+ &=\Cov(Z_{t+h},Z_{t})+\psi_{1}\Cov(Z_{t+h},Z_{t-1})+\psi_{2}\Cov(Z_{t+h},Z_{t-2})\\
+ &+\psi_{1}\Cov(Z_{t+h-1},Z_{t})+\psi_{1}^{2}\Cov(Z_{t+h-1},Z_{t-1})+\psi_{1}\psi_{2}\Cov(Z_{t+h-1},Z_{t-2}) \\
+ &+\psi_{2}\Cov(Z_{t+h-2},Z_{t})+\psi_{2}\psi_{1}\Cov(Z_{t+h-2},Z_{t-1})+\psi_{2}^{2}\Cov(Z_{t+h-1},Z_{t-2}) \\
+ &=\sigma^{2}(\delta_{h,0} + \psi_{1}\delta_{h,-1} + \psi_{2}\delta_{h,-2} +\psi_{1}\delta_{h,1} +\psi_{1}^{2}\delta_{h,0} + \psi_{1}\psi_{2}\delta_{h,-1}+\psi_{2}\delta_{h,2}+\psi_{2}\psi_{1}\delta_{h,1}+\psi_{2}^{2}\delta_{h,-1})
+ \end{split}
+ \end{equation}
+ From which we get
+\begin{equation}
+\begin{split}
+\gamma(0)&=\sigma^{2}(1+\psi_{1}^{2})\\
+\gamma(1)&=\sigma^{2}(\psi_{1}+\psi_{1}\psi_{2})\\
+\gamma(2)&=\sigma^{2}\psi_{2}\\
+\gamma(n)&= 0 , \quad \text{for n $\geq 3$}\\\
+\end{split}
+ \end{equation}
+ 
+ Now the variance of $\mathcal{P}_{n}(X_{n+2})$ is given by 
+ \begin{equation}
+ \begin{split}
+ \Var(\mathcal{P}_{n}(X_{n+2})) &= \Var\left(   \sum_{i=1}^{n}a_{i}X_{n+1-i}   \right)\\
+ &=\sum_{i,j=1}^{n}a_{i}a_{j}\Cov(X_{n+1-i},X_{n+1-j})
+ \end{split}
+ \end{equation}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
  
+ 
+ \section{Problem 6.4}
+ Let $\{ X_{t} \}$ be a stationary and linear causal time series with white noise process $\{ Z_{t} \} \sim WN(0,\sigma^{2})$. Let $\mathcal{P}_{n}$ be the projection onto $\{ X_{1},\cdots,X_{n} \}$.
+ Let compute $\widehat{Z}_{n+1} = \mathcal{P}_{n}(Z_{n+1})$ and  $\widehat{Z}_{n} = \mathcal{P}_{n}(Z_{n})$
+ Since $\{ X_{t} \}$ is linear we can write 
+ \begin{equation}
+ X_{t} = \sum_{j=0}^{n}\psi_{j}Z_{t-j}.
+ \end{equation}
+ From Problem 6.3  equation (\ref{eq:pn}) we have 
+ \begin{equation}\label{eq:pn1}
+\mathcal{P}_{n}(Z_{n+1}) = \sum_{i=1}^{n}a_{i}Z_{n+1-i}
+\end{equation} 
+and 
+ \begin{equation}\label{eq:pn2}
+\mathcal{P}_{n}(Z_{n}) = \sum_{i=1}^{n}b_{i}Z_{n-i}
+\end{equation} 
+where the  $a_{i}$ and $b_{i}$ are solution of 
+ \begin{equation}
+ \Gamma_{n}\textbf{a}_{n} = \gamma_{n}(1)
+ \end{equation}
+  \begin{equation}
+ \Gamma_{n}\textbf{b}_{n} = \gamma_{n}(0)
+ \end{equation}
+respectively. Or 
+  \begin{equation}
+\textbf{a}_{n} = \Gamma_{n}^{-1} \gamma_{n}(1)
+ \end{equation}
+  \begin{equation}
+\textbf{b}_{n} =  \Gamma_{n}^{-1}\gamma_{n}(0)
+ \end{equation}
+
+  \begin{equation}
+ \underbrace{
+  \begin{pmatrix}
+ a_{1}\\
+ a_{2}\\
+ \vdots\\
+ a_{n}
+ \end{pmatrix}
+ }_{\textbf{a}_{n}}
+  = 
+  \begin{pmatrix}
+  \gamma(0) & \gamma(1) & \cdots & \gamma(n) \\
+  \gamma(1) & \gamma(0) & \cdots & \gamma(n-1) \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  \gamma(n) & \gamma(n-1) & \cdots & \gamma(0) 
+ \end{pmatrix}^{-1}
+  \underbrace{
+  \begin{pmatrix}
+ \gamma(1)\\
+ \gamma(2)\\
+ \vdots\\
+ \gamma(n+1)
+ \end{pmatrix}
+  }_{\gamma_{n}(1)}
+ \end{equation}
+ 
+ 
+ \begin{equation}
+ \underbrace{
+  \begin{pmatrix}
+ b_{1}\\
+ b_{2}\\
+ \vdots\\
+ b_{n}
+ \end{pmatrix}
+ }_{\textbf{b}_{n}}
+  = 
+  \begin{pmatrix}
+  \gamma(0) & \gamma(1) & \cdots & \gamma(n) \\
+  \gamma(1) & \gamma(0) & \cdots & \gamma(n-1) \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  \gamma(n) & \gamma(n-1) & \cdots & \gamma(0) 
+ \end{pmatrix}^{-1}
+  \underbrace{
+  \begin{pmatrix}
+ \gamma(1)\\
+ \gamma(2)\\
+ \vdots\\
+ \gamma(n+1)
+ \end{pmatrix}
+  }_{\gamma_{n}(0)}
+ \end{equation}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 6.5}
+let $\{Z_{n}\} \sim WN(0,1)$ and 
+\begin{equation} \label{eq:p}
+X_{t} = Z_{t} - Z_{t-1}
+\end{equation}
+
+\subsection{Part a}
+The corresponding polynomial of model (\ref{eq:p}) is
+\begin{equation}
+\theta(z) = 1-z,
+\end{equation}
+whose root is
+\begin{equation}
+z = 1
+\end{equation}
+The root is on the unit circle. Since the root is not outside the unit circle, the process is not invertible.
+\subsection{Part b}
+Let try to create different representation of  the model in equation (\ref{eq:p}).
+(\ref{eq:p}) we have 
+\begin{equation} \label{eq:p1}
+X_{t-1} = Z_{t-1} - Z_{t-2} \Rightarrow Z_{t-1} = X_{t-1} + Z_{t-2}
+\end{equation}
+and inserting the last expression back into (\ref{eq:p}) we get 
+\begin{equation} \label{eq:pqw}
+X_{t}+x_{t-1} = Z_{t} - Z_{t-2}.
+\end{equation}
+If we repeat the same process we get the following representation.
+\begin{equation} \label{eq:p}
+X_{t} +X_{t-1} + X_{t-2}= Z_{t} - Z_{t-3}.
+\end{equation}
+which is an ARMA(2,3), and the autoregressive polynomial 
+\begin{equation} \label{eq:p00}
+1+z+z^{2} = \left(z+\frac{1}{2}+ i\frac{\sqrt{3}}{2}\right) \left(z+\frac{1}{2}- i\frac{\sqrt{3}}{2}\right)
+\end{equation}
+has root on the unit circle. So It seams like through this process, it is not possible to create a representation which is invertible. But We also know that for each covariance function of a MA(q) process, there
+exists one set of coefficients $d_{1}, \cdots, d_{q}$ such that the process is invertible. If we find this coefficients then we can have an invertible representation.
+
+\subsection{Part c}
+ using DL to find $\widehat{X}_{n+1}$ for $n = 1,2,3.$. The Durbin-Levinson recursion gives the coefficients of $X_{n}, \cdots, X_{1}$ in the following representation \cite{petter},
+ \begin{equation}
+ \widehat{X}_{n+1} = \sum_{j=1}^{n}\phi_{nj}X_{n+1-j}.
+ \end{equation}
+ We compute $\gamma(h)$ as follow:
+ \begin{equation}
+\begin{split}
+\gamma(h) &= \Cov(X_{t+h}, X_{t})\\
+&= \Cov(Z_{t+h} - Z_{t+h-1}, Z_{t} - Z_{t-1})\\
+&=\Cov(Z_{t+h},Z_{t})-\Cov(Z_{t+h},Z_{t-1})-\Cov(Z_{t+h-1},Z_{t})+\Cov(Z_{t+h-1},Z_{t-1})\\
+&=\sigma^{2}(\delta_{h,0}-\delta_{h,-1}-\delta_{h,1}+\delta_{h,0})\\
+&=(\delta_{h,0}-\delta_{h,-1}-\delta_{h,1}+\delta_{h,0})
+\end{split}
+ \end{equation}
+ and 
+ \begin{equation}
+ \phi_{11} = \frac{\gamma(1)}{\gamma(0)} = -\frac{1}{2}
+ \end{equation}
+ For $n=1$
+ \begin{equation}
+ \widehat{X}_{2} = \phi_{11}X_{1} = -\frac{1}{2}X_{1}
+ \end{equation}
+ For n = 2
+ \begin{equation}
+ \begin{split}
+ \widehat{X}_{3} &= \sum_{j=1}^{2}\phi_{2j}X_{3-j}\\
+ &=\phi_{21}X_{2} + \phi_{22}X_{1}
+ \end{split}
+ \end{equation}
+ where 
+ \begin{equation}
+ \begin{split}
+ \phi_{22} &= \frac{\gamma(2)-\phi_{11}\gamma(1)}{\nu_{1}}\\
+ &=\frac{-\phi_{11}\gamma(1)}{\nu_{1}}\\
+ \end{split}
+ \end{equation}
+ 
+ 
+ 
+
+
+
+
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem 6.6}
-Let $\textbf{P}_{k}$ be the linear projection onto
+Let $\mathcal{P}_{k}$ be the linear projection onto
 \begin{equation}\label{eq:e}
 \textbf{S}_{k} = span\{ X_{1},\cdots, X_{k}  \}
 \end{equation}
@@ -98,7 +382,7 @@ and
 e_{k} = \frac{X_{k}-\hat{X}_{k}}{\nu_{k-1}}.
 \end{equation}
 $\{e_{1},\cdots,e_{n}\}$
-is orthonormal basis for $\textbf{S}_{n}$ if $\{e_{1},\cdots,e_{n}\}$ is a linearly independent subset of $\textbf{S}_{n}$ that span $\textbf{S}_{n}$, and for any $e_{j}, e_{i}$ in $\{e_{1},\cdots,e_{n}\}$
+is orthonormal basis for $\textbf{S}_{n}$ if $\{e_{1},\cdots,e_{n}\}$ is a linearly independent subset of $\textbf{S}_{n}$ that span $\textbf{S}_{n}$, and for any $e_{j}, e_{i}$ in $\{e_{1},\cdots,e_{n}\}$ 
 the inner product of $e_{j}$ and $e_{i}$ is zero and any $e_{i}$ as norm 1.
 \justify
 \begin{proof}
