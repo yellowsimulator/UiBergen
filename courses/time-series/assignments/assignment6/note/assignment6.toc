@@ -7,4 +7,7 @@
 \contentsline {subsection}{\numberline {4.1}Part a}{5}
 \contentsline {subsection}{\numberline {4.2}Part b}{5}
 \contentsline {subsection}{\numberline {4.3}Part c}{6}
-\contentsline {section}{\numberline {5}Problem 6.6}{7}
+\contentsline {subsection}{\numberline {4.4}Part d}{7}
+\contentsline {subsection}{\numberline {4.5}Part e}{8}
+\contentsline {section}{\numberline {5}Problem 6.6}{9}
+\contentsline {section}{\numberline {6}Problem6.7}{11}
