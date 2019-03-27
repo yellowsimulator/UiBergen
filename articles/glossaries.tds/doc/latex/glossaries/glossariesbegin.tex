@@ -1,0 +1,2092 @@
+\documentclass{nlctdoc}
+
+\usepackage[utf8]{inputenc}
+\ifpdf
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage[scaled=.88]{helvet}
+\usepackage{courier}
+\usepackage{xr-hyper}
+\fi
+
+\usepackage{alltt}
+\usepackage{pifont}
+\usepackage{array}
+\usepackage{color}
+
+\usepackage[colorlinks,linkcolor=blue,pdfauthor={Nicola L.C. Talbot},
+            pdftitle={The glossaries package: a guide for beginners}]{hyperref}
+\usepackage[nomain]{glossaries}
+
+\newcommand*{\yes}{\ding{52}}
+\newcommand*{\no}{\ding{56}}
+
+\newcommand*{\proyes}{\textcolor{green}{\yes}}
+\newcommand*{\prono}{\textcolor{red}{\no}}
+
+\newcommand*{\conyes}{\textcolor{red}{\yes}}
+\newcommand*{\conno}{\textcolor{green}{\no}}
+
+\newcommand*{\code}[1]{%
+ \texorpdfstring{{\frenchspacing\obeyspaces\ttfamily#1}}{#1}}
+\newcommand*{\file}[1]{\texorpdfstring{\texttt{#1}}{#1}}
+
+\title{The glossaries package v4.42: 
+a guide for beginners}
+\author{Nicola L.C. Talbot}
+\date{2019-01-06}
+
+\ifpdf
+  \externaldocument{glossaries-user}
+\fi
+
+\makeatletter
+\newcommand*{\optionlabel}[1]{%
+ \@glstarget{option#1}{}\textbf{Option~#1}}
+\makeatother
+
+\newcommand*{\opt}[1]{\hyperlink{option#1}{Option~#1}}
+\newcommand*{\optsor}[2]{Options~\hyperlink{option#1}{#1}
+or~\hyperlink{option#2}{#2}}
+\newcommand*{\optsand}[2]{Options~\hyperlink{option#1}{#1}
+and~\hyperlink{option#2}{#2}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The \styfmt{glossaries} package is very flexible, but this means
+that it has a~lot of options, and since a user guide is supposed to
+provide a complete list of all the high-level user commands, the main
+user manual is quite big. This can be rather
+daunting for beginners, so this document is a brief introduction
+just to help get you started. If you find yourself saying, \qt{Yeah,
+but how can I do\ldots?} then it's time to move on to the 
+\docref{main user manual}{glossaries-user}.
+
+I've made some statements in this document that don't actually tell
+you the full truth, but it would clutter the document and cause
+confusion if I keep writing \qt{except when \ldots} or \qt{but you can
+also do this, that or the other} or \qt{you can do it this way but
+you can also do it that way, but that way may cause complications
+under certain circumstances}.
+\end{abstract}
+
+\tableofcontents
+
+\section{Getting Started}
+\label{sec:start}
+
+As with all packages, you need to load \styfmt{glossaries} with
+\cs{usepackage}, but there are certain packages that must be loaded
+before \styfmt{glossaries}, \emph{if} they are required: \sty{hyperref},
+\sty{babel}, \sty{polyglossia}, \sty{inputenc} and \sty{fontenc}.
+(You don't have to load these packages, but if you want them, you
+must load them before \styfmt{glossaries}.)
+
+\begin{important}
+If you require multilingual support you must also install 
+the relevant language module. Each language module is called
+\file{glossaries-}\meta{language}, where \meta{language} is the
+root language name. For example, \file{glossaries-french}
+or \file{glossaries-german}. If a language module is required,
+the \styfmt{glossaries} package will automatically try to load it
+and will give a warning if the module isn't found.
+\end{important}
+
+Once you have loaded \styfmt{glossaries}, you need to define
+your terms in the preamble and then you can use them throughout the
+document. Here's a simple example:
+\begin{verbatim}
+ \documentclass{article}
+
+ \usepackage{glossaries}
+
+ \newglossaryentry{ex}{name={sample},description={an example}}
+
+ \begin{document}
+ Here's my \gls{ex} term.
+ \end{document}
+\end{verbatim}
+This produces:
+\begin{quote}
+Here's my sample term.
+\end{quote}
+Here's another example:
+\begin{verbatim}
+ \documentclass{article}
+
+ \usepackage{glossaries}
+
+ \setacronymstyle{long-short}
+
+ \newacronym{svm}{SVM}{support vector machine}
+
+ \begin{document}
+ First use: \gls{svm}. Second use: \gls{svm}.
+ \end{document}
+\end{verbatim}
+This produces:
+\begin{quote}
+First use: support vector machine (SVM). Second use: SVM.
+\end{quote}
+In this case, the text produced by \verb|\gls{svm}| changed after the first
+use. The first use produced the long form followed by the short form
+in parentheses because I set the acronym style to
+\code{long-short}. I suggest you try the above two examples to
+make sure you have the package correctly installed.
+If you get an \code{undefined control sequence} error, check that
+the version number at the top of this document matches the version
+you have installed. (Open the \file{.log} file and search for the
+line that starts with \code{Package: glossaries} followed by a
+date and version.) 
+
+\begin{important}
+Be careful of fragile commands. If a command causes a problem when
+used in one of the \cs{newglossaryentry} fields, consider adding
+\cs{glsnoexpandfields} before you start defining your entries.
+\end{important}
+
+Abbreviations are slightly different if you use the extension package
+\sty{glossaries-extra} (which needs to be installed separately):
+\begin{verbatim}
+ \documentclass{article}
+
+ \usepackage{glossaries-extra}
+
+ \setabbreviationstyle{long-short}% glossaries-extra.sty
+
+ \newabbreviation{svm}{SVM}{support vector machine}% glossaries-extra.sty
+
+ \begin{document}
+ First use: \gls{svm}. Second use: \gls{svm}.
+ \end{document}
+\end{verbatim}
+If you still want to use \cs{newacronym} (rather than
+\cs{newabbreviation}) then you need the optional
+argument of \cs{setabbreviationstyle}:
+\begin{verbatim}
+ \documentclass{article}
+
+ \usepackage{glossaries-extra}
+
+ \setabbreviationstyle[acronym]{long-short}% glossaries-extra.sty only
+
+ \newacronym{svm}{SVM}{support vector machine}
+
+ \begin{document}
+ First use: \gls{svm}. Second use: \gls{svm}.
+ \end{document}
+\end{verbatim}
+\begin{important}
+You can't use \cs{setacronymstyle} with \sty{glossaries-extra}.
+\end{important}
+
+If you like, you can put all your definitions in another file (for
+example, \file{defns.tex}) and load that file in the preamble using
+\cs{loadglsentries} with the filename as the argument. For example:
+\begin{verbatim}
+\loadglsentries{defns}
+\end{verbatim}
+If you find you have a really large number of definitions that are
+hard to manage in a \file{.tex} file, you might want to have a
+look at \app{bib2gls} (installed separately) which requires 
+a \file{.bib} format instead that can be managed by an application
+such as JabRef.
+
+Don't try inserting formatting commands into the definitions as they
+can interfere with the underlying mechanism. Instead, the
+formatting should be done by the style. For example, suppose I~want
+to replace \code{SVM} with \verb|\textsc{svm}|, then
+I~need to select a style that uses \cs{textsc}, like this (for the
+base \styfmt{glossaries} style):
+\begin{verbatim}
+ \documentclass{article}
+
+ \usepackage{glossaries}
+
+ \setacronymstyle{long-sc-short}
+
+ \newacronym{svm}{svm}{support vector machine}
+
+ \begin{document}
+ First use: \gls{svm}. Second use: \gls{svm}.
+ \end{document}
+\end{verbatim}
+The abbreviation styles have a different naming scheme with
+\sty{glossaries-extra}:
+\begin{verbatim}
+ \documentclass{article}
+
+ \usepackage{glossaries-extra}
+
+ \setabbreviationstyle{long-short-sc}% glossaries-extra.sty
+
+ \newabbreviation{svm}{svm}{support vector machine}% glossaries-extra.sty
+
+ \begin{document}
+ First use: \gls{svm}. Second use: \gls{svm}.
+ \end{document}
+\end{verbatim}
+With \sty{glossaries-extra} you can have multiple abbreviation
+styles for different categories. Many of these styles have their
+own associated formatting commands that can be redefined 
+for minor adjustments. For example:
+\begin{verbatim}
+ \documentclass{article}
+
+ \usepackage{glossaries-extra}
+
+ \setabbreviationstyle[statistical]{long-short-sc}
+ \setabbreviationstyle[bacteria]{long-only-short-only}
+
+ % Formatting commands used by 'long-only-short-only' style:
+ \renewcommand*{\glsabbrvonlyfont}[1]{\emph{#1}}
+ \renewcommand*{\glslongonlyfont}[1]{\emph{#1}}
+
+ % Formatting command used by 'long-short-sc' style:
+ % (make sure abbreviation is converted to lower case)
+ \renewcommand*{\glsabbrvscfont}[1]{\textsc{\MakeLowercase{#1}}}
+
+ \newabbreviation
+  [
+    category={statistical}% glossaries-extra.sty key
+  ]
+  {svm}{SVM}{support vector machine}
+
+ \newabbreviation
+  [
+    category={bacteria}% glossaries-extra.sty key
+  ]
+  {cbot}{C.~botulinum}{Clostridium botulinum}
+
+ \begin{document}
+ First use: \gls{svm}, \gls{cbot}.
+
+ Next use: \gls{svm}, \gls{cbot}.
+ \end{document}
+\end{verbatim}
+This produces:
+\begin{quote}
+First use: support vector machine (\textsc{svm}), \emph{Clostridium
+botulinum}.
+
+Next use: \textsc{svm}, \emph{C.~botulinum}.
+\end{quote}
+
+As you can hopefully see from the above examples, there are two main ways of
+defining a term: as a general entry (\cs{newglossaryentry}) or as an
+abbreviation (\cs{newacronym} or, with \sty{glossaries-extra},
+\cs{newabbreviation}).
+
+Regardless of the method of defining a term, the term is always 
+given a label. In the first example, the label was
+\code{ex} and in the other examples the label was \code{svm}
+(and \code{cbot} in the last example). The
+label is used to uniquely identify the term (like the standard
+\cs{label}\slash\cs{ref} or \cs{cite} mechanism). It's best to just use the
+following alphanumerics in the labels: \code{a}, \ldots,
+\code{z}, \code{A}, \ldots, \code{Z}, \code{0}, \ldots,
+\code{9}.  Sometimes you can also use punctuation characters but
+not if another package (such as \sty{babel}) meddles with them.
+Don't try using any characters outside of the basic Latin set with
+\sty{inputenc} (for example, \'e or \ss) or things will go horribly
+wrong. This warning only applies to the label. It doesn't apply to
+the text that appears in the document.
+
+\begin{important}
+Don't use \cs{gls} in chapter or section headings as it can have
+some unpleasant side-effects. Instead use \cs{glsentrytext} for
+regular entries and one of \cs{glsentryshort}, \cs{glsentrylong}
+or \cs{glsentryfull} for acronyms. Alternatively use
+\sty{glossaries-extra} which provides special commands for use in
+section headings, such as \cs{glsfmtshort}\marg{label}.
+\end{important}
+
+The above examples are reasonably straightforward. The difficulty
+comes if you want to display a \emph{sorted} list of all the entries you
+have used in the document. The \sty{glossaries-extra} package
+provides a really easy way of listing all the defined entries:
+\begin{verbatim}
+ \documentclass{article}
+
+ \usepackage[sort=none]{glossaries-extra}
+
+ \newglossaryentry{potato}{name={potato},plural={potatoes},
+  description={starchy tuber}}
+
+ \newglossaryentry{cabbage}{name={cabbage},
+  description={vegetable with thick green or purple leaves}}
+ 
+ \newglossaryentry{turnip}{name={turnip},
+  description={round pale root vegetable}}
+
+ \newglossaryentry{carrot}{name={carrot},
+  description={orange root}}
+
+ \begin{document}
+ Chop the \gls{cabbage}, \glspl{potato} and \glspl{carrot}.
+
+ \printunsrtglossaries % list all entries
+ \end{document}
+\end{verbatim}
+However this method doesn't sort the entries (they're listed in
+order of definition) and it will display all the defined entries,
+regardless of whether or not you've used them all in the document,
+so \qt{turnip} appears in the glossary even though there's
+no \verb|\gls{turnip}| (or similar) in the document.
+
+The \pkgopt[none]{sort} option isn't essential in this case (there's
+no other sort option available for this document), but it prevents
+the automatic construction of the sort value and so slightly
+improves the document build time.
+
+Note that this example document uses the same command
+(\cs{printunsrtglossaries}) that's used with \app{bib2gls} (\opt4)
+but with \app{bib2gls} you instead need to use the 
+\pkgopt{record} package option and one or more instances of
+\cs{GlsXtrLoadResources} in the preamble (see below).
+
+Most users prefer to have an automatically sorted list that only
+contains entries that have been used in the document.
+The \styfmt{glossaries} package provides
+three options: use \TeX\ to perform the sorting (\opt1); use
+\app{makeindex} to perform the sorting (\opt2); use \app{xindy} to
+perform the sorting (\opt3). The extension package \sty{glossaries-extra}
+provides a fourth method: use \app{bib2gls} (\opt4).
+
+The first option (using \TeX) is the simplest method, as it doesn't
+require an external tool, but it's very inefficient and the sorting
+is done according to the English alphabet. To use this method, add
+\cs{makenoidxglossaries} to the preamble and put
+\cs{printnoidxglossaries} at the place where you want your glossary.
+For example:
+\begin{verbatim}
+ \documentclass{article}
+
+ \usepackage{glossaries}
+
+ \makenoidxglossaries % use TeX to sort
+
+ \newglossaryentry{potato}{name={potato},plural={potatoes},
+  description={starchy tuber}}
+
+ \newglossaryentry{cabbage}{name={cabbage},
+  description={vegetable with thick green or purple leaves}}
+
+ \newglossaryentry{turnip}{name={turnip},
+  description={round pale root vegetable}}
+
+ \newglossaryentry{carrot}{name={carrot},
+  description={orange root}}
+
+ \begin{document}
+ Chop the \gls{cabbage}, \glspl{potato} and \glspl{carrot}.
+
+ \printnoidxglossaries
+ \end{document}
+\end{verbatim}
+
+\begin{important}
+The \cs{makenoidxglossaries} method is very slow, uses an ASCII
+comparator and often breaks if there are commands in the
+\code{name} key.
+\end{important}
+
+Try this out and run \LaTeX\ (or pdf\LaTeX) \emph{twice}. The first
+run won't show the glossary. It will only appear on the second run.
+This doesn't include \qt{turnip} in the glossary because that term
+hasn't been used (with commands like \verb|\gls{turnip}|) in the document.
+
+The glossary has a vertical gap between the \qt{carrot} term and the
+\qt{potato} term. This is because the entries in the glossaries are
+grouped according to their first letter. If you don't want this gap,
+just add \pkgopt{nogroupskip} to the package options:
+\begin{verbatim}
+\usepackage[nogroupskip]{glossaries}
+\end{verbatim}
+or you may want to try out a style that shows the group headings:
+\begin{verbatim}
+\usepackage[style=indexgroup]{glossaries}
+\end{verbatim}
+If you try out this example you may also notice that the description
+is followed by a full stop (period) and a number. The number is the
+location in the document where the entry was used (page~1 in this
+case), so you can lookup the term in the glossary and be directed to
+the relevant pages. It may be that you don't want this
+back-reference, in which case you can suppress it using the
+\pkgopt{nonumberlist} package option:
+\begin{verbatim}
+\usepackage[nonumberlist]{glossaries}
+\end{verbatim}
+If you don't like the terminating full stop, you can suppress that
+with the \pkgopt{nopostdot} package option:
+\begin{verbatim}
+\usepackage[nopostdot]{glossaries}
+\end{verbatim}
+
+If you tried out the previous example with \sty{glossaries-extra}
+and \cs{printunsrtglossaries} the terminating full stop is missing
+and there are no number lists. You can add the full stop back with
+\begin{verbatim}
+\usepackage[nopostdot=false]{glossaries-extra}
+\end{verbatim}
+or
+\begin{verbatim}
+\usepackage[postdot]{glossaries-extra}
+\end{verbatim}
+If you want the number lists then you need to use an indexing option.
+
+
+You may have noticed that I've used another command in the above example:
+\cs{glspl}. This displays the plural form. By default, this is just
+the singular form with the letter \qt{s} appended, but in the case of
+\qt{potato} I had to specify the correct plural using the
+\code{plural} key.
+
+As I mentioned earlier, using \TeX\ to sort the entries is the
+simplest but least efficient method. If you have a large glossary or
+if your terms contain non-Latin or extended Latin characters, then
+you will have a much faster build time if you use \app{makeindex}
+(\opt2) or \app{xindy} (\opt3) or \app{bib2gls} (\opt4). If
+you are using extended Latin or non-Latin characters, then
+\app{xindy} or \app{bib2gls} are the recommended methods.
+These methods are described in more detail in
+\sectionref{sec:printglossaries}.
+
+The rest of this document briefly describes the main commands
+provided by the \styfmt{glossaries} package. (Most of these are also
+available with \sty{glossaries-extra} but may behave slightly
+differently.)
+
+\section{Defining Terms}
+\label{sec:defterm}
+
+When you use the \sty{glossaries} package, you need to define
+glossary entries in the document preamble. These entries could be
+a~word, phrase, abbreviation or symbol. They're usually accompanied by
+a~description, which could be a short sentence or an in-depth
+explanation that spans multiple paragraphs. The simplest method of
+defining an entry is to use:
+\begin{definition}
+\begin{alltt}
+\cs{newglossaryentry}\marg{label}
+\verb|{|
+  name=\marg{name},
+  description=\marg{description},
+  \meta{other options}
+\verb|}|
+\end{alltt}
+\end{definition}
+where \meta{label} is a unique label that identifies this entry.
+(Don't include the angle brackets \meta{ }. They just indicate the parts of
+the code you need to change when you use this command in your document.) 
+The \meta{name} is the word, phrase or symbol you are defining,
+and \meta{description} is the description to be displayed in the
+glossary.
+
+This command is a \qt{short} command, which means that
+\meta{description} can't contain a~paragraph break. If you have
+a~long description, you can instead use:
+\begin{definition}
+\begin{alltt}
+\cs{longnewglossaryentry}\marg{label}
+\verb|{|
+  name=\marg{name},
+  \meta{other options}
+\verb|}|
+\marg{description}
+\end{alltt}
+\end{definition}
+
+Examples:
+\begin{enumerate}
+\item Define the term \qt{set} with the label \code{set}:
+\begin{verbatim}
+\newglossaryentry{set}
+{
+  name={set},
+  description={a collection of objects}
+}
+\end{verbatim}
+
+\item Define the symbol $\emptyset$ with the label
+\code{emptyset}:
+\begin{verbatim}
+\newglossaryentry{emptyset}
+{
+  name={\ensuremath{\emptyset}},
+  description={the empty set}
+}
+\end{verbatim}
+(This will also need a \code{sort} key if you use \optsor13, see
+below.)
+
+\item Define the phrase \qt{Fish Age} with the label
+\code{fishage}:
+\begin{verbatim}
+\longnewglossaryentry{fishage}
+{name={Fish Age}}
+{%
+  A common name for the Devonian geologic period 
+  spanning from the end of the Silurian Period to
+  the beginning of the Carboniferous Period.
+
+  This age was known for its remarkable variety of 
+  fish species.
+}
+\end{verbatim}
+(The percent character discards the end of line character that would
+otherwise cause an unwanted space to appear at the start of the
+description.)
+
+\item Take care if the first letter is an extended Latin or
+non-Latin character (either specified via a~command such as 
+\verb|\'e| or explicitly via the \sty{inputenc} package such 
+as \code{\'e}). This first letter must be placed in a~group:
+
+\begin{verbatim}
+\newglossaryentry{elite}
+{
+  name={{\'e}lite},
+  description={select group or class}
+}
+\end{verbatim}
+or
+\begin{alltt}
+\verb|\newglossaryentry{elite}|
+\verb|{|
+  name=\verb|{{|\'e\verb|}lite}|,
+  description=\verb|{select group or class}|
+\verb|}|
+\end{alltt}
+\end{enumerate}
+(For further details, see the section \qt{UTF-8} of the 
+\href{https://ctan.org/pkg/mfirstuc}{\styfmt{mfirstuc}} user manual.)
+
+If you use \app{bib2gls} with \sty{glossaries-extra} then the
+terms must be defined in a \file{.bib} file. For example:
+\begin{alltt}
+\% Encoding: UTF-8
+
+@entry\{set,
+  name=\{set\},
+  description=\{a collection of objects\}
+\}
+
+@entry\{emptyset,
+  name=\verb|{\ensuremath{\emptyset}}|,
+  description=\{the empty set\}
+\}
+
+@entry\{fishage,
+  name=\{Fish Age\},
+  description=\{A common name for the Devonian geologic period 
+  spanning from the end of the Silurian Period to
+  the beginning of the Carboniferous Period.
+
+  This age was known for its remarkable variety of 
+  fish species.\}
+\}
+
+@entry\{elite,
+  name=\verb|{{|\'e\verb|}lite}|,
+  description=\verb|{select group or class}|
+\}
+\end{alltt}
+(The \file{.bib} format doesn't allow spaces in labels so you can't
+have \code{fish age} as the label, but you can have 
+\code{fish-age}.)
+This method requires the \sty{glossaries-extra}'s \pkgopt{record}
+package option:
+\begin{verbatim}
+\usepackage[record]{glossaries-extra}
+\end{verbatim}
+and the \file{.bib} file is specified in the resource command. For
+example, if the \file{.bib} file is called \file{entries.bib}
+then put the following line in the document preamble:
+\begin{verbatim}
+\GlsXtrLoadResources[src={entries}]
+\end{verbatim}
+You can have a comma-separated list. For example, if you also
+have entries defined in the file \file{entries2.bib}:
+\begin{verbatim}
+\GlsXtrLoadResources[src={entries,entries2.bib}]
+\end{verbatim}
+
+There are other keys you can use when you define an entry. For
+example, the \code{name} key indicates how the term
+should appear in the list of entries (glossary), but if the term should
+appear differently when you reference it with \cs{gls}\marg{label} in 
+the document, you need to use the \code{text} key as well.
+
+For example:
+\begin{verbatim}
+\newglossaryentry{latinalph}
+{
+  name={Latin Alphabet},
+  text={Latin alphabet},
+  description={alphabet consisting of the letters 
+  a, \ldots, z, A, \ldots, Z}
+}
+\end{verbatim}
+This will appear in the text as \qt{Latin alphabet} but will be listed in
+the glossary as \qt{Latin Alphabet}.
+With \app{bib2gls} this entry is defined in the \file{.bib}
+file as:
+\begin{verbatim}
+@entry{latinalph,
+  name={Latin Alphabet},
+  text={Latin alphabet},
+  description={alphabet consisting of the letters 
+  a, \ldots, z, A, \ldots, Z}
+}
+\end{verbatim}
+
+Another commonly used key is \code{plural} for specifying the
+plural of the term. This defaults to the value of the \code{text}
+key with an \qt{s} appended, but if this is incorrect, just use the
+\code{plural} key to override it:
+\begin{verbatim}
+\newglossaryentry{oesophagus}
+{
+  name={{\oe}sophagus},
+  plural={{\oe}sophagi},
+  description={canal from mouth to stomach}
+}
+\end{verbatim}
+(Remember from earlier that the initial ligature \cs{oe} needs to
+be grouped.)
+
+Abbreviations can be defined using
+\begin{definition}
+\cs{newacronym}\oarg{options}\marg{label}\marg{short}\marg{long}
+\end{definition}
+where \meta{label} is the label (as per \cs{newglossaryentry}), 
+\meta{short} is the short form and \meta{long} is the long form. 
+For example, the
+following defines an abbreviation:
+\begin{verbatim}
+\newacronym{svm}{SVM}{support vector machine}
+\end{verbatim}
+This internally uses \cs{newglossaryentry} to define an entry with
+the label \code{svm}. By default, the \code{name} key is set to
+\meta{short} (\qt{SVM} in the above example) and the
+\code{description} key is set to \meta{long} (\qt{support vector
+machine} in the above example). If, instead, you want to be able to
+specify your own description you can do this using the optional
+argument:
+\begin{verbatim}
+\newacronym
+ [description={statistical pattern recognition technique}]
+ {svm}{SVM}{support vector machine}
+\end{verbatim}
+
+Before you define your acronyms (or other types of abbreviations), you 
+need to specify which style to use with
+\begin{definition}
+\cs{setacronymstyle}\marg{style name}
+\end{definition}
+where \meta{style name} is the name of the style. There are a number
+of predefined styles, such as: \code{long-short} (on first use
+display the long form with the short form in parentheses);
+\code{short-long} (on first use display the short form with the
+long form in parentheses); \code{long-short-desc} (like
+\code{long-short} but you need to specify the description); or
+\code{short-long-desc} (like \code{short-long} but you need to
+specify the description). There are some other styles as well that
+use \cs{textsc} to typeset the acronym or that use a footnote on
+first use. See the main user guide for further details.
+
+The \sty{glossaries-extra} package provides improved abbreviation
+handling with \href{http://www.dickimaw-books.com/gallery/sample-abbr-styles.shtml}{a lot more predefined styles}.
+With this extension package, abbreviations are defined using:
+\begin{definition}
+\cs{newabbreviation}\oarg{options}\marg{label}\marg{short}\marg{long}
+\end{definition}
+You can still use \cs{newacronym} but it's redefined to 
+use the new abbreviation interface. The style must now be set using:
+\begin{definition}
+\cs{setabbreviationstyle}\oarg{category}\marg{style name}
+\end{definition}
+The default \meta{category} is \code{abbreviation}. If you use
+\cs{newacronym} the category is \code{acronym}, which is why you
+need to use the optional argument if you define abbreviations with
+\cs{newacronym} when \sty{glossaries-extra} has been loaded:
+\begin{alltt}
+\cs{setabbreviationstyle}[acronym]\marg{style name}
+\end{alltt}
+If you use \app{bib2gls} then abbreviations are defined in the
+\file{.bib} file in the format:
+\begin{alltt}
+@abbreviation\{\meta{label},
+  long=\marg{long form},
+  short=\marg{short form}
+\}
+\end{alltt}
+
+The plural forms for abbreviations can be specified using the
+\code{longplural} and \code{shortplural} keys. For example:
+\begin{verbatim}
+\newacronym
+ [longplural={diagonal matrices}]
+ {dm}{DM}{diagonal matrix}
+\end{verbatim}
+or (with \sty{glossaries-extra}):
+\begin{verbatim}
+\newabbreviation % glossaries-extra.sty
+ [longplural={diagonal matrices}]
+ {dm}{DM}{diagonal matrix}
+\end{verbatim}
+If omitted, the defaults are again obtained by appending an \qt{s} to
+the singular versions. With \app{bib2gls}, the definition in the
+\file{.bib} file is:
+\begin{verbatim}
+@abbreviation{dm,
+  short={DM},
+  long={diagonal matrix},
+  longplural={diagonal matrices}
+}
+\end{verbatim}
+
+It's also possible to have both a~name and a~corresponding symbol.
+Just use the \code{name} key for the name and the \code{symbol} key
+for the symbol. For example:
+\begin{verbatim}
+\newglossaryentry{emptyset}
+{
+  name={empty set},
+  symbol={\ensuremath{\emptyset}},
+  description={the set containing no elements}
+}
+\end{verbatim}
+or with \app{bib2gls} the definition in the \file{.bib} file is:
+\begin{verbatim}
+@entry{emptyset,
+  name={empty set},
+  symbol={\ensuremath{\emptyset}},
+  description={the set containing no elements}
+}
+\end{verbatim}
+
+If you want the symbol in the \code{name} field then you must
+supply a \code{sort} value with \optsand13 otherwise you'll end up
+with errors from \TeX\ or \app{xindy}. With \opt2
+(\app{makeindex}) it's not quite so important but you may find
+the resulting order is a little odd. For example:
+\begin{verbatim}
+\newglossaryentry{emptyset}
+{
+  name={\ensuremath{\emptyset}},
+  sort={empty set},
+  description={the set containing no elements}
+}
+\end{verbatim}
+This displays the symbol as $\emptyset$ but sorts according to
+\qt{empty set}. You may want to consider using
+\sty{glossaries-extra}'s \pkgopt{symbols} package option which
+provides
+\begin{definition}
+\cs{glsxtrnewsymbol}\oarg{options}\marg{label}\marg{symbol}
+\end{definition}
+This internally uses \cs{newglossaryentry} but automatically sets
+the \code{sort} key to the \meta{label}. For example:
+\begin{verbatim}
+\documentclass{article}
+
+\usepackage[symbols]{glossaries-extra}
+
+\makeglossaries
+
+\glsxtrnewsymbol % requires glossaries-extra.sty 'symbols' option
+ [description={the set containing no elements}]
+ {emptyset}% label (and sort value)
+ {\ensuremath{\emptyset}}% symbol
+
+\begin{document}
+\gls{emptyset}
+
+\printglossaries
+\end{document}
+\end{verbatim}
+Now the sort value is \qt{emptyset} rather than the previous
+\qt{empty set}.
+
+With \app{bib2gls} you can define this in the \file{.bib} file
+as
+\begin{verbatim}
+@entry{emptyset,
+  name={\ensuremath{\emptyset}},
+  description={the set containing no elements}
+}
+\end{verbatim}
+in which case \app{bib2gls} will try to interpret the \code{name} 
+field to determine the sort value. Alternatively you can use:
+\begin{verbatim}
+@symbol{emptyset,
+  name={\ensuremath{\emptyset}},
+  description={the set containing no elements}
+}
+\end{verbatim}
+which will use the label (\code{emptyset}) as the sort value.
+(You don't need the \pkgopt{symbols} package option in this case,
+unless you want a separate symbols list.) The corresponding document
+(where the definition is in the file \file{entries.bib}) is now:
+\begin{verbatim}
+\documentclass{article}
+
+\usepackage[record]{glossaries-extra}
+
+\GlsXtrLoadResources[src=entries]
+
+\begin{document}
+\gls{emptyset}
+
+\printunsrtglossaries
+\end{document}
+\end{verbatim}
+
+\section{Using Entries}
+\label{sec:useterm}
+
+Once you have defined your entries, as described above, you can
+reference them in your document. There are a~number of commands to
+do this, but the most common one is:
+\begin{definition}
+\cs{gls}\marg{label}
+\end{definition}
+where \meta{label} is the label you assigned to the entry when you
+defined it. For example, \verb|\gls{fishage}| will display \qt{Fish
+Age} in the text (given the definition from the previous section).
+If you are using \app{bib2gls} then this will display ?? (like
+\cs{ref} and \cs{cite}) until \app{bib2gls} has created the
+relevant files and \LaTeX\ is rerun.
+
+If you are using the \sty{hyperref} package (remember to load it
+before \styfmt{glossaries}) \cs{gls} will create a hyperlink to the
+corresponding entry in the glossary. If you want to suppress the
+hyperlink for a particular instance, use the starred form \cs{gls*}
+for example, \verb|\gls*{fishage}|. The other commands described in
+this section all have a similar starred form.
+
+If the entry was defined as an acronym (using \cs{newacronym} with
+\styfmt{glossaries} described above) or an abbreviation (using
+\cs{newabbreviation} with \sty{glossaries-extra}), then \cs{gls}
+will display the full form the first time it's used and just the
+short form on subsequent use. For example, if the style is
+set to \code{long-short}, then \verb|\gls{svm}| will display
+\qt{support vector machine (SVM)} the first time it's used, but the
+next occurrence of \verb|\gls{svm}| will just display \qt{SVM}.
+(If you use \cs{newacronym} with \sty{glossaries-extra} the default
+doesn't show the long form on first use. You'll need to change the
+style first, as described earlier.)
+
+If you want the plural form, you can use:
+\begin{definition}
+\cs{glspl}\marg{label}
+\end{definition}
+instead of \cs{gls}\marg{label}. For example, \verb|\glspl{set}|
+displays \qt{sets}.
+
+If the term appears at the start of a~sentence, you can convert the
+first letter to upper case using:
+\begin{definition}
+\cs{Gls}\marg{label}
+\end{definition}
+for the singular form or
+\begin{definition}
+\cs{Glspl}\marg{label}
+\end{definition}
+for the plural form. For example:
+\begin{verbatim}
+\Glspl{set} are collections.
+\end{verbatim}
+produces \qt{Sets are collections}.
+
+If you've specified a symbol using the \code{symbol} key, you can
+display it using:
+\begin{definition}
+\cs{glssymbol}\marg{label}
+\end{definition}
+
+\section{Displaying a List of Entries}
+\label{sec:printglossaries}
+
+In \sectionref{sec:start}, I mentioned that there are three options
+you can choose from to create an automatically sorted glossary with the base 
+\styfmt{glossaries} package. These are also available with the
+extension package \styfmt{glossaries-extra} along with a fourth
+option. These four options are listed below in a little more detail.
+\Tableref{tab:optionsp+c} summarises the main advantages and
+disadvantages.  (There's a more detailed summary in the main
+\styfmt{glossaries} user manual.) See also
+\href{https://www.dickimaw-books.com/latex/buildglossaries/}{Incorporating makeglossaries or makeglossaries-lite or bib2gls into the document build}.
+
+\begin{table}[htbp]
+ \caption{Comparison of Glossary Options}
+ \label{tab:optionsp+c}
+ {%
+ \centering
+ \begin{tabular}{>{\raggedright}p{0.3\textwidth}cccc}
+   & \bfseries \opt1 & \bfseries \opt2 & \bfseries \opt3 & \bfseries
+\opt4\\
+   Requires \sty{glossaries-extra}? &
+   \conno & \conno & \conno & \conyes\\
+   Requires an external application? &
+   \conno & \conyes & \conyes & \conyes\\
+   Requires Perl? &
+   \conno & \conno & \conyes & \conno\\
+   Requires Java? &
+   \conno & \conno & \conno & \conyes\\
+   Can sort extended Latin
+   or non-Latin alphabets? &
+   \prono & \prono & \proyes & \proyes\\
+   Efficient sort algorithm? &
+   \prono & \proyes & \proyes & \proyes\\
+   Can use different sort methods for each glossary? &
+   \proyes & \prono & \prono & \proyes\\
+   Any problematic sort values? &
+   \conyes & \conyes & \conyes & \conno\\
+   Can form ranges in the location lists? &
+   \prono & \proyes & \proyes & \proyes\\
+   Can have non-standard locations? &
+   \proyes & \prono & \proyes\textsuperscript{\textdagger} & \proyes
+ \end{tabular}
+ \par}\medskip\footnotesize\textsuperscript{\textdagger} Requires some setting up.
+\end{table}
+
+
+\begin{description}
+\item[]\optionlabel1: 
+
+ This is the simplest option but it's slow and if
+ you want a sorted list, it doesn't work for non-Latin alphabets.
+ The \code{name} mustn't contain commands (or, if it does, the
+ \code{sort} value must be supplied) unless you 
+ have the package option \pkgopt{sanitizesort} or \pkgopt[def]{sort} 
+ or \pkgopt[use]{sort}.
+
+  \begin{enumerate}
+    \item Add \cs{makenoidxglossaries} to your preamble (before you
+    start defining your entries, as described in
+    \sectionref{sec:defterm}).
+
+    \item Put
+\begin{definition}
+\cs{printnoidxglossary}[sort=\meta{order},\meta{other options}]
+\end{definition}
+    where you want your list of entries to appear. The sort
+    \meta{order} may be one of: \code{word} (word ordering),
+    \code{letter} (letter ordering), \code{case} (case-sensitive
+    letter ordering), \code{def} (in order of definition) or
+    \code{use} (in order of use). Alternatively, use
+\begin{definition}
+\cs{printnoidxglossaries}
+\end{definition}
+    to display all your glossaries (if you have more than one). This
+    command doesn't have any arguments.
+
+    This option allows you to have different sort methods. For
+    example:
+\begin{verbatim}
+\printnoidxglossary[sort=word]% main glossary
+\printnoidxglossary[type=symbols,sort=use]% symbols glossary
+\end{verbatim}
+
+    \item Run \LaTeX\ twice on your document. (As you would do to
+    make a~table of contents appear.) For example, click twice on
+    the \qt{typeset} or \qt{build} or \qt{PDF\LaTeX} button in your editor.
+  \end{enumerate}
+Here's a complete document (\file{myDoc.tex}):
+\begin{verbatim}
+\documentclass{article}
+
+\usepackage{glossaries}
+
+\makenoidxglossaries % use TeX to sort
+
+\newglossaryentry{sample}{name={sample},
+  description={an example}}
+
+\begin{document}
+A \gls{sample}.
+
+\printnoidxglossaries % iterate over all indexed entries
+\end{document}
+\end{verbatim}
+Document build:
+\begin{verbatim}
+pdflatex myDoc
+pdflatex myDoc
+\end{verbatim}
+
+\item[]\optionlabel2:
+
+   This option uses an application called \app{makeindex} to sort 
+   the entries. This application comes with all modern \TeX\ distributions, 
+   but it's hard-coded for the non-extended Latin alphabet. This process 
+   involves making \LaTeX\ write the glossary information to a temporary 
+   file which \app{makeindex} reads. Then \app{makeindex} writes 
+   a~new file containing the code to typeset the glossary. \LaTeX\ then 
+   reads this file on the next run. The \app{makeindex}
+   application is automatically invoked by the helper
+   \app{makeglossaries} script, which works out all the
+   appropriate settings from the \file{.aux} file.
+
+   \begin{enumerate}
+    \item If you are using \sty{ngerman}\footnote{deprecated, use
+\sty{babel} instead} or some other package that
+makes the double-quote character \verb|"| a shorthand, then use
+\cs{GlsSetQuote} to change this to some other character. For
+example:
+\begin{verbatim}
+\GlsSetQuote{+}
+\end{verbatim}
+    Use this as soon as possible after you've loaded the
+\styfmt{glossaries} package.
+
+    \item Add \cs{makeglossaries} to your preamble (before you start
+    defining your entries).
+
+    \item Put
+\begin{definition}
+\cs{printglossary}\oarg{options}
+\end{definition}
+    where you want your list of entries (glossary) to appear. (The
+    \code{sort} key isn't available in \meta{options}.)
+    Alternatively, use
+\begin{definition}
+\cs{printglossaries}
+\end{definition}
+    which will display all glossaries (if you have more than one).
+    This command doesn't have any arguments.
+
+\begin{important}
+All glossaries are sorted using the same method
+which may be identified with one of the package options:
+\pkgopt[standard]{sort} (default), \pkgopt[use]{sort}
+or \pkgopt[def]{sort}.
+\end{important}
+
+    \item Run \LaTeX\ on your document. This creates files with the
+    extensions \file{.glo} and \file{.ist} (for example, if your 
+    \LaTeX\ document is called \file{myDoc.tex}, then you'll have 
+    two extra files called \file{myDoc.glo} and \file{myDoc.ist}).
+    If you look at your document at this point, you won't see the 
+    glossary as it hasn't been created yet.
+
+    \item Run \app{makeglossaries} with the base name of your 
+    document (without the \file{.tex}) extension. If
+    you have access to a terminal or a command prompt (for example, the
+    MSDOS command prompt for Windows users or the bash console for
+    Unix-like users) then you need to run the command:
+\begin{verbatim}
+makeglossaries myDoc
+\end{verbatim}
+   (Replace \file{myDoc} with the base name of your \LaTeX\
+    document file without the \file{.tex} extension. 
+    Avoid spaces in the file name.) If you don't have Perl installed
+    use \app{makeglossaries-lite} instead:
+\begin{verbatim}
+makeglossaries-lite myDoc
+\end{verbatim}
+
+\begin{important}
+Some beginners get confused by \app{makeglossaries} the
+application (run as a system command) and \cs{makeglossaries}
+the \LaTeX\ command which should be typed in the document
+preamble. These are two different concepts that happen to have
+similar looking names.
+\end{important}
+
+    If you don't know how to use the command prompt, then you can 
+    probably configure your text editor to add 
+    \app{makeglossaries} (or \app{makeglossaries-lite})
+    as a build tool, but each editor has a
+    different method of doing this, so I~can't give a~general
+    description. You will have to check your editor's manual.
+    If you still have problems, try adding the \pkgopt{automake}
+    package option:
+\begin{verbatim}
+\usepackage[automake]{glossaries}
+\end{verbatim}
+
+    The default sort is word order (\qt{sea lion} comes before \qt{seal}). 
+    If you want letter ordering you need to add the
+    \pkgopt[letter]{order} package option
+\begin{verbatim}
+\usepackage[order=letter]{glossaries}
+\end{verbatim}
+
+    \item Once you have successfully completed the previous step,
+    you can now run \LaTeX\ on your document again.
+   \end{enumerate}
+Here's a complete document (\file{myDoc.tex}):
+\begin{verbatim}
+\documentclass{article}
+
+\usepackage{glossaries}
+
+\makeglossaries % create makeindex files
+
+\newglossaryentry{sample}{name={sample},
+  description={an example}}
+
+\begin{document}
+A \gls{sample}.
+
+\printglossaries % input files created by makeindex
+\end{document}
+\end{verbatim}
+Document build:
+\begin{verbatim}
+pdflatex myDoc
+makeglossaries myDoc
+pdflatex myDoc
+\end{verbatim}
+or
+\begin{verbatim}
+pdflatex myDoc
+makeglossaries-lite myDoc
+pdflatex myDoc
+\end{verbatim}
+
+
+\item[]\optionlabel3:
+
+   This option uses an application called
+   \app{xindy} to sort the entries. This application is more
+   flexible than \app{makeindex} and is able to sort extended
+   Latin or non-Latin alphabets. It comes with both \TeX~Live and 
+   MiK\TeX. Since \app{xindy} is a Perl script, you will also 
+   need to ensure that Perl is installed. In a~similar way to \opt2, this 
+   option involves making \LaTeX\ write the glossary information to 
+   a~temporary file which \app{xindy} reads. Then \app{xindy} 
+   writes a~new file containing the code to typeset the glossary. 
+   \LaTeX\ then reads this file on the next run. The \app{xindy}
+   application is automatically invoked by the helper
+   \app{makeglossaries} script, which works out all the
+   appropriate settings from the \file{.aux} file.
+
+   \begin{enumerate}
+     \item Add the \pkgopt{xindy} option to the \sty{glossaries}
+package option list:
+\begin{verbatim}
+\usepackage[xindy]{glossaries}
+\end{verbatim}
+
+     \item Add \cs{makeglossaries} to your preamble (before you start
+     defining your entries).
+
+    \item Put
+\begin{definition}
+\cs{printglossary}\oarg{options}
+\end{definition}
+    where you want your list of entries (glossary) to appear. (The
+    \code{sort} key isn't available in \meta{options}.)
+    Alternatively, use
+\begin{definition}
+\cs{printglossaries}
+\end{definition}
+
+\begin{important}
+All glossaries are sorted using the same method
+which may be identified with one of the package options:
+\pkgopt[standard]{sort} (default), \pkgopt[use]{sort}
+or \pkgopt[def]{sort}.
+\end{important}
+
+    \item Run \LaTeX\ on your document. This creates files with the
+    extensions \file{.glo} and \file{.xdy} (for example, if your 
+    \LaTeX\ document is called \file{myDoc.tex}, then you'll have 
+    two extra files called \file{myDoc.glo} and \file{myDoc.xdy}).
+    If you look at your document at this point, you won't see the 
+    glossary as it hasn't been created yet.
+
+    \item Run \app{makeglossaries} with the base name of the
+    document (omitting the \file{.tex} extension).
+    If you have access to a terminal or a command prompt (for example, the
+    MSDOS command prompt for Windows users or the bash console for
+    Unix-like users) then you need to run the command:
+\begin{verbatim}
+makeglossaries myDoc
+\end{verbatim}
+    (Replace \file{myDoc} with the base name of your \LaTeX\
+    document file without the \file{.tex} extension. 
+     Avoid spaces in the file name. If you don't know
+    how to use the command prompt, then as mentioned above, you may
+    be able to configure your text editor to add
+    \app{makeglossaries} as a build tool.
+
+    The default sort is word order (\qt{sea lion} comes before
+\qt{seal}). 
+    If you want letter ordering you need to add the
+    \code{order=letter} package option:
+\begin{verbatim}
+\usepackage[xindy,order=letter]{glossaries}
+\end{verbatim}
+
+    \item Once you have successfully completed the previous step,
+    you can now run \LaTeX\ on your document again.
+
+   \end{enumerate}
+Here's a complete document (\file{myDoc.tex}):
+\begin{verbatim}
+\documentclass{article}
+
+\usepackage[xindy]{glossaries}
+
+\makeglossaries % create xindy files
+
+\newglossaryentry{sample}{name={sample},
+  description={an example}}
+
+\begin{document}
+A \gls{sample}.
+
+\printglossaries % input files created by xindy
+\end{document}
+\end{verbatim}
+Document build:
+\begin{verbatim}
+pdflatex myDoc
+makeglossaries myDoc
+pdflatex myDoc
+\end{verbatim}
+
+\item[]\optionlabel4:
+
+   This requires the extension package \sty{glossaries-extra} and
+   an application called \app{bib2gls}. This application is able
+   to sort extended Latin or non-Latin alphabets. It comes with both
+   \TeX~Live and MiK\TeX\ but requires at least Java~7. This method
+   works differently to \optsand23. Instead of creating a file
+   containing the code to typeset the glossary it creates a
+   \file{.glstex} file containing the entry definitions fetched 
+   from the \file{.bib} file (or files), but only those entries 
+   that are required in the document are defined and they are 
+   defined in the order obtained from the chosen sort method. 
+   This means that you can just use
+   \cs{printunsrtglossary} to display each glossary (or
+   \cs{printunsrtglossaries} to display them all).
+
+   \begin{enumerate}
+   \item Add the \pkgopt{record} option to the \sty{glossaries-extra}
+   package option list:
+\begin{verbatim}
+\usepackage[record]{glossaries-extra}
+\end{verbatim}
+
+   \item Add one or more 
+\begin{definition}
+\cs{GlsXtrLoadResources}[src=\marg{bib list},\meta{options}]
+\end{definition}
+   to your preamble where \meta{bib list} is the
+   list of \file{.bib} files containing the entries. You may
+   use different sort methods for each resource set. For example:
+\begin{verbatim}
+\usepackage[record,% using bib2gls
+ abbreviations,
+ symbols,
+ numbers
+]{glossaries-extra}
+
+\GlsXtrLoadResources[
+  src={terms},% entries in terms.bib
+  type=main,% put these entries in the 'main' (default) list
+  sort={de-CH-1996}% sort according to this locale
+]
+\GlsXtrLoadResources[
+  src={abbrvs},% entries in abbrvs.bib
+  type=abbreviations,% put these entries in the 'abbreviations' list
+  sort={letter-case}% case-sensitive letter (non-locale) sort
+]
+\GlsXtrLoadResources[
+  src={syms},% entries in syms.bib
+  type=symbols,% put these entries in the 'symbols' list
+  sort={use}% sort according to first use in the document
+]
+\GlsXtrLoadResources[
+  src={constants},% entries in constants.bib
+  type=numbers,% put these entries in the 'numbers' list
+  sort-field={user1},% sort according to this field
+  sort={double}% double-precision sort
+]
+\end{verbatim}
+The last resource set assumes that the entries defined in the
+file \file{constants.bib} have a number stored in the \code{user1}
+field. For example:
+\begin{verbatim}
+@number{pi,
+  name={\ensuremath{\pi}},
+  description={pi},
+  user1={3.141592654}
+}
+\end{verbatim}
+
+   \item Put 
+\begin{definition}
+\cs{printunsrtglossary}[type=\marg{type},\meta{options}]
+\end{definition}
+    where you want your list of entries (glossary) to appear. (The
+    \code{sort} key isn't available in \meta{options}. It needs to be
+    used in \cs{GlsXtrLoadResources} instead.)
+    Alternatively, use
+\begin{definition}
+\cs{printunsrtglossaries}
+\end{definition}
+
+    \item Run \LaTeX\ on your document. The \pkgopt{record} option 
+    adds information to the \file{.aux} file that provides
+    \app{bib2gls} with all required details for each resource set.
+    For example, if the file is called \file{myDoc.tex}:
+\begin{verbatim}
+pdflatex myDoc
+\end{verbatim}
+
+    \item Run \app{bib2gls}
+\begin{verbatim}
+bib2gls myDoc
+\end{verbatim}
+or (if you need letter groups)
+\begin{verbatim}
+bib2gls --group myDoc
+\end{verbatim}
+
+    \item Run \LaTeX\ again.
+   \end{enumerate}
+Here's a complete document (\file{myDoc.tex}):
+\begin{verbatim}
+\documentclass{article}
+
+\usepackage[record]{glossaries-extra}
+
+\GlsXtrLoadResources % input file created by bib2gls
+ [% instructions to bib2gls:
+   src={entries}, % terms defined in entries.bib
+   sort={en-GB}% sort according to this locale
+ ]
+
+\newglossaryentry{sample}{name={sample},
+  description={an example}}
+
+\begin{document}
+A \gls{sample}.
+
+\printunsrtglossaries % iterate over all defined entries
+\end{document}
+\end{verbatim}
+The accompanying \file{entries.bib} file:
+\begin{verbatim}
+@entry{sample,
+  name = {sample},
+  description = {an example}
+}
+\end{verbatim}
+Document build:
+\begin{verbatim}
+pdflatex myDoc
+bib2gls myDoc
+pdflatex myDoc
+\end{verbatim}
+
+\end{description}
+
+If you are having difficulty integrating \app{makeglossaries}
+into your document build process, you may want to consider using
+\app{arara}, which is a Java application that searches the
+document for special comment lines that tell \app{arara} which
+applications to run. For example, the file \file{myDoc.tex} might
+start with:
+\begin{verbatim}
+ % arara: pdflatex
+ % arara: makeglossaries
+ % arara: pdflatex
+ \documentclass{article}
+ \usepackage{glossaries}
+ \makeglossaries
+\end{verbatim}
+then to build the document you just need the single system call:
+\begin{verbatim}
+ arara myDoc
+\end{verbatim}
+(The currently pending version 4.0 of \app{arara} has 
+directives for \app{makeglossaries-lite} and \app{bib2gls}.
+These aren't available in earlier versions, but you could try
+copying and adapting the \file{makeglossaries.yaml} file and
+replace \app{makeglossaries} as appropriate.)
+
+When sorting the entries, the string comparisons are made according
+to each entry's \code{sort} key. If this is omitted, the
+\code{name} key is used. For example, recall the earlier
+definition:
+\begin{verbatim}
+ \newglossaryentry{elite}
+ {
+   name={{\'e}lite},
+   description={select group or class}
+ }
+\end{verbatim}
+No \code{sort} key was used, so it's set to the same as the
+\code{name} key: \verb|{\'e}lite|. How this is interpreted depends
+on which option you have used:
+\begin{description}
+\item[\opt1:] By default, the accent command will be stripped so the
+sort value will be \code{elite}. This will put the entry in the
+\qt{E} letter group. However if you use the
+\pkgopt[true]{sanitizesort} package option, the sort value will be
+interpreted as the sequence of characters: \verb|{| \verb|\| \code{'} \code{e}
+\verb|}| \code{l} \code{i} \code{t} and \code{e}. This will place
+this entry in the \qt{symbols} group since it starts with a symbol.
+
+\item[\opt2:] The sort key will be interpreted the sequence of characters:
+\verb|{| \verb|\| \verb|'| \code{e} \verb|}| \code{l} \code{i} \code{t}
+and \code{e}. The first character is an opening curly brace
+\verb|{| so \app{makeindex} will put this entry in the
+\qt{symbols} group. 
+
+\item[\opt3:]
+\app{xindy} disregards \LaTeX\ commands so it sorts on
+\code{elite}, which puts this entry in the \qt{E} group.
+If stripping all commands leads to an empty string (such as
+\verb|\ensuremath{\emptyset}|) then \app{xindy} will fail, so in
+these situations you need to provide an appropriate \code{sort}
+value that \app{xindy} will accept.
+\begin{important}
+\app{xindy} merges entries with duplicate sort values. 
+\app{xindy} forbids empty sort values.
+A sort value may degrade into an empty or duplicate value once
+\app{xindy} has stripped all commands and braces.
+\end{important}
+
+\item[\opt4:]
+\app{bib2gls} has a primitive \LaTeX\ parser that recognises a
+limited set of commands, which includes the standard accent commands
+and some maths commands, so it can convert \verb|{\'e}lite| to
+\code{\'elite}. It disregards unknown commands. This may lead to
+an empty sort value, but \app{bib2gls} doesn't mind that.
+
+Note that even if the name is given as \verb|{\'e}lite|, the letter
+group heading (if the \verb|--group| switch is used) may end up with
+the character \'E depending on the locale used by the sort
+comparator. In this case you will need to ensure the document can
+support this character either with \sty{inputenc} or by switching to
+a \LaTeX\ engine with native UTF-8 support.
+
+\end{description}
+
+
+If the \sty{inputenc} package is used:
+\begin{verbatim}
+ \usepackage[utf8]{inputenc}
+\end{verbatim}
+and the entry is defined as:
+\begin{alltt}
+ \verb|\newglossaryentry{elite}|
+ \verb|{|
+   name=\verb|{{|\'e\verb|}lite},|
+   description=\verb|{select group or class}|
+ \verb|}|
+\end{alltt}
+then:
+\begin{description}
+\item[\opt1:] By default the sort value will be interpreted as
+\code{elite} so the entry will be put in the \qt{E} letter group.
+If you use the \pkgopt[true]{sanitizesort} package option, the
+sort value will be interpreted as \code{\'elite} where \'e has
+been sanitized (so it's no longer an active character and is in fact
+seen as two octets 0xC3 0xA9) which will
+put this entry before the \qt{A} letter group. (The group is
+determined by the first octet 0xC3.)
+
+\item[\opt2:] \app{makeindex} sees \code{\'e} as two octets
+(0xC3 0xA9) rather than a single character so it tries to put
+\code{\'elite} in the 0xC3 (\qt{\~A}) letter group (which, in this
+case, comes after \qt{Z}).
+
+\item[\opt3:] \app{xindy} will correctly recognise the sort value
+\code{\'elite} and will place it in whatever letter group is
+appropriate for the given language setting. (In English, this would
+just be the \qt{E} letter group, but another language
+might put it in the \qt{\'E} letter group.)
+
+\item[\opt4:] The \sty{inputenc} package doesn't affect the
+encoding used with \file{.bib} entry definitions, since these are dependent
+on the encoding used to save the \file{.bib} file (although the
+labels must still be ASCII). You can help \app{bib2gls} (and
+JabRef) by putting an encoding comment at the start of the \file{.bib} file:
+\begin{alltt}
+\% Encoding: UTF-8
+\end{alltt}
+
+With the correct encoding set up, \app{bib2gls} will determine
+that the sort value is \code{\'elite} and will place it in
+whatever letter group is appropriate for the given sort rule.
+For example, \verb|sort=en-GB| (or just \verb|sort=en|) will put 
+\code{\'elite} in the \qt{E} letter group, but another language
+might put it in the \qt{\'E} letter group.
+
+\end{description}
+
+Therefore if you have extended Latin or non-Latin characters, your
+best option is to use either \app{xindy} (\opt3) or
+\app{bib2gls} (\opt4) with the \sty{inputenc} or \sty{fontspec} package.
+If you use \app{makeindex} (\opt2) you need to specify the
+\code{sort} key like this:
+\begin{verbatim}
+\newglossaryentry{elite}
+{
+  name={{\'e}lite},
+  sort={elite},
+  description={select group or class}
+}
+\end{verbatim}
+or
+\begin{alltt}
+\cs{newglossaryentry}\{elite\}
+\{
+  name=\{\{\'e\}lite\},
+  sort=\{elite\},
+  description=\{select group or class\}
+\}
+\end{alltt}
+If you use \opt1, you may or may not need to use the \code{sort}
+key, but you will need to be careful about fragile commands in the
+\code{name} key if you don't set the \code{sort} key.
+
+If you use \opt3 and the \code{name} only contains a command or
+commands (such as \cs{P} or \verb|\ensuremath{\pi}|) you must add the
+\code{sort} key. This is also advisable for the other options
+(except \opt4), but is essential for \opt3. For example:
+\begin{verbatim}
+ \newglossaryentry{P}{name={\P},sort={P},
+  description={paragraph symbol}}
+\end{verbatim}
+
+\section{Customising the Glossary}
+\label{sec:glosstyle}
+
+The default glossary style uses the \env{description} environment
+to display the entry list. Each entry name is set in the optional
+argument of \cs{item} which means that it will typically be
+displayed in bold. You can switch to medium weight by redefining
+\cs{glsnamefont}:
+\begin{verbatim}
+\renewcommand*{\glsnamefont}[1]{\textmd{#1}}
+\end{verbatim}
+Some classes and packages redefine the \env{description} environment
+in such as way that's incompatible with the \styfmt{glossaries}
+package. In which case you'll need to select a different glossary
+style (see below).
+
+By default, a~full stop is appended to the description (unless you
+use \sty{glossaries-extra}). To prevent
+this from happening use the \pkgopt{nopostdot} package option:
+\begin{verbatim}
+\usepackage[nopostdot]{glossaries}
+\end{verbatim}
+or to add it with \styfmt{glossaries-extra}:
+\begin{verbatim}
+\usepackage[postdot]{glossaries-extra}
+\end{verbatim}
+
+By default, a~location list is displayed for each entry (unless you
+use \cs{printunsrtglossary} without \app{bib2gls}). This refers
+to the document locations (for example, the page number) where the
+entry has been referenced. If you use \optsor23 described in
+\sectionref{sec:printglossaries} or \opt4 (with \app{bib2gls} and
+\sty{glossaries-extra}) then location ranges will be compressed.
+For example, if an entry was used on pages~1, 2 and~3, with
+\optsor23 or \opt4 the location list will appear as 1--3, but with \opt1 it
+will appear as 1, 2, 3. If you don't want the locations displayed
+you can hide them using the \pkgopt{nonumberlist} package option:
+\begin{verbatim}
+\usepackage[nonumberlist]{glossaries}
+\end{verbatim}
+or with \app{bib2gls} use \code{save-locations=false} in the
+optional argument of the appropriate \cs{GlsXtrLoadResources}
+(it's possible to have some resource sets with locations and some
+without).
+
+Entries are grouped according to the first letter of
+each entry's \code{sort} key. By default a~vertical gap is placed
+between letter groups. You can suppress this with the
+\pkgopt{nogroupskip} package option:
+\begin{verbatim}
+\usepackage[nogroupskip]{glossaries}
+\end{verbatim}
+
+If the default style doesn't suit your document, you can change the
+style using:
+\begin{definition}
+\cs{setglossarystyle}\marg{style name}
+\end{definition}
+\href{http://www.dickimaw-books.com/gallery/glossaries-styles/}{There are a~number of predefined styles.} Glossaries can vary from
+a~list of symbols with a~terse description to a~list of words or
+phrases with descriptions that span multiple paragraphs, so there's
+no \qt{one style fits all} solution. You need to choose a~style that
+suits your document. For example:
+\begin{verbatim}
+\setglossarystyle{index}
+\end{verbatim}
+You can also use the \pkgopt{style} package option for the preloaded
+styles. For example:
+\begin{verbatim}
+\usepackage[style=index]{glossaries}
+\end{verbatim}
+
+Examples:
+\begin{enumerate}
+ \item You have entries where the name is a~symbol and the
+ description is a~brief phrase or short sentence. Try one of the 
+ \qt{mcol} styles defined in the \sty{glossary-mcols} package. For example:
+\begin{verbatim}
+\usepackage[nopostdot]{glossaries}
+\usepackage{glossary-mcols}
+\setglossarystyle{mcolindex}
+\end{verbatim}
+or
+\begin{verbatim}
+\usepackage[stylemods={mcols},style=mcolindex]{glossaries-extra}
+\end{verbatim}
+
+ \item You have entries where the name is a~word or phrase and the
+description spans multiple paragraphs. Try one of the \qt{altlist} styles. For
+example:
+\begin{verbatim}
+\usepackage[nopostdot]{glossaries}
+\setglossarystyle{altlist}
+\end{verbatim}
+or
+\begin{verbatim}
+\usepackage[stylemods,style=altlist]{glossaries-extra}
+\end{verbatim}
+
+ \item You have entries where the name is a~single word, the
+  description is brief, and an associated symbol has been set.
+  Use one of the styles that display the symbol (not all of them do). 
+  For example, one of the tabular styles:
+\begin{verbatim}
+\usepackage[nopostdot,nonumberlist]{glossaries}
+\setglossarystyle{long4col}
+\end{verbatim}
+or one of the \qt{tree} styles:
+\begin{verbatim}
+\usepackage[nopostdot,nonumberlist]{glossaries}
+\setglossarystyle{tree}
+\end{verbatim}
+\end{enumerate}
+
+If your glossary consists of a~list of abbreviations and you also want to
+specify a~description as well as the long form, then you need to use
+an abbreviation style that will suit the glossary style. For example,
+use the \code{long-short-desc} acronym style:
+\begin{verbatim}
+\setacronymstyle{long-short-desc}
+\end{verbatim}
+Define the acronyms with a~description:
+\begin{verbatim}
+\newacronym
+ [description={statistical pattern recognition technique}]
+ {svm}{SVM}{support vector machine}
+\end{verbatim}
+Alternatively with \sty{glossaries-extra}:
+\begin{verbatim}
+\setabbreviationstyle{long-short-desc}
+
+\newabbreviation
+ [description={statistical pattern recognition technique}]
+ {svm}{SVM}{support vector machine}
+\end{verbatim}
+
+Choose a~glossary style that suits wide entry names. For example:
+\begin{verbatim}
+\setglossarystyle{altlist}
+\end{verbatim}
+
+\section{Multiple Glossaries}
+\label{sec:multigloss}
+
+The \sty{glossaries} package predefines a~default \code{main}
+glossary. When you define an entry (using one of the commands
+described in \sectionref{sec:defterm}), that entry is automatically
+assigned to the default glossary, unless you indicate otherwise 
+using the \code{type} key. However you first need to
+make sure the desired glossary has been defined. This is done using:
+\begin{definition}
+\cs{newglossary}\oarg{glg}\marg{label}\marg{gls}\marg{glo}\marg{title}
+\end{definition}
+The \meta{label} is a~label that uniquely identifies this new
+glossary. As with other types of identifying labels, be careful not
+to use active characters in \meta{label}. The final argument
+\meta{title} is the section or chapter heading used by
+\cs{printglossary} or \cs{printnoidxglossary}. The other arguments
+indicate the file extensions used by
+\app{makeindex}\slash\app{xindy} (described in
+\sectionref{sec:printglossaries}). If you use \opt1 described
+above (or \app{bib2gls} and \cs{printunsrtglossaries}), 
+then the \meta{glg}, \meta{gls} and \meta{glo} arguments are
+ignored, in which case you may prefer to use the starred version
+where you don't specify the extensions:
+\begin{definition}
+\cs{newglossary*}\marg{label}\marg{title}
+\end{definition}
+
+In the case of \optsor23, all glossary definitions must come before
+\cs{makeglossaries}. (Entries definitions should come after
+\cs{makeglossaries}.) In the case of \opt4, all glossary definitions
+must come before any \cs{GlsXtrLoadResources} that requires them.
+
+Since it's quite common for documents to have both a~list of terms
+and a~list of abbreviations, the \sty{glossaries} package provides the
+package option \pkgopt{acronym} (or \pkgopt{acronyms}), which 
+is a~convenient shortcut for
+\begin{verbatim}
+\newglossary[alg]{acronym}{acr}{acn}{\acronymname}
+\end{verbatim}
+The option also changes the behaviour of \cs{newacronym} so that acronyms
+are automatically put in the list of acronyms instead of the main
+glossary. The \sty{glossaries-extra} package also provides this
+option for abbreviations defined using \cs{newacronym} but
+additionally has the package option \pkgopt{abbreviations} to create
+a list of abbreviations for \cs{newabbreviation}.
+
+There are some other package options for creating commonly used
+lists: \pkgopt{symbols} (lists of symbols), \pkgopt{numbers} (lists
+of numbers), \pkgopt{index} (index of terms without descriptions defined with
+\cs{newterm}\oarg{options}\marg{label}).
+
+For example, suppose you want a~main glossary for terms, a~list of
+acronyms and a~list of notation:
+\begin{verbatim}
+ \usepackage[acronyms]{glossaries}
+ \newglossary[nlg]{notation}{not}{ntn}{Notation}
+\end{verbatim}
+After \cs{makeglossaries} (or \cs{makenoidxglossaries}) you can
+define the entries in the preamble. For example:
+\begin{verbatim}
+ \newglossaryentry{gls:set}
+ {% This entry goes in the `main' glossary
+   name=set,
+   description={A collection of distinct objects}
+ }
+
+ % This entry goes in the `acronym' glossary:
+ \newacronym{svm}{svm}{support vector machine}
+
+ \newglossaryentry{not:set}
+ {% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{\mathcal{S}}},
+   description={A set},
+   sort={S}}
+\end{verbatim}
+or if you don't like using \cs{ensuremath}:
+\begin{verbatim}
+ \newglossaryentry{not:set}
+ {% This entry goes in the `notation' glossary:
+   type=notation,
+   name={$\mathcal{S}$},
+   text={\mathcal{S}},
+   description={A set},
+   sort={S}}
+\end{verbatim}
+
+Each glossary is displayed using:
+\begin{definition}
+\cs{printnoidxglossary}[type=\meta{type}]
+\end{definition}
+(\opt1) or
+\begin{definition}
+\cs{printglossary}[type=\meta{type}]
+\end{definition}
+(\optsand23). Where \meta{type} is the glossary label. If the
+type is omitted the default \code{main} glossary is assumed.
+
+If you're using \app{bib2gls} then each glossary is displayed
+using:
+\begin{definition}
+\cs{printunsrtglossary}[type=\meta{type}]
+\end{definition}
+With this method you don't use \cs{makeglossaries} or
+\cs{makenoidxglossaries}. Instead you can assign the entry type
+with the resource command. For example:
+\begin{verbatim}
+ \usepackage[record,abbreviations,symbols]{glossaries-extra}
+
+ \GlsXtrLoadResources[
+  src={terms}, % entries defined in terms.bib
+  type={main}% put in main glossary
+ ]
+ \GlsXtrLoadResources[
+  src={abbrvs}, % entries defined in abbrvs.bib
+  type={abbreviations}% put in abbreviations glossary
+ ]
+ \GlsXtrLoadResources[
+  src={syms}, % entries defined in syms.bib
+  type={symbols}% put in symbols glossary
+ ]
+\end{verbatim}
+Later in the document:
+\begin{verbatim}
+ \printunsrtglossary % main
+ \printunsrtglossary[type=abbreviations]
+ \printunsrtglossary[type=symbols]
+\end{verbatim}
+
+There's a~convenient shortcut that will display all the defined
+glossaries depending on the indexing method:
+\begin{definition}
+\cs{printnoidxglossaries}
+\end{definition}
+(\opt1) or
+\begin{definition}
+\cs{printglossaries}
+\end{definition}
+(\optsand23) or (\sty{glossaries-extra} only)
+\begin{definition}
+\cs{printunsrtglossaries}
+\end{definition}
+
+If you use \opt1, you don't need to do anything else. If you use
+\optsor23 with the \app{makeglossaries} Perl script or the
+\app{makeglossaries-lite} Lua script, you
+similarly don't need to do anything else. If you use \optsor23 
+without the \app{makeglossaries} Perl script then you need to
+make sure you run \app{makeindex}\slash\app{xindy} \emph{for
+each defined glossary}. The \meta{gls} and \meta{glo} arguments of
+\cs{newglossary} specify the file extensions to use instead of
+\file{.gls} and \file{.glo}. The optional argument \meta{glg} is
+the file extension for the transcript file. This should be different
+for each glossary in case you need to check for
+\app{makeindex}\slash\app{xindy} errors or warnings if things
+go wrong.
+
+For example, suppose you have three glossaries in your document
+(\code{main}, \code{acronym} and \code{notation}), 
+specified using:
+\begin{verbatim}
+\usepackage[acronyms]{glossaries}
+\newglossary[nlg]{notation}{not}{ntn}{Notation}
+\end{verbatim}
+Then (assuming your \LaTeX\ document is in a~file called
+\file{myDoc.tex}):
+
+\begin{description}
+\item\opt2
+Either use one \app{makeglossaries} or
+\app{makeglossaries-lite} call:
+\begin{verbatim}
+makeglossaries myDoc
+\end{verbatim}
+or
+\begin{verbatim}
+makeglossaries-lite myDoc
+\end{verbatim}
+Or you need to run \app{makeindex} three times:
+\begin{verbatim}
+makeindex -t myDoc.glg -s myDoc.ist -o myDoc.gls myDoc.glo
+makeindex -t myDoc.alg -s myDoc.ist -o myDoc.acr myDoc.acn
+makeindex -t myDoc.nlg -s myDoc.ist -o myDoc.not myDoc.ntn
+\end{verbatim}
+
+\item\opt3 
+Either use one \app{makeglossaries} call:
+\begin{verbatim}
+makeglossaries myDoc
+\end{verbatim}
+Or you need to run \app{xindy} three times (be careful not to insert
+line breaks where the line has wrapped.)
+\begin{verbatim}
+xindy  -L english -C utf8 -I xindy -M myDoc -t myDoc.glg
+-o myDoc.gls myDoc.glo
+xindy  -L english -C utf8 -I xindy -M myDoc -t myDoc.alg
+-o myDoc.acr myDoc.acn
+xindy  -L english -C utf8 -I xindy -M myDoc -t myDoc.nlg
+-o myDoc.not myDoc.ntn
+\end{verbatim}
+
+\item\opt4
+With \app{bib2gls} only one call is required:
+\begin{verbatim}
+pdflatex myDoc
+bib2gls --group myDoc
+pdflatex myDoc
+\end{verbatim}
+(Omit \verb|--group| if you don't need letter groups.)
+\end{description}
+
+
+\section[glossaries and hyperref]{\styfmt{glossaries} and \styfmt{hyperref}}
+\label{sec:hyperref}
+
+Take care if you use the \sty{glossaries} package with
+\sty{hyperref}. Contrary to the usual advice that \sty{hyperref}
+should be loaded last, \sty{glossaries} (and \sty{glossaries-extra}) 
+must be loaded \emph{after} \sty{hyperref}:
+\begin{verbatim}
+\usepackage[colorlinks]{hyperref}
+\usepackage{glossaries}
+\end{verbatim}
+If you use \sty{hyperref} make sure you use PDF\LaTeX\ rather than
+the \LaTeX\ to DVI engine. The DVI format can't break hyperlinks across
+a~line so long glossary entries (such as the full form of acronyms)
+won't line wrap with the DVI engine. Also, hyperlinks in sub- or
+superscripts aren't correctly sized with the DVI format.
+
+By default, if the \sty{hyperref} package has been loaded, commands
+like \cs{gls} will form a~hyperlink to the relevant entry in the
+glossary. If you to disable this for \emph{all} your
+glossaries, then use
+\begin{definition}
+\cs{glsdisablehyper}
+\end{definition}
+If you want hyperlinks suppressed for entries in specific
+glossaries, then use the \pkgopt{nohypertypes} package option. For
+example, if you don't want hyperlinks for entries in the \code{acronym} and
+\code{notation} glossaries but you do want them for entries in the
+\code{main} glossary, then do:
+\begin{verbatim}
+\usepackage[colorlinks]{hyperref}
+\usepackage[acronym,nohypertypes={acronym,notation}]{glossaries}
+\newglossary[nlg]{notation}{not}{ntn}{Notation}
+\end{verbatim}
+
+If you want the hyperlinks suppressed the first time an entry is
+used, but you want hyperlinks for subsequence references then use
+the \pkgopt[false]{hyperfirst} package option:
+\begin{verbatim}
+\usepackage[colorlinks]{hyperref}
+\usepackage[hyperfirst=false]{glossaries}
+\end{verbatim}
+
+Take care not to use non-expandable commands in PDF bookmarks. This
+isn't specific to the \sty{glossaries} package but is a~limitation
+of PDF bookmarks. Non-expandable commands include commands like 
+\cs{gls}, \cs{glspl}, \cs{Gls} and \cs{Glspl}. The \sty{hyperref}
+package provides a~way of specifying alternative text for the PDF
+bookmarks via \cs{texorpdfstring}. For example:
+\begin{verbatim}
+\section{The \texorpdfstring{\gls{fishage}}{Fish Age}}
+\end{verbatim}
+However, it's not a~good idea to use commands like \cs{gls} in
+a~section heading as you'll end up with the table of contents in 
+your location list. Instead you can use
+\begin{definition}
+\cs{glsentrytext}\marg{label}
+\end{definition}
+This is expandable provided that the \code{text} key doesn't
+contain non-expandable code. For example, the following works:
+\begin{verbatim}
+\section{The \glsentrytext{fishage}}
+\end{verbatim}
+and it doesn't put the table of contents in the location list.
+
+If you use \sty{glossaries-extra} then use the commands that are
+provided specifically for use in section headers. For example:
+\begin{verbatim}
+\section{The \glsfmttext{fishage}}
+\end{verbatim}
+
+\section{Cross-References}
+\label{sec:xr}
+
+You can add a~reference to another entry in a~location list using
+the \code{see=}\marg{label list} key when you define an entry. 
+The referenced entry (or entries) must also be defined.
+
+For example:
+\begin{verbatim}
+\longnewglossaryentry{devonian}{name={Devonian}}%
+{%
+  The geologic period spanning from the end of the 
+  Silurian Period to the beginning of the Carboniferous Period.
+
+  This age was known for its remarkable variety of 
+  fish species.
+}
+
+\newglossaryentry{fishage}
+{
+  name={Fish Age},
+  description={Common name for the Devonian period},
+  see={devonian}
+}
+\end{verbatim}
+The cross-reference will appear as \qt{\emph{see} Devonian}. You can
+change the \qt{see} tag using the format
+\code{see=}\oarg{tag}\meta{label}. For example:
+\begin{verbatim}
+\newglossaryentry{latinalph}
+{
+  name={Latin alphabet},
+  description={alphabet consisting of the letters 
+  a, \ldots, z, A, \ldots, Z},
+  see=[see also]{exlatinalph}
+}
+\newglossaryentry{exlatinalph}
+{
+   name={extended Latin alphabet},
+   description={The Latin alphabet extended to include 
+   other letters such as ligatures or diacritics.}
+}
+\end{verbatim}
+If you use the \code{see} key in the optional argument of
+\cs{newacronym}, make sure you enclose the value in braces. For
+example:
+\begin{verbatim}
+\newacronym{ksvm}{ksvm}{kernel support vector machine}
+\newacronym
+ [see={[see also]{ksvm}}]
+ {svm}{svm}{support vector machine}
+\end{verbatim}
+The \sty{glossaries-extra} package provides a \code{seealso}
+key. This doesn't allow a tag but behaves much like
+\code{see=\{[\cs{seealsoname}]\marg{label}\}}. For example:
+\begin{verbatim}
+\newabbreviation{ksvm}{ksvm}{kernel support vector machine}
+\newabbreviation
+ [seealso={ksvm}]
+ {svm}{svm}{support vector machine}
+\end{verbatim}
+
+Since the cross-reference appears in the location list, if you
+suppress the location list using the \pkgopt{nonumberlist} package
+option, then the cross-reference will also be suppressed. With
+\app{bib2gls}, don't use the \pkgopt{nonumberlist} package
+option. Instead use the \code{save-locations=false} in the resource
+options. For example:
+\begin{verbatim}
+\usepackage[record,abbreviations,symbols]{glossaries-extra}
+
+\GlsXtrLoadResources[
+ src={terms}, % entries defined in terms.bib
+ type={main}% put in main glossary
+]
+\GlsXtrLoadResources[
+ src={abbrvs}, % entries defined in abbrvs.bib
+ type={abbreviations},% put in abbreviations glossary
+ save-locations=false% no number list for these entries
+]
+\GlsXtrLoadResources[
+ src={syms}, % entries defined in syms.bib
+ type={symbols}% put in symbols glossary
+]
+\end{verbatim}
+
+\section{Further Information}
+\label{sec:moreinfo}
+
+\begin{itemize}
+\item \href{http://mirrors.ctan.org/support/bib2gls/bib2gls-begin.pdf}{\styfmt{glossaries-extra}
+and \appfmt{bib2gls}: an introductory guide}.
+\item The main \sty{glossaries} \docref{user manual}{glossaries-user}.
+\item The \href{http://www.dickimaw-books.com/faqs/glossariesfaq.html}{glossaries FAQ}.
+\item \href{https://www.dickimaw-books.com/latex/buildglossaries/}{Incorporating
+makeglossaries or makeglossaries-lite or bib2gls into the document
+build}.
+\item The \href{https://ctan.org/pkg/glossaries-extra}{\styfmt{glossaries-extra}} package.
+\item The \href{https://ctan.org/pkg/bib2gls}{\appfmt{bib2gls}}
+application.
+\end{itemize}
+\end{document}

@@ -1,13 +1,14 @@
-\contentsline {section}{\numberline {1}Problem 6.2}{2}
-\contentsline {subsection}{\numberline {1.1}Part a: Polynomial roots of moving average model}{2}
-\contentsline {subsection}{\numberline {1.2}Part b: Polynomial roots of moving average model}{2}
-\contentsline {section}{\numberline {2}Problem 6.3}{2}
-\contentsline {section}{\numberline {3}Problem 6.4}{4}
-\contentsline {section}{\numberline {4}Problem 6.5}{5}
-\contentsline {subsection}{\numberline {4.1}Part a}{5}
-\contentsline {subsection}{\numberline {4.2}Part b}{5}
-\contentsline {subsection}{\numberline {4.3}Part c}{6}
-\contentsline {subsection}{\numberline {4.4}Part d}{7}
-\contentsline {subsection}{\numberline {4.5}Part e}{8}
-\contentsline {section}{\numberline {5}Problem 6.6}{9}
-\contentsline {section}{\numberline {6}Problem6.7}{11}
+\contentsline {section}{\numberline {1}Problem 6.1}{2}
+\contentsline {section}{\numberline {2}Problem 6.2}{3}
+\contentsline {subsection}{\numberline {2.1}Part a: Polynomial roots of moving average model}{3}
+\contentsline {subsection}{\numberline {2.2}Part b: Polynomial roots of moving average model}{3}
+\contentsline {section}{\numberline {3}Problem 6.3}{4}
+\contentsline {section}{\numberline {4}Problem 6.4}{5}
+\contentsline {section}{\numberline {5}Problem 6.5}{6}
+\contentsline {subsection}{\numberline {5.1}Part a}{6}
+\contentsline {subsection}{\numberline {5.2}Part b}{7}
+\contentsline {subsection}{\numberline {5.3}Part c}{7}
+\contentsline {subsection}{\numberline {5.4}Part d}{9}
+\contentsline {subsection}{\numberline {5.5}Part e}{10}
+\contentsline {section}{\numberline {6}Problem 6.6}{10}
+\contentsline {section}{\numberline {7}Problem 6.7}{12}

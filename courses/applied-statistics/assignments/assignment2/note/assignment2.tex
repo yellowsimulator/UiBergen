@@ -1,0 +1,126 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{bm}
+
+
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\Cov}{\operatorname{Cov}}
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{DarkGreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{DarkGreen},
+     %frame=single, % adds a frame around the code
+     backgroundcolor=\color{lightgray},
+}
+\usepackage[svgnames]{xcolor}
+\title{Applied statistics Homework 2}
+\author{Yapi Donatien Achou}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+ 
+\section{Problem 2.1}
+We will learn about the following new R functions, as well as new functions
+\begin{lstlisting}
+read.csv()
+t.test()
+shapiro.test()
+read.table()
+\end{lstlisting}
+\subsection{Part1: t-test}
+When the test statistic follows the normal distribution (gaussian distribution), \textcolor{blue}{a t-test} is commonly applied to test the mean of a normally distributed population. This is achieved in R by using the command \textcolor{blue}{t.test()}. For that you need a sample $X$, the mean $\mu$ of the population from which the sample $X$ is drown, the mean $\mu_{x}$
+of the sample, and the significance level $\alpha$. Assuming a significance level $\alpha=5\%$, the test is given by
+\begin{lstlisting}[mathescape=true]
+t.test(X-$\mu_{X}$, alternative=two.side, conf.level=0.95)
+\end{lstlisting}
+More option are 
+\begin{lstlisting}[mathescape=true]
+t.test(x,y=NULL,
+alternative=c(two.sided,less, greater ),
+mu=0, paired=FALSE, var.equal=FALSE,
+conf.level=0.95,
+formula, data,subset,na.action...
+)
+\end{lstlisting}
+If the pvalue is greater than the significance level $\alpha$, we can conclude that the null hypothesis is plausible
+
+\subsection{Part 2: Hypotheses test formulation}
+We would like to test the hypotheses that the average yield of barley is greater than 150
+\begin{equation}
+\begin{split}
+H_{0}: \mu & =150 \\
+H_{1}:\mu &> 150
+\end{split}
+\end{equation}
+\clearpage
+\begin{lstlisting}[mathescape=false]
+Barley <- read.csv("Barley.csv")
+
+mean <- mean(Barley$barley)
+alpha <- 0.1 
+level <- 1-alpha
+test <- t.test(Barley$barley, mu=150, alternative="greater", conf.level=level)
+>>
+>>
+	One Sample t-test
+
+data:  Barley$barley
+t = 1.3607, df = 399, p-value = 0.08719
+alternative hypothesis: true mean is greater than 150
+90 percent confidence interval:
+ 150.1199      Inf
+sample estimates:
+mean of x 
+ 152.1175 
+\end{lstlisting}
+The one sided 90$\%$ confidence interval suggests that the mean barley yield is likely to be greater than 150.1199.
+%The $p-value$ of $0.08719$ tells us that if the mean barley yield was 150, the probability of selecting a sample with mean yield greater than or equal to 150 is 
+%$8.719$.
+The pvalue of $0.08719$ is less than the significance level $\alpha = 0.1$, we therefor reject the null hypothesis that the mean is equal to 150 in favour of the alternative hypothesis
+
+Now if the significance level $\alpha=0.05$  then the pvalue of $0.08719$ is greater than  the the the the significance level, than we would not reject $H_{0}$ in favour of $H_{1}$.
+\subsection{Part 3}
+
+
+\subsection{Note}
+Reject $H_{0}$ if pvalue is less than significance level, and not reject $H_{0}$ otherwise. The significance level $\alpha$ is the probability of rejecting the null hypothesis when it is true.
+The pvale, is the probability of obtaining a result at least as extreme, given that the null hypothesis is true. The result is \textcolor{blue}{statistically significant}, by the standard of the study when 
+\begin{equation}
+pvalue < \alpha
+\end{equation}
+
+
+
+\begin{thebibliography}{9}
+\bibitem{petter} 
+Petter J. Brockwell. Richard A. Davis
+\textit{Introduction to Time Series and Forecasting}. 
+Springer. Second edition. 2001
+ 
+\end{thebibliography}
+
+
+\end{document}  

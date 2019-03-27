@@ -59,7 +59,67 @@
 \tableofcontents
 \newpage
  
- 
+ \section{Problem 6.1}
+ Let $q=5$ and $\{ X_{t} \}$ be a MA(q) process:
+ \begin{equation}\label{eq:iid}
+ X_{t} = \sum_{j=0}^{5}\theta_{j}Z_{t-j}, \quad \theta_{0} = 1
+ \end{equation}
+where $\{ Z_{t} \} \sim iid(0, \sigma_{Z}^{2})$from a Laplace($\lambda$) with $\lambda$ chosen such that the variance $\sigma_{Z}^{2} = 2$.
+%\subsection{Part a: Drawing $\theta_{j}$}
+I am not sure if the assumptions in this problem are correct? (Or I am not understanding the formulation of the problem). However If the assumption are corrects (from my understanding) then 
+%Let draw $\theta_{j}$ from the uniform distribution on $[-2,2]$ for $j=1,2,3,4,5$
+Let compute the expectation of $X_{t}$:
+\begin{equation}
+\begin{split}
+\E[X_{t}] &= \E[\theta_{0}Z_{t}] + \cdots \E[\theta_{5}Z_{t-5}]\\
+&=\theta_{0}\E[Z_{t}] + \cdots \E\theta_{5}[Z_{t-5}]\\
+&=0
+\end{split}
+\end{equation}
+If we multiply equation (\ref{eq:iid}) by $X_{t}$ on both side and take the expectation we get
+\begin{equation}
+\begin{split}
+X_{t}X_{t} &= \theta_{0}X_{t}Z_{t} + \cdots \theta_{5}X_{t}Z_{t-5} , \Downarrow\\
+\E[X_{t}X_{t}] &= \E[\theta_{0}X_{t}Z_{t}] + \cdots \E[\theta_{5}X_{t}Z_{t-5}] , \Downarrow\\
+\E[X_{t}X_{t}] &= \theta_{0}\E[X_{t}Z_{t}] + \cdots \theta_{5}\E[X_{t}Z_{t-5}] 
+\end{split}
+\end{equation}
+Let compute the left hand side:
+\begin{equation}
+\begin{split}
+\gamma(0) &= \E[(X_{t}-\E[X_{t}])(X_{t}-\E[X_{t}])]\\
+&=\E[X_{t}X_{t}]\\
+&= \Cov(X_{t},X_{t})\\
+&=\Var(X_{t})\\
+&=\Var\left( \sum_{j=0}^{5} \theta_{j}Z_{t-j}\right)\\
+&=\sum_{j=0}^{5} \theta_{j}^{2}\Var(Z_{t-j})\\
+&=2(1+\theta_{1}^{2} +, \cdots+\theta_{5}^{2})
+\end{split}
+\end{equation}
+Let compute the right hand side. But first we note that $Z_{r}$ and $Z_{s}$ are independent so $\E[Z_{r}Z_{s}] = \E[Z_{r}]\E[Z_{s}] = 0$. It follows that
+\begin{equation}
+\begin{split}
+\E[X_{t}Z_{t-j}] &= \E[(Z_{0 + \theta_{1}Z_{1}+\cdots+\theta_{5}Z_{5}})Z_{t-j}]\\
+&=\E[Z_{0}Z_{t-j} + \theta_{1}Z_{1}Z_{t-j}+\cdots+\theta_{5}Z_{5}Z_{t-j}]\\
+&=\E[Z_{0}Z_{t-j}] + \theta_{1}\E[Z_{1}Z_{t-j}]+\cdots+\theta_{5}\E[Z_{5}Z_{t-j}]\\
+&=0
+\end{split}
+\end{equation}
+So the left hand side is given by
+\begin{equation}
+\begin{split}
+\theta_{0}\E[X_{t}Z_{t}] + \cdots \theta_{5}\E[X_{t}Z_{t-5}]&=0
+\end{split}
+\end{equation}
+and the relationship between the $\theta_{j}, j = 1, \cdots, 5$ is 
+\begin{equation}
+2(1+\theta_{1}^{2} +, \cdots+\theta_{5}^{2}) = 0,
+\end{equation}
+but this expression can not be equal to 0. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \section{Problem 6.2}
  \subsection{Part a: Polynomial roots of moving average model}
  The model
@@ -395,6 +455,41 @@ exists one set of coefficients $d_{1}, \cdots, d_{q}$ such that the process is i
  \end{equation}
  
 for n = 3
+\begin{equation}
+\widehat{X}_{4} = \phi_{31}X_{3}+\phi_{32}X_{2}+\phi_{33}X_{1}.
+\end{equation}
+Now 
+\begin{equation}
+\phi_{33} = (\gamma(3)-(\phi_{21}\gamma(2)+\phi_{22}\gamma(1))\nu^{-1}
+\end{equation}
+with 
+\begin{equation}
+\gamma(3) = \gamma(2) = 0
+\end{equation}
+
+\begin{equation}
+\nu_{2} = (1-\phi_{22}^{2})\nu_{1}^{-1} = \left(1-\left(-\frac{1}{3}\right)^{2}\right)\frac{2}{3}= \frac{20}{27}
+\end{equation}
+\begin{equation}
+\phi_{33} = -\frac{9}{20}
+\end{equation}
+and 
+\begin{equation}
+\phi_{31} = \phi_{21} - \phi_{33}\phi_{22} = -\frac{2}{3}-\frac{-9}{20}\left(  -\frac{1}{3}\right) = -\frac{49}{60}
+\end{equation}
+
+\begin{equation}
+\phi_{32} = \phi_{22} - \phi_{33}\phi_{21} = -\frac{1}{3}-\frac{-9}{20}\left(  -\frac{2}{3}\right) = -\frac{19}{30}
+\end{equation}
+
+\begin{equation}
+\phi_{34} = \phi_{22} - \phi_{33}\phi_{21} = -\frac{1}{3}-\frac{-9}{20}\left(  -\frac{2}{3}\right) = -\frac{19}{30}
+\end{equation}
+
+so 
+\begin{equation}
+\widehat{X}_{4} = -\frac{49}{60}X_{3}-\frac{19}{30}X_{2}-\frac{9}{20}X_{1}.
+\end{equation}
 
 \subsection{Part d}
 let prove that 
@@ -534,11 +629,6 @@ And from \cite{petter} equation 2.5.26, for $r\neq s$ we get
 \theta_{r,r-k} \theta_{s,s-k} = 0, \Rightarrow \langle\,e_{r},e_{s}\rangle = 0
 \end{equation}
 
-\item Normality
-The
-
-
-
 
 
 
@@ -547,7 +637,7 @@ The
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Problem6.7}
+\section{Problem 6.7}
 Let $\{X_{t}\}$ be a stationary time series. Suppose that $\gamma(n) =O(1)$. Prove that this assumption is sufficient for $\Gamma_{n}$ to be non singular.
 
 \begin{proof}
