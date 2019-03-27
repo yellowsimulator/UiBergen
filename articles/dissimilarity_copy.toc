@@ -7,7 +7,7 @@
 \contentsline {subsection}{\numberline {4.1}Overview}{5}
 \contentsline {subsection}{\numberline {4.2}Fourier transform}{5}
 \contentsline {subsubsection}{\numberline {4.2.1}Theory}{5}
-\contentsline {subsubsection}{\numberline {4.2.2}Application}{5}
+\contentsline {subsubsection}{\numberline {4.2.2}Application}{6}
 \contentsline {subsection}{\numberline {4.3}Wavelet transform}{10}
 \contentsline {subsubsection}{\numberline {4.3.1}Theory}{10}
 \contentsline {subsubsection}{\numberline {4.3.2}Application}{10}
