@@ -26,7 +26,8 @@
 \definecolor{deepgreen}{rgb}{0,0.5,0}
 
 \usepackage{listings}
-
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
 
 % Python style for highlighting
 \newcommand\pythonstyle{\lstset{
@@ -139,9 +140,62 @@ one and two. The thesis is concluded in chapter four where we ...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Fourier transform}
+\subsection{Fourier Analysis}
 \subsubsection{Theory}
-Fourier analysis is concern with the general problem of function approximation. The basic ingredients required for functions approximation are, a vector space, a basis, which is subspace of the vector space and an operation such as inner product that act on the each element the vector space. In this case we say that the vector space is an inner product space. The best approximation of a function in the inner product space is its orthogonal project. The orthogonality property is therefore  necessary for obtaining the optimum approximation of a function.
+Fourier analysis is concern with the general problem of function approximation. The basic ingredients required for functions approximation are, a vector space, a basis, which is a subspace of the vector space and an operation such as inner product that is performed between two elements belonging to the vector space. In this case we say that the vector space is an inner product space. The best approximation of a function is its orthogonal projection in the inner product space. The orthogonality property is therefore  necessary for obtaining the optimum approximation of a function.
+\justify
+Let have a closer look at each ingredient and define further properties that make Fourier analysis an appropriate tool for function approximation. We shall shortly define the concept of vector space, basis, inner product, orthogonality and additional properties that are derived from them.
+\begin{definition}
+A vector space $V$ over a field $F$ is a set  with two operations $(\cdot, +)$ satisfying 
+\begin{enumerate}
+\item Associativity:  (u+v)+w = u+(v+w), for any u,v, w $\in V$
+\item Commutativity: u+v = v+u, for all u,v $\in V$
+\item Inverse: for any u $\in V$ there exists an element -u $\in V$ such that u + (-u) = 0
+\item Identity element: $1\cdot u = u$ where 1 is the multiplicative identity in he field F.
+\item Distributivity: $a\cdot(u+v) = a\cdot u + a\cdot v$, for any a $\in F$, and u, v $\in V$
+\item Compatibility $a\cdot(b\cdot u) = (a\cdot b)\cdot u$, for any a,b $\in V$ and u $\in V$
+\item Scalar distributivity $(a+b)\cdot u = a\cdot u + b\cdot u$, for any a,b $\in F$, and u $\in V$
+\end{enumerate}
+The elements of the vector space V are called vectors and the element of the field F are call scalars.
+\end{definition}
+A legitimate question that comes in mind is, how are vectors organised in a vector space ? One way to organise vectors in a vector space is to define them in terms of special set of vectors called basis, having well defined properties. Each vector will then be uniquely expressed in terms of the basis vectors. 
+\justify
+\begin{definition}
+A basis is a set of vectors $\varphi_{i}, i = 1, \cdots, n$, covenantally written as 
+\begin{equation}
+\{ \varphi_{1}, \cdots, \varphi_{n} \} \nonumber,
+\end{equation}
+that spans the whole vector space and is linearly independent. Spanning the whole space means that for any vector u $\in V$ there exists unique scalars $a_{i}$ such that 
+\begin{equation}
+u = a_{1}\varphi_{1} + \cdots + a_{n}\varphi_{n} \nonumber,
+\end{equation}
+and linearly independent means that if
+\begin{equation}
+a_{1}\varphi_{1} + \cdots + a_{n}\varphi_{n} = 0 \nonumber,
+\end{equation}
+then 
+\begin{equation}
+a_{1} = \cdots = a_{n} = 0 \nonumber
+\end{equation}
+\end{definition}
+\justify
+With a given basis we can uniquely approximate a vector by decomposing its in terms of the basis vectors. However, a vector space can have several basis, giving rise to several approximations of the same vector. In mathematics and in science in general, one is often concerned with the optimum solution or the unique solution. Uniqueness allows one the pick the physical relevant solution of a practical problem in applied mathematics.
+It turns out that, regardless of the basis, the orthogonal projection of a vector is the optimum approximation. Orthogonal projection is achieved by a special operation called inner product
+
+\begin{definition}
+An inner product on a complex vector space $V$ is a function 
+\begin{equation}
+\langle\,,\rangle : V\times V \rightarrow \mathbb{C} \nonumber
+\end{equation}
+that satisfies the following properties
+\begin{enumerate}
+\item Positivity: $\langle\ u,v \rangle > 0$
+\item Conjugate symmetry: $\bar{\langle\ u,v \rangle > 0}  = \langle\ u,v \rangle$
+\item Homogeneity:
+\item Linearity:
+\end{enumerate}
+A vector space with an inner product is a called an inner product space.
+\end{definition}
 %The bulk of Fourier analysis is to decompose a time signal into its multiple frequency component. Let f(t) be a time signal, that is a function that maps time to real numbers. Mathematical we can write
 
 
