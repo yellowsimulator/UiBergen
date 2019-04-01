@@ -1,0 +1,442 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{bm}
+
+\usepackage{ragged2e}
+\usepackage{adjustbox}
+\usepackage{blindtext}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\Cov}{\operatorname{Cov}}
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+
+\usepackage{scalerel,stackengine}
+\stackMath
+\newcommand\reallywidehat[1]{%
+\savestack{\tmpbox}{\stretchto{%
+  \scaleto{%
+    \scalerel*[\widthof{\ensuremath{#1}}]{\kern-.6pt\bigwedge\kern-.6pt}%
+    {\rule[-\textheight/2]{1ex}{\textheight}}%WIDTH-LIMITED BIG WEDGE
+  }{\textheight}% 
+}{0.5ex}}%
+\stackon[1pt]{#1}{\tmpbox}%
+}
+\parskip 1ex
+
+
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{DarkGreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{DarkGreen},
+     %frame=single, % adds a frame around the code
+     backgroundcolor=\color{lightgray},
+}
+\usepackage[svgnames]{xcolor}
+\title{STAT211 Mandatory Homework 8}
+\author{Yapi Donatien Achou}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+
+\maketitle 
+\tableofcontents
+\newpage
+ 
+ \section{Problem 8.2}
+ In this exercise we study the spectral representation of a time series. The spectral representation of a time series is used to decompose a time series into sums of sinusoidal components \cite{petter}. By doing so, we can identify the dominant periods or frequencies of a time series by using its periodogram \cite{penn}. The periodogram is a sample based function that gives an estimate of the spectral density \cite{petter}. If $f(\cdot)$ is the spectral density and $I_{n}(\cdot)$ is the periodogram of $n$ observations, then $I_{n}(\cdot)$ can be view as an estimation of $2\pi f(\cdot)$ \cite{petter}.
+\justify 
+The spectral density for an AR(2) model is given by 
+ \begin{equation}
+ \begin{split}
+ f(w) &= \frac{\sigma^{2}}{2\pi} \frac{1}{| \phi(\exp(-iw))|^{2}}, \quad w \in (-\pi, \pi], \quad \phi(z) = 1-\phi_{1}z - \phi_{2}z^{2}.\\
+        &=\frac{\sigma^{2}}{2\pi} \frac{1}{|1-\phi_{1}e^{-iw} - \phi_{2}e^{-2iw} |^{2}}
+ \end{split}
+ \end{equation}
+ The spectral density of a stationary process $\{X_{t}\}$ specifies the frequency decomposition of the autocovariance function (ACF) \cite{petter}.
+ \subsection{Part a: Spectral density}
+ \begin{lstlisting}
+f <- function(w){
+  phi1 <- 1.4
+  phi2 <- -0.9
+  phi <- 1-phi1*w-phi2*w**2
+  sigma <- 1
+  denominator <- abs(1-phi1*exp(-(0+1i)*w) - phi2*exp(-(0+2i)*w))**2
+  factor <- (sigma*sigma)/(2*pi)
+  value <- factor*(1./denominator)
+  return(value)
+
+}
+set.seed(10)
+w <- seq(-pi, pi)
+png("theoreticalDensity.png")
+plot(f(w), col="blue",type="b",xlab="frequency")
+\end{lstlisting}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=3in]{../code/theoreticalDensity.png} 
+   \caption{Spectral density of the AR(2) process}
+   \label{fig:sd}
+\end{figure}
+
+\subsection{Part b: Comparing spectral density}
+For spectral for $\phi_{2}=0.95$
+ \begin{lstlisting}
+f <- function(w){
+  phi1 <- 1.4
+  phi2 <- 0.95
+  phi <- 1-phi1*w-phi2*w**2
+  sigma <- 1
+  denominator <- abs(1-phi1*exp(-(0+1i)*w) - phi2*exp(-(0+2i)*w))**2
+  factor <- (sigma*sigma)/(2*pi)
+  value <- factor*(1./denominator)
+  return(value)
+
+}
+set.seed(10)
+w <- seq(-pi, pi)
+png("theoreticalDensity.png")
+plot(f(w), col="blue",type="b",xlab="frequency")
+\end{lstlisting}
+
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+    \includegraphics[width=2.5in]{../code/theoreticalDensity.png}
+   \includegraphics[width=2.5in]{../code/theoreticalDensity2.png} 
+   \caption{Spectral density of the AR(2) process. Left $\phi_{2} = -0.90$, right $\phi_{2} = 0.95$ }
+   \label{fig:sd2}
+\end{figure}
+
+We can observe from Figure (\ref{fig:sd2}) that the spectral density for $\phi_{2} = 0.95$ oscillate more compared to the one with $\phi_{2} = -0.9$.
+%\begin{proof}
+%We know that
+%
+%\end{proof}
+
+\subsection{Part c: Simulation of the AR(2) process}
+Simlating the AR(2) process with 100 obervations
+\begin{lstlisting}
+# Plot of AR(2) model
+ar.sim <- arima.sim(model=list(ar=c(1.4, -0.9)), n=100)
+ts.plot(ar.sim)
+\end{lstlisting}
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2.5in]{../code/armaSimulation1.png} 
+   \caption{AR(2) simulation for $\phi_{1} = 1.4, \phi_{2}= -0.9$}
+   \label{fig:arma}
+\end{figure}
+\begin{lstlisting}
+#Periodogram  of AR(2) model
+ar.sim <- arima.sim(model=list(ar=c(1.4, -0.9)), n=100)
+per <- periodogram(ar.sim)
+plot(per)
+\end{lstlisting}
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2in]{../code/periodogram1.pdf} 
+    \includegraphics[width=2in]{../code/periodogram.png} 
+   \caption{Periodogram of the AR(2) process}
+   \label{fig:per}
+\end{figure}
+
+\begin{lstlisting}
+#Moving average smoothening of periodogram
+set.seed(10)
+ar.sim <- arima.sim(model=list(ar=c(1.4, -0.9)), n=100)
+periodogram <- periodogram(ar.sim)
+spectrum <- periodogram$spec
+trendpattern = filter(spectrum, filter = c(1/3,3), sides=2)
+plot(trendpattern)
+\end{lstlisting}
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{../code/smoonth.png} 
+   \caption{Smooth periodogram}
+   \label{fig:sm}
+\end{figure}
+\begin{lstlisting}
+#Estimated spectral density
+set.seed(10)
+ar.sim <- arima.sim(model=list(ar=c(1.4, -0.9)), n=100)
+estimatedSpecralDensity <- spectrum(ar.sim,method="ar")
+png("EstimatedSpectralDensity.png")
+plot(estimatedSpecralDensity)
+\end{lstlisting}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{../code/EstimatedSpectralDensity.png} 
+   \caption{Estimated spectral density from R function spectrum}
+   \label{fig:es}
+\end{figure}
+\justify
+Figure \ref{fig:arma} shows the simulated AR(2) process, Figure \ref{fig:per} shows the periodogram of the AR(2) process, Figure \ref{fig:sm} shows the smoothen periodogram and Figure \ref{fig:es} shows the
+estimated spectral density from the AR(2) model.
+
+
+\clearpage
+\subsection{Part d}
+Recall the plot of the AR(2) model
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=2.5in]{../code/armaSimulation1.png} 
+   \includegraphics[width=2.5in]{../code/periodogram1} 
+   \caption{AR(2) simulation for $\phi_{1} = 1.4, \phi_{2}= -0.9$ left and periodogram right}
+   \label{fig:ar2}
+\end{figure}
+\justify
+From Figure \ref{fig:ar2} we can clearly see a periodic structure of the time series modelled by the AR(2) process. From the periodogram, we can see a pick. We get the peak and corresponding frequency as follow
+\begin{lstlisting}
+ar.sim <- arima.sim(model=list(ar=c(1.4, -0.9)), n=100)
+periodogram <- periodogram(ar.sim)
+spectrum <- periodogram$spec
+frequency <- periodogram$freq
+pick <- max(spectrum)
+pickIndex = match(pick, spectrum)
+freq <- frequency[pickIndex]
+print(pick)
+print(freq)
+
+>>[1] 315.5908
+>>[1] 0.11
+\end{lstlisting}
+\justify
+We observe a peak at a frequency of 0.11 which corresponds to period 
+\begin{equation}
+T = \frac{1}{0.11} = 9
+\end{equation} 
+which means that a cycle is completed in 9 time periods.
+
+
+\subsection{Part e}
+Simulation with 1000 observation
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{../code/simulation1000.png} 
+   \caption{Simulation with 1000 obervartion}
+   \label{fig:sim1000}
+\end{figure}
+Periodogram for 1000 observations  
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{../code/periodogram1000} 
+   \caption{periodogram for 1000 obervation}
+   \label{fig:periodogram1000}
+\end{figure}
+Smooth peridogram
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{../code/smoothPeriodogram1000.png} 
+   \caption{Smoother periodogram}
+   \label{fig:smoothp}
+\end{figure}
+
+Estimated spectral density
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{../code/estimatedSpecralDensity1000.png} 
+   \caption{Estimated spectral density}
+   \label{fig:es1000}
+\end{figure}
+\justify
+For 1000 observations, the the peak is at at frequency of 0.125 corresponding to 8 time periods
+
+\section{Problem 8.3}
+If the process $\{X_{t} \}$ is a causal ARMA(p,q), its spectral density is given by \cite{petter}
+\begin{equation}
+f_{X}(\lambda) = \frac{\sigma^{2}}{2\pi}\frac{| \theta(e^{-i\lambda}) |^{2}}{| \phi(e^{-i\lambda}) |^{2}}, \quad -\pi \leq \lambda \leq \pi.
+\end{equation}
+Furthermore, 
+\begin{equation}
+\begin{split}
+ \theta(e^{-i\lambda})  &= 1+\theta_{1}e^{-i\lambda} + \theta_{2}e^{-i2\lambda} + \cdots +\theta_{n}e^{-in\lambda}\\
+ 			          &=1+\sum_{k=0}^{n}\theta_{n}e^{-ik\lambda},
+  \end{split}
+\end{equation}
+and 
+\begin{equation}
+\begin{split}
+ \phi(e^{-i\lambda})  &= 1-\phi_{1}e^{-i\lambda} - \phi_{2}e^{-i2\lambda} - \cdots -\phi_{n}e^{-in\lambda}\\
+                                &=1-\sum_{k=0}^{n}\phi_{n}e^{-ik\lambda}
+ \end{split}
+\end{equation}
+where 
+\begin{equation}
+e^{-ik\lambda} = \cos(k\lambda) - i\sin(k\lambda).
+\end{equation}
+Now let 
+\begin{equation}
+\begin{split}
+f(\lambda)  &= e^{-ik\lambda} \\
+                  &= \cos(k\lambda) - i\sin(k\lambda),
+ \end{split}
+\end{equation}
+and let $\lambda_{0}$ be arbitrary taken from the interval $[-\pi, \pi]$. Then 
+\begin{equation}
+\begin{split}
+\lim_{\lambda\to\lambda_{0}}f(\lambda) &= \lim_{\lambda\to\lambda_{0}}\cos(k\lambda) - i\sin(k\lambda)\\
+&=cos(k\lambda_{0}) - i\sin(k\lambda_{0})\\
+&=f(\lambda_{0})
+\end{split}
+\end{equation}
+and this prove that $e^{-ik\lambda}$ is continuous and so is its linear combination
+\begin{equation}
+\theta(e^{-ik\lambda}) = 1+\sum_{k=0}^{n}\theta_{n}e^{-ik\lambda}  \nonumber
+\end{equation}
+and
+\begin{equation}
+\phi(e^{-ik\lambda}) = 1-\sum_{k=0}^{n}\phi_{n}e^{-ik\lambda}.  \nonumber
+\end{equation}
+Since we have a causal process, the roots of $\phi(e^{-ik\lambda})$ lies outside the unit circle, and $\phi(e^{-ik\lambda}) \neq 0$, and since 
+the quotient of two continuous functions is continuous we have that
+\begin{equation}
+\frac{\theta(e^{-i\lambda}) }{\phi(e^{-i\lambda}) }  \nonumber
+\end{equation}
+is continuous
+and 
+\begin{equation}
+\frac{| \theta(e^{-i\lambda}) |^{2}}{| \phi(e^{-i\lambda}) |^{2}}  \nonumber
+\end{equation}
+is also continuous. Therefore 
+\begin{equation}
+f_{X}(\lambda) = \frac{\sigma^{2}}{2\pi}\frac{| \theta(e^{-i\lambda}) |^{2}}{| \phi(e^{-i\lambda}) |^{2}}, \quad -\pi \leq \lambda \leq \pi.  \nonumber
+\end{equation}
+is continuous.
+\justify
+Assume now that the minimum of the spectral density is attained at some value, say $\lambda_{0}$. Then the minimum of the spectral density is 
+\begin{equation}
+\begin{split}
+f_{X}(\lambda_{0}) &= \frac{\sigma^{2}}{2\pi}\frac{| \theta(e^{-i\lambda_{0}}) |^{2}}{| \phi(e^{-i\lambda_{0}}) |^{2}}, \quad -\pi \leq \lambda \leq \pi.\\
+&=\frac{\sigma^{2}}{2\pi}\left|\frac{ \theta(e^{-i\lambda_{0}}) }{ \phi(e^{-i\lambda_{0}})}\right|^{2} \\
+&=\frac{\sigma^{2}}{2\pi}\left|\frac{ 1+\sum_{k=0}^{n}\theta_{k}e^{-ik\lambda}}{ 1-\sum_{k=0}^{n}\phi_{k}e^{-ik\lambda}}\right|^{2} \geq 0.  \nonumber
+\end{split}
+\end{equation}
+For $f_{X}(\lambda_{0})$ to be equal to zero, we need 
+\begin{equation}
+1+\sum_{k=0}^{n}\theta_{k}e^{-ik\lambda} = 1+ \sum_{k=0}^{n}\theta_{k}\cos(k\lambda) + i\sum_{k=0}^{n}\theta_{k}\sin(k\lambda) = 0.  \nonumber
+\end{equation}
+This mean that we need to have simultaneously 
+\begin{equation}
+\sum_{k=0}^{n}\theta_{k}\sin(k\lambda) = 0.  \nonumber
+\end{equation}
+and 
+\begin{equation}
+ \sum_{k=0}^{n}\theta_{k}\cos(k\lambda)  = -1.  \nonumber
+\end{equation}
+\justify
+Furthermore,
+\begin{equation}
+\sum_{k=0}^{n}\theta_{k}\sin(k\lambda) = 0,  \nonumber
+\end{equation}
+means that 
+either $\theta_{k} = 0$ or $\sin(k\lambda) = 0$, $\forall k=1, \cdots, n$. Since all $\theta_{k}$ can not be equal to zero, the latter must hold, that is 
+\begin{equation}
+\begin{split}
+\sin(\lambda) &= 0\\
+\sin(2\lambda) &= 0\\
+&\vdots\\
+\sin(n\lambda) &= 0\\  \nonumber
+\end{split}
+\end{equation}
+which means that 
+\begin{equation}
+n\lambda = \pm\frac{\pi}{2} \Rightarrow \lambda = \pm\frac{\pi}{2n} .
+\end{equation}
+Similarely,
+\begin{equation}
+ \sum_{k=0}^{n}\theta_{k}\cos(k\lambda)  = -1.  \nonumber
+\end{equation}
+means that at $\lambda = \pm\frac{\pi}{2n}$ we must have
+\begin{equation}
+\theta_{1}\cos\left(\frac{\pi}{2}\right) + \theta_{2}\cos\left(2\frac{\pi}{4}\right)+\cdots + \theta_{n}\cos\left(n\frac{\pi}{2n}\right) = -1\nonumber,
+\end{equation}
+but 
+\begin{equation}
+\theta_{1}\cos\left(\frac{\pi}{2}\right) + \theta_{2}\cos\left(2\frac{\pi}{4}\right)+\cdots + \theta_{n}\cos\left(n\frac{\pi}{2n}\right) = 0 \nonumber
+\end{equation}
+so 
+\begin{equation}
+\theta_{1}\cos\left(\frac{\pi}{2}\right) + \theta_{2}\cos\left(2\frac{\pi}{4}\right)+\cdots + \theta_{n}\cos\left(n\frac{\pi}{2n}\right) \neq -1\nonumber
+\end{equation}
+Therefore 
+\begin{equation}
+f_{X}(\lambda_{0}) = \frac{\sigma^{2}}{2\pi}\left|\frac{ 1+\sum_{k=0}^{n}\theta_{k}e^{-ik\lambda}}{ 1-\sum_{k=0}^{n}\phi_{k}e^{-ik\lambda}}\right|^{2} > 0.  \nonumber
+\end{equation}
+
+
+
+
+
+
+
+
+\section{Problem 8.4}
+
+Let $\{ X_{t}, t = 1, \cdots, n \}$ be a data from a time series
+The likelihood estimator of the autocovariance function $\Gamma_{LM}$ is given by \cite{petter}
+\begin{equation}
+\Gamma_{LM} = (2\pi)^{-n/2}(det(\Gamma_{n}))^{-1/2}\exp\left(  -\frac{1}{2}\mathbb(X^{\prime}\Gamma_{n}^{-1}\mathbb(X_{n})) \right)
+\end{equation}
+and the sample autocovariance is given by
+\begin{equation}
+\hat{\Gamma}_{n} = 
+\begin{bmatrix}
+    \hat{\gamma}(0) & \hat{\gamma}(1)  & \dots  & \hat{\gamma}(k-1) \\
+        \hat{\gamma}(1) & \hat{\gamma}(0) & \dots  & \hat{\gamma}(k-2) \\
+    \vdots & \vdots & \vdots & \vdots \\
+        \hat{\gamma}(k-1) & \hat{\gamma}(k-2)  & \dots  & \hat{\gamma}(0)
+\end{bmatrix}
+\end{equation}
+where 
+\begin{equation}
+\hat{\gamma}(h) = \frac{1}{n}\sum_{t=1}^{n-|h|}(X_{t+|h|}-\bar{X})(X_{t}-\bar{X})
+\end{equation}
+
+
+
+
+
+
+
+\section{Problem 8.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{9}
+\bibitem{petter} 
+Petter J. Brockwell. Richard A. Davis
+\textit{Introduction to Time Series and Forecasting}. 
+Springer. Second edition. 2001
+
+\bibitem{penn} 
+PennState Eberly College of science, 
+\textit{STAT 510. Applied Time Series Analysis}. 
+https://newonlinecourses.science.psu.edu/stat510/node/71/
+ 
+\end{thebibliography}
+
+
+\end{document}  
