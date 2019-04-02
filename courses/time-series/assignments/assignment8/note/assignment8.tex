@@ -59,6 +59,198 @@
 \tableofcontents
 \newpage
  
+ \section{Problem 8.1}
+ \subsection{Part a}
+ \begin{lstlisting}
+yearlySunsplts <- na.omit(read.table(file="data/yearly_sunspots.txt",header=TRUE))
+dat <- yearlySunsplts$sunspots
+png("yearly.png")
+plot(dat,col="blue",type="b")
+ \end{lstlisting}
+ \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=4in]{yearly.png} 
+    \caption{Yearly sunspot}
+    \label{fig:example}
+ \end{figure}
+ 
+ \clearpage
+ \subsection{Part b}
+ Let 
+ \begin{equation}
+ Y_{t} = X_{t} - \bar{X}_{t}
+ \end{equation}
+ \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=4in]{y.png} 
+    \caption{Plot of $ Y_{t} = X_{t} - \bar{X}_{t}$}
+    \label{fig:y}
+ \end{figure}
+ \justify
+ Figure \ref{fig:y} shows the plot of $ Y_{t} = X_{t} - \bar{X}_{t}$.
+ 
+ 
+ \begin{lstlisting}
+yearlySunsplts <- na.omit(read.table(file="data/yearly_sunspots.txt",header=TRUE))
+X <- yearlySunsplts$sunspots
+Y <- X-mean(X)
+png("note/acf.png")
+acf(Y,col="blue")
+ \end{lstlisting}
+ 
+  
+ \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=4in]{acf.png} 
+    \caption{ACF}
+    \label{fig:acf}
+ \end{figure}
+ 
+ \begin{lstlisting}
+yearlySunsplts <- na.omit(read.table(file="data/yearly_sunspots.txt",header=TRUE))
+X <- yearlySunsplts$sunspots
+Y <- X-mean(X)
+png("note/pacf.png")
+pacf(Y,col="blue")
+ \end{lstlisting}
+ 
+
+ \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=4in]{pacf.png} 
+    \caption{PACF}
+    \label{fig:pacf}
+ \end{figure}
+
+ 
+ \subsection{Part c: Fit AR(2) model}
+ \begin{lstlisting}
+yearlySunsplts <- na.omit(read.table(file="data/yearly_sunspots.txt",header=TRUE))
+X <- yearlySunsplts$sunspots
+Y <- X-mean(X)
+ar2 <- ar(Y,order.max=2)
+print(ar2)
+
+Call:
+ar(x = Y, order.max = 2)
+
+Coefficients:
+      1        2  
+ 1.3666  -0.6792  
+
+Order selected 2  sigma^2 estimated as  704.1
+ \end{lstlisting}
+ From the simulation result $\hat{\phi}_{1} = 1.3666, \hat{\phi}_{1} =0.6792, \sigma_{2} = 704.1$
+ \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=4in]{ar.png} 
+    \caption{The simulated AR(2) process}
+    \label{fig:ar2}
+ \end{figure}
+ 
+ \subsection{Part d: Periodogram}
+ \begin{lstlisting}
+library(TSA)
+set.seed(10)
+yearlySunsplts <- na.omit(read.table(file="data/yearly_sunspots.txt",header=TRUE))
+X <- yearlySunsplts$sunspots
+Y <- X-mean(X)
+m <- length(Y)
+ar.sim <- arima.sim(model=list(ar=c(1.3666, -0.6792)),n=m)
+per <- periodogram(ar.sim)
+spectrum <- per$spec
+png("periodogram.png")
+plot(spectrum,col="blue",type="b")
+ \end{lstlisting}
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{periodogram.png} 
+   \caption{Periodogram}
+   \label{fig:per}
+\end{figure}
+
+
+\subsection{Part d: Smooth periodogram}
+ \begin{lstlisting}
+library(TSA)
+set.seed(10)
+yearlySunsplts <- na.omit(read.table(file="data/yearly_sunspots.txt",header=TRUE))
+X <- yearlySunsplts$sunspots
+Y <- X-mean(X)
+m <- length(Y)
+ar.sim <- arima.sim(model=list(ar=c(1.3666, -0.6792)),n=m)
+per <- periodogram(ar.sim)
+amplitude <- per$spec
+smoothPeriodogram = filter(amplitude, filter = c(1/3,3), sides=2)
+png("smoothPeriodogram.png")
+plot(smoothPeriodogram,col="blue",type="b")
+ \end{lstlisting}
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{smoothPeriodogram.png} 
+   \caption{Smoother periodogram}
+   \label{fig:per}
+\end{figure}
+
+
+\subsection{Part f: Spectral density}
+\begin{lstlisting}
+library(TSA)
+set.seed(10)
+yearlySunsplts <- na.omit(read.table(file="data/yearly_sunspots.txt",header=TRUE))
+X <- yearlySunsplts$sunspots
+Y <- X-mean(X)
+m <- length(Y)
+ar.sim <- arima.sim(model=list(ar=c(1.3666, -0.6792)),n=m)
+spectralDensity <- spectrum(ar.sim,method="ar")
+png("spectralDensity.png")
+plot(spectralDensity,col="blue")
+ \end{lstlisting}
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{spectralDensity} 
+   \caption{Spectral density}
+   \label{fig:per}
+\end{figure}
+
+ \subsection{Part g}
+ \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=4in]{residual.png} 
+    \caption{Residual}
+    \label{fig:res}
+ \end{figure}
+ 
+ \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=4in]{acfresidual.png} 
+    \caption{ACF of Residual}
+    \label{fig:acfres}
+ \end{figure}
+ 
+ \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=4in]{pacfresidual.png} 
+    \caption{PACF of Residual}
+    \label{fig:pacfres}
+ \end{figure}
+ 
+ \subsection{Part h}
+ \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=2in]{residualPer.png} 
+    \caption{Periodogram of residual}
+    \label{fig:resper}
+ \end{figure}
+ 
+  \begin{figure}[H] %  figure placement: here, top, bottom, or page
+    \centering
+    \includegraphics[width=2in]{residualSpec.png} 
+    \caption{Spectral density of residual}
+    \label{fig:specr}
+ \end{figure}
+ 
+ 
  \section{Problem 8.2}
  In this exercise we study the spectral representation of a time series. The spectral representation of a time series is used to decompose a time series into sums of sinusoidal components \cite{petter}. By doing so, we can identify the dominant periods or frequencies of a time series by using its periodogram \cite{penn}. The periodogram is a sample based function that gives an estimate of the spectral density \cite{petter}. If $f(\cdot)$ is the spectral density and $I_{n}(\cdot)$ is the periodogram of $n$ observations, then $I_{n}(\cdot)$ can be view as an estimation of $2\pi f(\cdot)$ \cite{petter}.
 \justify 
@@ -420,6 +612,75 @@ where
 
 
 \section{Problem 8.5}
+Let $\{ X_{t}, t = 1, \cdots, n \}$ be a data from a time series. Supposed that we fit the AR(p) process to the data using the Yule Walker estimation of $\phi$ and $\sigma^{2}$.
+Let explain $\hat{\Gamma_{YW}}(h) = \hat{\gamma}(h)$ for $|h|\leq p$.
+\justify
+ From \cite{petter}, the Yule-Walker estimators $\hat{\phi}$ and $\hat{\sigma}^{2}$ of $\phi$ and $\sigma^{2}$ are solutions of
+\clearpage
+\begin{equation}\label{eq:gam}
+\hat{\Gamma}_{p}\hat{\phi} = \hat{\gamma}_{p}
+\end{equation}
+and
+\begin{equation}\label{eq:sig}
+\hat{\sigma}^{2} = \hat{\gamma}(0)- \hat{\phi^{\prime}}\hat{\gamma}_{p}
+\end{equation}
+respectively. Where
+\begin{equation}\label{eq:auto}
+\hat{\Gamma}_{p} = [\hat{\gamma}(i-j)]_{i,j=1}^{p},
+\end{equation}
+and
+\begin{equation}
+\hat{\gamma}_{p} = (\hat{\gamma}(0), \cdots , \hat{\gamma}(p).
+\end{equation}
+For every nonsingular covariance matrix of the form (\ref{eq:auto}), there is an AR(p) process whose autocovariance at lages $0, \cdots, p$ are $\gamma(0),\cdots,\gamma(p)$ where the coefficients and white noise are computed from the sample Yule-Walker equations \cite{petter}. Consequently, from \cite{petter} the Solutions of (\ref{eq:gam}) and (\ref{eq:sig}) is 
+\begin{equation}
+\gamma_{F}(h) = \hat{\gamma}(h), \quad, h=0,\cdots, p
+\end{equation}
+Which are found from the Durbin-Levinson algorithm \cite{petter}. Therefore the autocovariance of the fitted model at lags $0, \cdots, p$ coincide with that of the sample autocovariance \cite{petter} 
+
+
+
+\section{Problem 8.6}
+Let $\{ X_{t}, \}$ be a MA(2) process
+\begin{equation}
+X_{t} = \theta(B)Z_{t} = (1-B\xi_{1}^{-1})(1-B\xi_{2}^{-1})Z_{t}, \quad \{ Z_{t}, \} \sim WN(0, \sigma^{2})
+\end{equation}
+
+\subsection{Part a}
+\begin{equation}
+X_{t} = \theta_{1}Z_{t-1} + \theta_{2}Z_{t-2} + Z_{t}
+\end{equation}
+For an ARMA(p,q) process we  have
+\begin{equation}\label{eq:armapq}
+\hat{\gamma}(k)-\phi_{1}\hat{\gamma}(k-1)-\cdots-\phi_{p}\hat{\gamma}(k-p) = \sigma^{2}\sum_{j=k}^{q}\theta_{j}\psi_{j-k}, \quad 0 \leq k \leq p+q.
+\end{equation}
+For an MA(2) process equation (\ref{eq:armapq}) reduces to 
+\begin{equation}\label{eq:maq}
+\hat{\gamma}(k) = \sigma^{2}\sum_{j=k}^{2}\theta_{j}\psi_{j-k}, \quad 0 \leq k \leq 2.
+\end{equation}
+or
+\begin{equation}\label{eq:maq1}
+\hat{\gamma}(0) = \sigma^{2}(1+ \theta_{1}\psi_{1} + \theta_{2}\psi_{2})
+\end{equation}
+\begin{equation}\label{eq:maq2}
+\hat{\gamma}(1) = \sigma^{2}( \theta_{1} + \theta_{2}\psi_{1})
+\end{equation}
+\begin{equation}\label{eq:maq3}
+\hat{\gamma}(2) = \sigma^{2} \theta_{2}
+\end{equation}
+from which $\theta_{1}, \theta_{2}$ can be computed from
+
+\subsection{Part b}
+The coefficient $\{\tilde{\theta}_{j}, j=1,2\}$ Applying the Durbin-Levinson algorithm to the sample autocovariance we can fit the MA(2) process \cite{petter}. The model then becomes
+\begin{equation}
+X_{t} = \hat{\theta}_{21}Z_{t-1} +  \hat{\theta}_{22}Z_{t-2} + Z_{t}
+\end{equation}
+
+\subsection{Partc}
+Finding the filter that fits 
+\begin{equation}
+X_{t} = \tilde{\theta}(B)\tilde{Z}_{t}
+\end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

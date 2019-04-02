@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  1 APR 2019 16:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  2 APR 2019 13:51
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -595,7 +595,20 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/svgnam.def
 File: svgnam.def 2007/01/21 v2.11 Predefined colors according to SVG 1.1 (UK)
 ))
-(./assignment8.aux)
+(./assignment8.aux
+
+LaTeX Warning: Label `fig:per' multiply defined.
+
+
+LaTeX Warning: Label `fig:per' multiply defined.
+
+
+LaTeX Warning: Label `fig:per' multiply defined.
+
+
+LaTeX Warning: Label `fig:ar2' multiply defined.
+
+)
 \openout1 = `assignment8.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
@@ -715,140 +728,265 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 58.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-(./assignment8.toc)
+(./assignment8.toc [1
+
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@toc=\write3
 \openout3 = `assignment8.toc'.
 
- [1
+ [2]
+Overfull \hbox (86.59438pt too wide) in paragraph at lines 65--66
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][] 
+ []
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] <../cod
-e/theoreticalDensity.png, id=11, 481.8pt x 481.8pt>
+<yearly.png, id=14, 481.8pt x 481.8pt>
+File: yearly.png Graphic file (type png)
+ <use yearly.png>
+Package pdftex.def Info: yearly.png used on input line 72.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+ [3 <./yearly.png>]
+<y.png, id=21, 481.8pt x 481.8pt>
+File: y.png Graphic file (type png)
+ <use y.png>
+Package pdftex.def Info: y.png used on input line 85.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+
+Overfull \hbox (86.59438pt too wide) in paragraph at lines 94--95
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+<acf.png, id=22, 481.8pt x 481.8pt>
+File: acf.png Graphic file (type png)
+ <use acf.png>
+Package pdftex.def Info: acf.png used on input line 104.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+ [4
+
+ <./y.png>]
+Overfull \hbox (86.59438pt too wide) in paragraph at lines 110--111
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+<pacf.png, id=30, 481.8pt x 481.8pt>
+File: pacf.png Graphic file (type png)
+ <use pacf.png>
+Package pdftex.def Info: pacf.png used on input line 120.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+ [5 <./acf.png>]
+Overfull \hbox (86.59438pt too wide) in paragraph at lines 128--129
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+<ar.png, id=35, 481.8pt x 481.8pt>
+File: ar.png Graphic file (type png)
+ <use ar.png>
+Package pdftex.def Info: ar.png used on input line 146.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+ [6 <./pacf.png>]
+Overfull \hbox (86.59438pt too wide) in paragraph at lines 155--156
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+<periodogram.png, id=41, 481.8pt x 481.8pt>
+File: periodogram.png Graphic file (type png)
+ <use periodogram.png>
+Package pdftex.def Info: periodogram.png used on input line 167.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+ [7 <./ar.png>]
+Overfull \hbox (86.59438pt too wide) in paragraph at lines 177--178
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+<smoothPeriodogram.png, id=47, 481.8pt x 481.8pt>
+File: smoothPeriodogram.png Graphic file (type png)
+ <use smoothPeriodogram.png>
+Package pdftex.def Info: smoothPeriodogram.png used on input line 190.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+
+[8 <./periodogram.png>]
+Overfull \hbox (86.59438pt too wide) in paragraph at lines 200--201
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+<spectralDensity.png, id=52, 481.8pt x 481.8pt>
+File: spectralDensity.png Graphic file (type png)
+ <use spectralDensity.png>
+Package pdftex.def Info: spectralDensity.png used on input line 211.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+
+[9 <./smoothPeriodogram.png>] <residual.png, id=57, 481.8pt x 481.8pt>
+File: residual.png Graphic file (type png)
+
+<use residual.png>
+Package pdftex.def Info: residual.png used on input line 219.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+ [10 <./spectralDensity.png>]
+<acfresidual.png, id=62, 481.8pt x 481.8pt>
+File: acfresidual.png Graphic file (type png)
+ <use acfresidual.png>
+Package pdftex.def Info: acfresidual.png used on input line 226.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+ [11 <./residual.png>] <pacfresidual.png, id=67, 481.8pt x 481.8pt>
+File: pacfresidual.png Graphic file (type png)
+ <use pacfresidual.png>
+Package pdftex.def Info: pacfresidual.png used on input line 233.
+(pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
+
+[12 <./acfresidual.png>] <residualPer.png, id=72, 481.8pt x 481.8pt>
+File: residualPer.png Graphic file (type png)
+
+<use residualPer.png>
+Package pdftex.def Info: residualPer.png used on input line 241.
+(pdftex.def)             Requested size: 144.54pt x 144.53375pt.
+ <residualSpec.png, id=73, 481.8pt x 481.8pt>
+File: residualSpec.png Graphic file (type png)
+
+<use residualSpec.png>
+Package pdftex.def Info: residualSpec.png used on input line 248.
+(pdftex.def)             Requested size: 144.54pt x 144.53375pt.
+ [13 <./pacfresidual.png> <./residualPer.png>] [14 <./residualSpec.png>] <../co
+de/theoreticalDensity.png, id=85, 481.8pt x 481.8pt>
 File: ../code/theoreticalDensity.png Graphic file (type png)
 
 <use ../code/theoreticalDensity.png>
-Package pdftex.def Info: ../code/theoreticalDensity.png used on input line 94.
+Package pdftex.def Info: ../code/theoreticalDensity.png used on input line 286.
+
 (pdftex.def)             Requested size: 216.81pt x 216.80798pt.
- [2]
+ [15 <../code/theoreticalDensity.png>]
 File: ../code/theoreticalDensity.png Graphic file (type png)
- <use ../code/theoreticalDensity.png>
-Package pdftex.def Info: ../code/theoreticalDensity.png used on input line 122.
+
+<use ../code/theoreticalDensity.png>
+Package pdftex.def Info: ../code/theoreticalDensity.png used on input line 314.
 
 (pdftex.def)             Requested size: 180.67499pt x 180.67455pt.
 
-<../code/theoreticalDensity2.png, id=22, 481.8pt x 481.8pt>
+<../code/theoreticalDensity2.png, id=90, 481.8pt x 481.8pt>
 File: ../code/theoreticalDensity2.png Graphic file (type png)
 
 <use ../code/theoreticalDensity2.png>
-Package pdftex.def Info: ../code/theoreticalDensity2.png used on input line 123
+Package pdftex.def Info: ../code/theoreticalDensity2.png used on input line 315
 .
 (pdftex.def)             Requested size: 180.67499pt x 180.67455pt.
- [3 <../code/theoreticalDensity.png>]
-<../code/armaSimulation1.png, id=27, 481.8pt x 481.8pt>
+
+<../code/armaSimulation1.png, id=91, 481.8pt x 481.8pt>
 File: ../code/armaSimulation1.png Graphic file (type png)
 
 <use ../code/armaSimulation1.png>
-Package pdftex.def Info: ../code/armaSimulation1.png used on input line 143.
+Package pdftex.def Info: ../code/armaSimulation1.png used on input line 335.
 (pdftex.def)             Requested size: 180.67499pt x 180.67455pt.
- [4 <../code/theoreticalDensity2.png>]
-<../code/periodogram1.pdf, id=32, 505.89pt x 505.89pt>
+ [16 <../code/theoreticalDensity2.png>]
+<../code/periodogram1.pdf, id=96, 505.89pt x 505.89pt>
 File: ../code/periodogram1.pdf Graphic file (type pdf)
 
 <use ../code/periodogram1.pdf>
-Package pdftex.def Info: ../code/periodogram1.pdf used on input line 155.
+Package pdftex.def Info: ../code/periodogram1.pdf used on input line 347.
 (pdftex.def)             Requested size: 144.54pt x 144.54294pt.
 
-<../code/periodogram.png, id=33, 481.8pt x 481.8pt>
+<../code/periodogram.png, id=97, 481.8pt x 481.8pt>
 File: ../code/periodogram.png Graphic file (type png)
 
 <use ../code/periodogram.png>
-Package pdftex.def Info: ../code/periodogram.png used on input line 156.
+Package pdftex.def Info: ../code/periodogram.png used on input line 348.
 (pdftex.def)             Requested size: 144.54pt x 144.53375pt.
- [5 <../code/armaSimulation1.png> <../code/periodogram1.pdf> <../code/periodogr
-am.png>]
-<../code/smoonth.png, id=45, 481.8pt x 481.8pt>
+ [17 <../code/armaSimulation1.png> <../code/periodogram1.pdf> <../code/periodog
+ram.png>]
+<../code/smoonth.png, id=109, 481.8pt x 481.8pt>
 File: ../code/smoonth.png Graphic file (type png)
  <use ../code/smoonth.png>
-Package pdftex.def Info: ../code/smoonth.png used on input line 172.
+Package pdftex.def Info: ../code/smoonth.png used on input line 364.
 (pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
 
-<../code/EstimatedSpectralDensity.png, id=46, 481.8pt x 481.8pt>
+<../code/EstimatedSpectralDensity.png, id=110, 481.8pt x 481.8pt>
 File: ../code/EstimatedSpectralDensity.png Graphic file (type png)
 
 <use ../code/EstimatedSpectralDensity.png>
 Package pdftex.def Info: ../code/EstimatedSpectralDensity.png used on input lin
-e 187.
+e 379.
 (pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
- [6 <../code/smoonth.png>] [7 <../code/EstimatedSpectralDensity.png>]
+ [18 <../code/smoonth.png>] [19 <../code/EstimatedSpectralDensity.png>]
 File: ../code/armaSimulation1.png Graphic file (type png)
  <use ../code/armaSimulation1.png>
-Package pdftex.def Info: ../code/armaSimulation1.png used on input line 201.
+Package pdftex.def Info: ../code/armaSimulation1.png used on input line 393.
 (pdftex.def)             Requested size: 180.67499pt x 180.67455pt.
 File: ../code/periodogram1.pdf Graphic file (type pdf)
 
 <use ../code/periodogram1.pdf>
-Package pdftex.def Info: ../code/periodogram1.pdf used on input line 202.
+Package pdftex.def Info: ../code/periodogram1.pdf used on input line 394.
 (pdftex.def)             Requested size: 180.67499pt x 180.67676pt.
 
-<../code/simulation1000.png, id=56, 481.8pt x 481.8pt>
+<../code/simulation1000.png, id=120, 481.8pt x 481.8pt>
 File: ../code/simulation1000.png Graphic file (type png)
 
 <use ../code/simulation1000.png>
-Package pdftex.def Info: ../code/simulation1000.png used on input line 235.
+Package pdftex.def Info: ../code/simulation1000.png used on input line 427.
 (pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
- [8
+ [20
 
 ]
-<../code/periodogram1000.png, id=60, 481.8pt x 481.8pt>
+<../code/periodogram1000.png, id=124, 481.8pt x 481.8pt>
 File: ../code/periodogram1000.png Graphic file (type png)
 
 <use ../code/periodogram1000.png>
-Package pdftex.def Info: ../code/periodogram1000.png used on input line 243.
+Package pdftex.def Info: ../code/periodogram1000.png used on input line 435.
 (pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
- [9 <../code/simulation1000.png>]
-<../code/smoothPeriodogram1000.png, id=65, 481.8pt x 481.8pt>
+ [21 <../code/simulation1000.png>]
+<../code/smoothPeriodogram1000.png, id=129, 481.8pt x 481.8pt>
 File: ../code/smoothPeriodogram1000.png Graphic file (type png)
 
 <use ../code/smoothPeriodogram1000.png>
-Package pdftex.def Info: ../code/smoothPeriodogram1000.png used on input line 2
-50.
+Package pdftex.def Info: ../code/smoothPeriodogram1000.png used on input line 4
+42.
 (pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
- [10 <../code/periodogram1000.png>]
-<../code/estimatedSpecralDensity1000.png, id=70, 481.8pt x 481.8pt>
+ [22 <../code/periodogram1000.png>]
+<../code/estimatedSpecralDensity1000.png, id=134, 481.8pt x 481.8pt>
 File: ../code/estimatedSpecralDensity1000.png Graphic file (type png)
 
 <use ../code/estimatedSpecralDensity1000.png>
 Package pdftex.def Info: ../code/estimatedSpecralDensity1000.png used on input 
-line 258.
+line 450.
 (pdftex.def)             Requested size: 289.07999pt x 289.08957pt.
- [11 <../code/smoothPeriodogram1000.png>] [12 <../code/estimatedSpecralDensity1
-000.png>] [13] [14] [15]
-(./assignment8.aux) ) 
+ [23 <../code/smoothPeriodogram1000.png>] [24 <../code/estimatedSpecralDensity1
+000.png>] [25] [26] [27] [28
+
+]
+[29] (./assignment8.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 7982 strings out of 493089
- 107495 string characters out of 6134842
+ 8087 strings out of 493089
+ 108996 string characters out of 6134842
  214676 words of memory out of 5000000
- 11280 multiletter control sequences out of 15000+600000
+ 11373 multiletter control sequences out of 15000+600000
  15598 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,18n,72p,815b,1762s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
-fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on assignment8.pdf (15 pages, 440182 bytes).
+ 38i,18n,72p,815b,1756s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on assignment8.pdf (29 pages, 851581 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 83 compressed objects within 1 object stream
+ 208 PDF objects out of 1000 (max. 8388607)
+ 113 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
 
