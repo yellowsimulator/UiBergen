@@ -28,6 +28,7 @@
 \usepackage{listings}
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
+\newtheorem{proof}{Proof}
 
 % Python style for highlighting
 \newcommand\pythonstyle{\lstset{
@@ -128,13 +129,13 @@ one and two. The thesis is concluded in chapter four where we ...
 
 \section{Signal processing methods}
 \subsection{Overview}
- In this section, we present three signal processing methods to generate new feature for anomaly detection. In the context of this work, a feature is a numerical sequence that represents the state of a system.
- For example, voltage and vibration measurement taken from a motor over time are time series that we call feature. These two features contain information about the state of the motor, the latter being the system in this case. 
- By state we mean the current health of the motor. The health of the motor is represented by a health index which is a numerical value that quantifies the overall health of the motor.
+ In this section, we present three signal processing methods to generate new features also called attributes, for anomaly detection. In the context of this work, a feature or attribute is a numerical sequence that represents the state of a system. For example, voltage and vibration measurement taken from a motor over time are time series that we call features. These two features contain information about the state of the motor, the latter being the system in this case. 
+ By state we mean the current health of the motor. The health of the motor is represented by a health index which is a numerical value that quantifies the overall condition of the motor.
  \justify
- Generating new feature from existing one, is a common procedure in machine learning. For example, by using Fourier transform, we can generate the frequency spectrum of a vibration time series. The frequency spectrum is the set of all frequency from each vibration component of the original vibration time series. If the motor is anomalous, the anomaly will generate an extra component in the vibration time signal, and the corresponding anomalous frequency will be visible in the frequency spectrum. Wavelet and Hilbert Huang transform can also be used to generate new feature for anomaly detection.
+ Generating new features from existing one, is a common procedure for anomaly detection. For example, by using Fourier transform, we can generate the frequency spectrum of a vibration time series. The frequency spectrum is the set of all frequencies from each vibration component of the original vibration time series. The importance of the frequency spectrum, lies in the fact that if a motor or machine is anomalous, the anomaly will generate an extra component in the vibration time signal, and the corresponding anomalous frequency will be visible in the frequency spectrum. Due to Fourier transform limitations, other signal processing techniques such as
+  wavelet and Hilbert Huang transform are alternatives for generating new features to deal with more complex time series for anomaly detection.
  \justify
- In the rest of this section we cover Fourier transform, wavelet transform and Hilbert Huang transform. For each transform, we establish the theoretical background followed by a direct application of the transform.
+ In the rest of this section, we give an expos$\acute{e}$  of three signal processing methods, namely: Fourier transform, wavelet transform and Hilbert Huang transform. For each transform, we cover the theoretical back bone in terms of mathematical constructs such as basis, vector space, orthogonality, existence, uniqueness, to name but a few. Furthermore, these mathematical constructs will set the limitations as well as the strengths of each transform. Following the theoretical set up is a concrete application, where we generate new features and show how they can be used for anomaly detection.
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -142,9 +143,9 @@ one and two. The thesis is concluded in chapter four where we ...
 
 \subsection{Fourier Analysis}
 \subsubsection{Theory}
-Fourier analysis is concern with the general problem of function approximation. The basic ingredients required for functions approximation are, a vector space, a basis, which is a subspace of the vector space and an operation such as inner product that is performed between two elements belonging to the vector space. In this case we say that the vector space is an inner product space. The best approximation of a function is its orthogonal projection in the inner product space. The orthogonality property is therefore  necessary for obtaining the optimum approximation of a function.
+Fourier analysis is concerned with the general problem of functions approximation. The basic ingredients required to approximate a function are: a vector space, a basis, which is a subspace of the vector space and an operation such as inner product that is performed between two elements belonging to the vector space. In this case we say that the vector space is an inner product space. The best approximation of a function is its orthogonal projection in the inner product space. The orthogonality property is therefore  necessary for obtaining the optimum approximation of a function.
 \justify
-Let have a closer look at each ingredient and define further properties that make Fourier analysis an appropriate tool for function approximation. We shall shortly define the concept of vector space, basis, inner product, orthogonality and additional properties that are derived from them.
+Let have a closer look at each ingredient and define further properties that make Fourier analysis an appropriate tool for function approximation. We shall shortly define the concepts of vector space, basis, inner product, orthogonality and additional properties that are derived from them.
 \begin{definition}
 A vector space $V$ over a field $F$ is a set  with two operations $(\cdot, +)$ satisfying 
 \begin{enumerate}
@@ -158,7 +159,13 @@ A vector space $V$ over a field $F$ is a set  with two operations $(\cdot, +)$ s
 \end{enumerate}
 The elements of the vector space V are called vectors and the element of the field F are call scalars.
 \end{definition}
-A legitimate question that comes in mind is, how are vectors organised in a vector space ? One way to organise vectors in a vector space is to define them in terms of special set of vectors called basis, having well defined properties. Each vector will then be uniquely expressed in terms of the basis vectors. 
+An example of a vector space used is the $L^{2}$ space which encompasses square integrable functions. By definition, the set of all squared integrable functions on an interval say $[0,T]$ is denoted by 
+$L^{2}[0,T]$. Any real function $f$ in $L^{2}[0,T]$ satisfies
+\begin{equation}
+\int_{0}^{T}f(t)^{2}\mathrm{d}t < \infty
+\end{equation}
+\justify
+A legitimate question that comes in mind is, how are vectors organised in a vector space. One way to organise vectors in a vector space is to define them in terms of special set of vectors called basis, having well defined properties. Each vector will then be uniquely expressed in terms of the basis vectors. 
 \justify
 \begin{definition}
 A basis is a set of vectors $\varphi_{i}, i = 1, \cdots, n$, covenantally written as 
@@ -179,7 +186,7 @@ a_{1} = \cdots = a_{n} = 0 \nonumber
 \end{equation}
 \end{definition}
 \justify
-With a given basis we can uniquely approximate a vector by decomposing its in terms of the basis vectors. However, a vector space can have several basis, giving rise to several approximations of the same vector. In mathematics and in science in general, one is often concerned with the optimum solution or the unique solution. Uniqueness allows one the pick the physical relevant solution of a practical problem in applied mathematics.
+With a given basis we can uniquely approximate a vector by decomposing its in terms of the basis vectors. However, a vector space can have several basis, giving rise to several approximations of the same vector. In mathematics and in science in general, one is often concerned with the optimum solution or the unique solution. In terms of an application, uniqueness allows one to pick the relevant physical solution.
 It turns out that, regardless of the basis, the orthogonal projection of a vector is the optimum approximation. Orthogonal projection is achieved by a special operation called inner product
 
 \begin{definition}
@@ -194,9 +201,93 @@ that satisfies the following properties
 \item Homogeneity:
 \item Linearity:
 \end{enumerate}
-A vector space with an inner product is a called an inner product space.
+A vector space with an inner product is called an inner product space.
 \end{definition}
-%The bulk of Fourier analysis is to decompose a time signal into its multiple frequency component. Let f(t) be a time signal, that is a function that maps time to real numbers. Mathematical we can write
+
+\begin{definition}
+Suppose $V$ is an inner product space.
+\begin{itemize}
+\item The vectors $u$ and $v$ are orthogonal if $\langle\ u,v \rangle = 0$
+\item A finite set of vectors $\{ v_{j} \}_{j=1}^{n}$ are orthonormal if each vector have unit length with respect to a norm $||, ||$, that is 
+\begin{equation}
+||v_{j}|| = 1 \nonumber
+\end{equation}
+and $v_{i}$ and $v_{j}$ are orthogonal for $i\neq j$ 
+\end{itemize}
+\end{definition}
+
+
+\begin{definition}
+Suppose $V_{0}$ is a finite-dimensional subspace of an inner product space $V$. For any vector $v \in V$, the orthogonal projection of $v$
+into $V_{0}$ is the unique vector $v_{0} \in V_{0}$ that is closest to $v$, that is,
+\begin{equation}
+ ||v-v_{0}|| =  \min_{\forall w \in V_{0}} || v-w ||,
+\end{equation}
+\end{definition}
+
+\begin{theorem}\label{orthogonalityTheorem}
+Suppose $V_{0}$ is a  n-dimensional subspace of an inner product space $V$ and let $\{  \varphi_{j} \}_{j=1}^{n}$ be an orthonormal basis for $V_{0}$, then the orthogonal projection
+of a vector $v\in V$ onto $V_{0}$ is given by 
+\begin{equation}
+v = \sum_{j=1}^{n}\alpha_{j}\varphi_{j}, \quad \text{where}, \quad \alpha_{j} = \langle\ v,\varphi_{j} \rangle \in \mathbb{R}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+(Need a proof here) 
+\end{proof}
+
+\justify
+From Theorem \ref{orthogonalityTheorem}, We saw that a vector can be decomposed in terms of basis functions by orthogonal projection. The orthogonal projection ensures that the decomposition is optimum with respect to a chosen basis. In Fourier analysis, the basis functions are trigonometric functions of period $2\pi$.
+\begin{theorem}
+The set of functions 
+\begin{equation}
+\left \{ \cdots, \frac{\cos(2x)}{\sqrt{\pi}},\frac{\cos(x)}{\sqrt{\pi}},\frac{1}{\sqrt{\pi}}, \frac{\sin(x)}{\sqrt{\pi}},\frac{\sin(2x)}{\sqrt{\pi}},\cdots  \right \}
+\end{equation}
+is an orthonormal set of functions in $L^{2}([-\pi,\pi])$ space
+\end{theorem}
+\begin{proof}
+(Need a proof here) 
+\end{proof}
+
+\begin{definition}
+The Fourier series of a periodic function $g$ is given by the expansion 
+\begin{equation}
+g(x) = a_{0} + \sum_{k=1}^{n}a_{k}\cos(kx)+b_{k}\sin(kx)
+\end{equation}
+where $a_{k}, k=0,\cdots, n$ are called the Fourier coefficients of the function $g$
+\end{definition}
+
+\begin{theorem}
+if 
+\begin{equation}
+g(x) = a_{0} + \sum_{k=1}^{n}a_{k}\cos(kx)+b_{k}\sin(kx)
+\end{equation}
+then 
+\begin{equation}
+a_{0} = \frac{1}{2\pi}\int_{-\pi}^{\pi}g(x)\mathrm{d}x
+\end{equation}
+\begin{equation}
+a_{k} = \frac{1}{2\pi}\int_{-\pi}^{\pi}g(x)\cos(kx)\mathrm{d}x
+\end{equation}
+\begin{equation}
+b_{k} = \frac{1}{2\pi}\int_{-\pi}^{\pi}g(x)\sin(kx)\mathrm{d}x
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+(need a proof here) We use the orthogonality property to derive the Fourier coefficients.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
 
 
 \subsubsection{Application}
