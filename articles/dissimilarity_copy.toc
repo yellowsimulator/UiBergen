@@ -1,7 +1,7 @@
 \contentsline {section}{\numberline {1}Introduction}{2}
 \contentsline {section}{\numberline {2}Previous work}{5}
-\contentsline {section}{\numberline {3}An overview of anomaly detection}{5}
-\contentsline {subsection}{\numberline {3.1}A general anomaly detection methodology}{5}
+\contentsline {section}{\numberline {3}Anomaly detection methodology and methods}{5}
+\contentsline {subsection}{\numberline {3.1}General anomaly detection methodology}{5}
 \contentsline {subsection}{\numberline {3.2}A novel anomaly detection strategy for predictive maintenance}{5}
 \contentsline {section}{\numberline {4}Signal processing methods}{5}
 \contentsline {subsection}{\numberline {4.1}Overview}{5}
@@ -14,8 +14,8 @@
 \contentsline {subsection}{\numberline {4.4}Hilbert Huang transform}{16}
 \contentsline {subsubsection}{\numberline {4.4.1}Theory}{16}
 \contentsline {subsubsection}{\numberline {4.4.2}Application for bearings fault detection}{18}
-\contentsline {section}{\numberline {5}Statistical and machine learning methods}{22}
+\contentsline {section}{\numberline {5}Machine learning methods}{22}
 \contentsline {subsection}{\numberline {5.1}Overview}{22}
-\contentsline {section}{\numberline {6}Result}{22}
+\contentsline {section}{\numberline {6}Application of signal processing and machine learning: Case study}{22}
 \contentsline {subsection}{\numberline {6.1}Overview}{22}
 \contentsline {section}{\numberline {7}Conclusion}{22}

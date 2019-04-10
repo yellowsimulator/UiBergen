@@ -60,7 +60,7 @@ showstringspaces=false            %
 % Python for inline
 \newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
 
-\title{Mixed signal processing and machine learning methods in predictive maintenance (Project outline)}
+\title{Machine learning and signal processing methods for anomaly detection in predictive maintenance (Project outline)}
 \author{Yapi Donatien Achou}
 %\date{}							% Activate to display a given date or no date
 
@@ -77,7 +77,7 @@ showstringspaces=false            %
 %   \label{fig:example}
 %\end{figure}
 \section{Introduction}
-Since the industrial revolution, engines and machines have been the driving force for economical growth across industries such as automotive, airline, oil and gaze, to name a few. However, machines are prone to failure and must be monitor and maintain regularly to avoid catastrophic failure leading to significant financial and human lost. To mitigate equipment and machines proclivity toward failure, a process called predictive maintenance has been developed within the industrial community. Predictive maintenance  for machines and industrial equipments can be defined as a maintenance philosophy or more generally a framework with a set of methods used to predict and prevent machine failure in order to avoid unexpected downtime and reduce related human and financial cost. This maintenance philosophy, when correctly implemented, increases machine life time, and reduces maintenance cost [reference].
+Since the industrial revolution, engines and machines have been the driving force for economical growth across industries such as automotive, airline, oil and gaze, to name a few. However, machines are prone to failure and must be monitor and maintain regularly to avoid catastrophic failure leading to significant financial and human lost. To mitigate equipment and machines proclivity toward failure and the associated cost, a process called predictive maintenance has been developed within the industrial community. Predictive maintenance  for machines and industrial equipments can be defined as a maintenance philosophy or more generally a framework with a set of methods used to predict and prevent machine failure in order to avoid unexpected downtime and reduce related human and financial cost. This maintenance philosophy, when correctly implemented, increases machine life time, and reduces maintenance cost [reference].
 \justify
 As a framework, predictive maintenance has 4 levels. In level 1, visual inspection of machines or equipments are performed in order to assess any damage.
 In addition, equipment must fail before they are replaced, which can incur a high production cost. In level 2 and 3, machines characteristics such as vibration, temperature, electrical current, voltage etc are monitored continually or periodically depending on their criticality. This is called condition monitoring. In condition monitoring, the goal is to detect any change in machine normal behaviour, in order to detect failure as early as possible and schedule maintenance accordantly. Maintenance actions are performed periodically regardless of machine health condition. In level 4, big data and machine learning are the main driving forces in detecting failure and planning maintenance. At this level, maintenance action are not performed periodically but are planned according to machine health condition derived from the application of anomaly detection techniques. This reduce unnecessary maintenance action and significantly cut down maintenance cost as well as increasing machine life time.
@@ -96,23 +96,21 @@ Several factor make this general approach of anomaly detection challenging: The 
 
 
 \begin{flushleft}
-In rotating machines, more than 40 $\%$ of anomalies can be attributed to bearing defect [references]. 
+In rotating machines, more than 40 $\%$ of anomalies can be attributed to bearing defect [references]. Figure \ref{fig:pie} shows the failure statistics for rotating machines. 
 \end{flushleft}
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=5in]{pie.png} 
-   \caption{Defect statistic, taken from [reference]}
+   \caption{Defect statistics for rotating machines, taken from [reference]}
    \label{fig:pie}
 \end{figure}
-In this project we present a mixed methodology to detect and predict bearing defects. The methodology consists of using signal processing for feature generation and data labelling,  and machine learning for defects classification and failure prediction. For a given input dataset, the dataset is decomposed into it subcomponents or basis components. The basis components also called features are then used as input of a supervised learning algorithm for defect classification and failure prediction.
+In this project we present a mixed methodology to detect and predict bearing defects. The methodology consists of using signal processing for feature generation and data labelling,  and machine learning for defects classification and failure prediction. For a given input dataset, the dataset is decomposed into it subcomponents or basis components. The basis components also called features or attributes are further used as input of a supervised learning algorithm for defect classification and failure prediction.
 \begin{flushleft}
 The signal processing methods used are Fourier transform, wavelet transform and Hilbert Huang transform. We focus on ensemble learning and feed forward neural network for classification. Furthermore we show that the back-propagation process in the feed forward neural network can be modelled by an ordinary differential equation, whose solution represents the path of the hidden and output layer weights.
 \end{flushleft}
-
-
-This thesis is structured into five parts organised as follows. In chapter one we give an overview of the signal processing methods. Chapter two outline the machine learning methodology and show that the back-propagation in the feedforward neural network can be modelled as a differential equation.
-We present a case study in chapter three and apply the methodology defined in chapter
-one and two. The thesis is concluded in chapter four where we ...
+\justify
+This thesis is structured into seven parts organised as follows. To put the current work in prospective, chapter two outline preview works where machine learning and/or signal processing and machine learning have been used for anomaly detection. Since anomaly detection is the main goal in this work, chapter three present a general anomaly detection methodology, followed by a proposed methodology for predictive maintenance. The main tools used for anomaly detection in this work are presented in chapter four and five where we present signal processing and machine learning methods respectively. The capstone of this work is presented in chapter six in a form three case studies where we apply our proposed methodology to solve anomaly detection problem.
+As in any work, we conclude this thesis by summarising what have been done. The summary also includes the strengths and weaknesses of our methodology, and what could be done to improve upon this wok.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -120,12 +118,23 @@ one and two. The thesis is concluded in chapter four where we ...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Previous work}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{An overview of anomaly detection}
-\subsection{A general anomaly detection methodology}
+
+\section{Anomaly detection methodology and methods}
+\subsection{General anomaly detection methodology}
 \subsection{A novel anomaly detection strategy for predictive maintenance}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Signal processing methods}
 \subsection{Overview}
@@ -570,15 +579,15 @@ After applying the empirical mode decomposition on the vibration data from figur
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Statistical and machine learning methods}
+\section{Machine learning methods}
 \subsection{Overview}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
-\section{Result}
+\section{Application of signal processing and machine learning: Case study}
 \subsection{Overview}
 %We apply the methodology described in this work to an application for bearing fault detection.
 %\begin{figure}[H] %  figure placement: here, top, bottom, or page
