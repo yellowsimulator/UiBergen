@@ -1,21 +1,21 @@
 \contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {2}Previous work}{5}
-\contentsline {section}{\numberline {3}Anomaly detection methodology and methods}{5}
-\contentsline {subsection}{\numberline {3.1}General anomaly detection methodology}{5}
-\contentsline {subsection}{\numberline {3.2}A novel anomaly detection strategy for predictive maintenance}{5}
+\contentsline {section}{\numberline {2}Literature review \leavevmode {\color {red}(TO DO!!)})}{5}
+\contentsline {section}{\numberline {3}Anomaly detection methodology and methods \leavevmode {\color {red}(TO DO!!)}}{5}
+\contentsline {subsection}{\numberline {3.1}General anomaly detection methodology \leavevmode {\color {red}(TO DO!!)}}{5}
+\contentsline {subsection}{\numberline {3.2}A proposed methodology for predictive maintenance \leavevmode {\color {red}(TO DO!!)}}{5}
 \contentsline {section}{\numberline {4}Signal processing methods}{5}
 \contentsline {subsection}{\numberline {4.1}Overview}{5}
 \contentsline {subsection}{\numberline {4.2}Fourier Analysis}{6}
 \contentsline {subsubsection}{\numberline {4.2.1}Theory}{6}
-\contentsline {subsubsection}{\numberline {4.2.2}Application}{9}
-\contentsline {subsection}{\numberline {4.3}Wavelet transform}{14}
-\contentsline {subsubsection}{\numberline {4.3.1}Theory}{14}
-\contentsline {subsubsection}{\numberline {4.3.2}Application}{14}
-\contentsline {subsection}{\numberline {4.4}Hilbert Huang transform}{16}
-\contentsline {subsubsection}{\numberline {4.4.1}Theory}{16}
-\contentsline {subsubsection}{\numberline {4.4.2}Application for bearings fault detection}{18}
-\contentsline {section}{\numberline {5}Machine learning methods}{22}
-\contentsline {subsection}{\numberline {5.1}Overview}{22}
-\contentsline {section}{\numberline {6}Application of signal processing and machine learning: Case study}{22}
-\contentsline {subsection}{\numberline {6.1}Overview}{22}
-\contentsline {section}{\numberline {7}Conclusion}{22}
+\contentsline {subsubsection}{\numberline {4.2.2}Application}{10}
+\contentsline {subsection}{\numberline {4.3}Wavelet transform}{15}
+\contentsline {subsubsection}{\numberline {4.3.1}Theory}{15}
+\contentsline {subsubsection}{\numberline {4.3.2}Application}{15}
+\contentsline {subsection}{\numberline {4.4}Hilbert Huang transform}{17}
+\contentsline {subsubsection}{\numberline {4.4.1}Theory}{17}
+\contentsline {subsubsection}{\numberline {4.4.2}Application for bearings fault detection}{19}
+\contentsline {section}{\numberline {5}Machine learning methods \leavevmode {\color {red}(TO DO!!)}}{23}
+\contentsline {subsection}{\numberline {5.1}Overview \leavevmode {\color {red}(TO DO!!)}}{23}
+\contentsline {section}{\numberline {6}Application of signal processing and machine learning: Case study \leavevmode {\color {red}(TO DO!!)}}{23}
+\contentsline {subsection}{\numberline {6.1}Overview \leavevmode {\color {red}(TO DO!!)}}{23}
+\contentsline {section}{\numberline {7}Conclusion \leavevmode {\color {red}(TO DO!!)}}{23}
