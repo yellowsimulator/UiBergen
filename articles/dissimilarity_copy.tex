@@ -291,7 +291,29 @@ v = \sum_{j=1}^{n}\alpha_{j}\varphi_{j}, \quad \text{where}, \quad \alpha_{j} = 
 \end{theorem}
 
 \begin{proof}
-(Need a proof here) 
+Let 
+\begin{equation}
+v_{0} = \sum_{j=1}^{n}\alpha_{j}\varphi_{j} \nonumber
+\end{equation}
+with 
+\begin{equation}
+\alpha_{j}  = \langle\ v,\varphi_{j} \rangle.  \nonumber
+\end{equation}
+We must show that $v-v_{0}$ is orthogonal to any vector $w \in V_{0}$. Since $\varphi_{1}, \cdots, \varphi_{n}$ is a basis for $V_{0}$, it is enough to show that $v-v_{0}$ is orthogonal to each 
+$\varphi_{k}, k = 1, \cdots, n$.
+\justify
+We have
+\begin{equation}
+\langle\ v-v_{0},\varphi_{k} \rangle = \langle\ v-\sum_{j=1}^{n}\alpha_{j}\varphi_{j},\varphi_{k} \rangle.
+\end{equation}
+Using the fact that $\varphi_{k}, k = 1, \cdots, n$ are orthonormal we get
+\begin{equation}
+\begin{split}
+\langle\ v-v_{0},\varphi_{k} \rangle &= \langle\ v,\varphi_{k} \rangle -\alpha_{k}\langle\ \varphi_{k},\varphi_{k} \rangle \\
+&=\langle\ v,\varphi_{k} \rangle -\alpha, \quad \text{since} \quad || \alpha_{k}|| = 1\\
+&=0, \quad \text{since} \quad \alpha_{k} = \langle\ v,\varphi_{k} \rangle \nonumber
+\end{split}
+\end{equation}
 \end{proof}
 
 \justify
@@ -304,8 +326,79 @@ The set of functions
 is an orthonormal set in $L^{2}([-\pi,\pi])$ space
 \end{theorem}
 \begin{proof}
-(Need a proof here) 
+The proof is given by the following theorem bellow
 \end{proof}
+
+\begin{theorem}{Theorem}
+The following integral relations hold
+\begin{equation}
+\begin{split}
+ \frac{1}{\pi}\int_{-\pi}^{\pi} \cos(nx)\cos(kx) \mathrm{d}t =  \begin{cases}
+  1 & \text{for } n=k \geq 1\\    
+  2 & \text{for } n = k = 0\\
+  0 & \text{otherwise}  
+\end{cases}  \nonumber 
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+ \frac{1}{\pi}\int_{-\pi}^{\pi} \sin(nx)\sin(kx) \mathrm{d}t =  \begin{cases}
+  1 & \text{for } n=k \geq 1\\    
+  0 & \text{otherwise }  
+\end{cases}  \nonumber 
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+ \frac{1}{\pi}\int_{-\pi}^{\pi} \cos(kx)\sin(kx) \mathrm{d}t = 0
+\end{split}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We use the following trigonometric identities 
+\begin{equation}
+\begin{split}
+\cos((n+k)x) &= \cos(nx)\cos(kx) - \sin(nx)\sin(kx)\\
+\cos((n-k)x) &= \cos(nx)\cos(kx) + \sin(nx)\sin(kx) \nonumber
+\end{split}
+\end{equation}
+to get 
+\begin{equation}
+\begin{split}
+\int_{-\pi}^{\pi} \cos(nx)\cos(kx) &= \frac{1}{2}\int_{-\pi}^{\pi}(\cos(n+k)x + \cos(n-k)x)\mathrm{d}x \\
+&=\frac{1}{2}\left [  \frac{\sin(n+k)x}{n+k} + \frac{\sin(n-k)x}{n-k} \right ]_{-\pi}^{\pi}\\
+&=\begin{cases}
+  1 & \text{for } n=k \geq 1\\    
+  2 & \text{for } n = k = 0\\
+  0 & \text{otherwise}  
+\end{cases}  \nonumber 
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\int_{-\pi}^{\pi} \sin(nx)\sin(kx) &= \frac{1}{2}\int_{-\pi}^{\pi}(-\cos(n+k)x + \cos(n-k)x)\mathrm{d}x \\
+&=\frac{1}{2}\left [  \frac{-\sin(n+k)x}{n+k} + \frac{\sin(n-k)x}{n-k} \right ]_{-\pi}^{\pi}\\
+&=\begin{cases}
+  1 & \text{for } n=k \geq 1\\    
+  0 & \text{otherwise}  
+\end{cases}  \nonumber 
+\end{split}
+\end{equation}
+We know that the integral of a function in $[-\pi, \pi]$ is zero. Furthermore since
+\begin{equation}
+\cos(-nx)\sin(-kx) = - \cos(-nx)\sin(-kx) \nonumber
+\end{equation}
+is odd we get 
+\begin{equation}
+ \frac{1}{\pi}\int_{-\pi}^{\pi} \cos(kx)\sin(kx) \mathrm{d}t = 0 \quad \text{for } k\geq 0
+\end{equation}
+\end{proof}
+
+
 \textcolor{red}{(NEED TO EXPAND MORE HERE AFTER THE THEOREM)}
 \begin{definition}
 The Fourier series of a periodic function $g$ is given by the expansion 
