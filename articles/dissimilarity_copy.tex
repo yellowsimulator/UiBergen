@@ -151,11 +151,14 @@ As in any work, we conclude this thesis by summarising what have been done. The 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Fourier Analysis}
-\subsubsection{Theory}
-Fourier analysis is concerned with the general problem of functions approximation. The basic ingredients required to approximate a function are: a vector space, a basis, which is a subspace of the vector space and a mathematical operation or more generally a function such as an inner product that maps two vectors to a real number. If a vector space has an inner product, we say that the vector space is an inner product space. 
+\subsection{Fourier Analysis: Theory and application for bearing fault detection}
+%\subsubsection{Theory}
+Fourier analysis is concerned with the general problem of periodic and non periodic functions approximation. Fourier series on one hand addresses the former, while the latter is treated by Fourier transform. The basic ingredients required to approximate a function in this scenario are: a vector space, a basis, which is a subspace of the vector space, and a mathematical operation, or more generally a function such as an inner product that maps two vectors to a real number. If a vector space has an inner product, we say that the vector space is an inner product space. 
 \justify
-The function approximation process goes like this: We select an arbitrary function $f$. We pick an appropriate vector space which we call $V$, such that $f\in V$. We define a subspace $V_{0}$ of the vector space $V$ and construct an inner product on $V_{0}$, if it does not exist. Furthermore, we fine an appropriate basis of $V_{0}$.  A basis of $V_{0}$ is a set of linearly independent vectors say $\varphi_{j}$ in $V_{0}$, conveniently denoted by $\{ \varphi_{j}\}_{j=0}^{n}$ that span $V_{0}$. This means that any vector in $V_{0}$ can be written as a linear combination of the basis vectors. Once we have all this in place, then the best approximation of the function $f$ is its orthogonal projection in the inner product space $V_{0}$. Figure \ref{figure:il} shows an illustration of function approximation.
+Before further continuing, we see the need to clarify some semantics, We use the letters $f$, $V$, $V_{0}$ for an arbitrary function, a vector space, and a subspace of a vector space, respectively.
+Basis functions will be denoted by $\{  \varphi_{j}\}_{j=0}^{n}$, where $n$ can either be a finite integer or infinite. Having made this clarification, let explain the concept of function approximation. 
+\justify
+The function approximation process in light of Fourier analysis goes like this: Given an arbitrary function $f$ that we seek to approximate, we pick an appropriate vector space which we call $V$, such that $f\in V$. We define a subspace $V_{0}$ of the vector space $V$ and construct an inner product on $V_{0}$, if it does not exist. Furthermore, we fine an appropriate basis of $V_{0}$.  A basis of $V_{0}$ is a set of linearly independent vectors say $\varphi_{j}$ in $V_{0}$, conveniently denoted by $\{ \varphi_{j}\}_{j=0}^{n}$, that span $V_{0}$. This means that any vector in $V_{0}$ can be written as a linear combination of the basis vectors. Once we have all this in place, the best approximation of the function $f$ is its orthogonal projection in the inner product space $V_{0}$. Figure \ref{figure:il} shows an illustration a generic mechanism of function approximation by orthogonal projection, where $f_{0}$ is the orthogonal projection of $f$ in the subspace $V_{0}$ of $V$.
 \justify
 \begin{figure}[H]
 \begin{center}
@@ -191,7 +194,8 @@ The function approximation process goes like this: We select an arbitrary functi
 \label{figure:il}
 \end{figure}
 \justify
-Let have a closer look at each ingredient and define further properties that make Fourier analysis an appropriate tool for function approximation. We shall shortly define the concepts of vector space, basis, inner product, orthogonality and additional properties that are derived from them.
+Let have a closer look at each ingredient and define further properties that make Fourier analysis an appropriate tool for function approximation. We start with function approximation for periodic functions followed by non-periodic functions. We start by  defining the concepts of vector space, basis, inner product, orthogonality and additional properties that are derived from them.
+\subsubsection{Fourier series}
 \begin{definition}
 A vector space $V$ over a field $F$ is a set  with two operations $(\cdot, +)$ satisfying 
 \begin{enumerate}
