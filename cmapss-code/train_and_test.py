@@ -1,60 +1,31 @@
 """
 train and select a best model
 """
+import warnings
+import sklearn
+warnings.filterwarnings("ignore")
+from sklearn import preprocessing
 import numpy as np
-np.seed(10)
+#from sklearn.linear_model import LinearRegression,Ridge
+from sklearn import linear_model
+from glob import glob
+import pandas as pd
+from numpy.linalg import norm
+np.random.seed(10)
 #1) check which normalisation method is good for each method
-regressors = {"name1":regressor1, "name2:regressor2", ...}
 normalisation_score = {}
 temp_dict = {}
 temp_list = []
 
-def get_better_normalization(X_train):
-    """
-    return a dictionary where key is a regression method
-    and value is a list of dictionary with normalisation
-    method and associated score.
-    Arguments:
-        X_train: training data
-    Return:
-        a dictionary of the form
-        {"method1": [{"namalization": "max-min", "socre": 0.7}, ...], ...}
-    """
-    for regressor_name, method in regressors.items():
-        for norm_name, norm_method in normalisations:
-            X_train_norn = norm_method(X_train)
-            method.fit(X_train_norn)
-            X_cross = get_cross_validation_data(X_train_norn)
-            train_score = cross_validation(method, X_cross)
-            temp_dict["score"] = train_score
-            temp_dict["narmalization"] = norm_name
-            temp_list.append(temp_dict)
-        normalisation_score[regressor_name] = temp_list
-        temp_list = []
-        temp_dict = {}
-    return normalisation_score
 
 
-def get_optimum_score(normalisation_score):
-    """
-    This function returns the best normalisation
-    method for a given regression method
-    Argument:
-        a dictionary of the form
-        {"method1": [{"norm1": score1}, ...,], ...}
-    Return:
-        a dictionary of the sorte:
-        {"method": {"norm1": score1}, ...}
-    """
-    optimum_normalizers = {}
-    for regressor_name, score_list in normalisation_score.items():
-        sorted_list = sorted(score_list, key=lambda d: d["score"])
-        optimum_normalizers[regressor_name] = sorted_list[-1]
-    return optimum_normalize
+def train_predict_score(regressor,X_train,X_test,y_train):
+    reg = regressor.fit(X_train, y_train)
+    score = reg.score(X_train,y_train)
+    pred = reg.predict(X_test)
+    return pred, score
 
 
-def train_test(regressor,X_train,X_test):
-    pass
 
 
 def get_cross_validation_data(X_train):
@@ -65,15 +36,56 @@ def cross_validation(X_train):
     pass
 
 
-def get_optimum_trained_regressor():
-    pass
-
-
-def get_optimum_tested_regressor():
-    pass
 
 
 
+def get_all_files(path):
+    files = glob("{}/*".format(path))
+    return files
+
+def load_test_data():
+    train_path = "../data/Engine-degradation/CMAPSSData/train"
+
+
+def get_datafram(task,file_k,engine_k):
+    file = "../data/Engine-degradation/CMAPSSData/{}/{}_FD00{}.txt".format(task,task,file_k)
+    df = pd.read_csv(file,delimiter=" ", header=None)
+    del df[26]; del df[27]
+    df_engine_k = df[df[0]==engine_k]
+    return df_engine_k
+
+
+def load_X_y_data(task,file_k,engine_k):
+    """
+    engine_k: 0 to 99
+    task: 'train' or 'test'
+    """
+    df_engine_k = get_datafram(task,file_k,engine_k)
+    X = df_engine_k.loc[:,2:].values
+    y = df_engine_k.loc[:,1:1].values
+    X_scale = preprocessing.scale(X)
+    return X_scale, y
+
+
+def error(y_test,y_true,norm_typ='None'):
+    """
+    norm_typ: 'l1', 'max', None for l2
+    """
+    diff = abs(y_test-y_true)
+    if norm_typ == 'l1':
+        norm_val = norm(diff,1)
+    elif norm_typ == 'max':
+        norm_val = norm(diff,inf)
+    else:
+        norm_val = norm(diff,inf)
+    return norm_val
+
+
+def get_validation_data(file_k):
+    file = "../data/Engine-degradation/CMAPSSData/validation/RUL_FD00{}.txt".format(file_k)
+    print(file)
+    y = pd.read_csv(file,delimiter=" ", header=None)[0].values
+    return y.reshape(-1,1)
 
 
 
@@ -81,11 +93,37 @@ def get_optimum_tested_regressor():
 
 
 
-
-
-
-
-
-
+import time
 if __name__ == '__main__':
-    main()
+
+    train_path = "../data/Engine-degradation/CMAPSSData/train"
+    engine_k = 1
+    file_k = 1
+    #for engine_k in range(1,100):
+
+    y_true = get_validation_data(file_k)
+    task = 'train'
+    regressors = [linear_model.LinearRegression(), linear_model.Ridge(alpha=.5),
+                    linear_model.RidgeCV(alphas=[0.1, 1.0, 10.0], cv=3),
+                    linear_model.Lasso(alpha=0.1),linear_model.LassoLars(alpha=.1),
+                    linear_model.BayesianRidge()
+                ]
+    regressor = regressors[5]
+    X_train, y_train = load_X_y_data('train',file_k,engine_k)
+    X_test, y_test = load_X_y_data('test',file_k,engine_k)
+    print(X_test.shape)
+    print(X_train.shape)
+
+    pred, score = train_predict_score(regressor,X_train,X_test,y_train)
+    print(score)
+
+
+
+
+
+
+
+
+
+
+#

@@ -28,10 +28,12 @@ def get_data(path):
 
 
 if __name__ == '__main__':
-
-    train_path = "../data/Engine-degradation/CMAPSSData/train"
-    all_train_files = get_all_files(train_path)
-    file_path = all_train_files[0]
-    df = get_data(file_path)
-    df1 = df[df[0]==1]
-    print(df1)
+    task = 'train'; file_k = 1
+    file_train = "../data/Engine-degradation/CMAPSSData/{}/{}_FD00{}.txt".format('train','train',file_k)
+    file_test = "../data/Engine-degradation/CMAPSSData/{}/{}_FD00{}.txt".format('test','test',file_k)
+    #train_path = "../data/Engine-degradation/CMAPSSData/train"
+    df_train = get_data(file_train)
+    df_test = get_data(file_test)
+    #df1 = df[df[0]==1]
+    print(df_test)
+    print(df_train)
