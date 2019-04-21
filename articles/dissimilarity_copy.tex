@@ -155,10 +155,10 @@ As in any work, we conclude this thesis by summarising what have been done. The 
 %\subsubsection{Theory}
 Fourier analysis is concerned with the general problem of periodic and non periodic functions approximation. Fourier series on one hand addresses the former, while the latter is treated by Fourier transform. The basic ingredients required to approximate a function in this scenario are: a vector space, a basis, which is a subspace of the vector space, and a mathematical operation, or more generally a function such as an inner product that maps two vectors to a real number. If a vector space has an inner product, we say that the vector space is an inner product space. 
 \justify
-Before further continuing, we see the need to clarify some semantics, We use the letters $f$, $V$, $V_{0}$ for an arbitrary function, a vector space, and a subspace of a vector space, respectively.
-Basis functions will be denoted by $\{  \varphi_{j}\}_{j=0}^{n}$, where $n$ can either be a finite integer or infinite. Having made this clarification, let explain the concept of function approximation. 
+Before continuing, we see the need to clarify some abbreviations. We use the letters $f$, $V$, $V_{0}$ for an arbitrary function, a vector space, and a subspace of a vector space, respectively.
+Basis functions will be denoted by $\{  \varphi_{0}, \cdots,\varphi_{n}\}$, where $n$ can either be a finite integer or infinite. Having made this clarification, let explain the concept of function approximation. 
 \justify
-The function approximation process in light of Fourier analysis goes like this: Given an arbitrary function $f$ that we seek to approximate, we pick an appropriate vector space which we call $V$, such that $f\in V$. We define a subspace $V_{0}$ of the vector space $V$ and construct an inner product on $V_{0}$, if it does not exist. Furthermore, we fine an appropriate basis of $V_{0}$.  A basis of $V_{0}$ is a set of linearly independent vectors say $\varphi_{j}$ in $V_{0}$, conveniently denoted by $\{ \varphi_{j}\}_{j=0}^{n}$, that span $V_{0}$. This means that any vector in $V_{0}$ can be written as a linear combination of the basis vectors. Once we have all this in place, the best approximation of the function $f$ is its orthogonal projection in the inner product space $V_{0}$. Figure \ref{figure:il} shows an illustration a generic mechanism of function approximation by orthogonal projection, where $f_{0}$ is the orthogonal projection of $f$ in the subspace $V_{0}$ of $V$.
+The function approximation process in light of Fourier analysis goes like this: Given an arbitrary function $f$ that we seek to approximate, we pick an appropriate vector space which we call $V$, such that $f\in V$. We define a subspace $V_{0}$ of the vector space $V$ and construct an inner product on $V_{0}$, if it does not exist. Furthermore, we fine an appropriate basis of $V_{0}$.  A basis of $V_{0}$ is a set of linearly independent vectors   $\{  \varphi_{0}, \cdots,\varphi_{n}\}$ in $V_{0}$, that span $V_{0}$. This means that any vector in $V_{0}$ can be written as a linear combination of the basis vectors. Once we have all this in place, the best approximation of the function $f$ is its orthogonal projection in the inner product space $V_{0}$. Figure \ref{figure:il} shows an illustration of a generic mechanism of function approximation by orthogonal projection, where $f_{0}$ is the orthogonal projection of $f$ in the subspace $V_{0}$ of $V$.
 \justify
 \begin{figure}[H]
 \begin{center}
@@ -190,15 +190,18 @@ The function approximation process in light of Fourier analysis goes like this: 
 \draw (origin2) -- (bottom2) -- (topright2) -- (topleft2) -- (origin2);
 \end{tikzpicture}
 \end{center}
-\caption{Illustration of a generic function approximation process of a function $f$ into a subspace $V_{0}$ of a vector space $V$. $\varphi_{j}$ are the basis function and $\alpha_{j}$ are real numbers for $j=1,\cdots,n$.}
+\caption{Illustration of a generic function approximation process of a function $f$ into a subspace $V_{0}$ of a vector space $V$. $\varphi_{j}$ are the basis functions and $\alpha_{j}$ are real numbers for $j=1,\cdots,n$.}
 \label{figure:il}
 \end{figure}
 \justify
-Let have a closer look at each ingredient and define further properties that make Fourier analysis an appropriate tool for function approximation. We start with function approximation for periodic functions followed by non-periodic functions. We start by  defining the concepts of vector space, basis, inner product, orthogonality and additional properties that are derived from them.
+After explaining the generic process of function approximation, let dive into the specifics. We first tackle Fourier series, which deals with periodic functions. The concepts of vector space, basis, inner product and orthogonal projection are successively define, and we show how they lead to Fourier series expansions of periodic functions. As in any mathematical theory, we also present the well established result of uniqueness of the Fourier series, in conjunction with properties such as stability and convergence. Lastly, to extend function approximation to non-periodic functions, we present Fourier transform as the proper tool. 
+
 \subsubsection{Fourier series}
+The Fourier series approximates periodic functions with trigonometric expansions of $\sin$ and $\cos$ functions that have specific properties, inherited from the vector space they belong to.
+Since we are dealing with functions here, function space is more appropriate, because a function space can be a vector space. Let first define a vector space
 \begin{definition}
 A vector space $V$ over a field $F$ is a set  with two operations $(\cdot, +)$ satisfying 
-\begin{enumerate}
+\begin{itemize}
 \item Associativity:  (u+v)+w = u+(v+w), for any u,v, w $\in V$
 \item Commutativity: u+v = v+u, for all u,v $\in V$
 \item Inverse: for any u $\in V$ there exists an element -u $\in V$ such that u + (-u) = 0
@@ -206,19 +209,15 @@ A vector space $V$ over a field $F$ is a set  with two operations $(\cdot, +)$ s
 \item Distributivity: $a\cdot(u+v) = a\cdot u + a\cdot v$, for any a $\in F$, and u, v $\in V$
 \item Compatibility $a\cdot(b\cdot u) = (a\cdot b)\cdot u$, for any a,b $\in V$ and u $\in V$
 \item Scalar distributivity $(a+b)\cdot u = a\cdot u + b\cdot u$, for any a,b $\in F$, and u $\in V$
-\end{enumerate}
+\end{itemize}
 The elements of the vector space V are called vectors and the element of the field F are call scalars.
 \end{definition}
-An example of an inner product space is the $L^{2}$ space which encompasses square integrable functions. By definition, the set of all squared integrable functions on an interval say $[0,T]$ is denoted by 
+An example of a function space and vector space is the $L^{2}$ space which encompasses square integrable functions. By definition, the set of all squared integrable functions on an interval say $[0,T]$ is denoted by 
 $L^{2}[0,T]$. Any real function $f$ in $L^{2}[0,T]$ satisfies
 \begin{equation} \label{eq:L2}
 \int_{0}^{T}f(t)^{2}\mathrm{d}t < \infty.
 \end{equation}
-For two functions $f$ and $g$ in $L^{2}[0,T]$, we define their inner product as 
-\begin{equation}
-\langle\ f,g \rangle = \frac{1}{T}\int_{0}^{T}f(t)g(t)\mathrm{d}t.
-\end{equation}
-Equation (\ref{eq:L2}) says that the total energy of $f$ is finite. This suggest that the $L^{2}$ space is important for real world applications such as signal processing. In fact, we will see  later in more detail that any function in $L^{2}$ has a Fourier expansion given in terms of linear combination of sinusoidal basis functions. 
+Equation (\ref{eq:L2}) says that the total energy of $f$ is finite. This suggest that the $L^{2}$ space is important for real world applications such as signal processing. In fact, we will see  later that any function in $L^{2}$ has a Fourier expansion given in terms of linear combination of sinusoidal basis functions. 
 \justify
 A legitimate question that comes in mind is, how are vectors organised in a vector space. One way to organise vectors in a vector space is to define them in terms of special set of vectors called basis, having well defined properties. Each vector will then be uniquely expressed in terms of the basis vectors. 
 \justify
@@ -242,7 +241,7 @@ a_{1} = \cdots = a_{n} = 0 \nonumber
 \end{definition}
 \justify
 With a given basis we can uniquely approximate a vector by decomposing its in terms of the basis vectors. However, a vector space can have several basis, giving rise to several approximations of the same vector. In mathematics and in science in general, one is often concerned with the optimum solution or the unique solution. In terms of an application, uniqueness allows one to pick the relevant physical solution.
-It turns out that, regardless of the basis, the orthogonal projection of a vector is its optimum approximation. Orthogonal projection is achieved by a special operation called inner product. Let formally define an inner product and show how its define orthogonality.
+It turns out that, regardless of the basis, the orthogonal projection of a vector is its optimum approximation. Orthogonal projection is achieved by inner product. Let formally define an inner product and show how it lead to orthogonality.
 
 \begin{definition}
 An inner product on a real vector space $V$ is a function 
@@ -250,18 +249,22 @@ An inner product on a real vector space $V$ is a function
 \langle\,,\rangle : V\times V \rightarrow \mathbb{R} \nonumber
 \end{equation}
 that satisfies the following properties $\forall u,v \in V$
-\begin{enumerate}
+\begin{itemize}
 \item Positivity: $\langle\ u,v \rangle > 0$, \quad 
-\item Symmetry: $\langle\ u,v \rangle > 0  = \langle\ u,v \rangle$
+\item Symmetry: $\langle\ u,v \rangle  = \langle\ u,v \rangle$
 %\item Homogeneity:
-%\item Linearity:
-\end{enumerate}
+\item Linearity: $\langle\ u+v,w \rangle$ = $\langle\ u,w \rangle +\langle\ v,w \rangle$
+\end{itemize}
 A vector space with an inner product is called an inner product space.
 \end{definition}
-\vdots
-\vdots
-\textcolor{red}{(NEED TO EXPAND MORE HERE AFTER THE DEFINITION)})
-\begin{definition}
+The $L^{2}[0,T]$ space mention previously, is equipped with an inner product.  
+Given two functions $f$ and $g$ in $L^{2}[0,T]$, their inner product is defined as 
+\begin{equation}
+\langle\ f,g \rangle = \frac{1}{T}\int_{0}^{T}f(t)g(t)\mathrm{d}t.
+\end{equation}
+The inner product operation if important because it is used to express orthogonality between two vectors or two functions in the case of a function space.
+
+\begin{definition}\label{ortho}
 Suppose $V$ is an inner product space.
 \begin{itemize}
 \item The vectors $u$ and $v$ are orthogonal if $\langle\ u,v \rangle = 0$
@@ -272,20 +275,9 @@ Suppose $V$ is an inner product space.
 and $v_{i}$ and $v_{j}$ are orthogonal for $i\neq j$ 
 \end{itemize}
 \end{definition}
-\vdots
-\vdots
-\textcolor{red}{(NEED TO EXPAND MORE HERE AFTER THE DEFINITION)}
+Definition \ref{ortho}, says that two vectors are orthogonal if their inner product is zero and an orthogonal basis is a set of vector which are mutually orthogonal. Once we have an orthogonal basis,
+we can approximate vectors by orthogonal projection.
 
-\begin{definition}
-Suppose $V_{0}$ is a finite-dimensional subspace of an inner product space $V$. For any vector $v \in V$, the orthogonal projection of $v$
-into $V_{0}$ is the unique vector $v_{0} \in V_{0}$ that is closest to $v$, that is,
-\begin{equation}
- ||v-v_{0}|| =  \min_{\forall w \in V_{0}} || v-w ||,
-\end{equation}
-\end{definition}
-\vdots
-\vdots
-\textcolor{red}{(NEED TO EXPAND MORE HERE AFTER THE DEFINITION)}
 \begin{theorem}\label{orthogonalityTheorem}
 Suppose $V_{0}$ is a  n-dimensional subspace of an inner product space $V$ and let $\{  \varphi_{j} \}_{j=1}^{n}$ be an orthonormal basis for $V_{0}$, then the orthogonal projection
 of a vector $v\in V$ onto $V_{0}$ is given by 
@@ -319,9 +311,17 @@ Using the fact that $\varphi_{k}, k = 1, \cdots, n$ are orthonormal we get
 \end{split}
 \end{equation}
 \end{proof}
-
 \justify
-From Theorem \ref{orthogonalityTheorem}, We saw that a vector can be decomposed in terms of basis functions by orthogonal projection. The orthogonal projection ensures that the decomposition is optimum with respect to a chosen basis. In Fourier analysis, the basis functions are trigonometric functions of period $2\pi$.
+From Theorem \ref{orthogonalityTheorem}, We see that a vector can be decomposed in terms of basis functions by orthogonal projection. The orthogonal projection ensures that the decomposition is optimum with respect to a chosen basis, as explained by the following definition
+\begin{definition}
+Suppose $V_{0}$ is a finite-dimensional subspace of an inner product space $V$. For any vector $v \in V$, the orthogonal projection of $v$
+into $V_{0}$ is the unique vector $v_{0} \in V_{0}$ that is closest to $v$, that is,
+\begin{equation}
+ ||v-v_{0}|| =  \min_{\forall w \in V_{0}} || v-w ||,
+\end{equation}
+\end{definition}
+\justify
+As mention before, the $L^{2}$ space is important for Fourier series. Recall that a Fourier series of a periodic function is its approximation by trigonometric function. We can now construct orthonormal basis from $L^{2}$ and thus approximate a periodic function by orthogonal projection.
 \begin{theorem}
 The set of functions 
 \begin{equation}
@@ -401,9 +401,8 @@ is odd we get
  \frac{1}{\pi}\int_{-\pi}^{\pi} \cos(kx)\sin(kx) \mathrm{d}t = 0 \quad \text{for } k\geq 0
 \end{equation}
 \end{proof}
-
-
-\textcolor{red}{(NEED TO EXPAND MORE HERE AFTER THE THEOREM)}
+\justify
+Having define trigonometric basis, we can now formally give the Fourier series of a periodic function.
 \begin{definition}
 The Fourier series of a periodic function $g$ is given by the expansion 
 \begin{equation}
@@ -411,9 +410,7 @@ g(x) = a_{0} + \sum_{k=1}^{n}a_{k}\cos(kx)+b_{k}\sin(kx)
 \end{equation}
 where $a_{k}, k=0,\cdots, n$ are called the Fourier coefficients of the function $g$
 \end{definition}
-\vdots
-\vdots
-\textcolor{red}{(NEED TO EXPAND MORE HERE AFTER THE DEFINITION)}
+
 \begin{theorem}
 if 
 \begin{equation}
@@ -432,14 +429,15 @@ b_{k} = \frac{1}{2\pi}\int_{-\pi}^{\pi}g(x)\sin(kx)\mathrm{d}x
 \end{theorem}
 
 \begin{proof}
-\vdots
-\vdots
 (need a proof here) We use the orthogonality property to derive the Fourier coefficients.
 \end{proof}
 
-\vdots
-\vdots
-\textcolor{orange}{TO BE CONTINUED}
+
+
+
+
+
+\subsubsection{Fourier transform}
 
 
 
@@ -448,10 +446,7 @@ b_{k} = \frac{1}{2\pi}\int_{-\pi}^{\pi}g(x)\sin(kx)\mathrm{d}x
 
 
 
-
-
-
-\subsubsection{Application}
+\subsubsection{Application to bearing fault dection}
 In this approach we use Fourier transform to detect defect frequency such outer race defect frequency and inner race defect frequency in the envelop spectrum. In this case the envelop spectrum is the new feature generated from the original vibration data. The bearing type used are Rexnor ZA-2115. For this type of bearing, the constant defect frequency (cdf) for ball pass frequency outer race defect is 0.1182 and the constant defect frequency for ball pass frequency inner race defect is 0.1484 [reference]. According to Rexnord product engineering group [reference], to find the defect frequency in Hz we multiply the constant defect frequency (cdf) by the rotational speed of the bearing ( here 2000 RPM), to find the defect frequency in Hz. Note that the defect frequency is computed from the geometry of the bearing, which means that for a specific bearing, this is a constant value. 
 
 \begin{flushleft}
