@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  21 APR 2019 13:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  23 APR 2019 14:05
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -801,7 +801,14 @@ Package: listings 2014/09/06 1.5e (Carsten Heinz)
 \c@definition=\count154
 \c@proof=\count155
 
-(./dissimilarity_copy.aux)
+(./dissimilarity_copy.aux
+
+LaTeX Warning: Label `fig:example' multiply defined.
+
+
+LaTeX Warning: Label `fig:example' multiply defined.
+
+)
 \openout1 = `dissimilarity_copy.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
@@ -921,14 +928,13 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 71.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-(./dissimilarity_copy.toc)
+(./dissimilarity_copy.toc [1
+
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@toc=\write4
 \openout4 = `dissimilarity_copy.toc'.
 
- [1
-
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- <pie.png, id=20, 853.1875pt x 568.1225pt>
+ [2] [3] <pie.png, id=20, 853.1875pt x 568.1225pt>
 File: pie.png Graphic file (type png)
 
 <use pie.png>
@@ -1146,17 +1152,74 @@ File: imf/imf14.png Graphic file (type png)
 Package pdftex.def Info: imf/imf14.png used on input line 720.
 (pdftex.def)             Requested size: 144.54pt x 108.40472pt.
  [25 <./imf/imf9.png> <./imf/imf10.png> <./imf/imf11.png> <./imf/imf12.png> <./
-imf/imf13.png> <./imf/imf14.png>] [26]
-(./dissimilarity_copy.aux)
+imf/imf13.png> <./imf/imf14.png>]
+<thesis-pictures/experiment.png, id=157, 629.35126pt x 298.11375pt>
+File: thesis-pictures/experiment.png Graphic file (type png)
+
+<use thesis-pictures/experiment.png>
+Package pdftex.def Info: thesis-pictures/experiment.png used on input line 746.
+
+(pdftex.def)             Requested size: 361.34999pt x 171.16388pt.
+ [26 <./thesis-pictures/experiment.png>]
+<thesis-pictures/bearing.png, id=162, 358.33875pt x 229.85875pt>
+File: thesis-pictures/bearing.png Graphic file (type png)
+
+<use thesis-pictures/bearing.png>
+Package pdftex.def Info: thesis-pictures/bearing.png used on input line 760.
+(pdftex.def)             Requested size: 289.07999pt x 185.44449pt.
+
+<thesis-pictures/bearing1-test1.png, id=163, 462.528pt x 346.896pt>
+File: thesis-pictures/bearing1-test1.png Graphic file (type png)
+
+<use thesis-pictures/bearing1-test1.png>
+Package pdftex.def Info: thesis-pictures/bearing1-test1.png used on input line 
+770.
+(pdftex.def)             Requested size: 505.89pt x 379.43773pt.
+
+Overfull \hbox (75.88538pt too wide) in paragraph at lines 770--771
+ [][] 
+ []
+
+[27 <./thesis-pictures/bearing.png>]
+<thesis-pictures/bearing1-test2.png, id=168, 462.528pt x 346.896pt>
+File: thesis-pictures/bearing1-test2.png Graphic file (type png)
+
+<use thesis-pictures/bearing1-test2.png>
+Package pdftex.def Info: thesis-pictures/bearing1-test2.png used on input line 
+778.
+(pdftex.def)             Requested size: 505.89pt x 379.43773pt.
+
+Overfull \hbox (75.88538pt too wide) in paragraph at lines 778--779
+ [][] 
+ []
+
+[28 <./thesis-pictures/bearing1-test1.png>]
+<thesis-pictures/bearing1-test3.png, id=173, 462.528pt x 346.896pt>
+File: thesis-pictures/bearing1-test3.png Graphic file (type png)
+
+<use thesis-pictures/bearing1-test3.png>
+Package pdftex.def Info: thesis-pictures/bearing1-test3.png used on input line 
+786.
+(pdftex.def)             Requested size: 505.89pt x 379.43773pt.
+
+Overfull \hbox (75.88538pt too wide) in paragraph at lines 786--787
+ [][] 
+ []
+
+[29 <./thesis-pictures/bearing1-test2.png>] [30 <./thesis-pictures/bearing1-tes
+t3.png>] [31] (./dissimilarity_copy.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 15864 strings out of 493089
- 296628 string characters out of 6134842
- 344635 words of memory out of 5000000
- 18978 multiletter control sequences out of 15000+600000
+ 15894 strings out of 493089
+ 297499 string characters out of 6134842
+ 344710 words of memory out of 5000000
+ 19003 multiletter control sequences out of 15000+600000
  13056 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,23n,54p,1218b,642s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1175,10 +1238,10 @@ ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
 015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/20
 15/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on dissimilarity_copy.pdf (26 pages, 1639621 bytes).
+Output written on dissimilarity_copy.pdf (31 pages, 1811806 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
- 108 compressed objects within 2 object streams
+ 235 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 158 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 183 words of extra memory for PDF output out of 10000 (max. 10000000)
 

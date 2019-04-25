@@ -2,6 +2,7 @@
 Extract data, Transform data and Load
 data if neccessary
 """
+import os
 import pandas as pd
 from glob import glob
 import scipy.stats
@@ -13,7 +14,7 @@ def get_date_from_file(file):
     return the date extension from a
     file.
     Argument:
-        file: a file.
+        file: a file name.
     Return:
         datetime of the form yyyy-mm-dd hh:mm:ss
     """
@@ -24,7 +25,7 @@ def get_date_from_file(file):
         new_date = "{} {}".format(date,hour)
         return new_date
     except Exception as e:
-        print("Error function 'get_date_from_file': ", e)
+        print("Error in function 'get_date_from_file': ", e)
         return "error"
 
 
@@ -43,7 +44,7 @@ def get_all_dates(exp_numb):
 def get_all_data(exp_numb):
     all_files = get_experiment_data(exp_numb)
     with Pool() as p:
-        data = p.map(get_dataframe,all_files)
+        data = p.map(get_dataframe, all_files)
         return data
 
 
@@ -134,7 +135,8 @@ def get_experiment_data(exp_numb):
     """
     Return all file for a given experiment.
     Arguments:
-        exp_numb: experiment number: 1,2 or 3
+        exp_numb: experiment number: intenger 1,2
+        or 3
     Return:
         all_files: all files
     """
@@ -142,7 +144,7 @@ def get_experiment_data(exp_numb):
                    "2": "2nd_test",
                    "3": "3rd_test"}
     experiment = experiments["{}".format(exp_numb)]
-    main_path = "../data/IMS/{}".format(experiment)
+    main_path = os.path.abspath("../data/IMS/{}".format(experiment))
     try:
         all_files = get_all_files(main_path)
         return all_files
@@ -162,7 +164,7 @@ def get_bearing_data(file):
         file: path to file
         channel: channel number
     """
-    channel = 0
+    channel = 0 # channel must be an input argument to the function
     data_frame = get_dataframe(file)
     try:
         return data_frame[channel].values

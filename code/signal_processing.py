@@ -87,13 +87,6 @@ def smooth(x,window_len=5,window='hanning'):
     return y
 
 
-
-
-
-
-
-
-
 def butter_bandpass(lowcut, highcut, sampling_freq, order=5):
 	"""
 	Band pass filter parameters:
@@ -107,6 +100,7 @@ def butter_bandpass(lowcut, highcut, sampling_freq, order=5):
 	high = highcut / nyq
 	b, a = butter(order, [low, high], btype='band')
 	return b, a
+
 
 def butter_bandpass_filter(data, lowcut, highcut, sampling_freq, order=5):
 	"""
@@ -122,6 +116,7 @@ def butter_bandpass_filter(data, lowcut, highcut, sampling_freq, order=5):
 	y = lfilter(b, a, data)
 	return y
 
+
 ## Low pass filter:
 def butter_lowpass(cut, fs, order=5):
 	"""
@@ -135,6 +130,7 @@ def butter_lowpass(cut, fs, order=5):
 	b, a = butter(order,  high, btype='low')
 	return b, a
 
+
 def butter_lowpass_filter(data, cut, fs, order=5):
 	"""
 	Filter data along one-dimension with a lowpass filter:
@@ -147,6 +143,7 @@ def butter_lowpass_filter(data, cut, fs, order=5):
 	y = lfilter(b, a, data)
 	return y
 
+
 ## Envelop detection
 def get_envelop(data):
 	"""
@@ -156,7 +153,6 @@ def get_envelop(data):
 	hilbert_transform = hilbert(data)
 	envelop = np.sqrt(data**2 + hilbert_transform**2)
 	return envelop
-
 
 
 def get_fft(signal,period,sampling_interval):
@@ -170,8 +166,6 @@ def get_fft(signal,period,sampling_interval):
     amplitude = 2.0/signal_length * np.abs(yf[:signal_length//2])
     amplitude[0] = 0
     return freq,amplitude
-
-
 
 
 def get_envelop_spectrum(accelaration):

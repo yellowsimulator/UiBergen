@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {4.2}Fourier Analysis: Theory and application for bearing fault detection}{7}
 \contentsline {subsubsection}{\numberline {4.2.1}Fourier series}{8}
 \contentsline {subsubsection}{\numberline {4.2.2}Fourier transform}{13}
-\contentsline {subsubsection}{\numberline {4.2.3}Application to bearing fault dection}{13}
+\contentsline {subsubsection}{\numberline {4.2.3}Application to bearing fault detection}{13}
 \contentsline {subsection}{\numberline {4.3}Wavelet transform}{18}
 \contentsline {subsubsection}{\numberline {4.3.1}Theory}{18}
 \contentsline {subsubsection}{\numberline {4.3.2}Application}{18}
@@ -17,6 +17,11 @@
 \contentsline {subsubsection}{\numberline {4.4.2}Application for bearings fault detection}{22}
 \contentsline {section}{\numberline {5}Machine learning methods \leavevmode {\color {red}(TO DO!!)}}{26}
 \contentsline {subsection}{\numberline {5.1}Overview \leavevmode {\color {red}(TO DO!!)}}{26}
-\contentsline {section}{\numberline {6}Application of signal processing and machine learning: Case study \leavevmode {\color {red}(TO DO!!)}}{26}
-\contentsline {subsection}{\numberline {6.1}Overview \leavevmode {\color {red}(TO DO!!)}}{26}
-\contentsline {section}{\numberline {7}Conclusion \leavevmode {\color {red}(TO DO!!)}}{26}
+\contentsline {section}{\numberline {6}Machine learning and signal processing: Case study}{26}
+\contentsline {subsection}{\numberline {6.1}Overview}{26}
+\contentsline {subsection}{\numberline {6.2}Bearing fault detection}{26}
+\contentsline {subsubsection}{\numberline {6.2.1}Problem formulation}{26}
+\contentsline {subsubsection}{\numberline {6.2.2}Conceptual model}{27}
+\contentsline {subsubsection}{\numberline {6.2.3}Data description}{27}
+\contentsline {subsubsection}{\numberline {6.2.4}Data driven model}{30}
+\contentsline {section}{\numberline {7}Conclusion \leavevmode {\color {red}(TO DO!!)}}{30}

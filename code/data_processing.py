@@ -2,6 +2,7 @@ import os
 import json
 import matplotlib
 import pandas as pd
+import modin.pandas as mpd
 from glob import glob
 #matplotlib.use('Agg')
 from sklearn import preprocessing
