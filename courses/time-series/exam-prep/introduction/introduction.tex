@@ -1,0 +1,65 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{color}
+\newtheorem{definition}{Definition}
+%SetFonts
+
+%SetFonts
+
+\usepackage{ragged2e}
+\title{Time series analysis}
+\author{Yapi Donatien Achou}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\section{What is a time series}
+\textcolor{blue}{A time series is a set of observations $x_{t}$ recorded at a specific time $t$}. For discrete time series, the set $T$ at which the observations are recorded is discrete.
+Example of time series: recording the arterial pressure every minute, recording the voltage of a computer every second.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objective and methodology of time series analysis}
+\textcolor{blue}{The objective of time series analysis is to draw inferences from them}. What does it mean to draw inferences? Before answering that question let define the steps in time series analysis.
+\begin{enumerate}
+\item \textcolor{blue}{Select a family of probability models}
+\item \textcolor{blue}{Estimate parameters. This will lead you to a specific model for the time series}
+\item \textcolor{blue}{Check goodness of fit to the data}
+\end{enumerate}
+Now drawing inferences from the model means using the model \textcolor{blue}{to enhance our understanding of the underlying process that generated the time series}.
+Or we can simply say without lost of generality that drawing inferences is an umbrella expression for different aspects that will eventually lead us to enhance our understanding of the underlying 
+process that generated to time series. 
+\justify
+Drawing inferences as in 
+\begin{itemize}
+\item use the model to provide a compact description of the data
+\item perform seasonal  adjustment
+\item predict future values of a series (Predicting future sales for wine, predict future values of stock)
+\item use time series model to estimate the probability of emptiness of a reservoir, in reservoir simulation
+\item perform hypotheses testing
+\end{itemize}
+Now let get a bit technical
+\section{Definition of a time series model}
+\begin{definition}
+\textcolor{blue}{A time series models} for the observed data $\{ x_{t}\}$ is \textcolor{blue}{a specification of the join distribution} (or possibly only the \textcolor{blue}{mean} and \textcolor{blue}{covariance}) of a sequence of random variables $\{ X_{t}\}$ of which $\{ x_{t}\}$ is postulated to be a realisation.
+\end{definition}
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{petter} 
+Petter J. Brocckwell, Richard A. Davis 
+\textit{Introduction to time series and forecasting}. 
+Springer Texts in Statistics, second edition.
+ 
+\end{thebibliography}
+
+
+\end{document}  
