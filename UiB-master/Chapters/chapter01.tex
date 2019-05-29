@@ -17,13 +17,16 @@
 %These are included to help you remember to cover the related issues. 
 %The headings should be removed in your final print.}
 %%=========================================
-\subsection*{Problem Formulation}
-An anomaly also known as novelty, is an event or an observation that falls outside of a normal behavior or pattern. This include but not limited to, medical problems such as cancer, heart disease, Bank fraud, web intrusion, machine failure or structural failure.
-Anomalies can lead to serious damages such as important financial lost or death in the case of a medical problem or structural failure. It is therefor important to identify an early onset of an anomaly and take sufficient measures to mitigate damages.\\
-\\
-With the availability of an array of medical imaging technology such as CT scan, Xray or sensor technology a large amount of data is generated. By using a data driven approach it is possible to effectively identity early sign of failure. In this thesis we focus our attention on identifying early sign of structural or machine failure by using a data driven approach or methods such as machine learning and signal processing. 
-
-
+%\subsection*{Problem Formulation}
+Since the industrial revolution, engines and machines have been the driving force for economical growth across industries such as automotive, airline, oil and gaze, to name a few. However, machines are prone to failure and must be monitor and maintain regularly to avoid catastrophic failure leading to significant financial and human lost. To mitigate equipment and machines proclivity toward failure and the associated cost, a process called predictive maintenance has been developed within the industrial community. Predictive maintenance  for machines and industrial equipments can be defined as a maintenance philosophy or more generally a framework with a set of methods used to predict and prevent machine failure in order to avoid unexpected downtime and reduce related human and financial cost. This maintenance philosophy, when correctly implemented, increase machine life time and reduce maintenance cost by detecting as early as possible early sign of failure [reference].
+\justify
+In rotating machines, more than $40 \% $ of failure can be attributed to bearing faults [reference]. It is therefore crucial to detect these fault as early as possible. The most commonly used method in the industry to detect specific bearing faults is the Fast Fourier Transform (FFT). The FFT method consists of transforming a vibration signal emanating from a bearing, to its corresponding frequency spectrum. If the bearing exhibit sign of failure, the frequency spectrum will contain the bearing failure frequencies. The latter are derived from the bearing geometry and the rotating speed of the machine.
+\justify
+One of the drawback of the FFT method, lies in the fact that the failure frequencies depend on the rotating speed of the machine. For constant rotating speed it is straight forward to estimate the failure fault frequencies. However, when the rotating speed varies continually, it becomes very challenging to estimate the failure fault frequencies, which can lead to incorrect fault diagnosis.
+\justify
+Many efforts have been directed toward alternative methods for bearing fault detection, in the filed of artificial intelligence and non Fourier transform signal analysis. Some of the effort has been directed toward developing failure detection methods by using machine learning, wavelet and Hilbert Huang transform. The attractiveness of these methods relies on the fact that they do not require the bearing geometry and the rotating speed of the machine. 
+\justify
+The machine learning methods commonly used are supervised and unsupervised learning methods. In supervised learning methods, an algorithm is used to learn the pattern of instances of failure. Once the pattern has been learn, the algorithm is used to detect any such pattern in subsequent data sample. When failure instances are not available to learn from, unsupervised learning algorithm are used to group data into different groups where data in the same group share some sort of similarity.
 %%=========================================
 \subsection*{Related work}
 You should here present the main books and articles that treat problems that are similar to what  you are studying, and give proper references to each of these as they are reported. 

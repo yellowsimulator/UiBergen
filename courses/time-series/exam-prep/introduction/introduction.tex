@@ -48,6 +48,31 @@ Now let get a bit technical
 \begin{definition}
 \textcolor{blue}{A time series models} for the observed data $\{ x_{t}\}$ is \textcolor{blue}{a specification of the join distribution} (or possibly only the \textcolor{blue}{mean} and \textcolor{blue}{covariance}) of a sequence of random variables $\{ X_{t}\}$ of which $\{ x_{t}\}$ is postulated to be a realisation.
 \end{definition}
+\justify
+Instead of specifying the joint probability we instead specify the first and the second order moment of the joint distributions: \textcolor{blue}{the expected value $E[X_{t}]$} and
+ \textcolor{blue}{the expected products $E[X_{t+h}X_{t}]$}.
+ \justify
+ In the particular case where all the joint distributions are \textcolor{blue}{multivariate normal}, the second order properties of $X_{t}$ \textcolor{blue}{completely} determined the joint distributions and hence gives the complete \textcolor{blue}{probabilistic characterisation} of $X_{t}$ 
+
+\section{Examples of time series models}
+\subsection{The iid noise}
+The iid noise or \textcolor{blue}{Independent and identical distributed} random variable \textcolor{blue}{with mean zero}, is a sequence with \textcolor{blue}{no trend} and 
+\textcolor{blue}{no seasonality }. Such random variable
+\begin{equation}
+X_{1}, \cdots, X_{n} \nonumber
+\end{equation}
+is said to be \textcolor{blue}{iid noise} if and by definition
+\begin{equation}
+P[X_{1} \leq x_{1},\cdots X_{n}\leq x_{n}] = P[X_{1}\leq x_{1}]\cdots P[X_{n} \leq x_{n}] = F(x_{1})\cdots F(x_{n})
+\end{equation}
+where $F(.)$ is \textcolor{blue}{the cumulative distribution} of each of the random variables $X_{1}, \cdots, X_{n}$ 
+\justify
+In this model, \textcolor{blue}{there is no dependence between observations}. In particular, for all $h\geq 1$ and for all $x$, $x_{1},\cdots,x_{n}$
+\begin{equation}
+P[X_{n+h}\leq x | X_{1}=x_{1}, \cdots, X_{n}=x_{n}] = P[X_{n+h}\leq x]
+\end{equation}
+This shows that $X_{1}, \cdots, X_{n}$ is of no value for predicting the behaviour of $X_{n+h}$. \textcolor{blue}{iid noise is not useful for forecasting}, but it \textcolor{blue}{it plays an important role in building more complicated time series models}
+\subsection{A binary process}
 
 
 
