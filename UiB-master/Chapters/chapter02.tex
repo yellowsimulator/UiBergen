@@ -4,83 +4,14 @@
 %%=========================================
 \documentclass[../Main/thesis.tex]{subfiles}
 \begin{document}
-\chapter[Theoretical Background]{Theoretical Background}
-reference(Lecture note from MAT-INF2360-2012 UIO, Knut Mørken and Øyvind Ryan)
-In this section we set the theoretical basis for an import practical issue: Function approximation. How do we approximate a process, in order to better understand it, and 
-make useful prediction, or detect abnormal behavior. We cover three techniques to approximate a function. We start by covering Fourier Transform, and continue with Hilbert Huang transform and finish with wavelet transform. \\
-\\
-The methodology is as follow: we define a function space, an orthogonal basis that span the function space, and the best approximation of the function is its projection on that space. Since the space is spanned by the basis, we can write the approximation of $f$ in the space spanned by the basis function as a linear combination of the basis functions.
+\chapter[Fourier analysis and its application to bearing fault detection]{Fourier analysis and its application to bearing fault detection}
+\label{sec:chapter2}
 
-\label{ch:ml}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Fourier Analysis}
+\section{An overview of Fourier analysis}
+\subsection{Fourier series}
+\subsection{Fourier transform and the fast Fourier transform}
+\section{Application of Fourier transform for bearing fault detection: a case study}
 
-\subsection{Fourier Series}
-A complex signal or time series can be view as a superposition of simple signals. In Fourier Analysis, such complex signal is expressed as a linear combination of sinusoidal basis function. The motivation can be put in the general framework of functions approximation. The theory of Fourier series is concern with continuous function or Riemann-integrable function over the interval $[0,T]$ reference(Lecture not).
-
-\begin{definition}{(Continuous and square integrable function).}
-The set of continuous, real functions defined on an interval $[0,T]$, is denoted by $C[0,T]$. 
-A real function $f$ defined on $[0,T]$ is said to be square integrable if $f^{2}$ is Riemann-integrable, i.e, if the Riemann integral of $f^{2}$ on $[0,T]$ exists, 
-\begin{equation}
-\int_{0}^{T}f(t)^{2}\mathrm{d}t < \infty. \nonumber
-\end{equation}
-The set of all square integrable functions on $[0,T]$ is denoted by $L^{2}[0,T]$
-\end{definition}
-Now that we know the type of functions we want to approximate, we direct our attention to the mechanism used to approximate $f$. Let $\hat{f}$ be the best approximation of $f$ on $[0,T]$.
-Since $f \in C[0,T]$, its approximation must lie into a subspace of $C[0,T]$.
-
-\begin{theorem}
-Both $L^{2}[0,T]$ and $C[0,T]$ are vector spaces. Moreover, if the two functions $f$ and $g$ lie in $L^{2}[0,T]$ (or  in $C[0,T]$), then the product $fg$ is also in 
-$L^{2}[0,T]$ (or  in $C[0,T]$). Moreover, both spaces are inner product spaces with the inner product defined by
-\begin{equation}\label{eq:inner}
-<f,g> = \frac{1}{T}\int_{0}^{T}f(t)g(t)\mathrm{d}t \nonumber
-\end{equation}
-and associated norm
-\begin{equation}
-||f|| = \sqrt{\frac{1}{T}\int_{0}^{T}f(t)^{2}\mathrm{d}t }\nonumber
-\end{equation}
-\end{theorem}
-
-\begin{definition}{(Fourier series).},
-Let $V_{N,T}$ be the subspace of $C[0,T]$ spanned by the set of functions given by
-\begin{equation}
-D_{N,T} = \left\{1, \cos\left(\frac{2\pi t}{T}\right), \dots,  \cos\left(\frac{2\pi Nt}{T}\right),  \sin\left(\frac{2\pi t}{T}\right), \dots,  \sin\left(\frac{2\pi Nt}{T}\right), \right\}
-\end{equation}
-The space $D_{N,T}$ is called the $N th$ order Fourier space. The Nth-order Fourier series approximation of $f$ denoted by $f_{N}$ is defined by the best approximation of $f$ from 
- $V_{N,T}$ with respect to the inner product defined by (\ref{eq:inner})
-\end{definition}
-From Linear algebra, any function in a space spanned by a set of basis functions, can be written as a linear combination of the basis functions. That is since the best approximation of $f$, 
-$f_{N} \in $V_{N,T}$ and $V_{N,T}$ is spanned by $D_{N,T}$.
-
-
-
-
-
-
-
-
-Let $f$ be a periodic function, with period $T = 2L$. Then the Fourier series representation of $f$ is an infinite trigonometric series given by
-\begin{equation}\label{eq:fs}
-f(x) = \frac{a_{0}}{2} + \sum_{n=1}^{\infty}\left(   a_{n}\cos\left( \frac{n\pi x}{L} \right) +  b_{n}\sin\left( \frac{n\pi x}{L} \right)  \right)
-\end{equation} 
-
-with 
-\begin{equation}\label{eq:am}
-a_{m} = \frac{1}{L}\int_{-L}^{L}f(x)\cos\left(  \frac{m\pi x}{L} \right)\mathrm{dx}, \quad m = 0,1,2,\dots
-\end{equation}
-
-\begin{equation}\label{eq:am}
-b_{m} = \frac{1}{L}\int_{-L}^{L}f(x)\sin\left(  \frac{m\pi x}{L} \right)\mathrm{dx}, \quad m = 1,2,\dots
-\end{equation}
-Thus any periodic function can be decomposed into a sum of trigonometric functions. The existence of the Fourier Series (\ref{eq:fs}) of a function $f$ is tied to the 
-existence of the integrals (\ref{eq:am}-\ref{eq:am}). These integral must be convergent
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Hilbert Huang Transform}
-\section{Wavelet Transform}
-\section{Machine Learning}
 \blankpage
 \end{document}
 
