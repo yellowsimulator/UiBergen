@@ -150,7 +150,7 @@ As in any work, we conclude this thesis by summarising what have been done. The 
  Generating new features from existing one, is a common procedure for anomaly detection. For example, by using Fourier transform, we can generate the frequency spectrum of a vibration time series. The frequency spectrum is the set of all frequencies from each vibration component of the original vibration time series. The importance of the frequency spectrum, lies in the fact that if a motor or machine is anomalous, the anomaly will generate an extra component in the vibration time signal, and the corresponding anomalous frequency will be visible in the frequency spectrum. Due to Fourier transform limitations, other signal processing techniques such as
   wavelet and Hilbert Huang transform are alternatives for generating new features to deal with more complex time series for anomaly detection.
  \justify
- In the rest of this section, we give an expos$\acute{e}$  of three signal processing methods, namely: Fourier analysis, wavelet transform and Hilbert Huang transform. For each transform, we cover the theoretical back bone in terms of mathematical constructs such as basis, vector space, orthogonality, existence, uniqueness, to name a few. Furthermore, these mathematical constructs will set the limitations as well as the strengths of each transform. Following the theoretical set up is a concrete application, where we generate new features and show how they can be used for anomaly detection.
+ In the rest of this section, we give an expos$\acute{e}$  of three signal processing methods, namely: Fourier analysis, wavelet transform and Hilbert Huang transform. For each transform, we cover the theoretical back bone in terms of mathematical constructs such as basis, vector space, orthogonality, existence, uniqueness, to name a few. Furthermore, these mathematical constructs will set the limitations as well as the strengths of each transform. Following the theoretical set up is a concrete application, where we generate new features and show how they can be used for anomaly detection. T
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -224,11 +224,6 @@ is the best approximation of $f$ in $V_{N,T}$. It is the the orthogonal projecti
 \begin{equation}
 <,f,g> = \frac{1}{T}\int_{0}^{T}f(t)g(t)\mathrm{d}t
 \end{equation}
-
-
-
-
-
 
 \justify
 Let $f$ be an arbitrary periodic function of period $T=2L$, defined on an interval of length $L$. Its Fourier series representation is

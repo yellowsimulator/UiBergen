@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  6 MAY 2019 17:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.7.23)  12 JUN 2019 09:28
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1210,8 +1210,12 @@ File: pie.png Graphic file (type png)
 <use pie.png>
 Package pdftex.def Info: pie.png used on input line 109.
 (pdftex.def)             Requested size: 361.34999pt x 240.62099pt.
- [4] [5 <./pie.png>] [6]
-<fft_domain.png, id=32, 578.16pt x 578.16pt>
+ [4] [5 <./pie.png>]
+
+LaTeX Warning: Reference `fig:fft_domain' on page 6 undefined on input line 153
+.
+
+[6] <fft_domain.png, id=32, 578.16pt x 578.16pt>
 File: fft_domain.png Graphic file (type png)
  <use fft_domain.png>
 Package pdftex.def Info: fft_domain.png used on input line 164.
@@ -1219,11 +1223,13 @@ Package pdftex.def Info: fft_domain.png used on input line 164.
  [7 <./fft_domain.png>] [8] [9]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 307.
 
- (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 307.
+
 <dbscaling.png, id=50, 281.05pt x 200.75pt>
 File: dbscaling.png Graphic file (type png)
  <use dbscaling.png>
@@ -1418,14 +1424,17 @@ Overfull \hbox (75.88538pt too wide) in paragraph at lines 899--900
 [21 <./thesis-pictures/bearing1-test2.png>] [22 <./thesis-pictures/bearing1-tes
 t3.png>] [23] (./dissimilarity_copy.aux)
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 26931 strings out of 493089
- 629509 string characters out of 6134842
+ 26932 strings out of 493089
+ 629525 string characters out of 6134842
  787390 words of memory out of 5000000
- 29860 multiletter control sequences out of 15000+600000
+ 29861 multiletter control sequences out of 15000+600000
  12355 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,16n,77p,1218b,674s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1443,7 +1452,7 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
 015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on dissimilarity_copy.pdf (23 pages, 1276034 bytes).
+Output written on dissimilarity_copy.pdf (23 pages, 1275766 bytes).
 PDF statistics:
  192 PDF objects out of 1000 (max. 8388607)
  95 compressed objects within 1 object stream
