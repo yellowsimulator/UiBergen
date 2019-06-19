@@ -162,11 +162,46 @@ where
 \end{itemize}
 The pitch diameter is the perpendicular distance from the center of one ball to the center of the ball located at the end. The contact angle can be taken to be zero?
 \subsection{Failure detection methodology}
-Given a raw vibration signal from the accelerometer, we are interested in detecting the presence of a forcing frequency. By forcing frequency we refer to either BPFO, BPFI or BSF.  The raw vibration data is refer to as the time domain signal. Since the forcing frequencies are in Hz, we transform the time domain signal into frequency domain signal, as described by Figure \ref{fig:fft_domain}, and look for the presence of the forcing frequencies.
+Given a vibration signal measured from an accelerometer, our intent is to detect the presence of a forcing frequency. By forcing frequency we refer to either BPFO, BPFI or BSF. Recall that a forcing frequency is a fancy name for failure frequency. We will refer to the vibration signal as the time domain signal, as it is customary to do so. Since the forcing frequencies are in Hz, the time domain signal must be transformed into frequency domain signal. The frequency domain signal is also called the frequency spectrum. The reader can refer to Figure \ref{fig:fft_domain} for a reminder. Once we have the frequency spectrum corresponding to the original time signal, we can look for the presence of any forcing frequency.
 \justify
-There are four steps in transforming time domain signal into frequency domain signal: Band pass filtering, demodulation, low pass filtering and Fast Fourier transform. Let go through each of the step. 
-
-
+There are four steps in transforming time domain signal into frequency domain signal: A band pass filtering, enveloping, a low pass filtering and a fast Fourier transformation.
+Figure \ref{fig:fft-process} shows a schematic description of the entire process. Let elaborate on it.  A vibration signal from a bearing accelerometer contains not only the vibration signal of the bearing, but also the signal from other components, such as motor, shaft and so on.
+\justify
+The band pass filter allows signal within a given band of frequency to seep through, while attenuating all other signal. The band of allowed frequencies is bounded bellow and above by two parameters: The low cut-off frequency and the high cut-off frequency, respectively.
+%The intent is to only capture bearing vibration signal and ignore any other. Once this done, the demodulation extract the high frequency time domain signal and a low pass filter extract the low frequency. The Fast Fourier transform is then applied to the time domain signal to generate the frequency spectrum.
+\begin{figure}[H]
+\begin{tikzpicture}
+  [node distance=.8cm,
+  start chain=going below,]
+     \node[punktchain, join] (intro) {Signal};
+     \node[punktchain, join] (probf)      {Band pass filtering};
+     \node[punktchain, join] (investeringer)      {Enveloping};
+     \node[punktchain, join] (perfekt) {Low pass filtering};
+     \node[punktchain, join, ] (emperi) {Fast Fourier transform};
+     % \node (asym) [punktchain ]  {Asymmetrisk information};
+      \begin{scope}[start branch=venstre,
+        %We need to redefine the join-style to have the -> turn out right
+        every join/.style={->, thick, shorten <=1pt}, ]
+        \node[punktchain, on chain=going left, join=by {->}] (risiko) {Frequency spectrum};
+      \end{scope}
+      \begin{scope}[start branch=hoejre,]
+      %\node (finans) [punktchain, on chain=going right] {Det finansielle system};
+    \end{scope}
+    \end{tikzpicture}
+  \caption{Process of obtaining a frequency spectrum from an input signal}
+   \label{fig:fft-process}
+\end{figure}
+\justify
+The enveloping step corresponds to rectifying the signal by accounting only for the positive part of the signal. Let $E(t)$ be the signal resulting from the enveloping process. Let $x(t)$ is the time domain signal, and let its Hilbert transform be denoted by $H(t)$. Then we have
+\begin{equation}
+H(t) = \frac{1}{\pi}P\int_{-\infty}^{+\infty}\frac{x(t)}{t-\tau}\mathrm{d}\tau
+\end{equation}
+\begin{equation}
+E(t) = \sqrt{H(t)^{2}+ x(t)^{2}}
+\end{equation}
+where $P$ is the Cauchy principal value. After the enveloping process, the resulting signal is filtered by removing hight frequency noise and the fast Fourier transform is applied to obtain the frequency spectrum.
+\clearpage
+\subsection{Simulation results from the experiment}
 \blankpage
 \end{document}
 
