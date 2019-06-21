@@ -14,7 +14,7 @@ From solving differential equations to analyzing sound wave, images and signal i
 This is illustrated in Figure \ref{fig:fft_domain}, where a signal (in dark) is decomposed into sinusoidal components (in blue). The sinusoidal components can be represented in a coordinate system with frequencies on the x axe and amplitudes on the y axe (in red). This is called the frequency domain. From the frequency domain we can observe a hight amplitude low frequency component. As we move toward high frequencies, the amplitudes decrease.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=4in]{../fig/fft_domain} 
+   \includegraphics[width=6in]{../fig/fft_domain} 
    %\includegraphics[width=2.5in]{freq} 
    \caption{}
    \label{fig:fft_domain}
@@ -147,7 +147,7 @@ BPFO = \frac{nb}{2}S\left( 1 -  \frac{BD}{PD}\cos(\beta)  \right)
 \begin{equation}\label{eq:bpfi}
 BSF = \frac{PD}{2BD}S\left( 1 -  \left(\frac{BD}{PD}\cos(\beta)\right)^{2}  \right)
 \end{equation}
-
+\clearpage
 where 
 \begin{itemize}
 \item S is the rotating speed of the motor
@@ -244,6 +244,19 @@ In contrast to Figure \ref{fig:bearing1-experiment2-fft}, Figure \ref{fig:bearin
    \caption{Frequency spectrum obtained from vibration signal corresponding to sample 900, of bearing number 4, in experiment 2.}
    \label{fig:bearing4-experiment2-fft}
 \end{figure}
+\justify
+Now let compare all bearing. To do so we compute the BPFO frequency, and related amplitude for each sample. Figure \ref{fig:experiment2_bearing_fft_trend} shows 
+the trend of the BPFO amplitude as the experiment evolve. We can observe that at the beginning of the experiment, bearing number 1 had a significant large failure amplitude.
+As the experiment evolve, the amplitude increases almost steadily, until failure occurs. In contrast to bearing 1, bearing 2, 3 and 4 BPFO amplitude are relatively steady during the experiment. 
+\begin{figure}[H] 
+   \centering
+   \includegraphics[width=6in]{../fig/experiment2_bearing_fft_trend.png} 
+   \caption{Trend for BPFO for each samples}
+   \label{fig:experiment2_bearing_fft_trend}
+\end{figure}
+
+\justify
+\subsubsection{Experiment 1 and 3}
 
 
 
