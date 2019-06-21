@@ -103,10 +103,6 @@ for all t, except at those points t where f in not continuous.
 
 
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Fourier transform and the fast Fourier transform}
 The Fourier series decomposes function into trigonometric extensions in $[-\pi, \pi]$, that vibrates at integer frequencies. Contrary to the Fourier series, the Fourier transform decomposes functions into extensions that vibrates at frequencies that are real number on infinite time interval [ref]. This is of great practical importance, at least for bearing fault detection, since failure failure frequencies are often real numbers.
@@ -202,6 +198,76 @@ E(t) = \sqrt{H(t)^{2}+ x(t)^{2}}
 where $P$ is the Cauchy principal value. After the enveloping process, the resulting signal is filtered by removing hight frequency noise and the fast Fourier transform is applied to obtain the frequency spectrum.
 \clearpage
 \subsection{Simulation results from the experiment}
+In this section we present the results resulting from applying Fourier analysis to detecting two types of faults in bearing, namely: ball pass frequency outer race defect (BPFO) and ball pass frequency inner race defect (BPFI). Recall that BPFO occurs when a defect is initiated in the outer ring of the bearing and BPFI is the defect that is initiated in the inner ring of the bearing. The reader can refer to Figure \ref{fig:bearing} for a detailed geometry description of a bearing. The experimental setup for the bearings are given in Figure \ref{fig:exp}. The bearing used in these experiments are manufactured by the company Rexnord, and are of type Rexnord ZA 2115, with forcing frequencies  given by 
+\begin{equation}
+BPFO = 236.4 Hz, \quad BPFI = 296.8 Hz \nonumber
+\end{equation}
+We apply the process described in Figure \ref{fig:fft-process} for experiment 1, 2 and 3
+\subsubsection{Result for experiment 2}
+In experiment number 2, successive vibration samples where measured from bearing number 1,2,3 and 4, resulting in 984 samples for each bearing.  At the end of the experiment, BPFO defect occurs in bearing number 1. Figure \ref{fig:bearing1-experiment2} shows the vibration signal from sample number 900, measured from bearing number 1. Figure \ref{fig:bearing1-experiment2-fft} shows the corresponding frequency spectrum obtained by applying the process described in Figure \ref{fig:fft-process}.
+\justify
+In the frequency spectrum, we can clearly identify the BPFO frequency (in orange), which has the largest amplitude in the spectrum. We can also observe three harmonics of the BPFO.
+BPFO harmonics are multiple frequency of the BPFO frequency. Here we observe $2\times$BPFO, $3\times$BPFO and $4\times$BPFO harmonics. The BPFO frequency are characterized by the presence of harmonics [ref:Vib analy training manuel cat1]. 
+\justify
+In contrast to Figure \ref{fig:bearing1-experiment2-fft}, Figure \ref{fig:bearing2-experiment2-fft}, \ref{fig:bearing3-experiment2-fft} and \ref{fig:bearing4-experiment2-fft}, show respectively the frequency spectrum of bearing number 2,3 and 4. These spectrum can been seen as noise compare to the spectrum of bearing number 1, which suffers from BPFO defect. It is worth noting that the BPFO defect usually appears at the bottom of the bearing where the load experienced by the bearing is the largest.
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=6in]{../fig/experiment2_bearing1.png} 
+   \caption{Vibration signal corresponding to sample 900, from bearing number 1 in  experiment 2}
+   \label{fig:bearing1-experiment2}
+\end{figure}
+%%%%%%%%%%%%%
+\begin{figure}[H] 
+   \centering
+   \includegraphics[width=6in]{../fig/experiment2_bearing1_fft.png} 
+   \caption{Frequency spectrum obtained from vibration signal corresponding to sample 900, of bearing number 1,  in  experiment 2}
+   \label{fig:bearing1-experiment2-fft}
+\end{figure}
+
+\begin{figure}[H] 
+   \centering
+   \includegraphics[width=6in]{../fig/experiment2_bearing2_fft.png} 
+   \caption{Frequency spectrum obtained from vibration signal corresponding to sample 900, of bearing number 2, in experiment 2.}
+   \label{fig:bearing2-experiment2-fft}
+\end{figure}
+
+\begin{figure}[H] 
+   \centering
+   \includegraphics[width=6in]{../fig/experiment2_bearing3_fft.png} 
+   \caption{Frequency spectrum obtained from vibration signal corresponding to sample 900, of bearing number 3, in experiment 2.}
+   \label{fig:bearing3-experiment2-fft}
+\end{figure}
+
+\begin{figure}[H] 
+   \centering
+   \includegraphics[width=6in]{../fig/experiment2_bearing4_fft.png} 
+   \caption{Frequency spectrum obtained from vibration signal corresponding to sample 900, of bearing number 4, in experiment 2.}
+   \label{fig:bearing4-experiment2-fft}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \blankpage
 \end{document}
 
