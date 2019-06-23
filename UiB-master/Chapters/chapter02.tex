@@ -178,7 +178,7 @@ The band pass filter allows signal within a given band of frequency to seep thro
       \begin{scope}[start branch=venstre,
         %We need to redefine the join-style to have the -> turn out right
         every join/.style={->, thick, shorten <=1pt}, ]
-        \node[punktchain, on chain=going left, join=by {->}] (risiko) {Frequency spectrum};
+        \node[punktchain, on chain=going left, join=by {->}] (risiko) {Frequency spectrum and amplitude};
       \end{scope}
       \begin{scope}[start branch=hoejre,]
       %\node (finans) [punktchain, on chain=going right] {Det finansielle system};
@@ -196,67 +196,77 @@ H(t) = \frac{1}{\pi}P\int_{-\infty}^{+\infty}\frac{x(t)}{t-\tau}\mathrm{d}\tau
 E(t) = \sqrt{H(t)^{2}+ x(t)^{2}}
 \end{equation}
 where $P$ is the Cauchy principal value. After the enveloping process, the resulting signal is filtered by removing hight frequency noise and the fast Fourier transform is applied to obtain the frequency spectrum.
+\justify
+Once we have found the frequency spectrum and the corresponding amplitude, we search any of the forcing frequency and record their amplitude in time. Base on a predefine limit, an alarm is raised when the amplitude is above the limit.
 \clearpage
 \subsection{Simulation results from the experiment}
-In this section we present the results resulting from applying Fourier analysis to detecting two types of faults in bearing, namely: ball pass frequency outer race defect (BPFO) and ball pass frequency inner race defect (BPFI). Recall that BPFO occurs when a defect is initiated in the outer ring of the bearing and BPFI is the defect that is initiated in the inner ring of the bearing. The reader can refer to Figure \ref{fig:bearing} for a detailed geometry description of a bearing. The experimental setup for the bearings are given in Figure \ref{fig:exp}. The bearing used in these experiments are manufactured by the company Rexnord, and are of type Rexnord ZA 2115, with forcing frequencies  given by 
+In this section we present the results from applying Fourier analysis to detecting one type of fault in bearing, namely: ball pass frequency outer race defect (BPFO). The methodology can easily be extended to other forcing frequencies as well, but we limit ourselves to BPFO to avoid any redundancy. Recall that BPFO occurs when a defect is initiated in the outer ring of the bearing. The reader can refer to Figure \ref{fig:bearing} for a detailed geometry description of a bearing. The experimental setup for the bearings are given in Figure \ref{fig:exp}. The bearing type used in this experiment are manufactured by the company Rexnord, and are of type Rexnord ZA 2115, with BPFO forcing frequency  given by 
 \begin{equation}
-BPFO = 236.4 Hz, \quad BPFI = 296.8 Hz \nonumber
+BPFO = 236.4 Hz, %\quad BPFI = 296.8 Hz \nonumber
 \end{equation}
-We apply the process described in Figure \ref{fig:fft-process} for experiment 1, 2 and 3
-\subsubsection{Result for experiment 2}
-In experiment number 2, successive vibration samples where measured from bearing number 1,2,3 and 4, resulting in 984 samples for each bearing.  At the end of the experiment, BPFO defect occurs in bearing number 1. Figure \ref{fig:bearing1-experiment2} shows the vibration signal from sample number 900, measured from bearing number 1. Figure \ref{fig:bearing1-experiment2-fft} shows the corresponding frequency spectrum obtained by applying the process described in Figure \ref{fig:fft-process}.
+We apply the process described in Figure \ref{fig:fft-process} to experiment number 2.
+%\subsubsection{Result for experiment 2}
+In the latter, successive vibration samples where measured from four bearings: Bearing number 1,2,3 and 4, resulting in 984 samples for each bearing.  At the end of the experiment, BPFO defect occurs in bearing number 1. Figure \ref{fig:bearing1-experiment2} shows the vibration signal from sample obtained at [date], from bearing number 1. Figure \ref{fig:bearing1-experiment2-fft} shows the corresponding frequency spectrum obtained by applying the process described in Figure \ref{fig:fft-process}.
 \justify
 In the frequency spectrum, we can clearly identify the BPFO frequency (in orange), which has the largest amplitude in the spectrum. We can also observe three harmonics of the BPFO.
 BPFO harmonics are multiple frequency of the BPFO frequency. Here we observe $2\times$BPFO, $3\times$BPFO and $4\times$BPFO harmonics. The BPFO frequency are characterized by the presence of harmonics [ref:Vib analy training manuel cat1]. 
-\justify
-In contrast to Figure \ref{fig:bearing1-experiment2-fft}, Figure \ref{fig:bearing2-experiment2-fft}, \ref{fig:bearing3-experiment2-fft} and \ref{fig:bearing4-experiment2-fft}, show respectively the frequency spectrum of bearing number 2,3 and 4. These spectrum can been seen as noise compare to the spectrum of bearing number 1, which suffers from BPFO defect. It is worth noting that the BPFO defect usually appears at the bottom of the bearing where the load experienced by the bearing is the largest.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=6in]{../fig/experiment2_bearing1.png} 
-   \caption{Vibration signal corresponding to sample 900, from bearing number 1 in  experiment 2}
+   \includegraphics[width=4.5in]{../fig/experiment2_bearing1.png} 
+   \caption{Vibration signal corresponding to sample 900, from bearing number 1 in  experiment number 2}
    \label{fig:bearing1-experiment2}
 \end{figure}
 %%%%%%%%%%%%%
 \begin{figure}[H] 
    \centering
-   \includegraphics[width=6in]{../fig/experiment2_bearing1_fft.png} 
-   \caption{Frequency spectrum obtained from vibration signal corresponding to sample 900, of bearing number 1,  in  experiment 2}
+   \includegraphics[width=4.4in]{../fig/experiment2_bearing1_fft.png} 
+   \caption{Frequency spectrum obtained from vibration signal corresponding to sample [date], of bearing number 1,  in  experiment number 2}
    \label{fig:bearing1-experiment2-fft}
 \end{figure}
+\justify
+In contrast to Figure \ref{fig:bearing1-experiment2-fft}, Figure \ref{fig:bearing2-experiment2-fft}, \ref{fig:bearing3-experiment2-fft} and \ref{fig:bearing4-experiment2-fft}, show  the frequency spectrum of bearing number 2,3 and 4, respectively. No apparent large peak can be observe in these spectrum, since the spectrum are from bearings with no defect. It is worth noting that the BPFO defect usually appears at the bottom in the outer ring where the load experienced by the bearing is the largest.
 
 \begin{figure}[H] 
    \centering
-   \includegraphics[width=6in]{../fig/experiment2_bearing2_fft.png} 
+   \includegraphics[width=4.4in]{../fig/experiment2_bearing2_fft.png} 
    \caption{Frequency spectrum obtained from vibration signal corresponding to sample 900, of bearing number 2, in experiment 2.}
    \label{fig:bearing2-experiment2-fft}
 \end{figure}
 
 \begin{figure}[H] 
    \centering
-   \includegraphics[width=6in]{../fig/experiment2_bearing3_fft.png} 
+   \includegraphics[width=4.4in]{../fig/experiment2_bearing3_fft.png} 
    \caption{Frequency spectrum obtained from vibration signal corresponding to sample 900, of bearing number 3, in experiment 2.}
    \label{fig:bearing3-experiment2-fft}
 \end{figure}
 
 \begin{figure}[H] 
    \centering
-   \includegraphics[width=6in]{../fig/experiment2_bearing4_fft.png} 
+   \includegraphics[width=4.4in]{../fig/experiment2_bearing4_fft.png} 
    \caption{Frequency spectrum obtained from vibration signal corresponding to sample 900, of bearing number 4, in experiment 2.}
    \label{fig:bearing4-experiment2-fft}
 \end{figure}
 \justify
-Now let compare all bearing. To do so we compute the BPFO frequency, and related amplitude for each sample. Figure \ref{fig:experiment2_bearing_fft_trend} shows 
-the trend of the BPFO amplitude as the experiment evolve. We can observe that at the beginning of the experiment, bearing number 1 had a significant large failure amplitude.
-As the experiment evolve, the amplitude increases almost steadily, until failure occurs. In contrast to bearing 1, bearing 2, 3 and 4 BPFO amplitude are relatively steady during the experiment. 
+Figure \ref{fig:experiment2_bearing_fft_amp}  and \ref{fig:experiment2_bearing_fft_trend}  and show the BPFO amplitude and
+ trend as the experiment evolves. We can observe that at the beginning of the experiment, all bearing have a very low BPFO amplitude. However, at [date], the BPFO amplitude of bearing number 1 starts increasing. As the experiment evolves, the amplitude increases almost steadily, until failure occurs. In contrast to bearing 1, bearing 2, 3 and 4, the BPFO amplitude are relatively steady during the experiment, and only a slight increase is noticeable at the end of the experiment.
 \begin{figure}[H] 
    \centering
-   \includegraphics[width=6in]{../fig/experiment2_bearing_fft_trend.png} 
+    \includegraphics[width=4.4in]{../fig/experiment2_bearing_fft_amp.png}
+  % \includegraphics[width=4.4in]{../fig/experiment2_bearing_fft_trend.png} 
+   \caption{Trend for BPFO for each samples}
+   \label{fig:experiment2_bearing_fft_amp}
+\end{figure}
+
+\begin{figure}[H] 
+   \centering
+   % \includegraphics[width=4.4in]{../fig/experiment2_bearing_fft_amp.png}
+   \includegraphics[width=4.4in]{../fig/experiment2_bearing_fft_trend.png} 
    \caption{Trend for BPFO for each samples}
    \label{fig:experiment2_bearing_fft_trend}
 \end{figure}
 
 \justify
-\subsubsection{Experiment 1 and 3}
+
 
 
 
