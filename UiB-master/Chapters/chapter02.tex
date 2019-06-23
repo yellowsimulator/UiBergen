@@ -204,6 +204,7 @@ In this section we present the results from applying Fourier analysis to detecti
 \begin{equation}
 BPFO = 236.4 Hz, %\quad BPFI = 296.8 Hz \nonumber
 \end{equation}
+\subsubsection{Forcing frequency detection}
 We apply the process described in Figure \ref{fig:fft-process} to experiment number 2.
 %\subsubsection{Result for experiment 2}
 In the latter, successive vibration samples where measured from four bearings: Bearing number 1,2,3 and 4, resulting in 984 samples for each bearing.  At the end of the experiment, BPFO defect occurs in bearing number 1. Figure \ref{fig:bearing1-experiment2} shows the vibration signal from sample obtained at [date], from bearing number 1. Figure \ref{fig:bearing1-experiment2-fft} shows the corresponding frequency spectrum obtained by applying the process described in Figure \ref{fig:fft-process}.
@@ -264,8 +265,11 @@ Figure \ref{fig:experiment2_bearing_fft_amp}  and \ref{fig:experiment2_bearing_f
    \caption{Trend for BPFO for each samples}
    \label{fig:experiment2_bearing_fft_trend}
 \end{figure}
-
+\clearpage
+\subsubsection{Remaining useful life prediction}
+It is of practical application to ask the question, when would a bearing fail ?. After detecting the presence of a forcing frequency and recording the amplitude, one can perform for example extrapolation, to predict the evolution of the amplitude. Looking at Figures  \ref{fig:experiment2_bearing_fft_amp}  and \ref{fig:experiment2_bearing_fft_trend}, we clearly see that extrapolating on the trend will be much easier than on the amplitude. The trend in Figure  \ref{fig:experiment2_bearing_fft_trend} is obtained from the robust seasonal trend estimation STL (Seasonal trend based on Loess) [ref].
 \justify
+The STL method is base on .....(Explain more about STL)
 
 
 
