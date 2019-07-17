@@ -90,7 +90,7 @@ where $c_{j}$ are the IMFs and r is the residual. Note that the IMFs where deriv
 \end{figure}
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=6in]{../fig/emd3.png} 
+   \includegraphics[width=6in]{../fig/imfEMD.png} 
    \caption{The intrinsic mode functions (IMF ) and the residual (in red) generated from the input signal $S(t) = \sin(10 \pi t) + \sin(20 \pi t) $}
    \label{fig:emd3}
 \end{figure}
@@ -103,9 +103,32 @@ where the symbol $\Re(\cdot)$ represents the real part of the expression its enc
 \begin{equation}\label{eq:recoverFourier}
 S(t) = \Re{\left( \sum_{j=1}^{n}a_{j}\exp\left(i\omega_{j}\right)  \right)},
 \end{equation} 
-where this time, the amplitude $a_{j}$ and the frequency $\omega_{j}$ are constant. The Hilbert Huang transform (HHT) offers two different approaches to recover a decomposed signal. The first one is described by equation (\ref{eq:recover1}) and include the IMFs, while the second one is given by equation (\ref{eq:recover2}) and includes the instantaneous amplitude and the instantaneous frequency. This gives the HHT a leverage over Fourier transform in nonlinear an non stationary data analysis.
-\section{Application of the Hilbert Huang transform to pulse detection }
+where this time, the amplitude $a_{j}$ and the frequency $\omega_{j}$ are constant. The Hilbert Huang transform (HHT) offers two different approaches to recover a decomposed signal. The first one is described by equation (\ref{eq:recover1}) and include the IMFs, while the second approach is given by equation (\ref{eq:recover2}) and includes the instantaneous amplitude and the instantaneous frequency. This gives the HHT a leverage over Fourier transform in nonlinear an non stationary data analysis.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Application of the Empirical mode decomposition to pulse detection}
 \label{sec:pulse}
+After introducing the Hilbert Huang transform in the previous section, we are now ready to apply the empirical mode decomposition to a case study: Detecting pulses emitted by a bearing with crack in the outer ring. First of all, a few recalls: Figure \ref{fig:bearing-architecture} shows a geometry of a bearing, with different parts.
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{../fig/bearing.png} 
+   \caption{Geometrical representation of a bearing}
+   \label{fig:bearing-architecture}
+\end{figure}
+\justify
+A fault occurring at the outer ring is called a ball pass frequency outer ring (BPFO) defect. The frequency (in Hz) at which it occurs can be approximated as followed:
+\begin{equation}
+BPFO = \frac{np}{2}S\left(1-\frac{BD}{PD}\cos\left(\beta\right)  \right) \nonumber,
+\end{equation}
+where S is the rotating speed of the motor on which the bearing is attached. nb is the number of rolling elements (balls), BD is a rolling element diameter, PD is the Pitch diameter and $\beta$ is the contact angle. The pitch diameter is half the hight of the inner ring, and the contact angle is the angle formed when a rolling element touches the cage. The data and experimental setup used for this case study was described in chapter 2. In this experiment four bearings are mounted on a motor rotating at 2000 rotations per minutes. The motor runes until bearing number 1 was severely affected by a ball pass frequency outer race defect. The data consists of 984 samples. Each sample is made of vibrating acceleration consisted on 20 480 data points. The vibrating acceleration was measured by using an accelerometer, which is a sensor used to quantify acceleration when a system vibrates. After this background information, we are now ready to describe the methodology used to detect pulses emitted by a bearing with crack in the outer ring.
+\justify
+The method consists of first applying the empirical mode decomposition (EMD), followed by a robust seasonal methods. 
+
+
+
+
 
 
 
