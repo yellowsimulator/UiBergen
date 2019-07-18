@@ -127,7 +127,86 @@ where S is the rotating speed of the motor on which the bearing is attached. nb 
 The method consists of applying the empirical mode decomposition, followed by a robust seasonal trend decomposition method called STL, which stands for Seasonal Trend decomposition procedure based on LOESS,  \cite{Cleveland-et-al-1990}. LOESS is the abbreviation of Locally Estimated Scatterplot Smoother, and is a nonparametric curve fitting procedure. It can be used for \say{Data exploration, diagnostic checking of parametric models and provides a nonparametric regression surface}, \cite{Cleveland-1979}, \cite{Cleveland-et-al-1988}.
 \justify
 \subsection{Seasonal Trend decomposition based on Loess (STL)}
-The STL sequentially applies the locally estimated scatterplot smoother (LOESS) in order to obtain cyclical and trend components of a signal. Here a cyclical event is a periodically occurring pattern. The LOESS procedure being a non parametric regression method, does not assume the shape of the curve that needs to be fitted. It therefore provides a flexible ways to fit a curve, by capturing local characteristics. Since pulses emitted by a bearing roller elements passing a crack are local periodic events, the STL provides the necessary mathematical apparatus to capture pulses. It is computational efficient and able to deal with very long signals and handles very well missing data, \cite{Cleveland-et-al-1990}.
+The STL sequentially applies the locally estimated scatterplot smoother (LOESS) in order to obtain cyclical and trend components of a signal. Here a cyclical component is a periodically occurring pattern in a signal.
+If $S(t)$ is a signal, the goal is to obtain the decomposition 
+\begin{equation}
+S(t) = T(t) + C(t) + R(t),
+\end{equation} 
+where $T(t)$ an $C(t)$ are the trend and cyclical components, and $R(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatterplot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. It therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. Since pulses emitted by a bearing roller elements passing a crack, are local periodic events on a global scale, the STL provides the necessary mathematical apparatus to capture them.
+\justify
+By design, the STL is computational efficient, robust in the sense that it uses a robust statistical estimator, and deals very well with missing and distorted data points, \cite{Cleveland-et-al-1990}. In the subsequent paragraphs, an account of the LOESS procedure is presented, followed by the description of the STL method.
+\justify
+Given a signal represented by a set of $n$ points, conveniently expressed by their coordinates
+\begin{equation}
+\{ (t_{j}, y_{j}), \quad j = 1, \cdots, n\},
+\end{equation}
+where $t_{j}$ is the independent variable on the time scale and $y_{j}$ is the dependent variable. The LOESS procedure finds a smooth function $\hat{g}(t)$, defined everywhere on the scale of the independent variable, such that the estimate of $y_{j}$ denoted by $\hat{y}_{j}$ at $t_{j}$ is computed as 
+\begin{equation}
+\begin{split}
+\hat{y}_{j} &= \hat{g}(t_{j}) \\
+                &=\sum_{k=0}^{d}\hat{\alpha}_{k}(t_{j})t_{j}^{k}
+\end{split}
+\end{equation}
+where the $\hat{\alpha}_{k}(t_{j})$ are the values $\alpha_{k}$ that minimize 
+\begin{equation}
+\sum_{k=1}^{n}w_{k}(t_{j})\left(y_{k}-\alpha_{0}-\alpha_{1}t_{k}-\cdots -\alpha_{d}t_{k}^{d}\right)^{2}
+\end{equation}
+with 
+\begin{equation}
+w_{k}(t_{j}) = W\left( \frac{t_{k}-t_{j}}{h_{j}} \right)
+\end{equation}
+
+\begin{equation}
+W(t) = 
+  \begin{cases}
+  \left(1-t^{3}\right)^{3} &\quad\text{for } 0\leq t \le 1\\
+   \0 &\quad\text{for} t\geq 1
+ \end{cases}
+\end{equation}
+and $h_{j}$ is the distance from $t_{j}$ to the nearest neighbor of $t_{j}$. For a signal $S(t)$, by setting 
+\begin{equation}
+S(t) = T(t) + C(t) + R(t), \nonumber
+\end{equation}  
+and by applying sequentially the LOESS procedure, the STL is able to extract the trend $T(t)$ and the cyclical component $C(t)$. A detail treatment on how the trend and cyclical components are extracted can be found in  \cite{Cleveland-et-al-1990}.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Results from applying empirical mode decomposition and seasonal trend decomposition base on Loess}
+In this section we apply the empirical mode decomposition followed by the seasonal trend decomposition based on LOESS to extract pulses emitted by a failed bearing.
+Figure \ref{fig:pulse} shows a flow diagram, describing the methodology to obtain a pulses. An input signal goes through the empirical mode decomposition to generate intrinsic mode functions. 
+The STL is applied on the IMFs to generate the pulses.
+\begin{figure}[H]
+\begin{tikzpicture}
+  [node distance=.8cm,
+  start chain=going below,]
+     \node[punktchain, join] (intro) {\textcolor{blue}{Signal}};
+     \node[punktchain, join] (probf)      {\textcolor{violet}{EMD}};
+     \node[punktchain, join] (investeringer)      {\textcolor{blue}{IMFs}};
+     \node[punktchain, join] (perfekt) {\textcolor{violet}{STL}};
+     %\node[punktchain, join, ] (emperi) {Fast Fourier transform};
+     % \node (asym) [punktchain ]  {Asymmetrisk information};
+      \begin{scope}[start branch=venstre,
+        %We need to redefine the join-style to have the -> turn out right
+        every join/.style={->, thick, shorten <=1pt}, ]
+        \node[punktchain, on chain=going left, join=by {->}] (risiko) {\textcolor{blue}{Pulse}};
+      \end{scope}
+      \begin{scope}[start branch=hoejre,]
+      %\node (finans) [punktchain, on chain=going right] {Det finansielle system};
+    \end{scope}
+    \end{tikzpicture}
+  \caption{Methodology of obtaining pulses }
+   \label{fig:pulse}
+\end{figure}
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=6in]{../fig/emd-stl.png} 
+   \caption{Pulses extracted by applying EMD followed by STP}
+   \label{fig:emd-stl}
+\end{figure}
 
 %This is precisely what is require to capture a pulse, which can be viewed as a periodic emanation of an event such as a bearing ball passing a crack.
  
