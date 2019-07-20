@@ -185,7 +185,7 @@ The outer race ball pass frequency defect, can be viewed as a crack located at t
 \begin{tikzpicture}
   [node distance=.8cm,
   start chain=going below,]
-     \node[punktchain, join] (intro) {\textcolor{blue}{Signal}};
+     \node[punktchain, join] (intro) {\textcolor{blue}{Input signal}};
      \node[punktchain, join] (probf)      {\textcolor{violet}{EMD}};
      \node[punktchain, join] (investeringer)      {\textcolor{blue}{IMFs}};
      \node[punktchain, join] (perfekt) {\textcolor{violet}{STL}};
@@ -194,7 +194,7 @@ The outer race ball pass frequency defect, can be viewed as a crack located at t
       \begin{scope}[start branch=venstre,
         %We need to redefine the join-style to have the -> turn out right
         every join/.style={->, thick, shorten <=1pt}, ]
-        \node[punktchain, on chain=going left, join=by {->}] (risiko) {\textcolor{blue}{Pulse}};
+        \node[punktchain, on chain=going left, join=by {->}] (risiko) {\textcolor{blue}{Pulses}};
       \end{scope}
       \begin{scope}[start branch=hoejre,]
       %\node (finans) [punktchain, on chain=going right] {Det finansielle system};
