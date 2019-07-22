@@ -48,13 +48,17 @@ subjected to
 y_{i}\left( \bm{W}^{T}\bm{X}_{i} + b \right) \geq 0, \quad i = 1,\cdots,n.
 \end{equation}
 Equations (\ref{eq:svmformulation1}, \ref{eq:svmformulation2}) can be solve by Lagrange multiplier methods:
-\begin{equation}
+\begin{equation}\label{eq:svmprime1}
 L(\bm{W}, b, \theta) = \frac{1}{2}||  \bm{W}||^{2} -\sum_{i}^{n}\theta_{i}\left(y_{i}\left( \bm{W}^{T}\bm{X}_{i} + b \right) -1  \right)
 \end{equation}
-\begin{equation}\label{eq:svmformulation1}
+\begin{equation}\label{eq:svmprime2}
 \min_{\bm{W},b}L(\bm{W}, b, \theta),
 \end{equation}
-subjected to $\theta_{i} \geq 0$, where $\theta_{i} \in \mathbb{R}$, and $\bm{W}^{T}$ denotes the transpose of the vector $\bm{W}$.
+subjected to 
+\begin{equation}\label{eq:constraint}
+\theta_{i} \geq 0,
+\end{equation}
+ where $\theta_{i} \in \mathbb{R}$, and $\bm{W}^{T}$ denotes the transpose of the vector $\bm{W}$. Equation (\ref{eq:svmprime1}, \ref{eq:svmprime2}, \ref{eq:constraint}) is referred to as the primal formulation of SVM. The Lagrangian defined in \ref{eq:svmprime1} and the inequality constraint defined by \ref{eq:constraint} are both convex, and a dual formulation of the quadratic programming problem (\ref{eq:svmprime1}, \ref{eq:svmprime2}, \ref{eq:constraint} can be formulated as followed:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wavelet transform}
