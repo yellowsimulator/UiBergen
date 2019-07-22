@@ -16,9 +16,9 @@ The method presented in this chapter solely relies on the data to detect any fau
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Support vector machine (SVM)}
 \label{sec:svm}
-The Support vector machine was originally presented by [vopnikk1995] as a two-groups, classification algorithm. It solves the problem of classifying an input vector into two groups. In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups. It was introduced as support-vector Networks, but is now popularly refer to as support vector machine. The bulk of the SVM rests on the following idea: Use a nonlinear kernel to map the input data into a high dimensional feature space, where a linear decision function is used to classify data into two groups.
+The Support vector machine was originally presented by [vopnikk1995] as a two-groups, classification algorithm. It solves the problem of classifying an input vector into two groups. In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups. It was originally introduced as support-vector Networks, but is now popularly refer to as support vector machine. The bulk of the SVM rests on the following idea: Use a nonlinear kernel to map the input data into a high dimensional feature space, where a linear decision function is used to classify data into two groups.
 \justify
-A non linear kernel is just a nonlinear function and a decision function also called a discriminator function is a curve that separates the two two groups. The classification is based on optimizing a margin separating the two groups. 
+A non linear kernel is just a nonlinear function and a decision function also called a discriminator function is a curve that separates the two groups. The classification is based on optimizing a margin separating the two groups. 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=5in]{../fig/svm2d.png} 
@@ -26,8 +26,35 @@ A non linear kernel is just a nonlinear function and a decision function also ca
    \label{fig:svm2d}
 \end{figure}
 \justify
-Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of points mark by circle and cross are separated an optimum curve or hyperplane.The margin is the distance between the support vectors, which are the line
- 
+Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of points marked by circle and cross are separated by the optimum curve or hyperplane (here the solid dash line). The margin is the distance or gap between solid dark lines. Here the two classes are linearly separable, meaning that a linear function can be used to separate the two classes. Support vectors are points that lies on the margins (points in grey square lying on the dark lines) and defines the margin of largest separation between the two classes [vapnik1995].
+\justify
+The formulation of the SVM problem goes like this: Let $\bm{X} \in \mathbb{R}^{d}$  be an input vector, $\bm{W}\in \mathbb{R}^{d}$ a vector of parameters and $b\in \mathbb{R}$, where $d$ is an integer. Let $y_{i}\in \{-1,1\}$. We can then classify a vector $\bm{X}_{i}, i = 1,\cdots,n$ such that
+\begin{equation}\label{eq:svmformulation}
+\begin{split}
+\bm{W}^{T}\bm{X}_{i} + b &< 0, \quad \Rightarrow y_{i} = -1\\
+\bm{W}^{T}\bm{X}_{i} + b &> 0, \quad \Rightarrow y_{i} = 1,
+\end{split}
+\end{equation}
+where the equation of the separating hyperplane is then given by 
+\begin{equation}
+\bm{W}^{T}\bm{X}_{i} + b = 0.
+\end{equation}
+The problem specified by equation (\ref{eq:svmformulation}) can be formulated as the following convex quadratic programming problem:
+\begin{equation}\label{eq:svmformulation1}
+\min_{\bm{W},b}\frac{1}{2}||  \bm{W}||^{2}
+\end{equation}
+subjected to 
+\begin{equation}\label{eq:svmformulation2}
+y_{i}\left( \bm{W}^{T}\bm{X}_{i} + b \right) \geq 0, \quad i = 1,\cdots,n.
+\end{equation}
+Equations (\ref{eq:svmformulation1}, \ref{eq:svmformulation2}) can be solve by Lagrange multiplier methods:
+\begin{equation}
+L(\bm{W}, b, \theta) = \frac{1}{2}||  \bm{W}||^{2} -\sum_{i}^{n}\theta_{i}\left(y_{i}\left( \bm{W}^{T}\bm{X}_{i} + b \right) -1  \right)
+\end{equation}
+\begin{equation}\label{eq:svmformulation1}
+\min_{\bm{W},b}L(\bm{W}, b, \theta),
+\end{equation}
+subjected to $\theta_{i} \geq 0$, where $\theta_{i} \in \mathbb{R}$, and $\bm{W}^{T}$ denotes the transpose of the vector $\bm{W}$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wavelet transform}
