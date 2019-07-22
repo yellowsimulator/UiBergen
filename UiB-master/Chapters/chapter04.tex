@@ -16,9 +16,18 @@ The method presented in this chapter solely relies on the data to detect any fau
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Support vector machine (SVM)}
 \label{sec:svm}
-The Support vector machine was originally presented by [vopnikk1995] as a two classes, classification problem.
-
-
+The Support vector machine was originally presented by [vopnikk1995] as a two-groups, classification algorithm. It solves the problem of classifying an input vector into two groups. In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups. It was introduced as support-vector Networks, but is now popularly refer to as support vector machine. The bulk of the SVM rests on the following idea: Use a nonlinear kernel to map the input data into a high dimensional feature space, where a linear decision function is used to classify data into two groups.
+\justify
+A non linear kernel is just a nonlinear function and a decision function also called a discriminator function is a curve that separates the two two groups. The classification is based on optimizing a margin separating the two groups. 
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5in]{../fig/svm2d.png} 
+   \caption{Illustration of two classes classification from [vapnik1995]}
+   \label{fig:svm2d}
+\end{figure}
+\justify
+Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of points mark by circle and cross are separated an optimum curve or hyperplane.The margin is the distance between the support vectors, which are the line
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wavelet transform}
