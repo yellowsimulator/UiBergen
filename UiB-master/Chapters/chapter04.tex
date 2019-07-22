@@ -4,8 +4,51 @@
 %%=========================================
 \documentclass[../Main/thesis.tex]{subfiles}
 \begin{document}
-\chapter[Wavelet transform coupled with one class Support Vector machine]{Wavelet transform coupled with one class Support Vector machine]}
+\chapter[One class SVM coupled with wavelet transform for bearing health monitoring]{One class SVM coupled with wavelet transform for bearing health monitoring}
 \label{sec:waveletandsvm}
+In this chapter we introduce yet a another method for bearing fault detection. In Chapter \ref{sec:chapter2} We showed how the fast Fourier transform is applied to bearing fault diagnosis. Although popular in the industry for bearing fault analysis and detection, the fast Fourier transform method is not without limitations. As in any scientific methods, the limitations are grounded in the mathematical assumptions upon which the method is derived. As pointed previously, two such assumption are linearity, and stationarity. Furthermore, for bearing fault analysis, the fast Fourier method relies on the rotational speed of the motor on which the bearings are mounted. In addition, the forcing frequencies are derived from the physical properties of the bearing. Thus, the fast Fourier transform method for bearing fault detection can be seen as a physics base data driven method.
+\justify
+In this chapter, a purely data driven method is presented. It consists of applying wavelet transform for feature generation, a robust statistical estimator to quantify a bearing health, and a support vector machine (SVM) for anomaly detection. Before giving a detail account of the method, let clarify some semantics and outline the benefits of this method. A feature in the context of this chapter, is a component of a signal. As pointed out earlier, a signal can have multiple components, which can be extracted for example by applying Fourier series or Fourier transform. In this case a feature or component of the original signal is a trigonometric function. A support vector machine (SVM) is an algorithm for pattern identification that uses margins to separate data into different groups [vapnik1995].
+\justify
+The method presented in this chapter solely relies on the data to detect any fault. it does not require bearing physical properties, and can be applies to any nonlinear and non-stationary data generated process. In the rest of this chapter we will refer to a generic bearing fault as an anomaly. As defined in [chandola2009], \say{Anomalies are patterns in data that do not conform to a well defined notion of normal behavior}. In section \ref{sec:svm} a detailed account of support vector machine algorithm is lade out, followed by wavelet transform in section \ref{sec:wavelet}. Finally, section \ref{sec:sectionresult} presents a one class SVM coupled with wavelet transform for bearing anomaly detection.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Support vector machine (SVM)}
+\label{sec:svm}
+The Support vector machine was originally presented by [vopnikk1995] as a two classes, classification problem.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wavelet transform}
+\label{sec:wavelet}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Coupled SVM and wavelet transform for bearing anomalies detection}
+\label{sec:sectionresult}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \blankpage
 \end{document}
 
