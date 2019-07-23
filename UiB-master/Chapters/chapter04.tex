@@ -93,13 +93,24 @@ Figure \ref{fig:nonlinearsvm} illustrates a nonlinear separable problem, where t
 \begin{equation}
 K: \mathbb{R}^{d}\times \mathbb{R}^{d} \rightarrow \mathbb{R}
 \end{equation}
-called a kernel function is required. The latter maps the data into a higher dimension space, where the data is linearly separable. This is illustrated in Figure \ref{fig:kernelsvm} where  class 1 and 2 originally nonlinearly separable, are map to a higher dimension where they are linearly separable.
+called a kernel function is required. The latter maps the data into a higher dimension space, where the data is linearly separable. Figure \ref{fig:kernelsvm} shows two classes 0 and 1 originally nonlinearly separable in two dimension. After applying a gaussian kernel the data is map to a higher dimension where the two classes are linearly separable. This can been seen in Figure \ref{fig:kernelsvm1}.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=6in]{../fig/kernelsvm.png} 
-   \caption{Using a kernel to map the data in higher dimension in order to linearly separate class 1 and 2}.
+   \includegraphics[width=6in]{../fig/nonlinearseparable.png} 
+   %\includegraphics[width=4in]{../fig/linearseparable.png} 
+   \caption{Nonlinear separable classes 0 and 1}.
    \label{fig:kernelsvm}
 \end{figure}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   %\includegraphics[width=4in]{../fig/nonlinearseparable.png} 
+   \includegraphics[width=6.5in]{../fig/linearseparable.png} 
+   \caption{Linear separable classes 0 and 1 after using a gaussian kernel to map the data in higher dimension}.
+   \label{fig:kernelsvm1}
+\end{figure}
+
+
 \justify
 Example of common Kernel functions are 
 \begin{itemize}
