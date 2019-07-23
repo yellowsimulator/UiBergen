@@ -82,12 +82,50 @@ subjected to
 \theta_{i} \geq 0, \quad \forall i = 1,\cdots,n
 \end{split}
 \end{equation}
-which can be efficiently solve with a sequential minimization algorithm. The above primal and dual formulations hold for linear separable classes. 
-
+which can be efficiently solve with a sequential minimization algorithm. The above primal and dual formulations hold for linear separable classes. \begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5in]{../fig/nonlinearsvm.png} 
+   \caption{Nonlinear separable points in two dimensions}
+   \label{fig:nonlinearsvm}
+\end{figure}
+\justify
+Figure \ref{fig:nonlinearsvm} illustrates a nonlinear separable problem, where the two classes can not directly separated by a linear curve. This problem requires a different formulation. In this case a nonlinear function $K(X,Z)$
+\begin{equation}
+K: \mathbb{R}^{d}\times \mathbb{R}^{d} \rightarrow \mathbb{R}
+\end{equation}
+called a kernel function is required. The latter maps the data into a higher dimension space, where the data is linearly separable. This is illustrated in Figure \ref{fig:kernelsvm} where  class 1 and 2 originally nonlinearly separable, are map to a higher dimension where they are linearly separable.
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=6in]{../fig/kernelsvm.png} 
+   \caption{Using a kernel to map the data in higher dimension in order to linearly separate class 1 and 2}.
+   \label{fig:kernelsvm}
+\end{figure}
+\justify
+Example of common Kernel functions are 
+\begin{itemize}
+\item Linear kernel,  $K\left(X,Z\right) = X^{T}Z$
+\item Polynomial of degree $q$ kernel, $K\left(X,Z\right) = \left(1+X^{T}Z\right)^{q}$ 
+\item Exponential kernel,  $K(X,Z) = \exp\left(-\gamma ||X-Z||\right)$ ,$\gamma\in\mathbb{R}$
+\item Gaussian kernel,  $K(X,Z) = \exp\left(-\gamma ||X-Z||^{2}\right)$ ,$\gamma\in\mathbb{R}$
+\end{itemize}
+The nonlinear dual formulation of the SVM can now be formulated in term of the kernel function $K$ as 
+\begin{equation}
+\max_{\theta}\sum_{i=1}^{n}\theta_{i} - \frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\theta_{i}\theta_{j}y_{i}y_{j}K\left(\bm{X}_{i},\bm{X}_{j}\right)
+\end{equation}
+subjected to 
+\begin{equation}
+\begin{split}
+\sum_{i}^{n}\theta_{i}y_{i} = 0\\
+\theta_{i} \geq 0, \quad \forall i = 1,\cdots,n.
+\end{split}
+\end{equation}
+\justify
+Some of the advantages of the SVM are high classification accuracy and robustness to outliers. That is it deals very well with aberrant data points as well as missing data points. However, for nonlinear separable problems, the computation of the kernel can incur significant overhead for large data, since the complexity is $\mathcal{O}\left(n^{2}\right)$. This can however be mitigated by perfoming the so call kernel trick, which reduces the complexity of the computation. Detail account of the kernel trick can be found in [reference].
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wavelet transform}
 \label{sec:wavelet}
+
 
 
 
