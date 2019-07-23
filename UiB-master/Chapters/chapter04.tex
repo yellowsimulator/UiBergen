@@ -16,7 +16,7 @@ The method presented in this chapter solely relies on the data to detect any fau
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Support vector machine (SVM)}
 \label{sec:svm}
-The Support vector machine was originally presented by [vopnikk1995] as a two-groups, classification algorithm. It solves the problem of classifying an input vector into two groups. In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups. It was originally introduced as support-vector Networks, but is now popularly refer to as support vector machine. The bulk of the SVM rests on the following idea: Use a nonlinear kernel to map the input data into a high dimensional feature space, where a linear decision function is used to classify data into two groups.
+The Support vector machine algorithm was originally derived by [vopnikk1995] as a two-groups, classification algorithm. It solves the problem of classifying an input vector into two groups. In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups. It was originally introduced as support-vector Networks, but is now popularly refer to as support vector machine. The bulk of the SVM rests on the following idea: Use a nonlinear kernel to map the input data into a high dimensional feature space, where a linear decision function is used to classify data into two groups [vopmik1995].
 \justify
 A non linear kernel is just a nonlinear function and a decision function also called a discriminator function is a curve that separates the two groups. The classification is based on optimizing a margin separating the two groups. 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
@@ -28,18 +28,30 @@ A non linear kernel is just a nonlinear function and a decision function also ca
 \justify
 Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of points marked by circle and cross are separated by the optimum curve or hyperplane (here the solid dash line). The margin is the distance or gap between solid dark lines. Here the two classes are linearly separable, meaning that a linear function can be used to separate the two classes. Support vectors are points that lies on the margins (points in grey square lying on the dark lines) and defines the margin of largest separation between the two classes [vapnik1995].
 \justify
-The formulation of the SVM problem goes like this: Let $\bm{X} \in \mathbb{R}^{d}$  be an input vector, $\bm{W}\in \mathbb{R}^{d}$ a vector of parameters and $b\in \mathbb{R}$, where $d$ is an integer. Let $y_{i}\in \{-1,1\}$. We can then classify a vector $\bm{X}_{i}, i = 1,\cdots,n$ such that
+The SVM can be formulated as a convex quadratic optimization problem. In this setting, the objective function is convex and quadratic, and the inequality constraint is convex. Henceforth, from the duality principal of the mathematical optimization theory, there exist two formulations of the SVM: A primal formulation and an equivalent dual formulation. For convex optimization problem, we always nearlly have strong duality, that is the optimum solution of the primal problem is equal to the optimum solution of the dual problem.
+
+\justify
+The formulation of the SVM problem goes like this: Find the optimum linear curve (the dash line in Figure \ref{fig:svm2d}), that separates  two groups of points (circle points and cross points in Figure \ref{fig:svm2d}), from the nearest points of each class (the support vectors which are points in the in grey square in Figure \ref{fig:svm2d}).
+\justify
+Let $\bm{X}_{i} \in \mathbb{R}^{d}$  be an input vector, $\bm{W}\in \mathbb{R}^{d}$ a vector of parameters and $b\in \mathbb{R}$, where $d$ is an integer. Let $y_{i}\in \{-1,1\}$. Any vector $\bm{X}_{i}$ can be classify as 
 \begin{equation}\label{eq:svmformulation}
-\begin{split}
-\bm{W}^{T}\bm{X}_{i} + b &< 0, \quad \Rightarrow y_{i} = -1\\
-\bm{W}^{T}\bm{X}_{i} + b &> 0, \quad \Rightarrow y_{i} = 1,
-\end{split}
+y_{i} =
+  \begin{cases}
+                                   -1 & \text{if $\bm{W}^{T}\bm{X}_{i} + b < 0$} \\
+                                   1 & \text{if $\bm{W}^{T}\bm{X}_{i} + b > 0$},
+  \end{cases}
 \end{equation}
-where the equation of the separating hyperplane is then given by 
-\begin{equation}
+%\begin{equation}\label{eq:svmformulation}
+%\begin{split}
+%\bm{W}^{T}\bm{X}_{i} + b &< 0, \quad \Rightarrow y_{i} = -1\\
+%\bm{W}^{T}\bm{X}_{i} + b &> 0, \quad \Rightarrow y_{i} = 1,
+%\end{split}
+%\end{equation}
+where the equation of the separating hyperplane is given by 
+\begin{equation}\label{eq:svmformulation01}
 \bm{W}^{T}\bm{X}_{i} + b = 0.
 \end{equation}
-The problem specified by equation (\ref{eq:svmformulation}) can be formulated as the following convex quadratic programming problem:
+The problem specified by equation (\ref{eq:svmformulation}, \ref{eq:svmformulation01}) can be formulated as the following convex quadratic optimization problem:
 \begin{equation}\label{eq:svmformulation1}
 \min_{\bm{W},b}\frac{1}{2}||  \bm{W}||^{2}
 \end{equation}
@@ -47,18 +59,31 @@ subjected to
 \begin{equation}\label{eq:svmformulation2}
 y_{i}\left( \bm{W}^{T}\bm{X}_{i} + b \right) \geq 0, \quad i = 1,\cdots,n.
 \end{equation}
-Equations (\ref{eq:svmformulation1}, \ref{eq:svmformulation2}) can be solve by Lagrange multiplier methods:
+Equations (\ref{eq:svmformulation1}, \ref{eq:svmformulation2}) is called the primal formulation of the SVM. An equivalent dual formulation called the Lagrangian dual formulation is defined as followed:
+Let 
 \begin{equation}\label{eq:svmprime1}
 L(\bm{W}, b, \theta) = \frac{1}{2}||  \bm{W}||^{2} -\sum_{i}^{n}\theta_{i}\left(y_{i}\left( \bm{W}^{T}\bm{X}_{i} + b \right) -1  \right)
 \end{equation}
-\begin{equation}\label{eq:svmprime2}
-\min_{\bm{W},b}L(\bm{W}, b, \theta),
+be the Lagrangian derived from the primal SVM formulation, where $\theta_{i} \in \mathbb{R}^{d}$, and $\bm{W}^{T}$ denotes the transpose of the vector $\bm{W}$. Taking the partial derivative of the Lagrangian with respect to $\bm{W}$ and $b$ we obtain  
+\begin{equation}\label{eq:dual1}
+\begin{split}
+\frac{\partial L(\bm{W}, b, \theta)}{\partial \bm{W}} &= \bm{W}-\sum_{i=1}^{n}\theta_{i}y_{i}\bm{X}_{i} = 0, \quad \Rightarrow \bm{W} = \sum_{i=1}^{n}\theta_{i}y_{i}\bm{X}_{i}\\
+\frac{\partial L(\bm{W}, b, \theta)}{\partial b} &= \sum_{i=1}^{n}\theta_{i}y_{i} = 0.
+\end{split}
+\end{equation}
+Substituting $\bm{W}$ back to the primal formulation (\ref{eq:svmformulation1}, \ref{eq:svmformulation2}) , with $ \sum_{i=1}^{n}\theta_{i}y_{i} = 0$, we obtain the dual Lagrangian formulation as 
+\begin{equation}
+\max_{\theta}\sum_{i=1}^{n}\theta_{i} - \frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\theta_{i}\theta_{j}y_{i}y_{j}\bm{X}_{i}\bm{X}_{j}
 \end{equation}
 subjected to 
-\begin{equation}\label{eq:constraint}
-\theta_{i} \geq 0,
+\begin{equation}
+\begin{split}
+\sum_{i}^{n}\theta_{i}y_{i} = 0\\
+\theta_{i} \geq 0, \quad \forall i = 1,\cdots,n
+\end{split}
 \end{equation}
- where $\theta_{i} \in \mathbb{R}$, and $\bm{W}^{T}$ denotes the transpose of the vector $\bm{W}$. Equation (\ref{eq:svmprime1}, \ref{eq:svmprime2}, \ref{eq:constraint}) is referred to as the primal formulation of SVM. The Lagrangian defined in \ref{eq:svmprime1} and the inequality constraint defined by \ref{eq:constraint} are both convex, and a dual formulation of the quadratic programming problem (\ref{eq:svmprime1}, \ref{eq:svmprime2}, \ref{eq:constraint} can be formulated as followed:
+which can be efficiently solve with a sequential minimization algorithm. The above primal and dual formulations hold for linear separable classes. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wavelet transform}
