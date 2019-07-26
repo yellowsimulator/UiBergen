@@ -225,8 +225,16 @@ In the next section we apply the Debauchies wavelet combined with the support ve
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\section{Coupled SVM and wavelet transform for bearing anomalies detection}
-\label{sec:sectionresult}
+\section{Coupled SVM and wavelet transform for bearing anomalies detection: A case study}
+\label{sec:result-svm-wavelet}
+In section \ref{sec:svm} and \ref{sec:wavelet}, we described support vector machine as a linear classifier, and wavelet transform as a signal decomposition tool. In this section, we present a methodology that couples SVM and wavelet transform, in order to monitor and detect bearing failure, for a system of bearings mounted on a motor. The data used in this case study was generated in the experimental set up described in Chapter 2. In this experiment, a motor rotating at 2000 rotation per minute and housing four bearings, was run to failure. At the end of the experiment, bearing number one was severely affected by a defect in the outer ring.
+\justify
+The present methodology, for bearing fault monitoring and detection, consists of three successive steps. In the first step, an input signal is decomposed into two sub-signals by applying a wavelet transform. The two sub-signal are the approximate coefficients and the detailed coefficients. The former and the latter can be interpreted in two ways. Firstly they represent the low and high frequency information for a signal, and secondly they encode the temporal and frequency information. We will term them temporal and frequency features respectively. 
+\justify
+In the second step of the methodology, the inter quartile range of the temporal and frequency feature are computed. Recall that the inter quartile range is a statistical estimator, that quantifies the dispersion of a sample. It is a robust estimator. That is, its asymptotic breaking point is one-half $\left(\frac{1}{2}\right)$, as opposed to the mean whose whose asymptotic breaking point is zero.
+
+
+
 
 
 
