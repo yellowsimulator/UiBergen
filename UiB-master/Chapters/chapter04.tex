@@ -234,6 +234,32 @@ The present methodology, for bearing fault monitoring and detection, consists of
 In the second step of the methodology, the inter quartile range of the temporal and frequency features are computed. The interquartile range represents the health index. Recall that the inter quartile range is a statistical estimator, that quantifies the dispersion of a sample. It is a robust estimator in the sense that is is based on the median. The asymptotic breaking point of the median is one-half $\left(\frac{1}{2}\right)$, as opposed to the mean whose asymptotic breaking point is zero. \say{The asymptotic breaking point represents the fraction of data point that can be given arbitrary values without making an estimator arbitrary bad}. In the case of the mean for example, even one \say{bad} data point such as an outlier can distort an estimator based on the mean. On the other hand, since the inter quartile range is based on the median, even if half of the data is \say{bad}, we can still rely on the values of an estimator based on the median. 
 \justify
 In the third and last step, we apply the support vector machine classifier. For successive bearings measurement sample, we apply step one and step two to generate a set of points in the temporal and frequency feature space. Each point represents the health index coordinate, and together the points represent the health trajectory of a bearing. Once we have the health index trajectory we apply the SVM.
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5in]{../fig/health_plot.png} 
+   \caption{Health trajectories of all bearing mounted on a motor run to failure at 2000 rotation per minute}
+   \label{fig:health_plot}
+\end{figure}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5.3in]{../fig/svm.png} 
+   \caption{One class support vector machine }
+   \label{fig:one-class-svmt}
+\end{figure}
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5.3in]{../fig/frequency_feature_health.png} 
+   \caption{Frequency feature health index as a function of time-}
+   \label{fig:frequency_feature_health}
+\end{figure}
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5.3in]{../fig/temporal_feature_health.png} 
+   \caption{Temporal feature health index as a function of time-}
+   \label{fig:temporal_feature_health}
+\end{figure}
 
 
 
