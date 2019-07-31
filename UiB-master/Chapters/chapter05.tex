@@ -1,13 +1,63 @@
 % !TEX encoding = UTF-8 Unicode
-%!TEX root = ../Main/thesis.tex
+%!TEX root = thesis.tex
 % !TEX spellcheck = en-US
 %%=========================================
 \documentclass[thesis.tex]{subfiles}
 \begin{document}
-\chapter[Conclusion]{Conclusion}
-\label{sec:conclusion}
-
-
+	\chapter[Conclusions]{Conclusions, Discussion, and Recommendations for Further Work}
+	\label{ch:conclusions}
+	%%This is the last chapter
+	In this final chapter you should sum up what you have done and which results you have got. 
+	You should also discuss your findings, and give recommendations for further work.
+	
+	%%=========================================
+	\section{Summary and Conclusions}
+	\label{sec:summary_and_conclusions}
+	%Here, you present a brief summary of your work and list the main results you have got. 
+	%You should give comments to each of the objectives in Chapter 1 and state whether or not you have met the objective. 
+	%If you have not met the objective, you should explain why (e.g., data not available, too difficult).
+	%
+	%This section is similar to the Summary and Conclusions in the beginning of your report, but more detailed---referring to the the various sections in the report.
+	The industrial revolution led to efficiency in all economical sectors, and consequently an improvement in nearly all aspects of human live. All this progress would not have been possible without machines. However, they are prone to failure, and must be monitor and maintain, to avoid unexpected and catastrophic breakdown. To mitigate such events, most machines are equipped with an array of sensors, collecting continuously data, which are analyzed in order to detect as early as possible any sign of failure.
+	\justify
+	In this thesis, we looked at different methods used to detect bearings defects, which represents more than 40 $\%$ of all deterioration in rotating machines. By allowing rotational movement, bearings are critical part of nearly all rotating equipment. They are continually subjected to extensive load, thereby must be closely kept under observation. The most widely used method for bearing fault detection is the Fourier transform. It decomposes vibration signals into a spectrum of frequencies. For a bearing, the failure frequency is derived from its geometrical components and the rotational speed of the machine on which it is mounted. Once the failure frequency is known, it suffices to search for it in the frequency spectrum, derived from the Fourier transform of a bearing vibration signal.
+	\clearpage
+	\justify
+	In Chapter 2, we showed how the Fourier transform method can be used to decompose a signal into its corresponding frequency spectrum, and detect a failure in the outer race of a bearing. We decomposed 984 vibration samples each measured from four bearings. By applying the Fourier transform method, we where able to identify a failed bearing by monitoring the failure frequency of four bearings mounted on a motor.
+	
+	\justify
+	However, dependency of failure frequency on the rotational speed of the motor, can incur difficulties when the rotational speed varies continuously. In addition, the Fourier transform method, is not well equipped to dealing with non-linear and non-stationary signals. The assumption of an a-priory trigonometrical basis, which are globally define, does not allow for capturing local phenomenon such a pulses emitted by a crack in bearings.
+	\justify
+	To circumvent some of the short coming of the Fourier transform, the Hilbert Huang transform (HHT) was introduced in Chapter 3.
+	This method adaptively decomposes a signal into sub-signals called intrinsic mode functions (IMF), by a process called empirical mode decomposition (EMD). It uses local properties and statistical estimator such as the mean to iteratively
+	\say{siffer} a signal into its sub-components. This allows decomposing non-stationary and nonlinear data with ease.
+	By applying the EMD coupled with a robust seasonal trend decomposition method, it was possible to extract high frequency, short duration pulses emitted by a crack located in the outer ring of a bearing.
+	\justify
+	In chapter 4, we introduced a method that uses the duo wavelet transform-support vector machine, to monitor and detect outer race defect for a system of four bearings attached to a motor. The new methodology consists of three steps: In the first step, the wavelet transform decomposes a bearing vibration signal into two additional signals. They were called frequency and temporal features. The former and the latter encode frequency and temporal information and together form the temporal-frequency feature space. In the second step, the interquartile range (IQR) of the frequency and temporal feature are estimated, for successive vibration samples, measure in time. The IQR which is a measure of statistical dispersion, quantifies the health of a sample. A higher IQR implies an \say{unhealthy}. In doing so, we obtained several points in the temporal-frequency feature space.
+	\justify
+	In the last step, a one class support vector machine (SVM) classifier was applied to the set of points generated in the temporal-frequency feature space. The SVM, which is a linear classifier, was able to set a boundary between \say{healthy} and \say{unhealthy} samples.
+	This new methodology was able to detect earlier the onset of failure for bearing number four which was severely affected by a defect in the outer race.
+	
+	
+	 
+	%%=========================================
+	\section{Discussion}
+	\label{sec:discussion}
+	Here, you may discuss your findings based on your results, their strengths and limitations. 
+	Note that this discussion is more high level than discussions made in relation to results you have achieved and presented in the previous chapter. 
+	The discussion here should put your work in larger context. 
+	You may address if you achieved what you had intended to do, why not (if you did not), if you got results in which you did not expect, why the results are important, why there are limitations in using the results, or if there are opportunities to transfer your results and findings into other domains, and so on.
+	%%=========================================
+	\section{Recommendations for Further Work}
+	\label{sec:recommendations_for_further_work}
+	You should give recommendations to possible extensions to your work. 
+	The recommendations should be as specific as possible, preferably with an objective and an indication of a possible approach.
+	
+	The recommendations may be classified as:
+	\begin{itemize}
+		\item Short-term
+		\item Medium-term
+		\item Long-term
+	\end{itemize}
+	
 \end{document}
-
-
