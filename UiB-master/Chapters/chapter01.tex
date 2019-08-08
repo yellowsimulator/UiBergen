@@ -67,7 +67,9 @@ Recall that in the Hilbert Huang transform, a signal which is assumed to have mu
 (\cite{fan2016}) applied the Hilbert Huang energy spectrum to detect sign of fatigue, oxidation and mechanical structure deformation. In this context, The energy spectrum also called power spectrum or energy density, is the energy contribution of each frequency, derived from the intrinsic mode functions.
 To compute the energy density, the Hilbert transform of the absolute value of the square of a signal is first computed. Secondly, the integral of the latter is evaluated over the domain of variability of the signal. The Hilbert transform of a signal is the convolution of the signal with the function $\frac{1}{\pi t}$, where $t$ is a dummy variable.
 \justify
-(\cite{osman2013a}), (\cite{osman2013b}) and (\cite{osman2014}) 
+One of the issue of the Hilbert Huang transform is the selection of the appropriate intrinsic mode function for analysis.
+(\cite{osman2013a}, \cite{osman2013b} ) uses a similarity measure to select the target IMF and uses the energy spectrum to identify bearing failure frequencies. Wheres (\cite{osman2014}) uses a weighted D'Agostino Pearson (DP) normality test to select the more relevant IMFs (IMF representing defect component). The DP uses both the statistical skewness and the the kurtosis to assess normality.
+
 
 
 
