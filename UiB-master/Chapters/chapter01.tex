@@ -58,6 +58,16 @@ Chapter \ref{sec:hht} and \ref{sec:waveletandsvm} cover the contribution of this
 %%=========================================
 \section{Related work}
 \label{sec:relatedwork}
+The widely applied method for bearing fault detection in most industries, is based on Fourier transform. In the latter, a snapshot vibration signal is decomposed into its elementary parts, which constitutes the frequency spectrum. Furthermore, any failure incur by a bearing will induce a specific frequency, which, inevitably can be found in the frequency spectrum.
+\justify
+Although powerful, the Fourier transform method is not without its limitations, which have been presented in section \ref{sec:background}. To extend bearing fault detection to cases where the Fourier transform based method is limited,
+numerous contributions have been made towards alternative methods such as Hilbert Huang transform, wavelet transform and machine learning.
+\justify
+Recall that in the Hilbert Huang transform, a signal which is assumed to have multiple components, is decomposed into single oscillatory modes called intrinsic mode functions (IMFs). 
+(\cite{fan2016}) applied the Hilbert Huang energy spectrum to detect sign of fatigue, oxidation and mechanical structure deformation. In this context, The energy spectrum also called power spectrum or energy density, is the energy contribution of each frequency, derived from the intrinsic mode functions.
+To compute the energy density, the Hilbert transform of the absolute value of the square of a signal is first computed. Secondly, the integral of the latter is evaluated over the domain of variability of the signal. The Hilbert transform of a signal is the convolution of the signal with the function $\frac{1}{\pi t}$, where $t$ is a dummy variable.
+\justify
+(\cite{osman2013a}), (\cite{osman2013b}) and (\cite{osman2014}) 
 
 
 
