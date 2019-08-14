@@ -58,6 +58,16 @@ Chapter \ref{sec:hht} and \ref{sec:waveletandsvm} cover the contribution of this
 %%=========================================
 \section{Related work}
 \label{sec:relatedwork}
+As part of nearly all rotating machines, rolling bearing elements are one of the most frequent reasons for machine breakdown (\cite{randal2010}). The interesting thing about bearing, is that a failure can be detected at a given frequency, called characteristic frequency or failure frequency. The latter is derived from the bearing physical characteristics, and can be found in the vibration signals frequency spectrum it generates. The latter is obtained by transforming the vibration signal with a mathematical transformation such as Fourier transform. Their are typically four failure frequencies: ball pass frequency outer race (BPFO), which occurs when a defect such as a crack is located in the bearing outer race. The latter is denoted by the number 1 in figure \ref{fig:bearing-s}, which shows an exploded view of a rolling bearing.
+ 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{../fig/bearing-s}
+	\caption{Exploded view of a rolling bearing. 1: outer race or ring, 2: ball, 3: cage, 4 and 5: inner race or ring.}
+	\label{fig:bearing-s}
+\end{figure}
+
+\justify
 The widely applied method for bearing fault detection in most industries, is based on Fourier transform (\cite{gupta2016}, \cite{khadersab2018}, \cite{randal2010}). In the latter, a snapshot vibration signal obtained from a bearing, is decomposed into its elementary parts, which constitutes the frequency spectrum. Furthermore, any failure incur by a bearing will induce a specific frequency, which, inevitably can be found in the frequency spectrum.
 \justify
 Although powerful, the Fourier transform method is not without its limitations, which have been presented in section \ref{sec:background}. To extend bearing fault detection to cases where the Fourier transform based method is limited,
