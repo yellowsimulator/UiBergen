@@ -33,7 +33,7 @@ The basic ingredients required to approximate a function in this scenario are: a
 Before continuing, let clarify some symbols. In this section, the letters $f$, $V$, $V_{0}$ are used for an arbitrary function, a vector space, and a subspace of a vector space, respectively.
 Basis functions will be denoted by $\{  \varphi_{0}, \cdots,\varphi_{n}\}$, where $n$ can either be a finite integer or infinite. Having made this clarification, let elaborate on the concept of function approximation. 
 \justify
-The function approximation process in light of Fourier analysis goes like this: Given an arbitrary function $f$, that is to be approximated, pick an appropriate vector space which $V$, such that $f\in V$. Furthermore, define a subspace $V_{0}$ of the vector space $V$, and construct an inner product on $V_{0}$, if it does not exist. Next, fine an appropriate basis of $V_{0}$.  A basis of $V_{0}$ is a set of linearly independent vectors   $\{  \varphi_{0}, \cdots,\varphi_{n}\}$ in $V_{0}$, that span $V_{0}$. This means that any vector in $V_{0}$ can be written as a linear combination of the basis vectors.
+The function approximation process in light of Fourier analysis goes like this: Given an arbitrary function $f$, that is to be approximated, pick an appropriate vector space $V$, such that $f\in V$. Furthermore, define a subspace $V_{0}$ of the vector space $V$, and construct an inner product on $V_{0}$, if it does not exist. Next, fine an appropriate basis of $V_{0}$.  A basis of $V_{0}$ is a set of linearly independent vectors   $\{  \varphi_{0}, \cdots,\varphi_{n}\}$ in $V_{0}$, that span $V_{0}$. This means that any vector in $V_{0}$ can be written as a linear combination of the basis vectors.
 \justify
  Having all this in place, the best approximation of the function $f$ is its orthogonal projection in the inner product space $V_{0}$. Figure \ref{figure:il} shows an illustration of a generic mechanism of function approximation by orthogonal projection, where $f_{0}$ is the orthogonal projection of $f$ in the subspace $V_{0}$ of $V$.
 \justify
@@ -83,41 +83,78 @@ To extend the discussion of Fourier analysis, section \ref{sec:fouurier-serie} p
 \justify
 \subsection{Fourier series}
 \label{sec:fouurier-serie}
- Let $f$ be an arbitrary periodic function of period $T=2L$, defined on an interval of length $L$. Its Fourier series representation is then given by
+ Let $f$ be an arbitrary function, defined on an interval of length $L = \pi$. Its Fourier series representation is then given by the infinite series
 \begin{equation}\label{eq:fs}
-f_{n}(t) = \frac{a_{0}}{2} +\sum_{n=1}^{n}\left( a_{n} \cos\left( \frac{n\pi t}{L}\right) + b_{n} \sin\left( \frac{n\pi t}{L}\right)  \right), \end{equation}
+f(t) = \frac{a_{0}}{2} +\sum_{n=1}^{\infty}\left( a_{n} \cos\left( \frac{n\pi t}{L}\right) + b_{n} \sin\left( \frac{n\pi t}{L}\right)  \right),
+ \end{equation}
 where the coefficients $a_{0}, a_{1}, \cdots, b_{1}, b_{2},\cdots$, corresponding to the $\alpha_{j}$ in Figure \ref{figure:il}, are given by 
 \begin{equation}\label{eq:fsc}
 \begin{split}
-a_{m} &= \frac{1}{L}\int_{-L}^{L}f(t)\cos\left( \frac{m\pi t}{L}\right) \mathrm{d}t,\quad m=0,1,2,\cdots\\
+a_{n} &= \frac{1}{L}\int_{-L}^{L}f(t)\cos\left( \frac{m\pi t}{L}\right) \mathrm{d}t,\quad n=0,1,2,\cdots\\
 b_{n} &= \frac{1}{L}\int_{-L}^{L}f(t)\sin\left( \frac{n\pi t}{L}\right) \mathrm{d}t,\quad n=1,2,\cdots
 \end{split}
 \end{equation}
+ Approximating a function by an infinite series such as in equation (\ref{eq:fs}), raises few interesting questions. The left hand side of (\ref{eq:fs}) being an infinite series, must obviously converge for this expression to be valid. As such, under which condition does it converge? and what type of convergence is required? what are the characteristics of the function that it converges to?.
 \justify
-There are various condition under which the Fourier series given in (\ref{eq:fs}) converges. One such condition is the Dirichlet condition and is given by the following theorem:
-
+At first glance, one can observe that the trigonometric functions, in the infinite series are periodic with period $2L$. This suggests that the class of functions admitting a Fourier series must be periodic, with period $2L$. The second observation is that the trigonometric extensions are continuous, therefore some sort of continuity property must be imparted on the function $f$. It turns out that, the convergence of Fourier series and the characteristics of the function $f$ are intimately tied. This is formerly expressed in the following theorem
 \begin{theorem}
-Suppose that $f$ is periodic with period $T$, and the following conditions are satisfied:
-\begin{enumerate}
-\item $f$ has a finite set of discontinuity in each period
-\item $f$ contains a finite set of maxima and minima in each period
-\item $\int_{0}^{T}|f|\mathrm{d}t <\infty$
-\end{enumerate}
-
-Then we have that 
-\begin{equation}
-\lim_{n\rightarrow \infty} f_{n}(t) = f(t) ,\nonumber
-\end{equation}
-for all t, except at those points t where f in not continuous.
+	The function $f(t)$ will  have a convergent Fourier series, with coefficients given by (\ref{eq:fsc}), provided $f(t)$ is periodic with period $2L$, and both $f(t)$ and $f^{\prime}(t)$ (the derivative of $f(t)$) are at least piecewise continuous.
 \end{theorem}
-Equation (\ref{eq:fs}) can be compactly written as an complex exponential expansion of the form
-\begin{equation}\label{eq:fse}
-f(t) = \sum_{n=1}^{N} c_{n}e^{\frac{2\pi i n t}{T}},
+\justify
+A useful interpretation of what it means for a function $f(t)$ to have a Fourier representation, is in terms of the partial sum
+\begin{equation}\label{ps}
+	S_{N} = \frac{a_{0}}{2} +\sum_{n=1}^{N}\left( a_{n} \cos\left( \frac{n\pi t}{L}\right) + b_{n} \sin\left( \frac{n\pi t}{L}\right)  \right).
 \end{equation}
-where $T = 2L$,  $i$ is the imaginary number and the coefficients $c_{n}$ are given by
+The function $f(t)$ has a Fourier representation given by (\ref{eq:fs}) means that 
 \begin{equation}
-c_{n} = \frac{1}{T}\int_{-L}^{L}e^{\frac{2\pi i n t}{T}}f(t)\mathrm{d}t
+\lim_{N\rightarrow\infty}S_{N}(t)= f(t)
 \end{equation}
+where N is an integer. The convergence type of Fourier series discussed in this section are: uniform convergence, pointwise convergence and mean-square convergence. The two first convergence type deal with continuous functions, while mean-square convergence treats discontinuous functions.
+\justify
+In terms of function approximation, Convergence of infinite series starts with examining the error incurred by approximating the function by the infinite series. This error is expressed as 
+\begin{equation}
+E_{N}(t) = f(t)-S_{N}(t) = \sum_{n=N+1}^{\infty}\left( a_{n} \cos\left( \frac{n\pi t}{L}\right) + b_{n} \sin\left( \frac{n\pi t}{L}\right)  \right).
+\end{equation} 
+It is now apparent that the Fourier series converges pointwise to $f(t)$ if and only if 
+\begin{equation}
+\lim_{N\rightarrow\infty}E_{N}(t)= 0\quad \text{for all $t$}.
+\end{equation}
+This can be summarized in the following theorem
+\begin{theorem}
+	if $f$ is differentiable on $[-\pi, \pi]$ then the Fourier series converges pointwise
+	and \ref{eq:fs} holds.
+\end{theorem}
+
+
+Similarly, since the trigonometric functions in the infinite Fourier series are bounded above by 1, we can write 
+\begin{equation}
+\abs{E_{N}(t)} \leq \sum_{n = N+1}^{\infty} \left(\abs{a_{n}} + \abs{b_{n}}\right)
+\end{equation} 
+and provided that the left hand side converges we have 
+%There are various condition under which the Fourier series given in (\ref{eq:fs}) converges. One such condition is the Dirichlet condition and is given by the following theorem:
+%
+%\begin{theorem}
+%Suppose that $f$ is periodic with period $T$, and the following conditions are satisfied:
+%\begin{enumerate}
+%\item $f$ has a finite set of discontinuity in each period
+%\item $f$ contains a finite set of maxima and minima in each period
+%\item $\int_{0}^{T}|f|\mathrm{d}t <\infty$
+%\end{enumerate}
+%
+%Then we have that 
+%\begin{equation}
+%\lim_{n\rightarrow \infty} f_{n}(t) = f(t) ,\nonumber
+%\end{equation}
+%for all t, except at those points t where f in not continuous.
+%\end{theorem}
+%Equation (\ref{eq:fs}) can be compactly written as an complex exponential expansion of the form
+%\begin{equation}\label{eq:fse}
+%f(t) = \sum_{n=1}^{N} c_{n}e^{\frac{2\pi i n t}{T}},
+%\end{equation}
+%where $T = 2L$,  $i$ is the imaginary number and the coefficients $c_{n}$ are given by
+%\begin{equation}
+%c_{n} = \frac{1}{T}\int_{-L}^{L}e^{\frac{2\pi i n t}{T}}f(t)\mathrm{d}t
+%\end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
