@@ -83,7 +83,7 @@ To extend the discussion of Fourier analysis, section \ref{sec:fouurier-serie} p
 \justify
 \subsection{Fourier series}
 \label{sec:fouurier-serie}
- Let $f$ be an arbitrary function, defined on an interval of length $L = \pi$. Its Fourier series representation is then given by the infinite series
+ Let $f$ be an arbitrary function, defined on an interval of length $L = \pi$. Its Fourier series representation is given by the infinite series
 \begin{equation}\label{eq:fs}
 f(t) = \frac{a_{0}}{2} +\sum_{n=1}^{\infty}\left( a_{n} \cos\left( \frac{n\pi t}{L}\right) + b_{n} \sin\left( \frac{n\pi t}{L}\right)  \right),
  \end{equation}
@@ -94,43 +94,89 @@ a_{n} &= \frac{1}{L}\int_{-L}^{L}f(t)\cos\left( \frac{m\pi t}{L}\right) \mathrm{
 b_{n} &= \frac{1}{L}\int_{-L}^{L}f(t)\sin\left( \frac{n\pi t}{L}\right) \mathrm{d}t,\quad n=1,2,\cdots
 \end{split}
 \end{equation}
- Approximating a function by an infinite series such as in equation (\ref{eq:fs}), raises few interesting questions. The left hand side of (\ref{eq:fs}) being an infinite series, must obviously converge for this expression to be valid. As such, under which condition does it converge? and what type of convergence is required? what are the characteristics of the function that it converges to?.
+ Approximating a function by an infinite series such as in equation (\ref{eq:fs}), raises few interesting questions. The right hand side of (\ref{eq:fs}) being an infinite series, must obviously converge for this expression to be valid. As such, under which condition does it converge? and what type of convergence is required? what are the characteristics of the function that it converges to?.
 \justify
-At first glance, one can observe that the trigonometric functions, in the infinite series are periodic with period $2L$. This suggests that the class of functions admitting a Fourier series must be periodic, with period $2L$. The second observation is that the trigonometric extensions are continuous, therefore some sort of continuity property must be imparted on the function $f$. It turns out that, the convergence of Fourier series and the characteristics of the function $f$ are intimately tied. This is formerly expressed in the following theorem
-\begin{theorem}
+At first glance, one can observe that the trigonometric functions in the infinite series are periodic with period $2L$. This suggests that the class of functions admitting a Fourier series must be periodic, with period $2L$. The second observation is that the trigonometric extensions are continuous, therefore some sort of continuity property must be imparted on the function $f$. It turns out that, the convergence of Fourier series and the characteristics of the function $f$ are intimately tied. This is formerly expressed in the following theorem
+\begin{theorem}\label{thm:conv}
 	The function $f(t)$ will  have a convergent Fourier series, with coefficients given by (\ref{eq:fsc}), provided $f(t)$ is periodic with period $2L$, and both $f(t)$ and $f^{\prime}(t)$ (the derivative of $f(t)$) are at least piecewise continuous.
 \end{theorem}
 \justify
 A useful interpretation of what it means for a function $f(t)$ to have a Fourier representation, is in terms of the partial sum
-\begin{equation}\label{ps}
+\begin{equation}\label{eq:ps}
 	S_{N} = \frac{a_{0}}{2} +\sum_{n=1}^{N}\left( a_{n} \cos\left( \frac{n\pi t}{L}\right) + b_{n} \sin\left( \frac{n\pi t}{L}\right)  \right).
-\end{equation}
+\end{equation}\label{eq:ps1}
 The function $f(t)$ has a Fourier representation given by (\ref{eq:fs}) means that 
-\begin{equation}
+\begin{equation}\label{eq:ps1}
 \lim_{N\rightarrow\infty}S_{N}(t)= f(t)
 \end{equation}
-where N is an integer. The convergence type of Fourier series discussed in this section are: uniform convergence, pointwise convergence and mean-square convergence. The two first convergence type deal with continuous functions, while mean-square convergence treats discontinuous functions.
+where N is an integer. 
+\justify
+\textbf{Theorem \ref{thm:conv}} ensures that if a function is periodic, and both the function and it first derivative are piecewise continuous, then it will have a convergence Fourier transform. Now, the question which remains to be addressed is, what type of convergence should be expected? The convergence type of Fourier series discussed in this section are: uniform convergence, pointwise convergence and mean-square convergence. The two first convergence type deal with continuous functions, while mean-square convergence treats discontinuous functions. 
+\justify
+Uniform convergence is more stringent than pointwise convergence, while pointwise convergence is more strict than mean-square convergence. Specifically, uniform convergence implies pointwise convergence, and pointwise convergence implies mean-square convergence. Therefore, together, they form a hierarchy of convergence type. 
 \justify
 In terms of function approximation, Convergence of infinite series starts with examining the error incurred by approximating the function by the infinite series. This error is expressed as 
-\begin{equation}
+\begin{equation}\label{eq:error}
 E_{N}(t) = f(t)-S_{N}(t) = \sum_{n=N+1}^{\infty}\left( a_{n} \cos\left( \frac{n\pi t}{L}\right) + b_{n} \sin\left( \frac{n\pi t}{L}\right)  \right).
 \end{equation} 
 It is now apparent that the Fourier series converges pointwise to $f(t)$ if and only if 
 \begin{equation}
 \lim_{N\rightarrow\infty}E_{N}(t)= 0\quad \text{for all $t$}.
 \end{equation}
-This can be summarized in the following theorem
+Pointwise convergence can also be formulated in terms of the series in equations (\ref{eq:ps}, \ref{eq:ps1}). Formally, the sequence $S_{N}$ converges pointwise if for some fixed $t$ and fixed $\epsilon$ (a small real number), it exists some $M\in \mathbb{Z}$, such that for $N\geq M$
+\begin{equation}
+\abs{S_{N}(t)-f(t)} \leq \epsilon.
+\end{equation}
+All the previous discussions can be summarized in the following theorem
 \begin{theorem}
 	if $f$ is differentiable on $[-\pi, \pi]$ then the Fourier series converges pointwise
-	and \ref{eq:fs} holds.
+	and \ref{eq:fs} holds at every point $t$ where $f(t)$ is continuous.
 \end{theorem}
-
-
-Similarly, since the trigonometric functions in the infinite Fourier series are bounded above by 1, we can write 
+Now let turn our attention to uniform convergence.
+since the trigonometric functions in the infinite Fourier series are bounded above by 1, we can write 
 \begin{equation}
-\abs{E_{N}(t)} \leq \sum_{n = N+1}^{\infty} \left(\abs{a_{n}} + \abs{b_{n}}\right)
+\abs{E_{N}(t)} \leq \sum_{n = N+1}^{\infty} \left(\abs{a_{n}} + \abs{b_{n}}\right),
 \end{equation} 
-and provided that the left hand side converges we have 
+and provided that the left hand side converges, uniform convergence is warranted. This is summed up in the following theorem
+\begin{theorem}
+	The Fourier series for $f(t)$ converges uniformly, and therefore $f(t)$ is continuous if
+	 \begin{equation}
+	  \sum_{n = N+1}^{\infty} \left(\abs{a_{n}} + \abs{b_{n}}\right),
+	 \end{equation}
+	 converges
+\end{theorem}
+Since a discontinuous function can not have a uniform convergence Fourier series, what should be expected from discontinuous function in terms of convergence? this question can be answered in terms of mean-square convergence.
+The mean-square value also interpreted physically as the average energy of the approximation error $E_{N}(t)$ (define in equation (\ref{eq:error})) in the interval of length $L$ is  is given by 
+\begin{equation}\label{eq:mc}
+	\frac{1}{2L}\int_{-L}^{L}\left(E_{N}(t)\right)^{2}\mathrm{dt} = \frac{1}{2}\sum_{n=N+1}^{\infty}\left(a_{n}^{2} + b_{n}^{2}\right).
+\end{equation}
+If the right hand side of equation (\ref{eq:mc}) converges then 
+\begin{equation}
+	\lim_{N\rightarrow \infty}\left( \frac{1}{2L}\int_{-L}^{L}\left(E_{N}(t)\right)^{2}\mathrm{dt}  \right) = 0.
+\end{equation}
+This result can be formulated in the following theorem.
+\begin{theorem}\label{thm:msc}
+	The Fourier series for $f(t)$ converges in the mean-square or almost every where if 
+	\begin{equation}
+	\sum_{n=N+1}^{\infty}\left(a_{n}^{2} + b_{n}^{2}\right),
+	\end{equation}
+	converges
+\end{theorem}
+Theorem \ref{thm:msc} ensures that the Fourier series will converge every where except at the points of discontinuity of $f(t)$. This is also refer to as almost everywhere convergence.
+\justify
+From the previous discussion, The coefficients $a_{n}$ and $b_{n}$ of the Fourier series, some how drive convergence. Therefore thy determine the series its self. Being so important let find an interpretation. By setting
+\begin{equation}
+	\begin{split}
+	A_{n} &= \sqrt{a_{n}^{2} + b_{n}^{2}}\\
+	\phi_{n} & = \tan^{-1}\left( \frac{b_{n}}{a_{n}} \right)\\
+	\delta_{n} &=\frac{L}{n\pi} \tan^{-1}\left(  \frac{b_{n}}{a_{n}}\right)\\
+	A_{0} &= \frac{a_{0}}{2}
+	\end{split}
+\end{equation}
+The Fourier series of $f(t)$ can be rewritten as 
+\begin{equation}
+	f(t) = A_{0} + \sum_{n=1}^{\infty}A_{n}\cos\left(  \frac{n\pi}{L}(t-\delta_{n})\right)
+\end{equation}
 %There are various condition under which the Fourier series given in (\ref{eq:fs}) converges. One such condition is the Dirichlet condition and is given by the following theorem:
 %
 %\begin{theorem}
