@@ -294,15 +294,10 @@ where $F_{n}$ is a symmetric matrix. The matrix operation defined in equation (\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
-
-
-
 \section{Application of Fourier transform for bearing fault detection}
 In the literature review section, the high frequency resonance techniques (HFRT) was presented as one of the most widely used method for bearing fault detection. In this section, the HFRT is applied to a case study. In particular, it is used to detect bearings defects in the outer and the inner ring of a roller bearing.
 \justify
-Section \ref{sec:case} describe the experimental set up that generated the bearings vibration signals. In section \ref{sec:fault} the equations of bearing defect frequency are formulated. Furthermore, the characteristics of each fault are described.
+Section \ref{sec:case} describe the experimental set up that generated the bearings vibration signals. In section \ref{sec:fault} the theoretical equations for inner and outer race bearing defects are formulated. Furthermore, the characteristics of each fault are described.
 Finally, the results from applying the high frequency resonance technique to the bearing vibration signals are presented in section \ref{sec:method}.
 
 
@@ -321,10 +316,11 @@ The sampling rate also called sampling frequency, is the average number of sampl
    \label{fig:exp}
 \end{figure}
 \justify
-Four bearings support a rotating shaft, driven by an AC motor through rub belts. The motor rotates at 2000 rotations per minute, while the bearings are subjected to a constant radial force of 6000 pounds. In the first experiment, eight accelerometers were used, two on each bearing. One for the radial position and the other for the axial position. In the second and third experiment, four accelerometers were used, one for each bearing.
-An accelerometers is a sensor that measures vibration signals, in particular the acceleration experience by a bearing. Axial signal are the signal measured by the accelerometers along the axis of the motor shaft, while radial signal are measure along the perpendicular direction of the motor shaft.
+Four bearings support a rotating shaft, driven by an AC motor through rub belts. The motor rotates at 2000 rotations per minute, while the bearings are subjected to a constant radial force of 6000 pounds. In the first experiment two accelerometers were mounted on the bearings. Each measuring vibration for the axial and radial position respectively.
+In the second and third experiment, four accelerometers were placed, one for each bearing, Measuring only axial vibration.
+Recall the an accelerometers is a sensor that measures vibration signals, in particular the acceleration experience by a bearing. Axial signals are measured along the axis of the motor shaft, while radial signals are measured along the perpendicular direction of the motor shaft.
 \justify
-At the end of the first experiment, inner race defect occurred in bearing number 3 and roller element defect occurred in bearing number 4. At the of the second and third experiment, outer race defect occurred in bearing number 1 and number 3, respectively. In the next section we define the different types of bearing faults such as inner race defect, outer race defect and roller element defect. 
+At the end of the first experiment, inner race defect occurred in bearing number 3 and roller element defect occurred in bearing number 4. At the of the second, outer race defect occurred in bearing number 1 and number 3, respectively. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -332,7 +328,7 @@ At the end of the first experiment, inner race defect occurred in bearing number
 
 \subsection{Bearing faults}
 \label{sec:fault}
-As pointed out earlier, the bearing failure frequencies depends on the geometry of the bearing and the rotating speed of the motor. Figure \ref{fig:bearing} shows a blow up view of a bearing. In the figure we see the outer ring of the bearing (1), the cage (3) which holds the cylindrical rolling elements (2) and the inner race (4 and 5).
+As pointed out earlier, the bearing failure frequencies depends on the physical characteristics of the bearing and the rotating speed of the motor. Figure \ref{fig:bearing} shows a graphical representation of a bearing.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=3.2in]{../fig/bearing}  
@@ -340,7 +336,7 @@ As pointed out earlier, the bearing failure frequencies depends on the geometry 
    \label{fig:bearing}
 \end{figure}
 \justify
-Inner race defect and outer race defect are defect occurring at the inner race and outer race, while roller element defect also called ball spin happens when a roller element is defectuous. Any of the defect occurs at a specific frequency that can be computed based on the bearing geometry and the rotation speed of the machine. inner race defect occurs at a frequency called ball pass frequency inner race (BPFI), outer race defect occurs at a frequency call ball pass outer frequency outer race (BPFO) and roller element defect occurs at a frequency call ball spin frequency (BSF). They are expressed in Hz in terms of the bearing geometry as 
+ Inner race defect occurs at a frequency called ball pass frequency inner race (BPFI), while outer race defect occurs at a frequency call ball pass outer outer race frequency (BPFO). They are expressed in Hz in terms of the bearing geometry as 
 \begin{equation}\label{eq:bpfi}
 BPFI = \frac{nb}{2}S\left( 1 +  \frac{BD}{PD}\cos(\beta)  \right)
 \end{equation}
@@ -348,11 +344,6 @@ BPFI = \frac{nb}{2}S\left( 1 +  \frac{BD}{PD}\cos(\beta)  \right)
 \begin{equation}\label{eq:bpfo}
 BPFO = \frac{nb}{2}S\left( 1 -  \frac{BD}{PD}\cos(\beta)  \right)
 \end{equation}
-
-\begin{equation}\label{eq:bpfi}
-BSF = \frac{PD}{2BD}S\left( 1 -  \left(\frac{BD}{PD}\cos(\beta)\right)^{2}  \right)
-\end{equation}
-\clearpage
 where 
 \begin{itemize}
 \item S is the rotating speed of the motor
@@ -361,20 +352,18 @@ where
 \item PD is the pitch diameter
 \item $\beta$ is the contact angle
 \end{itemize}
-The pitch diameter is the perpendicular distance from the center of one ball to the center of the ball located at the end. The contact angle can be taken to be zero?
+The pitch diameter is the perpendicular distance from the center of one ball to the center of the ball located at the end.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Failure detection methodology application}
+\subsection{High frequency resonance technique application to failure detection}
 \label{sec:method}
-
-Given a vibration signal measured from an accelerometer, our intent is to detect the presence of a forcing frequency. By forcing frequency we refer to either BPFO, BPFI or BSF. Recall that a forcing frequency is a fancy name for failure frequency. We will refer to the vibration signal as the time domain signal, as it is customary to do so. Since the forcing frequencies are in Hz, the time domain signal must be transformed into frequency domain signal. The frequency domain signal is also called the frequency spectrum. The reader can refer to Figure \ref{fig:fft_domain} for a reminder. Once we have the frequency spectrum corresponding to the original time signal, we can look for the presence of any forcing frequency.
-\justify
+The high frequency resonance technique consists of a series of operation whose goal is to extract frequency component from a time signal.
 There are four steps in transforming time domain signal into frequency domain signal: A band pass filtering, enveloping, a low pass filtering and a fast Fourier transformation.
-Figure \ref{fig:fft-process} shows a schematic description of the entire process. Let elaborate on it.  A vibration signal from a bearing accelerometer contains not only the vibration signal of the bearing, but also the signal from other components, such as motor, shaft and so on.
+Figure \ref{fig:fft-process} shows a schematic description of the entire process. 
 \justify
-The band pass filter allows signal within a given band of frequency to seep through, while attenuating all other signal. The band of allowed frequencies is bounded bellow and above by two parameters: The low cut-off frequency and the high cut-off frequency, respectively.
+The band pass filter allows signal within a given band of frequency to seep through, while attenuating all other signal. The band of allowed frequencies is bounded bellow and above by two parameters: The low cut-off frequency and the high cut-off frequency, respectively. In this application a low cut-off frequency of 2000 Hz and a high cut-off frequency of 9990 Hz was used.
 %The intent is to only capture bearing vibration signal and ignore any other. Once this done, the demodulation extract the high frequency time domain signal and a low pass filter extract the low frequency. The Fast Fourier transform is then applied to the time domain signal to generate the frequency spectrum.
 \begin{figure}[H]
 \begin{tikzpicture}
@@ -399,22 +388,22 @@ The band pass filter allows signal within a given band of frequency to seep thro
    \label{fig:fft-process}
 \end{figure}
 \justify
-The enveloping step corresponds to rectifying the signal by accounting only for the positive part of the signal. Let $E(t)$ be the signal resulting from the enveloping process. Let $x(t)$ is the time domain signal, and let its Hilbert transform be denoted by $H(t)$. Then we have
-\begin{equation}
-H(t) = \frac{1}{\pi}P\int_{-\infty}^{+\infty}\frac{x(t)}{t-\tau}\mathrm{d}\tau
-\end{equation}
+The enveloping step corresponds to rectifying the signal by accounting only for the positive part of the signal. 
+The envelope  $E(t)$ of a signal $x(t)$ is given by
 \begin{equation}
 E(t) = \sqrt{H(t)^{2}+ x(t)^{2}}
 \end{equation}
-where $P$ is the Cauchy principal value. After the enveloping process, the resulting signal is filtered by removing hight frequency noise and the fast Fourier transform is applied to obtain the frequency spectrum.
+were 
+\begin{equation}
+H(t) = \frac{1}{\pi}P\int_{-\infty}^{+\infty}\frac{x(t)}{t-\tau}\mathrm{d}\tau
+\end{equation}
+is the Hilbert transform of the signal and $P$ is the Cauchy principal value. After the enveloping process, the resulting signal is filtered by removing high frequency resonance components. The fast Fourier transform is applied on the filtered signal to obtain the frequency spectrum.
 \justify
 Once we have found the frequency spectrum and the corresponding amplitude, we search any of the forcing frequency and record their amplitude in time. Base on a predefine limit, an alarm is raised when the amplitude is above the limit.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\clearpage
 %\subsection{Failure detection results}
 In this section we present the results from applying Fourier analysis to detecting one type of fault in bearing, namely: ball pass frequency outer race defect (BPFO). The methodology can easily be extended to other forcing frequencies as well, but we limit ourselves to BPFO to avoid any redundancy. Recall that BPFO occurs when a defect is initiated in the outer ring of the bearing. The reader can refer to Figure \ref{fig:bearing} for a detailed geometrical description of a bearing. The experimental setup for the bearings are given in Figure \ref{fig:exp}. The bearing type used in this experiment are manufactured by the company Rexnord, and are of type Rexnord ZA 2115, with BPFO forcing frequency  given by 
 \begin{equation}
