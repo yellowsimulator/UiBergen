@@ -336,7 +336,7 @@ As pointed out earlier, the bearing failure frequencies depends on the physical 
    \label{fig:bearing}
 \end{figure}
 \justify
- Inner race defect occurs at a frequency called ball pass frequency inner race (BPFI), while outer race defect occurs at a frequency call ball pass outer outer race frequency (BPFO). They are expressed in Hz in terms of the bearing geometry as 
+ Inner race defect occurs at a frequency called ball pass frequency inner race (BPFI), while outer race defect occurs at a frequency call ball pass outer race frequency (BPFO). They are expressed in Hz in terms of the bearing geometry and the shaft rotation speed as 
 \begin{equation}\label{eq:bpfi}
 BPFI = \frac{nb}{2}S\left( 1 +  \frac{BD}{PD}\cos(\beta)  \right)
 \end{equation}
@@ -353,6 +353,7 @@ where
 \item $\beta$ is the contact angle
 \end{itemize}
 The pitch diameter is the perpendicular distance from the center of one ball to the center of the ball located at the end.
+The bearing type used in this experiment are manufactured by the company Rexnord, and are of type Rexnord ZA 2115, with BPFO and BPFI given by 236.4 Hz, 296.8 Hz respectively. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -360,10 +361,10 @@ The pitch diameter is the perpendicular distance from the center of one ball to 
 \subsection{High frequency resonance technique application to failure detection}
 \label{sec:method}
 The high frequency resonance technique consists of a series of operation whose goal is to extract frequency component from a time signal.
-There are four steps in transforming time domain signal into frequency domain signal: A band pass filtering, enveloping, a low pass filtering and a fast Fourier transformation.
+There are four steps in transforming a time signal into frequency spectrum: A band pass filtering, enveloping, a low pass filtering and a fast Fourier transformation.
 Figure \ref{fig:fft-process} shows a schematic description of the entire process. 
 \justify
-The band pass filter allows signal within a given band of frequency to seep through, while attenuating all other signal. The band of allowed frequencies is bounded bellow and above by two parameters: The low cut-off frequency and the high cut-off frequency, respectively. In this application a low cut-off frequency of 2000 Hz and a high cut-off frequency of 9990 Hz was used.
+The band pass filter process allows signals within a prescribed frequency band to seep through, while attenuating non essential signals. The band of allowed frequencies is bounded bellow and above by two parameters: The low cut-off frequency and the high cut-off frequency, respectively. In this application a low cut-off frequency of 2000 Hz and a high cut-off frequency of 9990 Hz were used.
 %The intent is to only capture bearing vibration signal and ignore any other. Once this done, the demodulation extract the high frequency time domain signal and a low pass filter extract the low frequency. The Fast Fourier transform is then applied to the time domain signal to generate the frequency spectrum.
 \begin{figure}[H]
 \begin{tikzpicture}
@@ -378,88 +379,62 @@ The band pass filter allows signal within a given band of frequency to seep thro
       \begin{scope}[start branch=venstre,
         %We need to redefine the join-style to have the -> turn out right
         every join/.style={->, thick, shorten <=1pt}, ]
-        \node[punktchain, on chain=going left, join=by {->}] (risiko) {Frequency spectrum and amplitude};
+        \node[punktchain, on chain=going left, join=by {->}] (risiko) {Frequency spectrum};
       \end{scope}
       \begin{scope}[start branch=hoejre,]
       %\node (finans) [punktchain, on chain=going right] {Det finansielle system};
     \end{scope}
     \end{tikzpicture}
-  \caption{Process of obtaining a frequency spectrum from an input signal}
+  \caption{Description of the high frequency resonance technique.}
    \label{fig:fft-process}
 \end{figure}
 \justify
-The enveloping step corresponds to rectifying the signal by accounting only for the positive part of the signal. 
-The envelope  $E(t)$ of a signal $x(t)$ is given by
+The enveloping step corresponds to rectifying the signal. It accounts only for the positive part of the signal, and extract the high frequency resonance component induced by bearing defects, and the defect characteristics frequency component.
+\justify
+In mathematically terms, the envelope  $E(t)$ of a signal $x(t)$ is given by
 \begin{equation}
 E(t) = \sqrt{H(t)^{2}+ x(t)^{2}}
 \end{equation}
 were 
 \begin{equation}
-H(t) = \frac{1}{\pi}P\int_{-\infty}^{+\infty}\frac{x(t)}{t-\tau}\mathrm{d}\tau
+H(t) = \frac{1}{\pi t}*x(t) = \frac{1}{\pi}\int_{-\infty}^{+\infty}\frac{x(t)}{t-\tau}\mathrm{d}\tau
 \end{equation}
-is the Hilbert transform of the signal and $P$ is the Cauchy principal value. After the enveloping process, the resulting signal is filtered by removing high frequency resonance components. The fast Fourier transform is applied on the filtered signal to obtain the frequency spectrum.
+is the Hilbert transform of the signal, and \say{*} define the convolution operation.
 \justify
-Once we have found the frequency spectrum and the corresponding amplitude, we search any of the forcing frequency and record their amplitude in time. Base on a predefine limit, an alarm is raised when the amplitude is above the limit.
+ After the enveloping process, the resulting signal is low pass filtered in order to remove the high frequency resonance components, leaving only the signal component that contain the bearing failure frequencies. Finally, the fast Fourier transform is applied on the filtered signal to obtain the frequency spectrum.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\subsection{Failure detection results}
-In this section we present the results from applying Fourier analysis to detecting one type of fault in bearing, namely: ball pass frequency outer race defect (BPFO). The methodology can easily be extended to other forcing frequencies as well, but we limit ourselves to BPFO to avoid any redundancy. Recall that BPFO occurs when a defect is initiated in the outer ring of the bearing. The reader can refer to Figure \ref{fig:bearing} for a detailed geometrical description of a bearing. The experimental setup for the bearings are given in Figure \ref{fig:exp}. The bearing type used in this experiment are manufactured by the company Rexnord, and are of type Rexnord ZA 2115, with BPFO forcing frequency  given by 
-\begin{equation}
-BPFO = 236.4 Hz, %\quad BPFI = 296.8 Hz \nonumber
-\end{equation}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsubsection{Forcing frequency detection}
-We apply the process described in Figure \ref{fig:fft-process} to experiment number 2.
-In the latter, successive vibration samples where obtained from four bearings: Bearing number 1,2,3 and 4, resulting in 984 samples for each bearing.  
-The samples were obtained by installing accelerometers on each bearing. Recall that an accelerometer in this context, is a sensor that measures the acceleration experienced by a bearing.
-The experiment started in February 12, 2004 at 10:32:39 and ended in February 19, 2004 at 06:22:39, and vibration samples were obtained every ten minutes [ref].
-At the end of the experiment, BPFO defect occurs in bearing number 1 [ref]. Figure \ref{fig:bearing1-experiment2} shows the vibration signal from sample obtained in  February 18, 2004, at 16:32:39, from bearing number 1. Figure \ref{fig:bearing1-experiment2-fft} shows the corresponding frequency spectrum obtained by applying the process described in Figure \ref{fig:fft-process}.
-\justify
-In the frequency spectrum, we can clearly identify the BPFO frequency (in orange), which has the largest amplitude in the spectrum. We can also observe three harmonics of the BPFO. BPFO harmonics are multiple frequency of the BPFO frequency. Here we observe $2\times$BPFO and $3\times$BPFO harmonics. One of the salient features of the BPFO frequency is the presence of harmonics [ref:Vib analy training manuel cat1]. 
-\begin{figure}[H] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=4.9in]{../fig/experiment2_bearing1.png} 
-   \caption{Vibration signal obtained in February 18, 2004, at 16:32:39, from bearing number 1 in  experiment number 2.}
-   \label{fig:bearing1-experiment2}
+\subsubsection{Ball pass outer race defect frequency detection}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../fig/bpfo/first_day_signal_bpfo}
+	\includegraphics[width=0.7\linewidth]{../fig/bpfo/last_day_signal_bpfo}
+	\caption{Vibration time signals recorded at the beginning (top) and six days after (bottom), in experiment 2.}
+	\label{fig:bpfo_signal}
 \end{figure}
-%%%%%%%%%%%%%
-\begin{figure}[H] 
-   \centering
-   \includegraphics[width=4.9in]{../fig/experiment2_bearing1_fft.png} 
-   \caption{Frequency spectrum obtained from the vibration signal obtained in February 18, 2004, at 16:32:39, of bearing number 1,  in  experiment number 2.}
-   \label{fig:bearing1-experiment2-fft}
+Figure \ref{fig:bpfo_signal} shows two vibration time signals from experiment 2. The top signal was recorded at the beginning of the experiment, while the bottom one was measured six days after. An increase in the variance can be observe.
+I fact, the variance has increased 28 time after 6 days. This can be seen in Figure \ref{fig:bpfo_density}, which shows a density plot at the beginning and six days after.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../fig/bpfo/density_bpfo_signal}
+	\caption{Density plot of the time signal at the beginning and six days after}
+	\label{fig:bpfo_density}
 \end{figure}
 \justify
-In contrast to Figure \ref{fig:bearing1-experiment2-fft}, Figure \ref{fig:bearing2-experiment2-fft}, \ref{fig:bearing3-experiment2-fft} and \ref{fig:bearing4-experiment2-fft}, show  the frequency spectrum of bearing number 2,3 and 4, respectively. The frequencies spectrum were obtained in February 18, 2004, at 16:32:39 as well. No apparent large peak can be observe in these spectrum. This correlates with the fact that the spectrum are from bearings with no defect. 
-\begin{figure}[H] 
-   \centering
-   \includegraphics[width=4.9in]{../fig/experiment2_bearing2_fft.png} 
-   \caption{Frequency spectrum obtained from vibration signal obtained in February 18, 2004, at 16:32:39, of bearing number 2, in experiment 2.}
-   \label{fig:bearing2-experiment2-fft}
-\end{figure}
-
-\begin{figure}[H] 
-   \centering
-   \includegraphics[width=4.9in]{../fig/experiment2_bearing3_fft.png} 
-   \caption{Frequency spectrum obtained from vibration signal obtained in February 18, 2004, at 16:32:39, of bearing number 3, in experiment 2.}
-   \label{fig:bearing3-experiment2-fft}
-\end{figure}
-
-\begin{figure}[H] 
-   \centering
-   \includegraphics[width=4.9in]{../fig/experiment2_bearing4_fft.png} 
-   \caption{Frequency spectrum obtained from vibration signal obtained in February 18, 2004, at 16:32:39, of bearing number 4, in experiment 2.}
-   \label{fig:bearing4-experiment2-fft}
-\end{figure}
+After six days the density tail increases considerably, which indicates an increase in the variance, due to bearing defect propagation. Figure \ref{fig:bpfo} shows the corresponding frequency spectrum at the beginning (top) and six days after (bottom). At the beginning of the experiment, the spectrum is relatively \say{clean}. No high frequency peaks can be observed. This indicates that the bearing is relatively \say{healthy}. However, after six days, the ball pass frequency as well as harmonics can be observed in the frequency spectrum.
 \justify
-To show the potential propagation of faults in the bearing, the amplitude corresponding to the BPFO forcing frequency are recorded for all four barings, for the duration of the experiment. Figure \ref{fig:experiment2_bearing_fft_amp}  shows the BPFO amplitude for each sample. At the beginning of the experiment, all bearing have a very low BPFO amplitude. However, after four days, the onset of failure is initiated in bearing number 1 and the amplitude of the forcing frequency keeps increasing.
-% trend as the experiment evolves. We can observe that at the beginning of the experiment, all bearing have a very low BPFO amplitude. However, at [date], the BPFO amplitude of bearing number 1 starts increasing. As the experiment evolves, the amplitude increases almost steadily, until failure occurs. In contrast to bearing 1, bearing 2, 3 and 4, the BPFO amplitude are relatively steady during the experiment, and only a slight increase is noticeable at the end of the experiment.
+The harmonics are evenly spaced frequency peaks that are integer multiple of the ball pass outer race defect frequency (\cite{mobius2014}). They are indication of transient, clipping or random impact in the vibration signal, and are characteristics of the presence of bearing defects (\cite{mobius2014}). Transient indicates the variation of the signal properties with time, while clipping refers to the distortion of a signal. 
+\justify
+Recall that in experiment number 2, four bearings were being observed, and at the end of the experiment, bearing number 1 was seriously damaged due to outer race defect. Figure \ref{fig:experiment2_bearing_fft_amp} shows the evolution of defect frequency in terms of amplitude with time for all  bearings. Clearly, bearing 1 exhibits high amplitude in terms of defect frequency compare to the rest. Its amplitude increases and drops, before increasing in an oscillatory fashion. This is due to random slip or clipping due to defect propagation in the bearing.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../fig/bpfo/first_day_spectrum_bpfo}
+	\includegraphics[width=0.7\linewidth]{../fig/bpfo/last_day_spectrum_bpfo}
+	\caption{Frequency spectrum with the presence of outer race defect frequency and harmonics.}
+	\label{fig:bpfo}
+\end{figure}
+
 \begin{figure}[H] 
    \centering
     \includegraphics[width=4.9in]{../fig/experiment2_bearing_fft_amp.png}
@@ -468,51 +443,15 @@ To show the potential propagation of faults in the bearing, the amplitude corres
    \label{fig:experiment2_bearing_fft_amp}
 \end{figure}
 \justify
-This increase is captured by Figure \ref{fig:experiment2_bearing_fft_trend}, which displays the trend component of Figure  \ref{fig:experiment2_bearing_fft_amp}.
-The trend components are extracted by using the seasonal trend decomposition method based on LOESS (STL) [ref]. The method consists in sequentially applying the LOESS smoother (Locally Estimated Scatter Smoother) to the data [ref]. The STL will be extensively used in this work for trend and seasonal estimation and will be explained in detail in chapter 3. For the time being, let just say that the STL provides a robust seasonal trend estimation method and deals very well with missing or erroneous data points [ref]. In addition, it can be apply with ease to long time series, due to its computational efficient feature [ref].
-\justify
-Having computed the trends from Figure  \ref{fig:experiment2_bearing_fft_trend}, We ask the following valid question: Is there a pattern in the trend?  We limit ourselves to bearing number 1. In an attempt to answer this question, we plot the derivative of the trend given in figure  \ref{fig:grad_trend}. The later shows three distinct phases, which matche the correlated structure of the trend given in Figure \ref{fig:experiment2_bearing_fft_trend}. 
-\begin{figure}[H] 
-   \centering
-   % \includegraphics[width=4.4in]{../fig/experiment2_bearing_fft_amp.png}
-   \includegraphics[width=4.9in]{../fig/experiment2_bearing_fft_trend.png} 
-   \caption{Trend for BPFO for each bearing over time}
-   \label{fig:experiment2_bearing_fft_trend}
-\end{figure}
-\begin{figure}[H] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=4.9in]{../fig/bearing1_bpfo_trend_grad.png} 
-   \caption{Gradient of the trend of BPFO forcing frequency amplitude for bearing 1}
-   \label{fig:grad_trend}
-\end{figure}
-\clearpage
-\justify
-During the first phase, the derivative is constant, which implies that there is no change in the trend. This is followed by a rapid increase in the derivative. This phase is the onset and rapid propagation of failure within the bearing. In the last phase, the derivative is relatively constant. At this stage the bearing can fail at any given moment. A second and equally valid question is the following: Can we predict the failure time of the bearings? In an other word, can we estimate the remaining useful life of the bearings, based on the trend shown in Figure \ref{fig:experiment2_bearing_fft_trend}? In the next subsection we propose a method to tackle the latter question.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Trend based remaining useful life estimation: problem formulation}
-In Figure  \ref{fig:experiment2_bearing_fft_trend}, we can observe the trend of bearing 1,2,3 and 4. The four bearings are of the same type and operate under the same condition. Since bearing number 1 failed, we used it as the reference bearing. The goal is to find the time at which the remaining working bearing will fail. We denote this time by $t_{f}$. To compute the latter, we assume that when the remaining bearing fail, the energy they produce will be approximately the same as the failed bearing. Let $E_{1}$ be the energy produced by bearing 1. This energy can be approximated by the area under the red curve in Figure \ref{fig:experiment2_bearing_fft_trend}. Furthermore, let $f_{i}$ be the BPFO amplitude trend define in Figure  \ref{fig:experiment2_bearing_fft_trend}, where $i$ denote bearing number $i= 1,2,3,4$. Then
-\begin{equation}
-\int_{0}^{t_{f}} f_{i}(t)\mathrm{dt}=E_{1} = \int_{0}^{t_{1}} f_{1}(t)\mathrm{dt}, \quad i = 2,3,4
-\end{equation}
-where $t_{1}$ is the time at which bearing 1 failed. We can estimate $f_{i}, i = 2,3,4$ by either a polynomial or an exponential function based on the shape of the trend in Figure \ref{fig:experiment2_bearing_fft_trend}.
-For a $p$ order polynomial we get
-\begin{equation}\label{eq:rul}
-\int_{0}^{t_{f}} \theta_{0}+\theta_{1}t+\cdots \theta_{p}t^{p} \mathrm{dt}=E_{1} = \int_{0}^{t_{1}} f_{1}(t)\mathrm{dt}, \quad i = 2,3,4
-\end{equation}
-where $\theta_{j}, j = 0,\cdots,p$ is a constant. After integration, equation (\ref{eq:rul}) reduces to 
-\begin{equation}\label{eq:rul1}
-\theta_{0}t_{f}+\theta_{1}t_{f}^{2}+\cdots \theta_{p}t_{f}^{p+1} =E_{1} = \int_{0}^{t_{1}} f_{1}(t)\mathrm{dt}, \quad i = 2,3,4.
-\end{equation}
-It remains now to estimate the coefficients $\theta_{j}, j = 0,\cdots,p$, based on the available trend data in Figure \ref{fig:experiment2_bearing_fft_trend}. To do so, we let the objective function $\mathcal{O}(t_{f})$ be defined by 
-\begin{equation}
-\mathcal{O}(t_{f}) = \theta_{0}t_{f}+\theta_{1}t_{f}^{2}+\cdots \theta_{p}t_{f}^{p+1}-E_{1},
-\end{equation}
-and use the least square method to estimate the coefficients $\theta_{j}, j = 0,\cdots,p$
-%After detecting the presence of a forcing frequency and recording the amplitudes, one can perform for example extrapolation, to predict the evolution of the amplitude. Looking at Figures  \ref{fig:experiment2_bearing_fft_amp}  and \ref{fig:experiment2_bearing_fft_trend}, we clearly see that extrapolating on the trend will be much easier than on the amplitude. The trend in Figure  \ref{fig:experiment2_bearing_fft_trend} is obtained from the robust seasonal trend estimation STL (Seasonal trend based on Loess) [ref].
-%\justify
-%The STL method is base on .....(Explain more about STL)
 
+\subsubsection{Ball pass inner race defect frequency detection}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../fig/bpfi/first_day_signal}
+	\includegraphics[width=0.7\linewidth]{../fig/bpfi/last_day_signal}
+	\caption{Vibration time signals recorded at the beginning (top) and six days after (bottom), in experiment 1.}
+	\label{fig:bpfo_signal}
+\end{figure}
 
 
 
