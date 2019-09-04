@@ -400,20 +400,20 @@ were
 H(t) = \frac{1}{\pi t}*x(t) = \frac{1}{\pi}\int_{-\infty}^{+\infty}\frac{x(t)}{t-\tau}\mathrm{d}\tau
 \end{equation}
 is the Hilbert transform of the signal, and \say{*} define the convolution operation.
-\justify
  After the enveloping process, the resulting signal is low pass filtered in order to remove the high frequency resonance components, leaving only the signal component that contain the bearing failure frequencies. Finally, the fast Fourier transform is applied on the filtered signal to obtain the frequency spectrum.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Ball pass outer race defect frequency detection}
+%
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{../fig/bpfo/first_day_signal_bpfo}
 	\includegraphics[width=0.7\linewidth]{../fig/bpfo/last_day_signal_bpfo}
-	\caption{Vibration time signals recorded at the beginning (top) and six days after (bottom), in experiment 2.}
+	\caption{Vibration time signals of bearing number 1 recorded at the beginning (top) and six days after (bottom), in experiment 2.}
 	\label{fig:bpfo_signal}
 \end{figure}
-Figure \ref{fig:bpfo_signal} shows two vibration time signals from experiment 2. The top signal was recorded at the beginning of the experiment, while the bottom one was measured six days after. An increase in the variance can be observe.
+In experiment 2, four bearings were run to failure, resulting in outer race defect in bearing  number 1.
+Figure \ref{fig:bpfo_signal} shows the vibration time signals of bearing number 1, at the beginning (top) and six days after (bottom), from experiment number 2. A significant increase in the variance can be observed.
 I fact, the variance has increased 28 time after 6 days. This can be seen in Figure \ref{fig:bpfo_density}, which shows a density plot at the beginning and six days after.
 \begin{figure}[H]
 	\centering
@@ -422,11 +422,11 @@ I fact, the variance has increased 28 time after 6 days. This can be seen in Fig
 	\label{fig:bpfo_density}
 \end{figure}
 \justify
-After six days the density tail increases considerably, which indicates an increase in the variance, due to bearing defect propagation. Figure \ref{fig:bpfo} shows the corresponding frequency spectrum at the beginning (top) and six days after (bottom). At the beginning of the experiment, the spectrum is relatively \say{clean}. No high frequency peaks can be observed. This indicates that the bearing is relatively \say{healthy}. However, after six days, the ball pass frequency as well as harmonics can be observed in the frequency spectrum.
+After six days, the tail of the distribution increases considerably, which indicates an increase in the variance, due to bearing defect propagation. Figure \ref{fig:bpfo} shows the corresponding frequency spectrum at the beginning (top) and six days after (bottom). At the beginning of the experiment, the frequency spectrum is relatively \say{clean}. No high frequency peaks can be observed. This indicates that the bearing is relatively \say{healthy}. However, after six days, the ball pass frequency as well as harmonics can be observed in the frequency spectrum.
 \justify
-The harmonics are evenly spaced frequency peaks that are integer multiple of the ball pass outer race defect frequency (\cite{mobius2014}). They are indication of transient, clipping or random impact in the vibration signal, and are characteristics of the presence of bearing defects (\cite{mobius2014}). Transient indicates the variation of the signal properties with time, while clipping refers to the distortion of a signal. 
+Harmonics are evenly spaced frequency peaks that are integer multiple of the ball pass outer race defect frequency (\cite{mobius2014}). They are indication of transient, clipping or random impact in the vibration signal, and are characteristics of the presence of bearing defects (\cite{mobius2014}). Transient indicates the variation of the signal properties with time, while clipping refers to the distortion of a signal. 
 \justify
-Recall that in experiment number 2, four bearings were being observed, and at the end of the experiment, bearing number 1 was seriously damaged due to outer race defect. Figure \ref{fig:experiment2_bearing_fft_amp} shows the evolution of defect frequency in terms of amplitude with time for all  bearings. Clearly, bearing 1 exhibits high amplitude in terms of defect frequency compare to the rest. Its amplitude increases and drops, before increasing in an oscillatory fashion. This is due to random slip or clipping due to defect propagation in the bearing.
+ Figure \ref{fig:experiment2_bearing_fft_amp} shows the evolution of defect frequency in terms of amplitude as a function of time, for all  bearings. Clearly, bearing 1 exhibits high amplitude in terms of defect frequency compare to other bearings. Its amplitude increases and drops, before increasing in an oscillatory fashion. This is due to random slip or clipping caused by defect propagation in the bearing. This illustrates the fact that the vibration signal generated by bearing are non periodic and stochastic (\cite{randal2011}).
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{../fig/bpfo/first_day_spectrum_bpfo}
@@ -445,12 +445,12 @@ Recall that in experiment number 2, four bearings were being observed, and at th
 \clearpage
 
 \subsubsection{Ball pass inner race defect frequency detection}
-Recall that in experiment 1, four bearing were being monitored and at the end of the experiment, inner race defect occurred in bearing number 3. Figure \ref{fig:bpfi_signal} shows the vibration signal at the beginning (top) and the signal at the end (bottom) of the experiment, for bearing number 3.
+Recall that in experiment 1, four bearings were run to failure, and at the end of the experiment, inner race defect occurred in bearing number 3. Figure \ref{fig:bpfi_signal} shows the vibration signals of bearing number 3, at the beginning (top) and at the end (bottom) of the experiment.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{../fig/bpfi/first_day_signal}
 	\includegraphics[width=0.7\linewidth]{../fig/bpfi/last_day_signal}
-	\caption{Vibration time signals recorded at the beginning (top) and six days after (bottom), in experiment 1.}
+	\caption{Vibration time signals recorded at the beginning (top) and at the end (bottom), of experiment 1.}
 	\label{fig:bpfi_signal}
 \end{figure}
 
@@ -462,19 +462,27 @@ Recall that in experiment 1, four bearing were being monitored and at the end of
 	\label{fig:bpfi_density}
 \end{figure}
 \justify
-It is clear that the variance of the time signal had increased significantly. This can be seen from the density plot in Figure \ref{fig:bpfi_density}, where the density of the signal at the end of the experiment exhibit a seriously wide tail. In fact, the variance had increased 41 time its initial value. The frequencies spectrum at the beginning and at the end of the experiment can be seen in Figure \ref{fig:bpfi}. The end spectrum exhibits a ball pass inner race frequency and form sidebands together with surrounding peaks. The sideband can also be visible around 600 Hz.
+It is clear that the variance of the time signal had increased significantly. This can be seen from the density plot in Figure \ref{fig:bpfi_density}, where the distribution of the signal at the end of the experiment exhibits a pronounced wide tail. In fact, the variance had increased 41 time its initial value. The frequencies spectrum at the beginning (top) and at the end (bottom) of the experiment can be seen in Figure \ref{fig:bpfi}. The frequency spectrum at the beginning of the experiment does not contain any high peaks frequencies. It is completely \say{clean}. This means that the bearing is relatively \say{healthy}.
 \justify
-Sidebabds are series of evenly spaced frequency peaks, centered around a center peak called carrier \cite{mobius2014}.
-They are result of amplitude modulation between the shaft frequency and the ball pass inner race defect frequency \cite{mobius2014}. This is due to the fact that the inner race fault will rotate in and out of the loaded region, causing modulation of the impact amplitudes by the rotation speed of the shaft (\cite{courrech}).
+However, at the end of the experiment, the frequency spectrum exhibits a ball pass inner race frequency and form sidebands together with surrounding peaks.
+Sidebands are series of (almost) evenly spaced frequency peaks, centered around a center peak called carrier (\cite{mobius2014}).
+They are result of amplitude modulation between the shaft frequency and the ball pass inner race defect frequency (\cite{mobius2014}). This is due to the fact that the inner race fault will rotate in and out of the loaded region, causing modulation of the impact amplitudes by the rotation speed of the shaft (\cite{courrech}).
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{../fig/bpfi/first_day_spectrum}
-	\includegraphics[width=0.7\linewidth]{../fig/bpfi/last_day_spectrum}
+	\includegraphics[width=0.7\linewidth]{../fig/bpfi/bpfi_sidebands}
 	\caption{Frequency spectrum with the presence of inner race defect frequency and sidebands.}
 	\label{fig:bpfi}
 \end{figure}
-
-
+\clearpage
+\section{Chapter conclusion}
+Fourier analysis applied to bearing fault detection, is concerned with transforming the vibration time signal of a bearing, to its corresponding frequency spectrum. A defect generates an impulse, which induces resonance in the bearing, and the machine housing the bearing. The generated resonance represents the response of the former and the latter.
+\justify
+The diagnostic information for bearing fault detection resides in the high frequency resonance induced by defects. The latter are frequency components, expressed mathematically in terms of the bearings physical characteristics, and the rotational speed of the machine shaft. The most prevalent technique used to extract bearing diagnostic information is the high frequency resonance technique.
+\justify
+The latter uses a series of filtering operations, aiming at isolating the bearing signal containing the failure frequencies. Furthermore, the frequency spectrum is extracted from the time signal through Fourier transform. If defects are initiated, the frequency spectrum will contain the defects frequencies. Although efficient, the high frequency resonance techniques is only valid within the boundary of the assumptions upon on which it is predicated. 
+\justify
+Due to slip of the roller elements in the bearing, the failure frequencies values can vary up to 2$\%$ from their theoretical values. In addition, bearing signal are relatively non periodic and stochastic in nature. Consequently, non-stationarity and non-linearity can be observed in bearing signal. The dependency of the failure frequency on the rotation speed of the machine shaft is also a limiting factor. For unknown or inaccurate rotation speed, the detection of failure become unreliable, or even impossible. The need for alternative methods for bearing fault detection is therefore justified and imperative. In particular, method that does not only rely on the frequency spectrum are important. In the next chapters, such methods are presented.
 
 
 
