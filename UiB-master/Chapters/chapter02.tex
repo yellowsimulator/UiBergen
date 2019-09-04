@@ -22,12 +22,7 @@ This is illustrated in Figure \ref{fig:fft_domain}, where a signal (in dark) is 
 \end{figure}
 \justify
 In a theoretical view point, however, the results that underlie Fourier analysis can be sum up as followed: Given a function (or a signal), find a trigonometric series that converges to the target function. The latter statement falls under the umbrella of the general problem of function approximation.  
-%Fourier analysis is concerned with the general problem of periodic and non periodic functions approximation. The former and the latter are treated by Fourier series and Fourier transform, respectively. %Given a periodic function, its Fourier series is given as a discrete superposition of exponential functions, and its Fourier transform is given by continuous superposition of exponential functions.
-%\justify
-%Fourier analysis is used in a wide range of application, including signal processing, data compression, image analysis. The main objective is to take a signal or more generally a function, and decompose its in trigonometric functions. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Fourier series}
-%As previously mention, Fourier series is concerned with the general problem of periodic functions approximation. 
+\justify
 The basic ingredients required to approximate a function in this scenario are: a vector space, a basis, which is a subspace of the vector space, and a mathematical operation such as an inner product that maps two vectors to a real number. If a vector space has an inner product, we say that the vector space is an inner product space. The inner product operation, can be used for example to express the orthogonality property. The latter plays an import part in simplifying some algebraic operations.
 \justify
 Before continuing, let clarify some symbols. In this section, the letters $f$, $V$, $V_{0}$ are used for an arbitrary function, a vector space, and a subspace of a vector space, respectively.
@@ -78,7 +73,7 @@ which corresponds to
 from figure \ref{figure:il}. 
 \justify
 Let sum up this introductory section of Fourier analysis. Fourier analysis is concerned with the general problem of periodic and non periodic functions approximation. The former and the latter are treated by Fourier series and Fourier transform, respectively. Given a periodic function, its Fourier series is given as a discrete superposition of trigonometric functions, and its Fourier transform is expressed as continuous superposition of exponential functions.
-To extend the discussion of Fourier analysis, section \ref{sec:fouurier-serie} presents the Fourier series, while section \ref{sec:fouurier-transform} elaborates on Fourier transform.
+To extend the discussion of Fourier analysis, section \ref{sec:fouurier-serie} presents the Fourier series, while section \ref{sec:fouurier-transform} elaborates on Fourier transform. In section \ref{sec:application}, the application of Fourier analysis to bearing fault detection is presented.
 
 \justify
 \subsection{Fourier series}
@@ -295,6 +290,7 @@ where $F_{n}$ is a symmetric matrix. The matrix operation defined in equation (\
 
 
 \section{Application of Fourier transform for bearing fault detection}
+\label{sec:application}
 In the literature review section, the high frequency resonance techniques (HFRT) was presented as one of the most widely used method for bearing fault detection. In this section, the HFRT is applied to a case study. In particular, it is used to detect bearings defects in the outer and the inner ring of a roller bearing.
 \justify
 Section \ref{sec:case} describe the experimental set up that generated the bearings vibration signals. In section \ref{sec:fault} the theoretical equations for inner and outer race bearing defects are formulated. Furthermore, the characteristics of each fault are described.
@@ -476,13 +472,14 @@ They are result of amplitude modulation between the shaft frequency and the ball
 \end{figure}
 \clearpage
 \section{Chapter conclusion}
+\label{sec:chapter_conclusion}
 Fourier analysis applied to bearing fault detection, is concerned with transforming the vibration time signal of a bearing, to its corresponding frequency spectrum. A defect generates an impulse, which induces resonance in the bearing, and the machine housing the bearing. The generated resonance represents the response of the former and the latter.
 \justify
 The diagnostic information for bearing fault detection resides in the high frequency resonance induced by defects. The latter are frequency components, expressed mathematically in terms of the bearings physical characteristics, and the rotational speed of the machine shaft. The most prevalent technique used to extract bearing diagnostic information is the high frequency resonance technique.
 \justify
-The latter uses a series of filtering operations, aiming at isolating the bearing signal containing the failure frequencies. Furthermore, the frequency spectrum is extracted from the time signal through Fourier transform. If defects are initiated, the frequency spectrum will contain the defects frequencies. Although efficient, the high frequency resonance techniques is only valid within the boundary of the assumptions upon on which it is predicated. 
+The latter uses a series of filtering operations, aiming at isolating the bearing signal containing the failure frequencies. Furthermore, the frequency spectrum is extracted from the time signal through Fourier transform. If defects are initiated, the frequency spectrum will contain the defects frequencies. Although efficient, the high frequency resonance technique is only valid within the boundary of the assumptions upon which it is predicated. 
 \justify
-Due to slip of the roller elements in the bearing, the failure frequencies values can vary up to 2$\%$ from their theoretical values. In addition, bearing signal are relatively non periodic and stochastic in nature. Consequently, non-stationarity and non-linearity can be observed in bearing signal. The dependency of the failure frequency on the rotation speed of the machine shaft is also a limiting factor. For unknown or inaccurate rotation speed, the detection of failure become unreliable, or even impossible. The need for alternative methods for bearing fault detection is therefore justified and imperative. In particular, method that does not only rely on the frequency spectrum are important. In the next chapters, such methods are presented.
+Due to slip of the roller elements in the bearing, the failure frequencies values can vary up to 2$\%$ from their theoretical values, or even more. In addition, bearing signal are relatively non periodic and stochastic in nature. Consequently, non-stationarity and non-linearity can be observed in bearing signal. The dependency of the failure frequency on the rotation speed of the machine shaft is also a limiting factor. For unknown or inaccurate rotation speed, the detection of failure become unreliable, or even impossible. The need for alternative methods for bearing fault detection is therefore justified and imperative. In particular, method that does not only rely on the frequency spectrum are important. In the next chapters, such methods are presented.
 
 
 
