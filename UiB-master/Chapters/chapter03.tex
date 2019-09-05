@@ -79,11 +79,11 @@ Figure \ref{fig:emd3} shows the the signal  $S(t) = \sin(10 \pi t) + \sin(20 \pi
 \begin{equation}\label{eq:basis}
 	f(t) = \sum_{j=1}^{n}a_{j}\varphi_{j}(t).
 \end{equation}
-However, the Hilbert Huang transform will decompose the function as 
+However, the Hilbert Huang transform will decompose $f(t)$ as 
 \begin{equation}\label{eq:hht1}
 f(t) = \sum_{j=1}^{n}c_{j}(t) + r(t).
 \end{equation}
-In equation (\ref{eq:basis}) the basis $\varphi_{j}(t)$ are chosen before hand and the coefficients are computed through an integral or summation operation. On the hand, in equation (\ref{eq:hht1}) is one say clearly state that the basis function are directely computed based on the function $f(t)$. This is illustrates the concept of adaptivity, central to the Hilbert Huang transform.
+In equation (\ref{eq:basis}) the basis $\varphi_{j}(t)$ are chosen before hand (a-priory), and the coefficients are computed through an integral or summation operation. A sort of \say{bias} is imposed on the the function $f(t)$. On the hand, in equation (\ref{eq:hht1}) one can clearly state that the basis function are directly computed based on the function $f(t)$. This illustrates the concept of adaptivity, central to the Hilbert Huang transform.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=6in]{../fig/imfEMD.png} 
@@ -95,11 +95,11 @@ The intrinsic mode functions obtained through the EMD process constitute an adap
 \begin{equation}\label{eq:recover2}
 S(t) = \Re{\left( \sum_{j=1}^{n}a_{j}(t)\exp\left(i\int\omega_{j}(t)\mathrm{dt}\right)  \right)},
 \end{equation} 
-where the symbol $\Re(\cdot)$ represents the real part of the expression its encompasses, $i=\sqrt{-1}$, and $n$ is the total number of IMFs obtained from decomposition a signal $S(t)$. Recall that the amplitudes $a_{j}(t)$ and the frequencies $\omega_{j}(t)$ can be computed through the Hilbert transform from equations (\ref{eq:hilbert}, \ref{eq:amplitude}, and \ref{eq:frequency}). An analog representation of equation (\ref{eq:recover2}) in terms of Fourier expansion would be 
+where the symbol $\Re(\cdot)$ represents the real part of the expression its encompasses, $i=\sqrt{-1}$, and $n$ is the total number of IMFs obtained from decomposing a signal $S(t)$. Recall that the amplitudes $a_{j}(t)$ and the frequencies $\omega_{j}(t)$ can be computed through the Hilbert transform from equations (\ref{eq:hilbert}, \ref{eq:amplitude}, and \ref{eq:frequency}). An analog representation of equation (\ref{eq:recover2}) in terms of Fourier expansion would be 
 \begin{equation}\label{eq:recoverFourier}
 S(t) = \Re{\left( \sum_{j=1}^{n}a_{j}\exp\left(i\omega_{j}\right)  \right)},
 \end{equation} 
-where this time, the amplitude $a_{j}$ and the frequency $\omega_{j}$ are constant. The Hilbert Huang transform (HHT) offers two different approaches to recover a decomposed signal. The first one is described by equation (\ref{eq:recover1}) and include the IMFs, while the second approach is given by equation (\ref{eq:recover2}) and includes the instantaneous amplitude and the instantaneous frequency. This gives the HHT a leverage over Fourier transform in nonlinear an non stationary data analysis.
+where this time, the amplitude $a_{j}$ and the frequency $\omega_{j}$ are constant. The Hilbert Huang transform (HHT) offers two different approaches to recover a decomposed signal. The first one is described by equation (\ref{eq:hht1}) and include the IMFs, while the second approach is given by equation (\ref{eq:recover2}) and includes the instantaneous amplitude and the instantaneous frequency. This gives the HHT a leverage over Fourier transform in nonlinear an non stationary data analysis.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -120,7 +120,7 @@ BPFO = \frac{np}{2}S\left(1-\frac{BD}{PD}\cos\left(\beta\right)  \right) \nonumb
 \end{equation}
 where S is the rotating speed of the motor on which the bearing is attached. nb is the number of rolling elements (balls), BD is a rolling element diameter. The pitch diameter PD is half the hight of the inner ring, and the contact angle $\beta$ is the angle formed when a rolling element touches the cage. The data and the experimental setup used for this case study were described in chapter 2. In this experiment, four bearings are mounted on a motor rotating at 2000 rotations per minutes. The motor runes until bearing number 1 was severely affected by a ball pass frequency outer race defect. The data consists of 984 samples. Each sample contains  acceleration measurements consisted of 20 480 data points, obtained by mounting an accelerometer on each bearing. Recall that an accelerometer is a sensor used to quantify acceleration when a system vibrates. After this background information, let describe the methodology used to detect pulses emitted by a bearing with cracks in the outer ring.
 \justify
-The method consists of applying the empirical mode decomposition, followed by a robust seasonal trend decomposition method called STL, which stands for Seasonal Trend decomposition procedure based on LOESS,  \cite{Cleveland-et-al-1990}. LOESS is the abbreviation of Locally Estimated Scatterplot Smoother, and is a nonparametric curve fitting procedure. It can be used for \say{Data exploration, diagnostic checking of parametric models and provides a nonparametric regression surface}, \cite{Cleveland-1979}, \cite{Cleveland-et-al-1988}.
+The method consists of applying the empirical mode decomposition, followed by a robust seasonal trend decomposition method called STL, which stands for Seasonal Trend decomposition procedure based on LOESS,  (\cite{Cleveland-et-al-1990}). LOESS is the abbreviation of Locally Estimated Scatterplot Smoother, and is a nonparametric curve fitting procedure. It can be used for \say{Data exploration, diagnostic checking of parametric models and provides a nonparametric regression surface}, (\cite{Cleveland-1979}, \cite{Cleveland-et-al-1988}).
 \justify
 \subsection{Seasonal Trend decomposition based on Loess (STL)}
 The STL sequentially applies the locally estimated scatterplot smoother (LOESS) in order to obtain cyclical and trend components of a signal. Here a cyclical component is a periodically occurring pattern in a signal.
@@ -130,13 +130,13 @@ S(t) = T(t) + C(t) + R(t),
 \end{equation} 
 where $T(t)$ an $C(t)$ are the trend and cyclical components, and $R(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatterplot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. It therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. Since pulses emitted by a bearing roller elements passing a crack, are local periodic events on a global scale, the STL provides the necessary mathematical apparatus to capture them.
 \justify
-By design, the STL is computational efficient, robust in the sense that it uses a robust statistical estimator, and deals very well with missing and distorted data points, \cite{Cleveland-et-al-1990}. In the subsequent paragraphs, an account of the LOESS procedure is presented, followed by the description of the STL method.
+By design, the STL is computational efficient, robust in the sense that it uses a robust statistical estimator, and deals very well with missing and distorted data points (\cite{Cleveland-et-al-1990}). In the subsequent paragraphs, an account of the LOESS procedure is presented, followed by the description of the STL.
 \justify
 Given a signal represented by a set of $n$ points, conveniently expressed by their coordinates
 \begin{equation}
 \{ (t_{j}, y_{j}), \quad j = 1, \cdots, n\},
 \end{equation}
-where $t_{j}$ is the independent variable on the time scale and $y_{j}$ is the dependent variable. The LOESS procedure finds a smooth function $\hat{g}(t)$, defined everywhere on the scale of the independent variable, such that the estimate of $y_{j}$ denoted by $\hat{y}_{j}$ at $t_{j}$ is computed as 
+where $t_{j}$ is the independent variable on the time scale, and $y_{j}$ is the dependent variable. The LOESS procedure finds a smooth function $\hat{g}(t)$, defined everywhere on the scale of the independent variable, such that the estimate of $y_{j}$ denoted by $\hat{y}_{j}$ at $t_{j}$ is computed as 
 \begin{equation}
 \begin{split}
 \hat{y}_{j} &= \hat{g}(t_{j}) \\
@@ -163,7 +163,7 @@ and $h_{j}$ is the distance from $t_{j}$ to the nearest neighbor of $t_{j}$. For
 \begin{equation}
 S(t) = T(t) + C(t) + R(t), \nonumber
 \end{equation}  
-and by applying sequentially the LOESS procedure, the STL is able to extract the trend $T(t)$ and the cyclical component $C(t)$. A detail treatment on how the trend and cyclical components are extracted can be found in  \cite{Cleveland-et-al-1990}.
+and by applying sequentially the LOESS procedure, the STL is able to extract the trend $T(t)$ and the cyclical component $C(t)$. A detail treatment on how the trend and cyclical components are extracted can be found in  (\cite{Cleveland-et-al-1990}).
 
 
 
