@@ -57,8 +57,33 @@ An intrinsic mode function (IMF) must satisfy the following conditions:
 \end{enumerate}
 \end{definition}
 The empirical mode decomposition is an iterative algorithm that generates intrinsic mode functions, each satisfying definition \ref{def:emd}.
-
-
+\justify
+The empirical mode decomposition can be described as follow:
+\begin{enumerate}
+	\item Compute the upper and the lower envelope curve of the target signal $S(t)$
+	\item At in the first iteration $i=1$, compute the mean $m_{i}(t)$ between the upper and the lower envelope cure of $S(t)$
+	\item Compute the fist proto IMF as 
+	\begin{equation}\label{eq:proto}
+		h_{i1}(t) = S(t)-m_{i}(t).
+	\end{equation}
+	If $h_{i1}$ satisfies definition \ref{def:emd}, then it is an IMF and it is denoted by 
+	\begin{equation}\label{eq:imf}
+		h_{i1}(t) = c_{i}(t).
+	\end{equation}
+	otherwise
+	
+	\item Set $h_{i1}(t)$ as the input signal and repeat set 1,2 and 3 $k$ time, until $h_{ik}(t)$ satisfies definition \ref{def:emd}.
+	\item After finding the first IMF, set the first IMF as input signal and repeat step 1,2,3 and 4 to obtain the remaining IMFs. If an IMF is monotone, set it as the residual and you are done.
+\end{enumerate}
+Figure \ref{fig:emd3} shows the the signal  $S(t) = \sin(10 \pi t) + \sin(20 \pi t) $ (top) and its IMFs as well as the residual. In most function approximation methods, a set of basis functions $\varphi_{j}(t), j = 1,\cdots,n$ coupled with coefficients $a_{j}$, are used to decompose a function $f(t)$ as 
+\begin{equation}\label{eq:basis}
+	f(t) = \sum_{j=1}^{n}a_{j}\varphi_{j}(t).
+\end{equation}
+However, the Hilbert Huang transform will decompose the function as 
+\begin{equation}\label{eq:hht1}
+f(t) = \sum_{j=1}^{n}c_{j}(t) + r(t).
+\end{equation}
+In equation (\ref{eq:basis}) the basis $\varphi_{j}(t)$ are chosen before hand and the coefficients are computed through an integral or summation operation. On the hand, in equation (\ref{eq:hht1}) is one say clearly state that the basis function are directely computed based on the function $f(t)$. This is illustrates the concept of adaptivity, central to the Hilbert Huang transform.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=6in]{../fig/imfEMD.png} 
