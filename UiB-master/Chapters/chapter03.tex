@@ -201,22 +201,17 @@ The outer race ball pass frequency defect, can be viewed as a crack located at t
    \label{fig:pulse}
 \end{figure}
 \justify
-The STL process extract the most significant and relevant feature or information in the intrinsic mode function. The result is a signal with strong sinusoidal components. The signal obtained from the STL process is called pulse signal.
+The STL process extracts the most significant and relevant features or information from the intrinsic mode functions. The result is a signal with strong sinusoidal components. The signal obtained from the STL process is called pulse signal (a name derived in this thesis). This is due to the fact that the signal (bottom) in Figure \ref{fig:pulse} obtained from applying the STL process on an intrinsic mode function (middle), has a pulse like representation. This can be conceptually seen as the pulse emitted when a defect is stricken in a bearing. 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=6in]{../fig/emd-stl.png} 
-   \caption{ A pulse signal extracted by applying EMD followed by STL. The pulses represents the periodic high frequency signal emitted by a bearing when the roller elements pass a crack located in the outer ring.}
+   \caption{ A pulse signal extracted by applying EMD followed by STL. The top graph represents the vibration time signal. The middle graph is the fifth intrinsic mode function. The bottom graph is the signal resulting from applying the STL on the IMF. The pulses represents the periodic high frequency signal emitted by a bearing when the roller elements pass a crack located in the outer ring.}
    \label{fig:emd-stl}
 \end{figure}
 \justify
 Figure \ref{fig:emd-stl} shows, the result from applying the EMD and the STL to an input signal. The top graph represents the input vibration signal obtained by mounting an accelerometer on the defected bearing. The signal is measured after 6020 minutes from the start of the experiment. Recall that, after 9840 minutes, the defect endured by the bearing becomes severe, and the experiment is stoped. The middle graph of Figure \ref{fig:emd-stl} shows the fifth IMF obtained from applying the EMD to the input signal. The IMF exhibits the presence of high frequency patterns.
-\justify
- However, it is hard to clearly  identify periodic high frequency patterns. Thats where the STL comes to the rescue. It extracts the periodic high frequency pulses from the IMF with elegance and they can be seen in the bottom graph of Figure \ref{fig:emd-stl}. When a bearing roller element hits the crack, this event can conceptually be interpreted as the generation of a huge amount of energy in a small amount of time, that slowly dies out. The bottom graph of Figure \ref{fig:emd-stl} clearly shows such event.
-\justify
-Detecting the pulses leads to more questions. Is the frequency of the pulses related to the forcing frequencies? Does the amplitude of a pulse quantify the severity of a crack? How to chose the correct IMF to correctly represent the pulses?(This questions are for the next study) 
 
-
-
+\subsubsection{Ball pass frequency outer race detection} 
 %The middle graph shows the fifth intrinsic mode function generated from applying the EMD on the input signal. This IMF shows patterns.
 %This is precisely what is require to capture a pulse, which can be viewed as a periodic emanation of an event such as a bearing ball passing a crack.
  \begin{figure}[H]
@@ -251,6 +246,9 @@ The highest intrinsic mode functions contain mostly the shaft rotation speed and
 	\caption{Periodogram of the pulse signal obtained from IMF number 8, at the beginning (top) and the end (bottom) of experiment number 2.}
 	\label{fig:startimf8shaft}
 \end{figure}
+
+\subsubsection{ Ball pass inner race frequency detection }
+
 
 \section{Limitation of the empirical mode decomposition}
 \label{sec:limitation}
