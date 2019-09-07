@@ -259,8 +259,14 @@ The highest intrinsic mode functions contain mostly the shaft rotation speed and
 \justify
 Figure \ref{fig:startimf1bpfi} shows the periodograms obtained from the pulse signals of the first intrinsic mode functions at the start (top) and at the end (bottom) of experiment number 1. The inner race defect frequency is visible in both cases.
 However, the shaft frequency is not visible.
-\section{Limitation of the proposed method}
+\section{Summary and discussion}
 \label{sec:limitation}
+The proposed method consists of transforming a vibration signal to a pulse like signal, which contains all diagnostics information in terms of bearing failure detection. In particular, the outer race and the inner race defect. The present method uses the empirical mode decomposition (EMD), followed by the seasonal trend decomposition method based on Loess (STL). The former is a signal decomposition method suited for non stationary and non linear signal, while the letter extracts periodic components from a signal.
+\justify
+Together they are able to generate a noise less periodogram which contains relevant frequency information for bearing fault detection. The periodogram approximates the power spectral density (PSD) of a signal. The PSD is the energy distribution of frequencies components of a signal.
+By applying the proposed method, it was possible to identify conspicuous outer race defect frequency, as well as inner race defect frequency in a periodogram, pertaining to a bearing undergoing failure. In addition, the periodogram exhibited clearly the rotational frequency of the machine shaft.
+
+
 
 
 
