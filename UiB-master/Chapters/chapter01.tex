@@ -138,11 +138,14 @@ The application of support vector machine in bearing fault detection requires at
 
 \section{Contributions }
 \label{sec:contributions}
-The contribution of this work can be summed up in three parts. Firstly, the Hilbert Huang transform coupled with the robust seasonal trend estimation based of Loess [ref], can extract high frequency spikes emitted when bearing balls pass defect area or cracks.
+I this thesis two methods are proposed for bearing fault detection: The first method uses the Hilbert Huang transform, coupled with a robust seasonal trend decomposition method, to generate a signal, that contains all the diagnosis information, related to bearing faults. The resulting signal is a periodic high frequency pulse like signal. By extracted its frequency components, one is able to identify bearing failure frequencies.
 \justify
-secondly, the health of a bearing is estimated by a robust statistical dispersion measure: the interquartile range (IQR). The latter is the health index. Furthermore,  the health index is used to estimate a bearing health trajectory. The health trajectory is the different stages a bearing can go through until failure occurs. We show that a bearing can go through three successive phases: The onset of failure, a rapid deterioration and an imminent failure phase. 
-\justify
-lastly, a health decision boundary is estimated for a system of bearings, based on a wavelet decomposition, the IQR, and a one class support vector machine. A health decision boundary allows for deciding if a bearing is about to fail or not. For each successive vibration signal, a discrete wavelet transform is used to decompose the vibration signal into two new features: The high and low frequency component. The health index of the high and low frequency components are computed. In this fashion, we obtain a set of points in the high and low frequency feature space. By training a one class support vector machine the health decision boundary for multiple bearings is estimated.
+The second method uses wavelet transform to generate two addition signals from a target bearing vibration signal. 
+To quantify bearing health, the interquartile range (IQR), which is a robust statistical measure of dispersion, is used.
+By computing the IQR of the two additional signals, for a multiple bearing vibration signals, a set of points are generated in the two dimensional plan. Furthermore, by applying the one class support vector machine, one can classify bearings into two classes: healthy and unhealthy. In addition, a bearing with failure follows a trajectory which is terms bearing failure trajectory.
+%
+% coupled with a one class support vector machine to classify a system of bearing into healthy and unhealthy classes.
+
 
 %%=========================================
 

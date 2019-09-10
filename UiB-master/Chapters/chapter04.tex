@@ -5,9 +5,10 @@
 %%=========================================
 \documentclass[../Main/thesis.tex]{subfiles}
 \begin{document}
-\chapter[One class SVM coupled with wavelet transform for bearing health monitoring]{One class SVM coupled with wavelet transform for bearing health monitoring}
+\chapter[Support vector machine coupled with wavelet transform for bearing health monitoring]{Support vector machine coupled with wavelet transform for bearing health monitoring}
 \label{sec:waveletandsvm}
-In this chapter we introduce yet a another method for bearing fault detection. In Chapter \ref{sec:chapter2} We showed how the fast Fourier transform is applied to bearing fault diagnosis. Although popular in the industry for bearing fault analysis and detection, the fast Fourier transform method is not without limitations. As in any scientific methods, the limitations are grounded in the mathematical assumptions upon which the method is derived. As pointed previously, two such assumption are linearity, and stationarity. Furthermore, for bearing fault analysis, the fast Fourier method relies on the rotational speed of the motor on which the bearings are mounted. In addition, the forcing frequencies are derived from the physical properties of the bearing. Thus, the fast Fourier transform method for bearing fault detection can be seen as a physics base data driven method.
+Support vector machine for classification are machine learning algorithms that classify vectors into two or more groups, that share some sort of \say{similarity}.
+%In this chapter we introduce yet a another method for bearing fault detection. In Chapter \ref{sec:chapter2} We showed how the fast Fourier transform is applied to bearing fault diagnosis. Although popular in the industry for bearing fault analysis and detection, the fast Fourier transform method is not without limitations. As in any scientific methods, the limitations are grounded in the mathematical assumptions upon which the method is derived. As pointed previously, two such assumption are linearity, and stationarity. Furthermore, for bearing fault analysis, the fast Fourier method relies on the rotational speed of the motor on which the bearings are mounted. In addition, the forcing frequencies are derived from the physical properties of the bearing. Thus, the fast Fourier transform method for bearing fault detection can be seen as a physics base data driven method.
 \justify
 In this chapter, a purely data driven method is presented. It consists of applying wavelet transform for feature generation, a robust statistical estimator to quantify a bearing health, and a support vector machine (SVM) for anomaly detection. Before giving a detail account of the method, let clarify some semantics and outline the benefits of this method. A feature in the context of this chapter, is a component of a signal. As pointed out earlier, a signal can have multiple components, which can be extracted for example by applying Fourier series or Fourier transform. In this case a feature or component of the original signal is a trigonometric function. A support vector machine (SVM) is a linear classification algorithm for pattern identification that uses margins to separate data into different groups [vapnik1995].
 \justify
@@ -17,78 +18,61 @@ The method presented in this chapter solely relies on the data to detect any fau
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Support vector machine (SVM)}
 \label{sec:svm}
-The Support vector machine algorithm was originally derived by [vopnikk1995] as a two-groups, classification algorithm. It solves the problem of classifying an input vector into two groups. In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups. It was originally introduced as support-vector Networks, but is now popularly refer to as support vector machine. The bulk of the SVM rests on the following idea: Use a nonlinear kernel to map the input data into a high dimensional feature space, where a linear decision function is used to classify data into two groups [vopmik1995].
-\justify
-A non linear kernel is just a nonlinear function and a decision function also called a discriminator function is a curve that separates the two groups. The classification is based on optimizing a margin separating the two groups. 
+Support vector machine is an algorithm  that solves the problem of classifying an input vector into two groups. In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups.
+The classification is based on optimizing a margin separating the two groups. 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=5in]{../fig/svm2d.png} 
-   \caption{Illustration of two classes classification from [vapnik1995]}
+   \caption{Illustration of two classes classification from (\cite{vapnik1995})}
    \label{fig:svm2d}
 \end{figure}
 \justify
-Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of points marked by circle and cross are separated by the optimum curve or hyperplane (here the solid dash line). The margin is the distance or gap between solid dark lines. Here the two classes are linearly separable, meaning that a linear function can be used to separate the two classes. Support vectors are points that lies on the margins (points in grey square lying on the dark lines) and defines the margin of largest separation between the two classes [vapnik1995].
+Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of points marked by circle and cross are separated by the optimum curve or hyperplane (here the solid dash line). The margin is the distance or gap between solid dark lines. Here the two classes are linearly separable, meaning that a linear function can be used to separate the two classes. Support vectors are points that lies on the margins (points in gray square lying on the dark lines) and defines the margin of largest separation between the two classes.
 \justify
-The SVM can be formulated as a convex quadratic optimization problem. In this setting, the objective function is convex and quadratic, and the inequality constraint is convex. Henceforth, from the duality principal of the mathematical optimization theory, there exist two formulations of the SVM: A primal formulation and an equivalent dual formulation. For convex optimization problem, we always nearlly have strong duality, that is the optimum solution of the primal problem is equal to the optimum solution of the dual problem.
 
-\justify
-The formulation of the SVM problem goes like this: Find the optimum linear curve (the dash line in Figure \ref{fig:svm2d}), that separates  two groups of points (circle points and cross points in Figure \ref{fig:svm2d}), from the nearest points of each class (the support vectors which are points in the in grey square in Figure \ref{fig:svm2d}).
-\justify
-Let $\bm{X}_{i} \in \mathbb{R}^{d}$  be an input vector, $\bm{W}\in \mathbb{R}^{d}$ a vector of parameters and $b\in \mathbb{R}$, where $d$ is an integer. Let $y_{i}\in \{-1,1\}$. Any vector $\bm{X}_{i}$ can be classify as 
-\begin{equation}\label{eq:svmformulation}
-y_{i} =
-  \begin{cases}
-                                   -1 & \text{if $\bm{W}^{T}\bm{X}_{i} + b < 0$} \\
-                                   1 & \text{if $\bm{W}^{T}\bm{X}_{i} + b > 0$},
-  \end{cases}
-\end{equation}
-where the equation of the separating hyperplane is given by 
-\begin{equation}\label{eq:svmformulation01}
-\bm{W}^{T}\bm{X}_{i} + b = 0.
-\end{equation}
-The problem specified by equation (\ref{eq:svmformulation}, \ref{eq:svmformulation01}) can be formulated as the following convex quadratic optimization problem:
-\begin{equation}\label{eq:svmformulation1}
-\min_{\bm{W},b}\frac{1}{2}||  \bm{W}||^{2}
-\end{equation}
-subjected to 
-\begin{equation}\label{eq:svmformulation2}
-y_{i}\left( \bm{W}^{T}\bm{X}_{i} + b \right) \geq 0, \quad i = 1,\cdots,n.
-\end{equation}
-Equations (\ref{eq:svmformulation1}, \ref{eq:svmformulation2}) is called the primal formulation of the SVM. An equivalent dual formulation called the Lagrangian dual formulation is defined as followed:
-Let 
-\begin{equation}\label{eq:svmprime1}
-L(\bm{W}, b, \theta) = \frac{1}{2}||  \bm{W}||^{2} -\sum_{i}^{n}\theta_{i}\left(y_{i}\left( \bm{W}^{T}\bm{X}_{i} + b \right) -1  \right)
-\end{equation}
-be the Lagrangian derived from the primal SVM formulation, where $\theta_{i} \in \mathbb{R}^{d}$, and $\bm{W}^{T}$ denotes the transpose of the vector $\bm{W}$. Taking the partial derivative of the Lagrangian with respect to $\bm{W}$ and $b$ we obtain  
-\begin{equation}\label{eq:dual1}
-\begin{split}
-\frac{\partial L(\bm{W}, b, \theta)}{\partial \bm{W}} &= \bm{W}-\sum_{i=1}^{n}\theta_{i}y_{i}\bm{X}_{i} = 0, \quad \Rightarrow \bm{W} = \sum_{i=1}^{n}\theta_{i}y_{i}\bm{X}_{i}\\
-\frac{\partial L(\bm{W}, b, \theta)}{\partial b} &= \sum_{i=1}^{n}\theta_{i}y_{i} = 0.
-\end{split}
-\end{equation}
-Substituting $\bm{W}$ back to the primal formulation (\ref{eq:svmformulation1}, \ref{eq:svmformulation2}) , with $ \sum_{i=1}^{n}\theta_{i}y_{i} = 0$, we obtain the dual Lagrangian formulation as 
+\subsection{C-Support vector classification}
+The support vector algorithms comes into two forms: The primal and the dual form, each form offering an advantage in the solution and the implemetatin level.
+Let $\bm{x}_{i}\in \mathbb{R}^{n}, i = 1, \cdots, m$ be a training vector and $y_{i}\in \{1,-1\}$, the C-SVM (\cite{bosser1992}, \cite{vapnik1995}) solves the primal optimization problem
 \begin{equation}
-\max_{\theta}\sum_{i=1}^{n}\theta_{i} - \frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\theta_{i}\theta_{j}y_{i}y_{j}\bm{X}_{i}\bm{X}_{j}
+	\min_{w,b,\xi} +\quad \frac{1}{2}\bm{w}^{T}\bm{w} + C\sum_{i = 1}^{m}\xi_{i}
 \end{equation}
 subjected to 
 \begin{equation}
-\begin{split}
-\sum_{i}^{n}\theta_{i}y_{i} = 0\\
-\theta_{i} \geq 0, \quad \forall i = 1,\cdots,n
-\end{split}
+	y_{i}(\bm{w}^{T}\phi(\bm{x}_{i}) + b) \geq 1 - \xi_{i}
 \end{equation}
-which can be efficiently solve with a sequential minimization algorithm. The above primal and dual formulations hold for linear separable classes. \begin{figure}[H] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=5.4in]{../fig/nonlinearsvm.png} 
-   \caption{Nonlinear separable classes in two dimensions}
-   \label{fig:nonlinearsvm}
-\end{figure}
+\begin{equation}
+	\xi_{i} \geq 0, \quad i = 1, \cdots, m
+\end{equation}
+where $\phi(x_{i})$ maps $x_{i}$ in higher dimension space and the constant $C > 0$ is a real number which called regularization parameter.
+Because of \say{the possible high dimensionality of the vector $\bm{w}$, the following dual problem} is solved (\cite{chang2001}):
+\begin{equation}
+	\min_{\alpha}\quad \frac{1}{2}\bm{\alpha}^{T}Q\bm{\alpha}-\bm{e}^{T}\bm{\alpha}
+\end{equation}
+%
+%which can be efficiently solve with a sequential minimization algorithm. The above primal and dual formulations hold for linear separable classes.
+% \begin{figure}[H] %  figure placement: here, top, bottom, or page
+%   \centering
+%   \includegraphics[width=5.4in]{../fig/nonlinearsvm.png} 
+%   \caption{Nonlinear separable classes in two dimensions}
+%   \label{fig:nonlinearsvm}
+%\end{figure}
+subjected to 
+\begin{equation}
+	\bm{y}\bm{\alpha}^{T} = 0. \quad 0 \leq \alpha_{i} \leq C,\quad  i = 1,\cdots, m
+\end{equation}
 \justify
-Figure \ref{fig:nonlinearsvm} illustrates a nonlinear separable problem, where the two classes can not directly separated by a linear curve. This problem requires a different formulation. In this case a nonlinear function $K(X,Z)$
+where $\bm{y}\in \mathbb{R}^{m}$ is the indicator vector, $\bm{e} = [1,\cdots,1]^{T}$, $Q$ is the semi-definite matrix
+\begin{equation}
+	Q_{ij} = y_{i}y_{j}K(\bm{x}_{i},\bm{x_{j}})
+\end{equation}
+and $K$ is the kernel function 
+\begin{equation}
+	K(\bm{x}_{i},\bm{x}_{j}) = \phi(\bm{x}_{i})^{T}\phi(\bm{x}_{j})
+\end{equation}
 \begin{equation}
 K: \mathbb{R}^{d}\times \mathbb{R}^{d} \rightarrow \mathbb{R}
 \end{equation}
-called a kernel function is required. The latter maps the data into a higher dimension space, where the data is linearly separable. Figure \ref{fig:kernelsvm} shows two classes 0 and 1 originally nonlinearly separable in two dimension.  Here it is obvious that no linear curve can be used to separate the two classes. After applying a gaussian kernel the data is map to a higher dimension where the two classes are linearly separable. This can been seen in Figure \ref{fig:kernelsvm1}, where a plan can be used to separate the two classes.
+that  maps the data into a higher dimension space.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=6in]{../fig/nonlinearseparable.png} 
