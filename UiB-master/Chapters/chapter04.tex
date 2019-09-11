@@ -17,7 +17,7 @@ The method presented in this chapter solely relies on the data to detect any fau
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Support vector algorithms }
 \label{sec:svm}
-Support vector algorithms for classification solve the problem of classifying an input vector into two groups (binary classification), or estimating the distribution of input vector(s). In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups. The classification is based on optimizing a margin separating the two groups. 
+Support vector algorithms for classification, solve the problem of classifying an input vector into two groups (binary classification), or estimating the distribution of input vector(s). In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups. The  binary classification is based on optimizing a margin separating the two groups. 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=5in]{../fig/svm2d.png} 
@@ -27,13 +27,13 @@ Support vector algorithms for classification solve the problem of classifying an
 \justify
 Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of points marked by circle and cross are separated by the optimum curve or hyperplane (here the solid dash line). The margin is the distance or gap between solid dark lines. Here the two classes are linearly separable, meaning that a linear function can be used to separate the two classes. Support vectors are points that lies on the margins (points in gray square lying on the dark lines) and defines the margin of largest separation between the two classes.
 \justify
-The most commonly used and implemented support vector classification algorithms are  C-support vector classification (SVC) (\cite{bosser1992}, \cite{vapnik1995}), $\nu$-support vector classification (\cite{kp2000}) and one-class support vector machine (\cite{kp2001}), for distribution estimation. Here the C-SVC introduces the regularization parameter $C\in (0,\infty)$, while the regularization parameter for the $\nu$-SVC is bounded. 
+The most commonly used and implemented support vector classification algorithms are  C-support vector classification (SVC) (\cite{bosser1992}, \cite{vapnik1995}), $\nu$-support vector classification (\cite{kp2000}) and one-class support vector machine (\cite{kp2001}), for distribution estimation. Here the C-SVC introduces the regularization parameter $C\in (0,\infty)$, while the regularization parameter for the $\nu$-SVC is bounded. Intuitively, the regularization parameter has the effect of decreasing the error for the classification problem.
 \justify
-The support vector algorithms are formulated as optimization problems in terms of a primal and dual formulation, where each form offers an advantage in the derivation of the solution, and on the implementation level.
+The support vector algorithms are formulated as optimization problems in terms of a primal and dual formulation, where each form offers an advantage in the derivation of the solution, and on the computer implementation level. In addition, the relationship between the dual formulation and the primal formulation allows a derivation of the solution of the optimization problem. 
 
 
 \subsection{C-Support vector classification (SVC)}
-Let $\bm{x}_{i}\in \mathbb{R}^{n}, i = 1, \cdots, m$ be a training vector and $y_{i}\in \{1,-1\}$, the C-SVM (\cite{bosser1992}, \cite{vapnik1995}) solves the primal optimization problem
+Let $\bm{x} = \{ \bm{x}_{i}\}$ be training examples, $\bm{x}_{i}\in \mathbb{R}^{n}, i = 1, \cdots, m$ and $y_{i}\in \{1,-1\}$ be the classes , $\bm{y} = \{ y_{i} \}$. The C-SVM (\cite{bosser1992}, \cite{vapnik1995}) solves the primal optimization problem
 \begin{equation}
 	\min_{w,b,\xi} \quad \frac{1}{2}\bm{w}^{T}\bm{w} + C\sum_{i = 1}^{m}\xi_{i}
 \end{equation}
@@ -44,17 +44,17 @@ subjected to
 \begin{equation}
 	\xi_{i} \geq 0, \quad i = 1, \cdots, m
 \end{equation}
-where $\phi(x_{i})$ maps $x_{i}$ in higher dimension space and the constant $C > 0$ is a real number which called regularization parameter.
+where $\phi(x_{i})$ maps $x_{i}$ in higher dimension space and the constant $C > 0$ is a real number which is called regularization parameter.
 Because of \say{the possible high dimensionality of the vector $\bm{w}$, the following dual problem} is solved (\cite{chang2001}):
 \begin{equation}\label{eq:cdual1}
-	\min_{\alpha}\quad \frac{1}{2}\bm{\alpha}^{T}Q\bm{\alpha}-\bm{e}^{T}\bm{\alpha}
+	\min_{\alpha}\quad g(\bm{\alpha}) = \frac{1}{2}\bm{\alpha}^{T}Q\bm{\alpha}-\bm{e}^{T}\bm{\alpha}, \quad \bm{\alpha}=\{\alpha_{i}\}, i=1,\cdots,m
 \end{equation}
 subjected to 
 \begin{equation}\label{eq:cdual2}
 	\bm{y}\bm{\alpha}^{T} = 0. \quad 0 \leq \alpha_{i} \leq C,\quad  i = 1,\cdots, m
 \end{equation}
 \justify
-where $\bm{y}\in \mathbb{R}^{m}$ is the indicator vector, $\bm{e} = [1,\cdots,1]^{T}$, $Q$ is the semi-definite matrix
+where $g(\bm{\alpha})$ is called the dual function, $\bm{y}\in \mathbb{R}^{m}$ is the indicator vector, $\bm{e} = [1,\cdots,1]^{T}$, $Q$ is the semi-definite matrix
 \begin{equation}\label{eq:Q}
 	Q_{ij} = y_{i}y_{j}K(\bm{x}_{i},\bm{x_{j}})
 \end{equation}
@@ -85,24 +85,33 @@ that  maps the data into a higher dimension space. Example of common Kernel func
    \centering
    %\includegraphics[width=4in]{../fig/nonlinearseparable.png} 
    \includegraphics[width=4in]{../fig/linearseparable.png} 
-   \caption{Linear separable classes 0 and 1 after using a gaussian kernel to map the data in higher dimension}.
+   \caption{Linear separable classes 0 and 1 after using a Gaussian kernel to map the data in higher dimension}.
    \label{fig:kernelsvm1}
 \end{figure}
 \justify
 The effect of a kernel function can be seen in Figure \ref{fig:kernelsvm} and \ref{fig:kernelsvm1}. In Figure \ref{fig:kernelsvm}, the data has two classes that can not be linearly separated directly. To linearly separate the classes, a Gaussian kernel is used to project the data in a higher dimension, which can be seen in Figure \ref{fig:kernelsvm1}.
 \justify
-The solution of the dual problem (\ref{eq:cdual1}, \ref{eq:cdual2}) coupled with the primal-dual relationship gives the optimal $\bm{w}$ (\cite{chang2001}) as
+The relationship between the primal and the dual problem is that, the dual function is a lower bound of the optimal solution $\bm{w}$ (\cite{boyd2004}), that is 
+\begin{equation}
+	g(\bm{\alpha}) \leq \bm{w},
+\end{equation}
+but since the primal optimization problem is convex, we have equality (\cite{boyd2004}), that is 
+\begin{equation}\label{eq:rdual}
+g(\bm{\alpha}) = \bm{w}.
+\end{equation}
+The solution of the dual problem (\ref{eq:cdual1}, \ref{eq:cdual2}) coupled with the primal-dual relationship (\ref{eq:rdual}) gives the optimal $\bm{w}$ (\cite{chang2001}) as
 \begin{equation}
 	\bm{w} = \sum_{i = 1}^{m}y_{i}\alpha_{i}\phi(\bm{x}_{i})
 \end{equation}
-where the decision boundary is given by (\cite{chang2001})
+where the decision boundary is given by
 \begin{equation}
 	sgn\left(\bm{w}^{T}\phi(\bm{x}) + b  \right) = sgn\left(  \sum_{i=1}^{m}y_{i}\alpha_{i}K(\bm{x}_{i},\bm{x} ) +b    \right)
 \end{equation}
-where sgn is the sign function.
+where sgn is the sign function. The decision boundary is used to separate classes.
+
 \subsection{$\nu$-Support vector classification (SVC)}
-The $\nu$-SVC (\cite{kp2000}) ,formulates the binary classification problem in term of a bounded regularization
- parameter $\nu$, as opposed to the C-SVC where the regularization parameter C can take any positive real number $C\in (0,\infty)$. The parameter $\nu$ is \say{an upper bound on the fraction of training errors and a lower bound of the fraction of support vectors} (\cite{chang2001})
+The $\nu$-SVC (\cite{kp2000}), formulates the binary classification problem in term of a bounded regularization
+ parameter $\nu$, as opposed to the C-SVC where the regularization parameter C, can take any positive real number $C\in (0,\infty)$. The parameter $\nu$ is \say{an upper bound on the fraction of training errors and a lower bound of the fraction of support vectors} (\cite{chang2001}). 
  \justify
  For the $\nu$-SVC the primal optimization problem is (\cite{chang2001})
  \begin{equation}
