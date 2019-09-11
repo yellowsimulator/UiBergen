@@ -30,7 +30,7 @@ The classification is based on optimizing a margin separating the two groups.
 Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of points marked by circle and cross are separated by the optimum curve or hyperplane (here the solid dash line). The margin is the distance or gap between solid dark lines. Here the two classes are linearly separable, meaning that a linear function can be used to separate the two classes. Support vectors are points that lies on the margins (points in gray square lying on the dark lines) and defines the margin of largest separation between the two classes.
 \justify
 
-\subsection{C-Support vector classification}
+\subsection{C-Support vector classification (SVC)}
 The support vector algorithms comes into two forms: The primal and the dual form, each form offering an advantage in the solution and the implemetatin level.
 Let $\bm{x}_{i}\in \mathbb{R}^{n}, i = 1, \cdots, m$ be a training vector and $y_{i}\in \{1,-1\}$, the C-SVM (\cite{bosser1992}, \cite{vapnik1995}) solves the primal optimization problem
 \begin{equation}
@@ -45,19 +45,11 @@ subjected to
 \end{equation}
 where $\phi(x_{i})$ maps $x_{i}$ in higher dimension space and the constant $C > 0$ is a real number which called regularization parameter.
 Because of \say{the possible high dimensionality of the vector $\bm{w}$, the following dual problem} is solved (\cite{chang2001}):
-\begin{equation}
+\begin{equation}\label{eq:cdual1}
 	\min_{\alpha}\quad \frac{1}{2}\bm{\alpha}^{T}Q\bm{\alpha}-\bm{e}^{T}\bm{\alpha}
 \end{equation}
-%
-%which can be efficiently solve with a sequential minimization algorithm. The above primal and dual formulations hold for linear separable classes.
-% \begin{figure}[H] %  figure placement: here, top, bottom, or page
-%   \centering
-%   \includegraphics[width=5.4in]{../fig/nonlinearsvm.png} 
-%   \caption{Nonlinear separable classes in two dimensions}
-%   \label{fig:nonlinearsvm}
-%\end{figure}
 subjected to 
-\begin{equation}
+\begin{equation}\label{eq:cdual2}
 	\bm{y}\bm{\alpha}^{T} = 0. \quad 0 \leq \alpha_{i} \leq C,\quad  i = 1,\cdots, m
 \end{equation}
 \justify
@@ -72,10 +64,17 @@ and $K$ is the kernel function
 \begin{equation}
 K: \mathbb{R}^{d}\times \mathbb{R}^{d} \rightarrow \mathbb{R}
 \end{equation}
-that  maps the data into a higher dimension space.
+that  maps the data into a higher dimension space. Example of common Kernel functions are 
+\begin{itemize}
+	\item Linear kernel,  $K\left(x,z\right) = x^{T}z$
+	\item Polynomial of degree $q$ kernel, $K\left(x,z\right) = \left(1+x^{T}z\right)^{q}$ 
+	\item Exponential kernel,  $K(x,z) = \exp\left(-\gamma ||x-z||\right)$ ,$\gamma\in\mathbb{R}$
+	\item Gaussian kernel,  $K(x,z) = \exp\left(-\gamma ||x-z||^{2}\right)$ ,$\gamma\in\mathbb{R}$
+\end{itemize}
+
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=6in]{../fig/nonlinearseparable.png} 
+   \includegraphics[width=4in]{../fig/nonlinearseparable.png} 
    %\includegraphics[width=4in]{../fig/linearseparable.png} 
    \caption{Nonlinear separable classes 0 and 1}.
    \label{fig:kernelsvm}
@@ -84,33 +83,35 @@ that  maps the data into a higher dimension space.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    %\includegraphics[width=4in]{../fig/nonlinearseparable.png} 
-   \includegraphics[width=6.5in]{../fig/linearseparable.png} 
+   \includegraphics[width=4in]{../fig/linearseparable.png} 
    \caption{Linear separable classes 0 and 1 after using a gaussian kernel to map the data in higher dimension}.
    \label{fig:kernelsvm1}
 \end{figure}
-
-
 \justify
-Example of common Kernel functions are 
-\begin{itemize}
-\item Linear kernel,  $K\left(X,Z\right) = X^{T}Z$
-\item Polynomial of degree $q$ kernel, $K\left(X,Z\right) = \left(1+X^{T}Z\right)^{q}$ 
-\item Exponential kernel,  $K(X,Z) = \exp\left(-\gamma ||X-Z||\right)$ ,$\gamma\in\mathbb{R}$
-\item Gaussian kernel,  $K(X,Z) = \exp\left(-\gamma ||X-Z||^{2}\right)$ ,$\gamma\in\mathbb{R}$
-\end{itemize}
-The nonlinear dual formulation of the SVM can now be formulated in term of the kernel function $K$ as 
-\begin{equation}
-\max_{\theta}\sum_{i=1}^{n}\theta_{i} - \frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\theta_{i}\theta_{j}y_{i}y_{j}K\left(\bm{X}_{i},\bm{X}_{j}\right)
-\end{equation}
-subjected to 
-\begin{equation}
-\begin{split}
-\sum_{i}^{n}\theta_{i}y_{i} = 0\\
-\theta_{i} \geq 0, \quad \forall i = 1,\cdots,n.
-\end{split}
-\end{equation}
+The effect of a kernel function can be seen in Figure \ref{fig:kernelsvm} and \ref{fig:kernelsvm1}. In Figure \ref{fig:kernelsvm}, the data has two classes that can not be linearly separated directly. To linearly separate the classes, a Gaussian kernel is used to project the data in a higher dimension, which can be seen in Figure \ref{fig:kernelsvm1}.
 \justify
-Some of the advantages of the SVM are high classification accuracy and robustness to outliers. That is it deals very well with aberrant data points as well as missing data points. However, for nonlinear separable problems, the computation of the kernel can incur significant overhead for large data, since the complexity is $\mathcal{O}\left(n^{2}\right)$. This can however be mitigated by performing the so call \say{kernel trick}, which reduces the complexity of the computation. Detail account of the kernel trick can be found in [reference]. 
+The solution of the dual problem (\ref{eq:cdual1}, \ref{eq:cdual2}) coupled with the primal-dual relationship gives the optimal $\bm{w}$ (\cite{chang2001}) as
+\begin{equation}
+	\bm{w} = \sum_{i = 1}^{m}y_{i}\alpha_{i}\phi(\bm{x}_{i})
+\end{equation}
+where the decision boundary is given by (\cite{chang2001})
+\begin{equation}
+	sgn\left(\bm{w}^{T}\phi(\bm{x}) + b  \right) = sgn\left(  \sum_{i=1}^{m}y_{i}\alpha_{i}K(\bm{x}_{i},\bm{x} ) +b    \right)
+\end{equation}
+
+\subsection{$\nu$-Support vector classification (SVC)}
+The $\nu$-SVC (\cite{kp2001}) ,formulates the binary classification problem in term of a bounded regularization
+ parameter $\nu$, as opposed to the C-SVC where the regularization parameter C can take any positive real number $C\in (0,\infty)$. The parameter $\nu$ is \say{an upper bound on the fraction of training errors and a lower bound of the fraction of support vectors} (\cite{chang2001})
+ \justify
+ For the $\nu$-SVC the primal optimization problem is (\cite{chang2001})
+ \begin{equation}
+ \min_{w,b,\xi,\rho} +\quad \frac{1}{2}\bm{w}^{T}\bm{w}- \nu\rho + \frac{1}{m}\sum_{i = 1}^{m}\xi_{i}
+ \end{equation}
+ subjected to 
+ \begin{equation}
+ y_{i}(\bm{w}^{T}\phi(\bm{x}_{i}) + b) \geq \rho - \xi_{i}, \quad \xi_{i} \geq 0, \quad i = 1,\cdots,m \quad, \rho \geq 0
+ \end{equation}
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{An overview of wavelet transform}
