@@ -8,7 +8,6 @@
 \chapter[Support vector machine coupled with wavelet transform for bearing health monitoring]{Support vector machine coupled with wavelet transform for bearing health monitoring}
 \label{sec:waveletandsvm}
 Support vector machine for classification are machine learning algorithms that classify vectors into two or more groups, that share some sort of \say{similarity}.
-%In this chapter we introduce yet a another method for bearing fault detection. In Chapter \ref{sec:chapter2} We showed how the fast Fourier transform is applied to bearing fault diagnosis. Although popular in the industry for bearing fault analysis and detection, the fast Fourier transform method is not without limitations. As in any scientific methods, the limitations are grounded in the mathematical assumptions upon which the method is derived. As pointed previously, two such assumption are linearity, and stationarity. Furthermore, for bearing fault analysis, the fast Fourier method relies on the rotational speed of the motor on which the bearings are mounted. In addition, the forcing frequencies are derived from the physical properties of the bearing. Thus, the fast Fourier transform method for bearing fault detection can be seen as a physics base data driven method.
 \justify
 In this chapter, a purely data driven method is presented. It consists of applying wavelet transform for feature generation, a robust statistical estimator to quantify a bearing health, and a support vector machine (SVM) for anomaly detection. Before giving a detail account of the method, let clarify some semantics and outline the benefits of this method. A feature in the context of this chapter, is a component of a signal. As pointed out earlier, a signal can have multiple components, which can be extracted for example by applying Fourier series or Fourier transform. In this case a feature or component of the original signal is a trigonometric function. A support vector machine (SVM) is a linear classification algorithm for pattern identification that uses margins to separate data into different groups [vapnik1995].
 \justify
@@ -16,10 +15,9 @@ The method presented in this chapter solely relies on the data to detect any fau
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Support vector machine (SVM)}
+\section{Support vector algorithms }
 \label{sec:svm}
-Support vector machine is an algorithm  that solves the problem of classifying an input vector into two groups. In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups.
-The classification is based on optimizing a margin separating the two groups. 
+Support vector algorithms for classification solve the problem of classifying an input vector into two groups (binary classification), or estimating the distribution of input vector(s). In the context of bearing fault detection: healthy versus unhealthy bearing would be the two groups. The classification is based on optimizing a margin separating the two groups. 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=5in]{../fig/svm2d.png} 
@@ -29,12 +27,15 @@ The classification is based on optimizing a margin separating the two groups.
 \justify
 Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of points marked by circle and cross are separated by the optimum curve or hyperplane (here the solid dash line). The margin is the distance or gap between solid dark lines. Here the two classes are linearly separable, meaning that a linear function can be used to separate the two classes. Support vectors are points that lies on the margins (points in gray square lying on the dark lines) and defines the margin of largest separation between the two classes.
 \justify
+The most commonly used and implemented support vector classification algorithms are  C-support vector classification (SVC) (\cite{bosser1992}, \cite{vapnik1995}), $\nu$-support vector classification (\cite{kp2000}) and one-class support vector machine (\cite{kp2001}), for distribution estimation. Here the C-SVC introduces the regularization parameter $C\in (0,\infty)$, while the regularization parameter for the $\nu$-SVC is bounded. 
+\justify
+The support vector algorithms are formulated as optimization problems in terms of a primal and dual formulation, where each form offers an advantage in the derivation of the solution, and on the implementation level.
+
 
 \subsection{C-Support vector classification (SVC)}
-The support vector algorithms comes into two forms: The primal and the dual form, each form offering an advantage in the solution and the implemetatin level.
 Let $\bm{x}_{i}\in \mathbb{R}^{n}, i = 1, \cdots, m$ be a training vector and $y_{i}\in \{1,-1\}$, the C-SVM (\cite{bosser1992}, \cite{vapnik1995}) solves the primal optimization problem
 \begin{equation}
-	\min_{w,b,\xi} +\quad \frac{1}{2}\bm{w}^{T}\bm{w} + C\sum_{i = 1}^{m}\xi_{i}
+	\min_{w,b,\xi} \quad \frac{1}{2}\bm{w}^{T}\bm{w} + C\sum_{i = 1}^{m}\xi_{i}
 \end{equation}
 subjected to 
 \begin{equation}
@@ -54,7 +55,7 @@ subjected to
 \end{equation}
 \justify
 where $\bm{y}\in \mathbb{R}^{m}$ is the indicator vector, $\bm{e} = [1,\cdots,1]^{T}$, $Q$ is the semi-definite matrix
-\begin{equation}
+\begin{equation}\label{eq:Q}
 	Q_{ij} = y_{i}y_{j}K(\bm{x}_{i},\bm{x_{j}})
 \end{equation}
 and $K$ is the kernel function 
@@ -98,9 +99,9 @@ where the decision boundary is given by (\cite{chang2001})
 \begin{equation}
 	sgn\left(\bm{w}^{T}\phi(\bm{x}) + b  \right) = sgn\left(  \sum_{i=1}^{m}y_{i}\alpha_{i}K(\bm{x}_{i},\bm{x} ) +b    \right)
 \end{equation}
-
+where sgn is the sign function.
 \subsection{$\nu$-Support vector classification (SVC)}
-The $\nu$-SVC (\cite{kp2001}) ,formulates the binary classification problem in term of a bounded regularization
+The $\nu$-SVC (\cite{kp2000}) ,formulates the binary classification problem in term of a bounded regularization
  parameter $\nu$, as opposed to the C-SVC where the regularization parameter C can take any positive real number $C\in (0,\infty)$. The parameter $\nu$ is \say{an upper bound on the fraction of training errors and a lower bound of the fraction of support vectors} (\cite{chang2001})
  \justify
  For the $\nu$-SVC the primal optimization problem is (\cite{chang2001})
@@ -110,6 +111,42 @@ The $\nu$-SVC (\cite{kp2001}) ,formulates the binary classification problem in t
  subjected to 
  \begin{equation}
  y_{i}(\bm{w}^{T}\phi(\bm{x}_{i}) + b) \geq \rho - \xi_{i}, \quad \xi_{i} \geq 0, \quad i = 1,\cdots,m \quad, \rho \geq 0
+ \end{equation}
+ and the corresponding dual is 
+ \begin{equation}\label{eq:nudual1}
+ \min_{\alpha}\quad \frac{1}{2}\bm{\alpha}^{T}Q\bm{\alpha}
+ \end{equation}
+ subjected to 
+ \begin{equation}\label{eq:nudual2}
+  0 \leq \alpha_{i} \leq \frac{1}{m},\quad  i = 1,\cdots, m, \quad \bm{e}^{T}\bm{\alpha} \geq \nu, \quad \bm{y}^{T}+\bm{\alpha} = 0
+ \end{equation}
+ where $Q$ is defined in equation (\ref{eq:Q}) and the decision boundary is given by
+ \begin{equation}
+ 	sgn\left(  \sum_{i=1}^{m}y_{i}\alpha_{i}K(\bm{x_{i}},\bm{x}) +b\right)
+ \end{equation}
+ 
+ \subsection{One-class support vector machine (SVM)}
+ The C-support vector classification and the $\nu$.support vector classification on deal with binary classification or two class classification problems. However, they might be situations where one is only concerned in estimating the distribution of data. The One-class support vector machine (\cite{kp2001}) was designed to address this issue.
+ it solves the dual  (\cite{chang2001})
+ 
+ \begin{equation}
+ \min_{w,b,\xi,\rho} +\quad \frac{1}{2}\bm{w}^{T}\bm{w}- \rho + \frac{1}{\nu m}\sum_{i = 1}^{m}\xi_{i}
+ \end{equation}
+ subjected to 
+ \begin{equation}
+ \bm{w}^{T}\phi(\bm{x}_{i}) \geq \rho - \xi_{i}, \quad \xi_{i} \geq 0, \quad i = 1,\cdots,m \quad
+ \end{equation}
+ and the corresponding dual is 
+ \begin{equation}\label{eq:onedual1}
+ \min_{\alpha}\quad \frac{1}{2}\bm{\alpha}^{T}Q\bm{\alpha}
+ \end{equation}
+ subjected to 
+ \begin{equation}\label{eq:onedual2}
+ 0 \leq \alpha_{i} \leq \frac{1}{m\rho},\quad  i = 1,\cdots, m, \quad \bm{e}^{T}\bm{\alpha} = 1
+ \end{equation}
+ where $Q$ is defined in equation (\ref{eq:Q}) and the decision boundary is given by
+ \begin{equation}
+ sgn\left(  \sum_{i=1}^{m}\alpha_{i}K(\bm{x_{i}},\bm{x}) -\rho \right)
  \end{equation}
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -151,13 +188,13 @@ and Figure \ref{fig:haar-phi} and \ref{fig:haar-psi} show their graphical repres
 \end{equation}
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=5in]{../fig/haar-phi.png} 
+   \includegraphics[width=4in]{../fig/haar-phi.png} 
    \caption{Graphical representation of Haar scaling function $\phi$ along the time scale $t$}
    \label{fig:haar-phi}
 \end{figure}
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=5in]{../fig/haar-psi.png} 
+   \includegraphics[width=4in]{../fig/haar-psi.png} 
    \caption{Graphical representation of Haar wavelet function $\psi$ along the time scale $t$}
    \label{fig:haar-psi}
 \end{figure}
