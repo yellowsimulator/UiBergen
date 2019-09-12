@@ -7,11 +7,16 @@
 \begin{document}
 \chapter[Support vector machine coupled with wavelet transform for bearing health monitoring]{Support vector machine coupled with wavelet transform for bearing health monitoring}
 \label{sec:waveletandsvm}
-Support vector machine for classification are machine learning algorithms that classify vectors into two or more groups, that share some sort of \say{similarity}.
+The previous chapter presented some what a frequency based method. A bearing vibration signal was transformed through a series of \say{filtering} processes. The resulting signal was then translated to a frequency spectral, obtained by estimating the power spectrum density. For a faulty bearing, the fault frequency was visible in the spectrum.
 \justify
-In this chapter, a purely data driven method is presented. It consists of applying wavelet transform for feature generation, a robust statistical estimator to quantify a bearing health, and a support vector machine (SVM) for anomaly detection. Before giving a detail account of the method, let clarify some semantics and outline the benefits of this method. A feature in the context of this chapter, is a component of a signal. As pointed out earlier, a signal can have multiple components, which can be extracted for example by applying Fourier series or Fourier transform. In this case a feature or component of the original signal is a trigonometric function. A support vector machine (SVM) is a linear classification algorithm for pattern identification that uses margins to separate data into different groups [vapnik1995].
+This chapter marques a departure from frequency based methods. A new purely data driven method is proposed. It consists of sequentially applying wavelet transform for feature generation, a robust statistical estimator to quantify a bearing health, and a classification algorithm (Support vector machine) to classify a system of bearings as faulty or not faulty. A feature in the context of this chapter, is a component of a signal. A support vector machine (SVM) is a linear classification algorithm for pattern identification, that uses margins to separate data into different groups.
 \justify
-The method presented in this chapter solely relies on the data to detect any fault. it does not require bearing physical properties, and can be applies to any nonlinear and non-stationary data generated process. In the rest of this chapter we will refer to a generic bearing fault as an anomaly. As defined in [chandola2009], \say{Anomalies are patterns in data that do not conform to a well defined notion of normal behavior}. In section \ref{sec:svm} a detailed account of support vector machine algorithm is lade out, followed by wavelet transform in section \ref{sec:wavelet}. Finally, section \ref{sec:sectionresult} presents a one class SVM coupled with wavelet transform for bearing anomaly detection.
+The method presented in this chapter solely relies on the data to detect bearings faults. It does not require bearing physical properties, nor the rotating speed of the machine. 
+In section \ref{sec:svm} a detailed account of support vector machine algorithms is lade out, followed by wavelet transform in section \ref{sec:wavelet}. Finally, section \ref{sec:result-svm-wavelet} presents a case study, that applies the proposed method for bearings classification.
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
