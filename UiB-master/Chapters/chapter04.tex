@@ -7,12 +7,12 @@
 \begin{document}
 \chapter[Support vector machine coupled with wavelet transform for bearing health monitoring]{Support vector machine coupled with wavelet transform for bearing health monitoring}
 \label{sec:waveletandsvm}
-The previous chapter presented some what a frequency based method. A bearing vibration signal was transformed through a series of \say{filtering} processes. The resulting signal was then translated to a frequency spectral, obtained by estimating the power spectrum density. For a faulty bearing, the fault frequency was visible in the spectrum.
+The previous chapter presented some what a frequency based method, that focused on a targeted bearing for fault diagnosis (identify the bearing fault type). A bearing vibration signal was transformed through a series of \say{filtering} processes. The resulting signal was then translated to a frequency spectrum, obtained by estimating the power spectral density. For a faulty bearing, the fault frequency was visible in the spectrum.
 \justify
 This chapter marques a departure from frequency based methods. A new purely data driven method is proposed. It consists of sequentially applying wavelet transform for feature generation, a robust statistical estimator to quantify a bearing health, and a classification algorithm (Support vector machine) to classify a system of bearings as faulty or not faulty. A feature in the context of this chapter, is a component of a signal. A support vector machine (SVM) is a linear classification algorithm for pattern identification, that uses margins to separate data into different groups.
 \justify
-The method presented in this chapter solely relies on the data to detect bearings faults. It does not require bearing physical properties, nor the rotating speed of the machine. 
-In section \ref{sec:svm} a detailed account of support vector machine algorithms is lade out, followed by wavelet transform in section \ref{sec:wavelet}. Finally, section \ref{sec:result-svm-wavelet} presents a case study, that applies the proposed method for bearings classification.
+The method presented in this chapter solely relies on the data to detect bearings faults. It does not require bearing physical properties, nor the rotating speed of the machine. The proposed method is scalable. This means that for a large system of bearing, it can identify all faulty bearings at once.
+In section \ref{sec:svm}, a detailed account of support vector machine algorithms is lade out, followed by an overview of wavelet transform in section \ref{sec:wavelet}. Finally, section \ref{sec:result-svm-wavelet} presents a case study, that applies the proposed method, for the classification of a system of four bearings, into faulty or healthy.
 
 
 
@@ -26,7 +26,7 @@ Support vector algorithms for classification, solve the problem of classifying a
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=5in]{../fig/svm2d.png} 
-   \caption{Illustration of two classes classification from (\cite{vapnik1995})}
+   \caption{Illustration of two classes classification problem (\cite{vapnik1995})}
    \label{fig:svm2d}
 \end{figure}
 \justify
@@ -35,7 +35,8 @@ Figure \ref{fig:svm2d} shows a two groups classification problem. Two set of poi
 The most commonly used and implemented support vector classification algorithms are  C-support vector classification (SVC) (\cite{bosser1992}, \cite{vapnik1995}), $\nu$-support vector classification (\cite{kp2000}) and one-class support vector machine (\cite{kp2001}), for distribution estimation. Here the C-SVC introduces the regularization parameter $C\in (0,\infty)$, while the regularization parameter for the $\nu$-SVC is bounded. Intuitively, the regularization parameter has the effect of decreasing the error for the classification problem.
 \justify
 The support vector algorithms are formulated as optimization problems in terms of a primal and dual formulation, where each form offers an advantage in the derivation of the solution, and on the computer implementation level. In addition, the relationship between the dual formulation and the primal formulation allows a derivation of the solution of the optimization problem. 
-
+\justify
+The primal form of an optimization problem, consists of minimizing an objective function, subjected to some constrains. The dual form is derived from the primal form, by augmenting the primal form objective function, with the weighted sum of its constrains (\cite{boyd2004}). 
 
 \subsection{C-Support vector classification (SVC)}
 Let $\bm{x} = \{ \bm{x}_{i}\}$ be training examples, $\bm{x}_{i}\in \mathbb{R}^{n}, i = 1, \cdots, m$ and $y_{i}\in \{1,-1\}$ be the classes , $\bm{y} = \{ y_{i} \}$. The C-SVM (\cite{bosser1992}, \cite{vapnik1995}) solves the primal optimization problem
