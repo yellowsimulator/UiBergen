@@ -275,7 +275,7 @@ In the second step of the methodology, the inter quartile range of the temporal 
 \justify
 The asymptotic breaking point of the median is one-half $\left(\frac{1}{2}\right)$, as opposed to the mean whose asymptotic breaking point is zero. \say{The asymptotic breaking point represents the fraction of data point that can be given arbitrary values without making an estimator arbitrary bad}. In the case of the mean for example, even one \say{bad} data point such as an outlier can distort an estimator based on the mean. On the other hand, since the inter quartile range is based on the median, even if half of the data is \say{bad}, we can still rely on the values of an estimator based on the median. 
 \justify
-Figure \ref{fig:method2} shows the schematic description of the current method. An input bearing vibration signal is decomposed into its detail and approximate coefficient, cD and cA respectively. The detailed coefficient is termed frequency feature, while the approximate coefficient is named temporal feature. The interquartile range (IQR) of each feature is computed, in order to have a set of points in the frequency temporal feature space, where a one class support vector machine is applied for classification. Since the IQR measures the dispersion of a sample, it is called \say{health index}. In this setting it measures the health of each bearing. A higher value indicates defect. The IQR of the frequency feature and the temporal feature are called frequency feature health index, and temporal feature health index. Together, they form a point which is called the \say{the health index}, in the frequency-temporal feature space.
+Figure \ref{fig:method2} shows the schematic description of the current method. An input bearing vibration signal is decomposed into its detail and approximate coefficient, cD and cA respectively. The detailed coefficient is termed frequency feature, while the approximate coefficient is named temporal feature. The interquartile range (IQR) of each feature is computed, in order to have a set of points in the frequency temporal feature space, where a one class support vector machine is applied for classification. Since the IQR measures the dispersion of a sample, it is called \say{health index}. In this setting it quantifies the health of each bearing. A higher value indicates defect. The IQR of the frequency feature and the temporal feature are called frequency feature health index, and temporal feature health index. Together, they form a point which is called the \say{the health index}, in the frequency-temporal feature space.
 
 
 \begin{figure}[H]
@@ -302,21 +302,41 @@ Figure \ref{fig:method2} shows the schematic description of the current method. 
 	\label{fig:method2}
 \end{figure}
 \justify
-Figure \ref{fig:health_plot} shows a set of health indexes for a sequence samples for four bearings. 
-
+Figure \ref{fig:health_plot} shows a set of health indexes for a sequence of samples for four bearings, in the frequency-temporal feature space. The data is clustered in the left bottom corner. This can be seen from Figure \ref{fig:pdf3d}, which sows the surface distribution of the data. The data is multivariate distributed, but is centered in one area. From Figure \ref{fig:health_plot}, we can observe the health indexes of the damaged bearing moving along the diagonal of the plan, as the defect propagates and increases in amplitude.
+\justify
+The variation of health indexes in time, for all four bearings is captured in Figure \ref{fig:3dplot}. A straight line along the time axes means that no change in the bearing health as occurred. Which can be translated as no bearing defect. However, a variation of the health index in the temporal-frequency feature plan, means onset of bearing defect.
+Bearing number 1 shows early change in its health compare to the rest of the bearings.
+At the end of the experiment, all bearings start to exhibit an increase in their health indexes, but bearing number 1 health index is more pronounced.
 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=5in]{../fig/health_plot.png} 
-   \caption{Health trajectories of all bearing mounted on a motor run to failure at 2000 rotation per minute}
+   \caption{Health trajectories of all bearing mounted on a motor run to failure at 2000 rotations per minute}
    \label{fig:health_plot}
+\end{figure}
+\justify
+The distribution of the data shown in Figures \ref{fig:health_plot} and \ref{fig:pdf3d} suggests that healthy bearings data tends to form a cluster. When a defect is initiated, the data span in a linear trajectory. Therefore, a one class support vector machine (SVM) is more appropriate as a classifier, in order to capture healthy bearings state. Figure \ref{fig:1svm} shows a one class Support vector machine applied to the data. The decision boundary referred to as the learned frontier, specifies the boundary above which onset of failure is initiated.
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+	\centering
+	\includegraphics[width=10in]{../fig/pdf3d.png} 
+	\caption{Three dimension probability distribution of the data from Figure \ref{fig:health_plot}}
+	\label{fig:pdf3d}
+\end{figure}
+
+
+\begin{figure}[H] %  figure placement: here, top, bottom, or page
+	\centering
+	\includegraphics[width=5.3in]{../fig/3dplot1.png} 
+	\caption{One class support vector machine }
+	\label{fig:3dplot}
 \end{figure}
 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=5.3in]{../fig/svm.png} 
    \caption{One class support vector machine }
-   \label{fig:one-class-svmt}
+   \label{fig:1svm}
 \end{figure}
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
@@ -331,7 +351,13 @@ Figure \ref{fig:health_plot} shows a set of health indexes for a sequence sample
    \caption{Temporal feature health index as a function of time-}
    \label{fig:temporal_feature_health}
 \end{figure}
-
+\justify
+Recall that the interquartile range of the approximate and detailed coefficients, obtained from applying wavelet transform on bearing vibration signal, were refer to as temporal feature and frequency feature health index, respectively. Each quantifying the degree to which a bearing is defective. Figure \ref{fig:frequency_feature_health} and \ref{fig:temporal_feature_health} show the variation in time of the frequency feature and temporal feature health index, respectively.
+\justify
+Bearing number 2, 3 and 4 health indexes a relatively constant in time, with a small increase at the end of the experiment. However, the health index of the defective bearing (bearing number 1), starts to increase earlier, with a rapid increase at the end, which shows the severity of the defect.
+\justify
+\section{Summary}
+This chapter presented a method for bearing fault detection which consisted of quantifying bearing defect by a health index. The latter 
 
 
 
