@@ -27,13 +27,14 @@ After giving an esquisse of the new method, the remaining of this chapter is org
 \section{Hilbert Transform}
 \label{sec:ht}
 
-The Hilbert transform plays an import role in signal processing. Among others, it allows one to extend a real valued signal into an analytical signal (a complex signal), which is its extension to the upper half complex plan. By doing so, the concept of instantaneous amplitude and instantaneous frequency can be introduced, which is important in amplitude and frequency modulation problems [picinbono1989], such as transfer of radio communication signals, analysis of vibration signals under varying load, etc. Recall that amplitude and frequency modulation is akin to amplitude and frequency variation.
- Before giving the mathematical definition of the Hilbert transform, let define an analytical signals.
- Formally, an analytical signal is a complex signal whose imaginary part is the Hilbert transform of its real part. If $x(t)$ is a real valued signal, its can be extended to a well defined complex signal $s(t)$, 
+The Hilbert transform is an import tool in mathematics, and in signal processing in particular. Among others, its makes possible the representation of a real valued signal as an analytic signal (a complex signal), which is its extension to the upper half complex plane. By doing so, the concept of instantaneous amplitude and instantaneous frequency can be introduced, which is important in amplitude and frequency modulation problems [picinbono1989], such as transmission of radio communication signals, analysis of vibration signals under varying load, etc. Here amplitude and frequency modulation refers to the time dependency of the amplitude and the frequency. In the formulation of Fourier analysis, the frequency and amplitude of a signal are constant. However, in many  practical problems, amplitude and frequency modulation are imposed.
+\justify
+ Before moving to the mathematical formulation of the Hilbert transform, let define an analytical signal.
+ Formally, an analytical signal is a complex signal whose imaginary part is the Hilbert transform of its real part. A real valued signal $x(t)$ , can be extended to a well defined complex signal $s(t)$, 
  \begin{equation}\label{eq:ana}
  	s(t) = x(t) + i H\{ x(t)\}
  \end{equation}
-where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. The signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytical signal. Furthermore, if $s(t)$ is a mono-component signal, its amplitude $a(t)$ and frequency $\omega(t)$ as a function of the variable $t$ are given by
+where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. The signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytical signal. Furthermore, if $s(t)$ is a mono-component signal, its amplitude $a(t)$ and frequency $\omega(t)$ as a function of the time variable $t$ are given by
 
 %As any new methods, the Hilbert Huang transform strives in improving upon previous signal processing paradigms. It rests on adaptivity, non linearity, non stationarity and physical meaningful time-frequency-energy paradigm. The latter is akin to the fundamental concept of uniqueness in the study of the solution of differential equations. 
 %In Fourier analysis, a time dependent signal $S(t)$, can be expressed as the following complex expansion
@@ -60,17 +61,18 @@ where
 \begin{equation}\label{eq:frequency}
 \Psi(t) = \tan^{-1}\left(\frac{H\{x(t) \}}{x(t)} \right),
 \end{equation}
-is the instantaneous phase and $\omega_{0}$ is a constant. With these formulations, $s(t)$ can be expressed simultaneously in the time and frequency domain (a mixed representation) as 
+is the instantaneous phase. With these formulations, $s(t)$ can be expressed simultaneously in the time and frequency domain (a mixed representation) as 
 \begin{equation}\label{eq:modulation}
 	s(t) = a(t)\cos\left( \Psi(t)\right) 
 \end{equation}
-In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal either in time or in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a correct representation of signals which are non periodic, where obviously the frequency and the amplitude varies continuously with time. Since the Hilbert is the main ingredient in extending a signal to its analytical representation, let define its mathematical formulation
+Recall that a mono-component signal is a signal with no other frequency component then its own.
+In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal either in time or in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a correct representation of signals which are non periodic, where obviously the frequency and the amplitude varies continuously with time.
 \justify
 The Hilbert transform $H\{ x(t) \}$ of a signal $x(t)$, is define as its convolution with the function $\frac{1}{\pi t}$ expressed as
 \begin{equation}\label{eq:conv}
 H\{ x(t) \} = \frac{1}{\pi t}* x(t) = 	\frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}.
 \end{equation}
-Because of the pole at $t=\eta$ in (\ref{eq:conv}), the indefinite integral might not converge. To mitigate this short coming, the indefinite integral is evaluated by applying the Cauchy principal value method, as indicated by the letter $P$ in front the integral. Furthermore (\ref{eq:conv}), can be written as
+Because of the pole at $t=\eta$ in (\ref{eq:conv}), the indefinite integral might not converge. To circumvent this issue, the indefinite integral is evaluated by applying the Cauchy principal value method, as indicated by the letter $P$ in front the integral. Furthermore (\ref{eq:conv}), can be written as
 \begin{equation}
 	\begin{split}
 	H\{ x(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}\\
@@ -82,25 +84,26 @@ Because of the pole at $t=\eta$ in (\ref{eq:conv}), the indefinite integral migh
 	\centering
 	\includegraphics[width=0.8\linewidth]{../fig/h_sin}
 	%\includegraphics[width=0.8\linewidth]{../fig/h_cos}
-	\caption{The Hilbert transform of $\sin(t)$ given by $\sin(t-\frac{\pi}{2})$  }
-	\label{fig:startimf1bpfi}
+	\caption{The Hilbert transform of $\sin(ct)$ given by $\sin(ct-\frac{\pi}{2})$. $c=1$  }
+	\label{fig:hsin}
 \end{figure}
-
+\justify
+Figure \ref{fig:hsin} shows the Hilbert transform of $\sin(ct)$ which is $\sin\left(ct-\frac{\pi}{2}\right)$. In the same fashion, the Hilbert transform of $\cos(ct)$ is  $\cos\left(ct-\frac{\pi}{2}\right)$, where $c = 1$. As a consequence, the Hilbert transform imposes a phase shift of $\frac{\pi}{2}$ to every Fourier component of a signal. Figure \ref{fig:cauchy_pulse} and \ref{fig:sinc_pulse} show the Cauchy pulse $\left(\frac{c}{c^{2} + t^{2}}\right)$ and the sinc pulse $\left(\frac{\sin(ct)}{ct}\right)$ with their corresponding Hilbert transform for $c = 1.5$.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{../fig/cauchy_pulse}
 	\caption{The Hilbert transform of Cauchy pulse }
-	\label{fig:startimf1bpfi}
+	\label{fig:cauchy_pulse}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{../fig/sinc_pulse}
 	\caption{The Hilbert transform of Cauchy pulse }
-	\label{fig:startimf1bpfi}
+	\label{fig:sinc_pulse}
 \end{figure}
-
-The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}).
+\justify
+The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful (well defined) physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}). The Hilbert Huang transform was developed to tackle this issue. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense.
 
 
 
@@ -108,9 +111,8 @@ The amplitude and frequency modulation obtained from Hilbert transform in equati
  
  \section{Hilbert Huang transform}
  \label{sec:emd}
-  The empirical mode decomposition (EMD) on the other hand, decomposes a given signal into sub-components call intrinsic mode functions (IMFs), such that every IMF gives physically meaningful amplitude and frequency modulation, (\cite{huang98}).
- 
-  For a target signal $S(t)$, the goal is to obtained its $n$ fundamental parts (IMFs), denoted here by $s_{j}, j =1,\cdots,n$, through the empirical mode decomposition, such that
+  The empirical mode decomposition (EMD), decomposes a given signal into sub-components call intrinsic mode functions (IMFs), such that every IMF produces physically meaningful amplitude and frequency modulation, (\cite{huang98}).
+ For a target signal $S(t)$, the goal is to obtained its $n$ fundamental parts (IMFs), denoted here by $s_{j}, j =1,\cdots,n$, through the empirical mode decomposition, such that
 \begin{equation}\label{eq:emd-decomposition}
 S(t) = \sum_{j=1}^{n}s_{j}(t) + r(t),
 \end{equation}
@@ -189,8 +191,8 @@ BPFI = \frac{nb}{2}R\left( 1 +  \frac{BD}{PD}\cos\left(\beta\right)   \right)
 \end{equation}
 where R is the rotating speed of the motor on which the bearing is attached. nb is the number of rolling elements (balls), BD is a rolling element diameter. The pitch diameter PD is half the hight of the inner ring, and the contact angle $\beta$ is the angle formed when a rolling element touches the cage. 
 \justify
-The data and the experimental setup used for this case study were described in chapter 2. In this setup, four bearings are mounted on a motor rotating at 2000 rotations per minutes (33.3 Hz). In the first experiment the motor runes until bearing
-bearing number 3 is severely damaged with inner race defect, while in the second experiment outer race defect occurs in bearing number 1.
+The data and the experimental setup used for this case study were described in chapter 2. In this setup, four bearings are mounted on a motor rotating at 2000 rotations per minutes (33.3 Hz). In the first experiment the motor runs until bearing
+bearing number 3 is severely damaged with inner race defect, while in the second experiment outer race defect occurs in bearing number 1. For each experiment, successive vibration signals where obtained, with a sample rate of 20 $KHz$ and corresponding Nyquist frequency of 10 $KHz$ (half the sampling rate). The Nyquist frequency define a lower bound limit in order to avoid aliasing, which is a loss of information due to under sampling. That is, if the sample contain frequency components that are higher then the Nyquist frequency, those frequency component wont be able to be seen.
 
 \justify
 \subsection{Seasonal Trend decomposition based on Loess (STL)}
@@ -199,39 +201,39 @@ If $S(t)$ is a signal, the goal is to obtained the decomposition
 \begin{equation}
 S(t) = T_{r}(t) + C_{y}(t) + R_{res}(t),
 \end{equation} 
-where $T_{r}(t)$ an $C_{y}(t)$ are the trend and cyclical components, and $R_{res}(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatterplot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. Its therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. Since pulses emitted by a bearing roller elements passing a crack, are local periodic events on a global scale, the STL provides the necessary mathematical apparatus to capture them.
-\justify
-By design, the STL is computational efficient, robust in the sense that it uses a robust statistical estimator, and deals very well with missing and distorted data points (\cite{Cleveland-et-al-1990}). In the subsequent paragraphs, an account of the LOESS procedure is presented.
-\justify
-Given a signal represented by a set of $n$ points, conveniently expressed by their coordinates
-\begin{equation}
-\{ (t_{j}, y_{j}), \quad j = 1, \cdots, n\},
-\end{equation}
-where $t_{j}$ is the independent variable on the time scale, and $y_{j}$ is the dependent variable. The LOESS procedure finds a smooth function $\hat{g}(t)$, defined everywhere on the scale of the independent variable, such that the estimate of $y_{j}$ denoted by $\hat{y}_{j}$ at $t_{j}$ is computed as 
-\begin{equation}
-\begin{split}
-\hat{y}_{j} &= \hat{g}(t_{j}) \\
-                &=\sum_{k=0}^{d}\hat{\alpha}_{k}(t_{j})t_{j}^{k}
-\end{split}
-\end{equation}
-where the $\hat{\alpha}_{k}(t_{j})$ are the values $\alpha_{k}$ that minimize 
-\begin{equation}
-\sum_{k=1}^{n}w_{k}(t_{j})\left(y_{k}-\alpha_{0}-\alpha_{1}t_{k}-\cdots -\alpha_{d}t_{k}^{d}\right)^{2}
-\end{equation}
-with 
-\begin{equation}
-w_{k}(t_{j}) = W\left( \frac{t_{k}-t_{j}}{h_{j}} \right)
-\end{equation}
+where $T_{r}(t)$ an $C_{y}(t)$ are the trend and cyclical components, and $R_{res}(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatterplot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. Its therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. Since pulses emitted by a bearing roller elements passing a crack, are local periodic events on a global scale, the STL provides the necessary mathematical apparatus to capture them. A detailed account of the STL can be found in  (\cite{Cleveland-et-al-1990}).
 
-\begin{equation}
-W(t) = 
-  \begin{cases}
-  \left(1-t^{3}\right)^{3} &\quad\text{for } 0\leq t \le 1\\
-   0 &\quad\text{for} t\geq 1
- \end{cases}
-\end{equation}
-and $h_{j}$ is the distance from $t_{j}$ to the nearest neighbor of $t_{j}$. A more thorough account of the STL can be found in  (\cite{Cleveland-et-al-1990}).
-
+\justify
+%By design, the STL is computational efficient, robust in the sense that it uses a robust statistical estimator, and deals very well with missing and distorted data points (\cite{Cleveland-et-al-1990}). In the subsequent paragraphs, an account of the LOESS procedure is presented.
+%\justify
+%Given a signal represented by a set of $n$ points, conveniently expressed by their coordinates
+%\begin{equation}
+%\{ (t_{j}, y_{j}), \quad j = 1, \cdots, n\},
+%\end{equation}
+%where $t_{j}$ is the independent variable on the time scale, and $y_{j}$ is the dependent variable. The LOESS procedure finds a smooth function $\hat{g}(t)$, defined everywhere on the scale of the independent variable, such that the estimate of $y_{j}$ denoted by $\hat{y}_{j}$ at $t_{j}$ is computed as 
+%\begin{equation}
+%\begin{split}
+%\hat{y}_{j} &= \hat{g}(t_{j}) \\
+%                &=\sum_{k=0}^{d}\hat{\alpha}_{k}(t_{j})t_{j}^{k}
+%\end{split}
+%\end{equation}
+%where the $\hat{\alpha}_{k}(t_{j})$ are the values $\alpha_{k}$ that minimize 
+%\begin{equation}
+%\sum_{k=1}^{n}w_{k}(t_{j})\left(y_{k}-\alpha_{0}-\alpha_{1}t_{k}-\cdots -\alpha_{d}t_{k}^{d}\right)^{2}
+%\end{equation}
+%with 
+%\begin{equation}
+%w_{k}(t_{j}) = W\left( \frac{t_{k}-t_{j}}{h_{j}} \right)
+%\end{equation}
+%
+%\begin{equation}
+%W(t) = 
+%  \begin{cases}
+%  \left(1-t^{3}\right)^{3} &\quad\text{for } 0\leq t \le 1\\
+%   0 &\quad\text{for} t\geq 1
+% \end{cases}
+%\end{equation}
+%and $h_{j}$ is the distance from $t_{j}$ to the nearest neighbor of $t_{j}$. 
 
 
 
@@ -256,7 +258,7 @@ Figure \ref{fig:pulse} shows a flow diagram, describing the methodology to obtai
       \begin{scope}[start branch=venstre,
         %We need to redefine the join-style to have the -> turn out right
         every join/.style={->, thick, shorten <=1pt}, ]
-        \node[punktchain, on chain=going left, join=by {->}] (risiko) {\textcolor{blue}{Periodogram}};
+        \node[punktchain, on chain=going left, join=by {->}] (risiko) {\textcolor{blue}{Power spactrum density}};
       \end{scope}
       \begin{scope}[start branch=hoejre,]
       %\node (finans) [punktchain, on chain=going right] {Det finansielle system};

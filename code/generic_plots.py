@@ -1,5 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from hilbert_huang_transform import hilbert_huang_transform
+
+
 def h_sin(omega):
     n = 10000
     t = np.linspace(-10*np.pi, 10*np.pi, n)
@@ -26,13 +29,13 @@ def h_cos(omega):
     plt.show()
 
 
-def cauchy_pule(a):
+def cauchy_pulse(a):
     n = 10000
     t = np.linspace(-10*np.pi, 10*np.pi, n)
     y = a/(a**2 + t**2)
     y_h = t/(a**2 + t**2)
     plt.xlabel("Time")
-    plt.ylabel("a/(a**2 + t**2)")
+    plt.ylabel("Cauchy pulse/Hilbert transform")
     plt.plot(t,y)
     plt.plot(t,y_h)
     plt.legend(["Cauchy pulse","Hilbert transform"],loc="best")
@@ -53,8 +56,17 @@ def sinc_pulse(a):
 
 
 
+def sinc_pulse_function(a):
+    n = 10000
+    t = np.linspace(-10*np.pi, 10*np.pi, n)
+    y = np.sin(a*t)/(a*t)
+    y_h = (1.-np.cos(a*t))/(a*t)
+    return y
+
 
 
 if __name__ == '__main__':
     a = 1.5
-    sinc_pulse(a)
+    data = sinc_pulse_function(a)
+    imfs = hilbert_huang_transform(data)
+    print(len(imfs))
