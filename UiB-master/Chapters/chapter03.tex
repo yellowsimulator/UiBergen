@@ -24,91 +24,11 @@ After giving an esquisse of the new method, the remaining of this chapter is org
  Section \ref{sec:emd} presents the empirical mode decomposition (EMD), which is the back bone of the Hilbert Huang transform for decomposing a signal adaptively.
  Section \ref{sec:pulse}, through a concrete case study, shows that the HHT, coupled with the STL, are able to recover the high frequency pulse like signals, emitted by bearing defects. The section starts by recalling the characteristics of two bearing faults: The outer race defect and the inner race defect. Furthermore, the experiments that generated the data for this case study are described. Afterwards, the seasonal trend decomposition based on LOESS (STL) is presented, followed by a description of the proposed method for bearing fault detection. Finally, the results of the application to the case study are presented. In closing, section \ref{sec:limitation} presents a summary and discussion of the proposed new method.
 \justify
-\section{Hilbert Transform}
-\label{sec:ht}
-
-The Hilbert transform is an import tool in mathematics, and in signal processing in particular. Among others, its makes possible the representation of a real valued signal as an analytic signal (a complex signal), which is its extension to the upper half complex plane. By doing so, the concept of instantaneous amplitude and instantaneous frequency can be introduced, which is important in amplitude and frequency modulation problems [picinbono1989], such as transmission of radio communication signals, analysis of vibration signals under varying load, etc. Here amplitude and frequency modulation refers to the time dependency of the amplitude and the frequency. In the formulation of Fourier analysis, the frequency and amplitude of a signal are constant. However, in many  practical problems, amplitude and frequency modulation are imposed.
-\justify
- Before moving to the mathematical formulation of the Hilbert transform, let define an analytical signal.
- Formally, an analytical signal is a complex signal whose imaginary part is the Hilbert transform of its real part. A real valued signal $x(t)$ , can be extended to a well defined complex signal $s(t)$, 
- \begin{equation}\label{eq:ana}
- 	s(t) = x(t) + i H\{ x(t)\}
- \end{equation}
-where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. The signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytical signal. Furthermore, if $s(t)$ is a mono-component signal, its amplitude $a(t)$ and frequency $\omega(t)$ as a function of the time variable $t$ are given by
-
-%As any new methods, the Hilbert Huang transform strives in improving upon previous signal processing paradigms. It rests on adaptivity, non linearity, non stationarity and physical meaningful time-frequency-energy paradigm. The latter is akin to the fundamental concept of uniqueness in the study of the solution of differential equations. 
-%In Fourier analysis, a time dependent signal $S(t)$, can be expressed as the following complex expansion
-%\begin{equation} \label{eq:fourier}
-%S(t) = \sum_{j=1}^{\infty}a_{j}\exp(i\omega_{j}t),
-%\end{equation}
-%where $a_{j}, \omega_{j}$ are constant amplitudes and frequencies respectively, and $i = \sqrt{-1}$. The Hilbert Huang transform generalizes the Fourier expansion (\ref{eq:fourier}) with time dependent amplitude $a(t)$ and frequency $\omega(t)$ as 
-%\begin{equation} \label{eq:hht}
-%S(t) = \sum_{j=1}^{n}a_{j}(t)\exp\left(i\int \omega_{j}(t)\mathrm{dt}\right).
-%\end{equation}
-%Equation (\ref{eq:hht}) expresses non stationarity as opposed to equation (\ref{eq:fourier}), by providing amplitude and frequency modulation. Here amplitude and frequency modulation refer to the time dependency of the amplitude $a(t)$ and the frequency $\omega(t)$. The former and the latter can be derive through the Hilbert transform. let $H(t)$ be the Hilbert transform of the signal $S(t)$ and given by
-%\begin{equation}\label{eq:hilbert}
-%H(t) = \frac{P}{\pi}\int_{-\infty}^{\infty}\frac{S(\tau)}{t-\tau}\mathrm{d\tau},
-%\end{equation}
-%where $P$ is the Cauchy principal value of the singular integral (\cite{huang08}). The amplitude $a(t)$ and the frequency $\omega(t)$
-
-\begin{equation}\label{eq:amplitude}
-a(t) = \sqrt{x(t)^{2} + H\{x(t) \}^{2} }
-\end{equation}
-\begin{equation}\label{eq:frequency}
-\omega(t) = \frac{d \Psi(t)}{dt} 
-\end{equation}
-where 
-\begin{equation}\label{eq:frequency}
-\Psi(t) = \tan^{-1}\left(\frac{H\{x(t) \}}{x(t)} \right),
-\end{equation}
-is the instantaneous phase. With these formulations, $s(t)$ can be expressed simultaneously in the time and frequency domain (a mixed representation) as 
-\begin{equation}\label{eq:modulation}
-	s(t) = a(t)\cos\left( \Psi(t)\right) 
-\end{equation}
-Recall that a mono-component signal is a signal with no other frequency component then its own.
-In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal either in time or in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a correct representation of signals which are non periodic, where obviously the frequency and the amplitude varies continuously with time.
-\justify
-The Hilbert transform $H\{ x(t) \}$ of a signal $x(t)$, is define as its convolution with the function $\frac{1}{\pi t}$ expressed as
-\begin{equation}\label{eq:conv}
-H\{ x(t) \} = \frac{1}{\pi t}* x(t) = 	\frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}.
-\end{equation}
-Because of the pole at $t=\eta$ in (\ref{eq:conv}), the indefinite integral might not converge. To circumvent this issue, the indefinite integral is evaluated by applying the Cauchy principal value method, as indicated by the letter $P$ in front the integral. Furthermore (\ref{eq:conv}), can be written as
-\begin{equation}
-	\begin{split}
-	H\{ x(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}\\
-				&= \frac{1}{\pi}\lim_{\epsilon\rightarrow 0^{+}} \left( \int_{-\infty}^{-\epsilon} \frac{x(\eta)}{t-\eta}\mathrm{d\eta} +   \int_{\epsilon}^{\infty} \frac{x(\eta)}{t-\eta}\mathrm{d\eta}     \right)
-	\end{split}
-\end{equation}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{../fig/h_sin}
-	%\includegraphics[width=0.8\linewidth]{../fig/h_cos}
-	\caption{The Hilbert transform of $\sin(ct)$ given by $\sin(ct-\frac{\pi}{2})$. $c=1$  }
-	\label{fig:hsin}
-\end{figure}
-\justify
-Figure \ref{fig:hsin} shows the Hilbert transform of $\sin(ct)$ which is $\sin\left(ct-\frac{\pi}{2}\right)$. In the same fashion, the Hilbert transform of $\cos(ct)$ is  $\cos\left(ct-\frac{\pi}{2}\right)$, where $c = 1$. As a consequence, the Hilbert transform imposes a phase shift of $\frac{\pi}{2}$ to every Fourier component of a signal. Figure \ref{fig:cauchy_pulse} and \ref{fig:sinc_pulse} show the Cauchy pulse $\left(\frac{c}{c^{2} + t^{2}}\right)$ and the sinc pulse $\left(\frac{\sin(ct)}{ct}\right)$ with their corresponding Hilbert transform for $c = 1.5$.
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{../fig/cauchy_pulse}
-	\caption{The Hilbert transform of Cauchy pulse }
-	\label{fig:cauchy_pulse}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{../fig/sinc_pulse}
-	\caption{The Hilbert transform of Cauchy pulse }
-	\label{fig:sinc_pulse}
-\end{figure}
-\justify
-The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful (well defined) physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}). The Hilbert Huang transform was developed to tackle this issue. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense.
 
 
 
  
- 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \section{Hilbert Huang transform}
  \label{sec:emd}
   The empirical mode decomposition (EMD), decomposes a given signal into sub-components call intrinsic mode functions (IMFs), such that every IMF produces physically meaningful amplitude and frequency modulation, (\cite{huang98}).

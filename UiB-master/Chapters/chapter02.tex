@@ -284,10 +284,80 @@ where $F_{n}$ is a symmetric matrix. The matrix operation defined in equation (\
 \begin{equation}
 \hat{x} = \sum_{j = 0}^{\frac{n}{2}-1}\overline{W}^{jk} + \overline{w}^{k}\left(   \sum_{j=0}^{\frac{n}{2}-1}x_{2j+1}\overline{W}^{jk}\right)
 \end{equation}
-
-
+\justify
+The Fourier transform not only computes the frequency spectrum of a signal. It is also a tool in the process of deriving the analytical representation of a real value signal. An analytical representation of a real valued signal is its complex representation that makes it possible to represents a signal in terms of frequency modulation (frequency variation). The analytical representation of a signal is derived in terms of the Hilbert transform. In terms of the Fourier transform, the Hilbert transform of a signal is found by computing its Fourier transform, remove the negative spectrum and finally take the inverse Fourier transform. The Hilbert transform is also used in addition with the Fourier transform for bearing fault detection. In section \ref{sec:ht} the Hilbert transform is presented followed by section \ref{sec:application} which apply the Fourier transform and the Hilbert transform to bearing fault detection.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Filters}
+
+\section{Hilbert Transform}
+\label{sec:ht}
+
+The Hilbert transform is an import tool in mathematics, and in signal processing in particular. Among others, its makes possible the representation of a real valued signal as an analytic signal (a complex signal), which is its extension to the upper half complex plane. By doing so, the concept of instantaneous amplitude and instantaneous frequency can be introduced, which is important in amplitude and frequency modulation problems [picinbono1989], such as transmission of radio communication signals, analysis of vibration signals under varying load, etc. Here amplitude and frequency modulation refers to the time dependency of the amplitude and the frequency. In the formulation of Fourier analysis, the frequency and amplitude of a signal are constant. However, in many  practical problems, amplitude and frequency modulation are imposed.
+\justify
+Before moving to the mathematical formulation of the Hilbert transform, let define an analytical signal.
+Formally, an analytical signal is a complex signal whose imaginary part is the Hilbert transform of its real part. A real valued signal $x(t)$ , can be extended to a well defined complex signal $s(t)$, 
+\begin{equation}\label{eq:ana}
+s(t) = x(t) + i H\{ x(t)\}
+\end{equation}
+where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. The signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytical signal. Furthermore, if $s(t)$ is a mono-component signal, its amplitude $a(t)$ and frequency $\omega(t)$ as a function of the time variable $t$ are given by
+
+
+
+\begin{equation}\label{eq:amplitude}
+a(t) = \sqrt{x(t)^{2} + H\{x(t) \}^{2} }
+\end{equation}
+\begin{equation}\label{eq:frequency}
+\omega(t) = \frac{d \Psi(t)}{dt} 
+\end{equation}
+where 
+\begin{equation}\label{eq:frequency}
+\Psi(t) = \tan^{-1}\left(\frac{H\{x(t) \}}{x(t)} \right),
+\end{equation}
+is the instantaneous phase. With these formulations, $s(t)$ can be expressed simultaneously in the time and frequency domain (a mixed representation) as 
+\begin{equation}\label{eq:modulation}
+s(t) = a(t)\cos\left( \Psi(t)\right) 
+\end{equation}
+Recall that a mono-component signal is a signal with no other frequency component then its own.
+In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal either in time or in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a correct representation of signals which are non periodic, where obviously the frequency and the amplitude varies continuously with time.
+\justify
+The Hilbert transform $H\{ x(t) \}$ of a signal $x(t)$, is define as its convolution with the function $\frac{1}{\pi t}$ expressed as
+\begin{equation}\label{eq:conv}
+H\{ x(t) \} = \frac{1}{\pi t}* x(t) = 	\frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}.
+\end{equation}
+Because of the pole at $t=\eta$ in (\ref{eq:conv}), the indefinite integral might not converge. To circumvent this issue, the indefinite integral is evaluated by applying the Cauchy principal value method, as indicated by the letter $P$ in front the integral. Furthermore (\ref{eq:conv}), can be written as
+\begin{equation}
+\begin{split}
+H\{ x(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}\\
+&= \frac{1}{\pi}\lim_{\epsilon\rightarrow 0^{+}} \left( \int_{-\infty}^{-\epsilon} \frac{x(\eta)}{t-\eta}\mathrm{d\eta} +   \int_{\epsilon}^{\infty} \frac{x(\eta)}{t-\eta}\mathrm{d\eta}     \right)
+\end{split}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{../fig/h_sin}
+	%\includegraphics[width=0.8\linewidth]{../fig/h_cos}
+	\caption{The Hilbert transform of $\sin(ct)$ given by $\sin(ct-\frac{\pi}{2})$. $c=1$  }
+	\label{fig:hsin}
+\end{figure}
+\justify
+Figure \ref{fig:hsin} shows the Hilbert transform of $\sin(ct)$ which is $\sin\left(ct-\frac{\pi}{2}\right)$. In the same fashion, the Hilbert transform of $\cos(ct)$ is  $\cos\left(ct-\frac{\pi}{2}\right)$, where $c = 1$. As a consequence, the Hilbert transform imposes a phase shift of $\frac{\pi}{2}$ to every Fourier component of a signal. Figure \ref{fig:cauchy_pulse} and \ref{fig:sinc_pulse} show the Cauchy pulse $\left(\frac{c}{c^{2} + t^{2}}\right)$ and the sinc pulse $\left(\frac{\sin(ct)}{ct}\right)$ with their corresponding Hilbert transform for $c = 1.5$.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{../fig/cauchy_pulse}
+	\caption{The Hilbert transform of Cauchy pulse }
+	\label{fig:cauchy_pulse}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{../fig/sinc_pulse}
+	\caption{The Hilbert transform of Cauchy pulse }
+	\label{fig:sinc_pulse}
+\end{figure}
+\justify
+The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful (well defined) physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}). The Hilbert Huang transform was developed to tackle this issue. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -375,7 +445,7 @@ The band pass filter process allows signals within a prescribed frequency band t
   start chain=going below,]
      \node[punktchain, join] (intro) {Signal};
      \node[punktchain, join] (probf)      {Band pass filtering};
-     \node[punktchain, join] (investeringer)      {Enveloping};
+     \node[punktchain, join] (investeringer)      {Hilbert transform};
      \node[punktchain, join] (perfekt) {Low pass filtering};
      \node[punktchain, join, ] (emperi) {Fast Fourier transform};
      % \node (asym) [punktchain ]  {Asymmetrisk information};
@@ -392,18 +462,18 @@ The band pass filter process allows signals within a prescribed frequency band t
    \label{fig:fft-process}
 \end{figure}
 \justify
-The enveloping step corresponds to rectifying the signal. It accounts only for the positive part of the signal, and extract the high frequency resonance component induced by bearing defects, and the defect characteristics frequency component.
-\justify
-In mathematically terms, the envelope  $E(t)$ of a signal $x(t)$ is given by
-\begin{equation}
-E(t) = \sqrt{H(t)^{2}+ x(t)^{2}}
-\end{equation}
-were 
-\begin{equation}
-H(t) = \frac{1}{\pi t}*x(t) = \frac{1}{\pi}\int_{-\infty}^{+\infty}\frac{x(t)}{t-\tau}\mathrm{d}\tau
-\end{equation}
-is the Hilbert transform of the signal, and \say{*} define the convolution operation.
- After the enveloping process, the resulting signal is low pass filtered in order to remove the high frequency resonance components, leaving only the signal component that contain the bearing failure frequencies. Finally, the fast Fourier transform is applied on the filtered signal to obtain the frequency spectrum.
+%The enveloping step corresponds to rectifying the signal. It accounts only for the positive part of the signal, and extract the high frequency resonance component induced by bearing defects, and the defect characteristics frequency component.
+%\justify
+%In mathematically terms, the envelope  $E(t)$ of a signal $x(t)$ is given by
+%\begin{equation}
+%E(t) = \sqrt{H(t)^{2}+ x(t)^{2}}
+%\end{equation}
+%were 
+%\begin{equation}
+%H(t) = \frac{1}{\pi t}*x(t) = \frac{1}{\pi}\int_{-\infty}^{+\infty}\frac{x(t)}{t-\tau}\mathrm{d}\tau
+%\end{equation}
+%is the Hilbert transform of the signal, and \say{*} define the convolution operation.
+% After the enveloping process, the resulting signal is low pass filtered in order to remove the high frequency resonance components, leaving only the signal component that contain the bearing failure frequencies. Finally, the fast Fourier transform is applied on the filtered signal to obtain the frequency spectrum.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Ball pass outer race defect frequency detection}
