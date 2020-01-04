@@ -297,19 +297,28 @@ The Fourier transform not only computes the frequency spectrum of a signal. It i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Filters}
 \label{sec:filters}
-\subsubsection{Hilbert Transform}
+\subsubsection{The Hilbert Transform}
 \label{sec:hilbert-transform}
-
-The Hilbert transform is an import tool in mathematics, and in signal processing in particular. Among others, its makes possible the representation of a real valued signal as an analytic signal (a complex signal), which is its extension to the upper half complex plane. By doing so, the concept of instantaneous amplitude and instantaneous frequency can be introduced, which is important in amplitude and frequency modulation problems [picinbono1989], such as transmission of radio communication signals, analysis of vibration signals under varying load, etc. Here amplitude and frequency modulation refers to the time dependency of the amplitude and the frequency. In the formulation of Fourier analysis, the frequency and amplitude of a signal are constant. However, in many  practical problems, amplitude and frequency modulation are imposed.
+The Hilbert transform is an integral transform, first introduced by David Hilbert to solve integral equations in mathematical physics (\cite{gabor1982}). Physically, it is equivalent to a special kind of linear filter, which shift a signal spectral component phase by $\pi/2$, while keeping unchanged, its amplitude (\cite{feldman2010}). This is the physical meaning behind expressing the Hilbert transform of a signal as its convolution with the function $\frac{1}{\pi t}$. Along side this, the generalization of Euler formula
+\begin{equation}
+	e^{i\theta} = \cos(\theta) + i\sin(\theta)
+\end{equation}
+ to a complex function
+ \begin{equation}\label{eq:gab}
+ 	  Y(t) = u(t) +iv(t)
+ \end{equation}
+due to Gabor in 1946, was made possible by the Hilbert transform (\cite{feldman2010}). In equation (\ref{eq:gab}), the real value function $v(t)$ is the Hilbert transform of the function real value function $u(t)$. Furthermore, if $Y(t)$ is a signal which depends on time $t$, then $Y(t)$ is an analytic signal, which is the complex representation of the signal $u(t)$ in the upper half complex plane.
 \justify
-Before moving to the mathematical formulation of the Hilbert transform, let define an analytical signal.
-Formally, an analytical signal is a complex signal whose imaginary part is the Hilbert transform of its real part. A real valued signal $x(t)$ , can be extended to a well defined complex signal $s(t)$, 
+Equation (\ref{eq:gab}), has a profound implication in signal processing, and in particular in problems with non stationary signals. The latter spectral properties such as amplitude and frequency are modulated in time. Therefore, a correct representation of such signals must incorporate instantaneous amplitude and frequency. This is precisely made possible by Hilbert transform in part.
+
+%By doing so, the concept of instantaneous amplitude and instantaneous frequency can be introduced, which is important in amplitude and frequency modulation problems [picinbono1989], such as transmission of radio communication signals, analysis of vibration signals under varying load, etc. Here amplitude and frequency modulation refers to the time dependency of the amplitude and the frequency. In the formulation of Fourier analysis, the frequency and amplitude of a signal are constant. However, in many  practical problems, amplitude and frequency modulation are imposed.
+\justify
+Before moving to the mathematical formulation of the Hilbert transform, let define what an analytical signal is, and why it is important for non stationary signals.
+Formally, an analytical signal is a complex signal whose imaginary part is the Hilbert transform of its real part. A real valued signal $x(t)$ , can be extended to a well defined complex signal $s(t)$, given by
 \begin{equation}\label{eq:ana}
 s(t) = x(t) + i H\{ x(t)\}
 \end{equation}
 where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. The signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytical signal. Furthermore, if $s(t)$ is a mono-component signal, its amplitude $a(t)$ and frequency $\omega(t)$ as a function of the time variable $t$ are given by
-
-
 
 \begin{equation}\label{eq:amplitude}
 a(t) = \sqrt{x(t)^{2} + H\{x(t) \}^{2} }
@@ -326,13 +335,13 @@ is the instantaneous phase. With these formulations, $s(t)$ can be expressed sim
 s(t) = a(t)\cos\left( \Psi(t)\right) 
 \end{equation}
 Recall that a mono-component signal is a signal with no other frequency component then its own.
-In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal either in time or in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a correct representation of signals which are non periodic, where obviously the frequency and the amplitude varies continuously with time.
+In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined de facto. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a correct representation of non stationary signals, where obviously the frequency and the amplitude varies continuously with time.
 \justify
-The Hilbert transform $H\{ x(t) \}$ of a signal $x(t)$, is define as its convolution with the function $\frac{1}{\pi t}$ expressed as
+Mathematically though, the Hilbert transform $H\{ x(t) \}$ of a signal $x(t)$, is define as its convolution with the function $\frac{1}{\pi t}$ expressed as
 \begin{equation}\label{eq:conv}
 H\{ x(t) \} = \frac{1}{\pi t}* x(t) = 	\frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}.
 \end{equation}
-Because of the pole at $t=\eta$ in (\ref{eq:conv}), the indefinite integral might not converge. To circumvent this issue, the indefinite integral is evaluated by applying the Cauchy principal value method, as indicated by the letter $P$ in front the integral. Furthermore (\ref{eq:conv}), can be written as
+Because of the singularity at $t=\eta$ in (\ref{eq:conv}), the indefinite integral might not converge. To circumvent this issue, the indefinite integral is evaluated by applying the Cauchy principal value method, as indicated by the letter $P$ in front the integral. Furthermore (\ref{eq:conv}), can be written as
 \begin{equation}
 \begin{split}
 H\{ x(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}\\
