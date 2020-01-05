@@ -395,8 +395,13 @@ Although the Hilbert transform can provide a way to analyze signals with modulat
 \end{figure}
 \justify
 
-
-The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful (well defined) physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}). The Hilbert Huang transform was developed to tackle this issue. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense.
+Formally, a mono-component signal say $s(t)$ has an analytic (complex) representation 
+\begin{equation}
+	z(t) = a(t)e^{i \Psi(t)} 
+\end{equation}
+where $a(t)$ and $\Psi(t)$ are the instantaneous amplitude and phase respectively.
+and the pair $a(t)$ and $e^{i \Psi(t)}$ are spectral disjoint.
+%The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful (well defined) physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}). The Hilbert Huang transform was developed to tackle this issue. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
