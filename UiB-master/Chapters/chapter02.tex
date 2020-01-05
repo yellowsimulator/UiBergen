@@ -318,7 +318,7 @@ Formally, an analytical signal is a complex signal whose imaginary part is the H
 \begin{equation}\label{eq:ana}
 s(t) = x(t) + i H\{ x(t)\}
 \end{equation}
-where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. The signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytical signal. Furthermore, if $s(t)$ is a mono-component signal, its amplitude $a(t)$ and frequency $\omega(t)$ as a function of the time variable $t$ are given by
+where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. The signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytical signal. Furthermore, if $s(t)$ is a mono-component signal, its instantaneous amplitude $a(t)$ (envelope) and instantaneous frequency $\omega(t)$ as a function of the time variable $t$ are given by
 
 \begin{equation}\label{eq:amplitude}
 a(t) = \sqrt{x(t)^{2} + H\{x(t) \}^{2} }
@@ -327,15 +327,15 @@ a(t) = \sqrt{x(t)^{2} + H\{x(t) \}^{2} }
 \omega(t) = \frac{d \Psi(t)}{dt} 
 \end{equation}
 where 
-\begin{equation}\label{eq:frequency}
+\begin{equation}\label{eq:phase}
 \Psi(t) = \tan^{-1}\left(\frac{H\{x(t) \}}{x(t)} \right),
 \end{equation}
 is the instantaneous phase. With these formulations, $s(t)$ can be expressed simultaneously in the time and frequency domain (a mixed representation) as 
 \begin{equation}\label{eq:modulation}
-s(t) = a(t)\cos\left( \Psi(t)\right) 
+s(t) = a(t)e^{i \Psi(t)} 
 \end{equation}
-Recall that a mono-component signal is a signal with no other frequency component then its own.
-In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined de facto. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a correct representation of non stationary signals, where obviously the frequency and the amplitude varies continuously with time.
+Recall that a mono-component signal is a sinusoidal with relatively slow amplitude and frequency variation.
+In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined de facto. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a correct representation of non-stationary signals, where obviously the frequency and the amplitude varies continuously with time.
 \justify
 Mathematically though, the Hilbert transform $H\{ x(t) \}$ of a signal $x(t)$, is define as its convolution with the function $\frac{1}{\pi t}$ expressed as
 \begin{equation}\label{eq:conv}
@@ -348,30 +348,54 @@ H\{ x(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mat
 &= \frac{1}{\pi}\lim_{\epsilon\rightarrow 0^{+}} \left( \int_{-\infty}^{-\epsilon} \frac{x(\eta)}{t-\eta}\mathrm{d\eta} +   \int_{\epsilon}^{\infty} \frac{x(\eta)}{t-\eta}\mathrm{d\eta}     \right)
 \end{split}
 \end{equation}
+\justify
+To avoid any confusion, let emphasis the importance of the Hilbert transform one more time.
+The Hilbert transform which is an integral transform, makes it possible to extend a real value function or signal to an analytic signal, which is a complex signal. The imaginary part of this complex signal is the Hilbert transform of the original signal. With this set up, if the original signal is non-stationary, its amplitude and frequency will vary in time. This amplitude and frequency modulation is captured by the instantaneous amplitude and frequency defined in equations (\ref{eq:amplitude}-\ref{eq:phase}).
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{../fig/h_sin}
-	%\includegraphics[width=0.8\linewidth]{../fig/h_cos}
 	\caption{The Hilbert transform of $\sin(ct)$ given by $\sin(ct-\frac{\pi}{2})$. $c=1$  }
 	\label{fig:hsin}
 \end{figure}
 \justify
-Figure \ref{fig:hsin} shows the Hilbert transform of $\sin(ct)$ which is $\sin\left(ct-\frac{\pi}{2}\right)$. In the same fashion, the Hilbert transform of $\cos(ct)$ is  $\cos\left(ct-\frac{\pi}{2}\right)$, where $c = 1$. As a consequence, the Hilbert transform imposes a phase shift of $\frac{\pi}{2}$ to every Fourier component of a signal. Figure \ref{fig:cauchy_pulse} and \ref{fig:sinc_pulse} show the Cauchy pulse $\left(\frac{c}{c^{2} + t^{2}}\right)$ and the sinc pulse $\left(\frac{\sin(ct)}{ct}\right)$ with their corresponding Hilbert transform for $c = 1.5$.
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{../fig/cauchy_pulse}
-	\caption{The Hilbert transform of Cauchy pulse }
-	\label{fig:cauchy_pulse}
-\end{figure}
+Figure \ref{fig:hsin} shows the Hilbert transform of $\sin(ct)$ which is $\sin\left(ct-\frac{\pi}{2}\right)$. In the same fashion, the Hilbert transform of $\cos(ct)$ is  $\cos\left(ct-\frac{\pi}{2}\right)$, where $c = 1$. As a consequence, the Hilbert transform imposes a phase shift of $\frac{\pi}{2}$ to every Fourier component of a signal. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{../fig/sinc_pulse}
-	\caption{The Hilbert transform of Cauchy pulse }
-	\label{fig:sinc_pulse}
+	\includegraphics[width=1\linewidth]{../fig/cauchy_pulse_spectral}
+	\caption{Cauchy pulse with its instantaneous (inst) amplitude and frequency. $c=1$}
+	\label{fig:cauchy_pulse}
 \end{figure}
 \justify
+Figure \ref{fig:cauchy_pulse} shows the Cauchy pulse, which is given by ($c=1$)
+\begin{equation}
+	 \frac{c}{c^{2}+ t^{2}},
+\end{equation}
+as well as its instantaneous (inst) amplitude and frequency on the interval $[-30, 30]$. considering the Cauchy pulse on the time interval $[0,30]$, its amplitude and frequency decay in time. This is well captured by the instantaneous amplitude and frequency in Figure \ref{fig:cauchy_pulse}.
+\justify
+Let give an other illustration which will cements the importance of the Hilbert transform for frequency and amplitude modulated signals. Consider the signal given in Figure \ref{fig:mode}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{../fig/mode}
+	\caption{A signal with amplitude and frequency variation in time}
+	\label{fig:mode}
+\end{figure}
+\justify
+As one can can observe, its frequency changes from 20 Hz to 100 Hz from 0 to 1 second, while its amplitude varies in time. By computing its Hilbert transform, the signal is extended to the upper complex plane, as an analytic signal. Therefore using (\ref{eq:amplitude}-\ref{eq:phase}), its instantaneous frequency and amplitude can be computed.
+\justify
+Figure \ref{fig:inst} shows the instantaneous amplitude and frequency. It is clear from this that the frequency changes (nearly) from 20 Hz around $t = 0s$, to 100 Hz around $t = 1$ neighborhood. This demonstrates the efficiency of the Hilbert transform in dealing with signals with modulated spectral characteristics. 
+\justify
+Although the Hilbert transform can provide a way to analyze signals with modulated spectral characteristics, the instantaneous frequency obtained does not always provide a physical meaning. As one can observe in Figure \ref{fig:mode}, at the endpoints of the interval $[0,1]$, the instantaneous frequency is not a single-value function of time. This is due to the fact that the original signal is a superposition of signals. We say that the signal is not a mono-component signal.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{../fig/inst}
+	\caption{A signal with amplitude and frequency variation in time}
+	\label{fig:inst}
+\end{figure}
+\justify
+
+
 The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful (well defined) physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}). The Hilbert Huang transform was developed to tackle this issue. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense.
 
 
