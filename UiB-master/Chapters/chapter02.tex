@@ -374,7 +374,8 @@ Figure \ref{fig:cauchy_pulse} shows the Cauchy pulse, which is given by ($c=1$)
 \end{equation}
 as well as its instantaneous (inst) amplitude and frequency on the interval $[-30, 30]$. considering the Cauchy pulse on the time interval $[0,30]$, its amplitude and frequency decay in time. This is well captured by the instantaneous amplitude and frequency in Figure \ref{fig:cauchy_pulse}.
 \justify
-Let give an other illustration which will cements the importance of the Hilbert transform for frequency and amplitude modulated signals. Consider the signal given in Figure \ref{fig:mode}
+Let give an other illustration which will cements the importance of the Hilbert transform for frequency and amplitude modulated signals. This example is taken from (\cite{scipy2019}), the official page of the Python implementation of Hilbert transform. It depicts the strength, as well as the short coming of the Hilbert transform. Consider the signal given in Figure \ref{fig:mode}. 
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{../fig/mode}
@@ -384,9 +385,9 @@ Let give an other illustration which will cements the importance of the Hilbert 
 \justify
 As one can can observe, its frequency changes from 20 Hz to 100 Hz from 0 to 1 second, while its amplitude varies in time. By computing its Hilbert transform, the signal is extended to the upper complex plane, as an analytic signal. Therefore using (\ref{eq:amplitude}-\ref{eq:phase}), its instantaneous frequency and amplitude can be computed.
 \justify
-Figure \ref{fig:inst} shows the instantaneous amplitude and frequency. It is clear from this that the frequency changes (nearly) from 20 Hz around $t = 0s$, to 100 Hz around $t = 1$ neighborhood. This demonstrates the efficiency of the Hilbert transform in dealing with signals with modulated spectral characteristics. 
+Figure \ref{fig:inst} shows the instantaneous amplitude and frequency. It is clear from this that the frequency changes (nearly) from 20 Hz in the neighborhood of $t=0$, to 100 Hz in the neighborhood of $t = 1$ . This demonstrates the efficiency of the Hilbert transform in dealing with signals with modulated spectral characteristics. 
 \justify
-Although the Hilbert transform can provide a way to analyze signals with modulated spectral characteristics, the instantaneous frequency obtained does not always provide a physical meaning. As one can observe in Figure \ref{fig:mode}, at the endpoints of the interval $[0,1]$, the instantaneous frequency is not a single-value function of time. This is due to the fact that the original signal is a superposition of signals. We say that the signal is not a mono-component signal.
+Although the Hilbert transform can provide a way to analyze signals with modulated spectral characteristics, the instantaneous frequency obtained does not always provide a physical meaning. As one can observe in Figure \ref{fig:inst}, at the endpoints of the interval $[0,1]$, the instantaneous frequency is not a single-valued function of time. This means that at a single point in time, we can have multiple frequency values, which is not physically possible. This is due to the fact that the original signal is a superposition of signals. We say that the signal is not a mono-component signal.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{../fig/inst}
@@ -401,7 +402,7 @@ Formally, a mono-component signal say $s(t)$ has an analytic (complex) represent
 \end{equation}
 where $a(t)$ and $\Psi(t)$ are the instantaneous amplitude and phase respectively,
 and the pair $a(t)$, $e^{i \Psi(t)}$ are spectrally disjoint.
-The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful (well defined) physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}). The Hilbert Huang transform was developed to tackle this issue. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense. Therefore the Hilbert Huang transform add value to the Hilbert transform and both make it possible to correctly tackle problems with frequency and amplitude modulation. In chapter 3 we give a thorough account of the Hilbert Huang transform, and how it can be used to detect bearing fault detection. 
+The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful (well defined) physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}). The Hilbert Huang transform was developed to tackle this issue. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense. Therefore the Hilbert Huang transform add value to the Hilbert transform and both make it possible to correctly tackle problems with frequency and amplitude modulation. Chapter 3 gives a thorough account of the Hilbert Huang transform, and how it can be used to detect bearings fault detection. 
 \justify
   
 
