@@ -303,22 +303,22 @@ The Hilbert transform is an integral transform, first introduced by David Hilber
 \begin{equation}
 	e^{i\theta} = \cos(\theta) + i\sin(\theta)
 \end{equation}
- of a signal to a complex function
+ to a complex function as
  \begin{equation}\label{eq:gab}
- 	  Y(t) = u(t) +iv(t)
+ 	  Y(t) = u(t) +iv(t),
  \end{equation}
 due to Gabor in 1946, was made possible by the Hilbert transform (\cite{feldman2010}). In equation (\ref{eq:gab}), the real value function $v(t)$ is the Hilbert transform of the real value function $u(t)$. Furthermore, if $Y(t)$ is a signal which depends on time $t$, then $Y(t)$ is an analytic signal, which is the complex representation of the signal $u(t)$ in the upper half complex plane.
 \justify
-Equation (\ref{eq:gab}), has a profound implication in signal processing, notably in problems pertaining to non-stationary signal analysis. In the latter,  spectral properties such as amplitude and frequency are modulated in time. Therefore, a correct representation of such signals must incorporate instantaneous amplitude and frequency. This is precisely made possible by the Hilbert transform in part.
+Equation (\ref{eq:gab}), has a profound implication in signal processing, notably in problems pertaining to non-stationary signal analysis. In the latter,  spectral properties such as amplitude and frequency are modulated in time. Therefore, it is safe to posit that, an appropriate representation of such signals, should incorporate instantaneous amplitude and frequency. The former and the latter, are akin to amplitude and frequency variation in time. This is precisely achieved through the Hilbert transform, in part.
 
 
 \justify
-Before moving to the mathematical formulation of the Hilbert transform, let define what an analytical signal is, and why it is important for non-stationary signals.
+Before expanding the mathematical formulation of the Hilbert transform, a definition of an analytical signal, and the reason why it is important for non-stationary problems, are required.
 Formally, an analytic signal is a complex signal whose imaginary part is the Hilbert transform of its real part. A real valued signal $x(t)$ , can be extended to a well defined complex signal $s(t)$, given by
 \begin{equation}\label{eq:ana}
 s(t) = x(t) + i H\{ x(t)\}
 \end{equation}
-where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. The signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytic signal. In addition, if $s(t)$ is a mono-component signal, its instantaneous amplitude (envelop) $a(t)$ and instantaneous frequency $\omega(t)$ as a function of the time variable $t$ are given by
+where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytic signal. In addition, if $s(t)$ is a mono-component signal, its instantaneous amplitude (envelop) $a(t)$ and instantaneous frequency $\omega(t)$ as a function of the time variable $t$, are given by
 
 \begin{equation}\label{eq:amplitude}
 a(t) = \sqrt{x(t)^{2} + H\{x(t) \}^{2} }
@@ -328,20 +328,22 @@ a(t) = \sqrt{x(t)^{2} + H\{x(t) \}^{2} }
 \end{equation}
 where 
 \begin{equation}\label{eq:phase}
-\Psi(t) = \tan^{-1}\left(\frac{H\{x(t) \}}{x(t)} \right),
+\Psi(t) = \tan^{-1}\left(\frac{H\{x(t) \}}{x(t)} \right)
 \end{equation}
 is the instantaneous phase. With these formulations, $s(t)$ can be expressed simultaneously in the time and frequency domain (a mixed representation) as 
 \begin{equation}\label{eq:modulation}
 s(t) = a(t)e^{i \Psi(t)} 
 \end{equation}
+In this case, the signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed.
 Recall that a mono-component signal is a sinusoidal with relatively slow amplitude and frequency variation.
-In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined de facto. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a correct representation of non-stationary signals, where obviously the frequency and the amplitude varies continuously with time.
+In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined de facto.
+ The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a satisfactory representation of non-stationary signals, where obviously the frequency and the amplitude varies continuously with time.
 \justify
 Mathematically, the Hilbert transform $H\{ x(t) \}$ of a signal $x(t)$, is define as its convolution with the function $\frac{1}{\pi t}$ expressed as
 \begin{equation}\label{eq:conv}
 H\{ x(t) \} = \frac{1}{\pi t}* x(t) = 	\frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}.
 \end{equation}
-Because of the singularity at $t=\eta$ in (\ref{eq:conv}), the indefinite integral might not converge. As a circumvention, the indefinite integral is evaluated by applying the Cauchy principal value method, as indicated by the letter $P$ in front the integral. Furthermore (\ref{eq:conv}), can be written as
+Because of the singularity at $t=\eta$ in (\ref{eq:conv}), the indefinite integral might not converge. As a circumvention, it is evaluated by applying the Cauchy principal value method, as indicated by the letter $P$ in front the integral. Furthermore (\ref{eq:conv}), can be written as
 \begin{equation}
 \begin{split}
 H\{ x(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}\\
@@ -349,8 +351,6 @@ H\{ x(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mat
 \end{split}
 \end{equation}
 \justify
-%To avoid any confusion, let emphasis the importance of the Hilbert transform one more time.
-%The Hilbert transform which is an integral transform, makes it possible to extend a real value function or signal to an analytic signal, which is a complex signal. The imaginary part of this complex signal is the Hilbert transform of the original signal. With this set up, if the original signal is non-stationary, its amplitude and frequency will vary in time. This amplitude and frequency modulation is captured by the instantaneous amplitude and frequency defined in equations (\ref{eq:amplitude}-\ref{eq:phase}).
 
 \begin{figure}[H]
 	\centering
@@ -359,8 +359,7 @@ H\{ x(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mat
 	\label{fig:hsin}
 \end{figure}
 \justify
-Figure \ref{fig:hsin} shows the Hilbert transform of $\sin(ct)$ which is $\sin\left(ct-\frac{\pi}{2}\right)$. In the same fashion, the Hilbert transform of $\cos(ct)$ is  $\cos\left(ct-\frac{\pi}{2}\right)$, where $c = 1$. Therefore in the frequency domain, the Hilbert transform imposes a phase shift of $\frac{\pi}{2}$ to every Fourier component of a signal. 
-
+Figure \ref{fig:hsin} shows the Hilbert transform of $\sin(ct)$ which is $\sin\left(ct-\frac{\pi}{2}\right)$. In the same fashion, the Hilbert transform of $\cos(ct)$ is  $\cos\left(ct-\frac{\pi}{2}\right)$, where $c = 1$. Therefore, in the frequency domain, the Hilbert transform imposes a phase shift of $\frac{\pi}{2}$ to every Fourier component of a signal. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{../fig/cauchy_pulse_spectral}
@@ -374,7 +373,7 @@ Figure \ref{fig:cauchy_pulse} shows the Cauchy pulse, which is given by ($c=1$)
 \end{equation}
 as well as its instantaneous (inst) amplitude and frequency on the interval $[-30, 30]$. Considering the Cauchy pulse on the time interval $[0,30]$, its amplitude and frequency decay in time. This is well captured by the instantaneous amplitude and frequency in Figure \ref{fig:cauchy_pulse}.
 \justify
-Le further illustrate the importance of the Hilbert transform for frequency and amplitude modulated signals. This example is taken from (\cite{scipy2019}), the official page of the Python implementation of Hilbert transform. It depicts the strength, as well as the short coming of the Hilbert transform. Consider the signal given in Figure \ref{fig:mode}. 
+Le further illustrate the importance of the Hilbert transform for frequency and amplitude modulated signals. This example is taken from (\cite{scipy2019}), the official page of the Python implementation of the Hilbert transform. It depicts the strength, as well as the short coming of the Hilbert transform. Consider the signal given in Figure \ref{fig:mode}. 
 
 \begin{figure}[H]
 	\centering
@@ -387,7 +386,7 @@ As one can can observe, its frequency changes from 20 Hz to 100 Hz from 0 to 1 s
 \justify
 Figure \ref{fig:inst} shows the corresponding instantaneous amplitude and frequency. It is clear from this that the frequency changes (nearly) from 20 Hz in the neighborhood of $t=0$, to 100 Hz in the neighborhood of $t = 1$ . This demonstrates the efficiency of the Hilbert transform in dealing with signals with modulated spectral characteristics. 
 \justify
-Although the Hilbert transform can provide a way to analyze signals with modulated spectral characteristics, the instantaneous frequency obtained does not always provide a physical meaning. As one can observe in Figure \ref{fig:inst}, at the endpoints of the interval $[0,1]$, the instantaneous frequency is not a single-valued function of time. This means that at a single point in time, we can have multiple frequency values, which is not physically possible. This is due to the fact that the original signal is a superposition of signals. We say that the signal is not a mono-component signal.
+Although the Hilbert transform provides a tool to analyze signals with modulated spectral characteristics, the instantaneous frequency obtained does not always provide a physical meaning (\cite{huang98}, \cite{huang08}). As one can observe in Figure \ref{fig:inst}, at the endpoints of the interval $[0,1]$, the instantaneous frequency is not a single-valued function of time. It means that at a single point in time, multiple frequency values are defined. This obviously violate physical laws. The explanation as to why this occurred, is found in the signal not being mono-component. That is, the target signal is a superposition of elementary sub-signals.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{../fig/inst}
@@ -395,14 +394,14 @@ Although the Hilbert transform can provide a way to analyze signals with modulat
 	\label{fig:inst}
 \end{figure}
 \justify
-
-Formally, a mono-component signal say $s(t)$ has an analytic (complex) representation 
+Formally, a mono-component signal say $z(t)$ has an analytic (complex) representation 
 \begin{equation}
 	z(t) = a(t)e^{i \Psi(t)} 
 \end{equation}
 where $a(t)$ and $\Psi(t)$ are the instantaneous amplitude and phase respectively,
 and the pair $a(t)$, $e^{i \Psi(t)}$ are spectrally disjoint.
-The amplitude and frequency modulation obtained from Hilbert transform in equation (\ref{eq:amplitude}, \ref{eq:frequency}) does not always provide a meaningful (well defined) physical description of a signal unless the signal is mono-component (\cite{huang98}, \cite{huang08}). The Hilbert-Huang transform was developed to tackle this issue. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense. Therefore the Hilbert Huang transform add value to the Hilbert transform and both make it possible to correctly tackle problems with frequency and amplitude modulation. Chapter 3 gives a thorough account of the Hilbert-Huang transform, and how it can be used in detecting bearings fault. 
+\justify
+ To address the issue faced by the Hilbert transform for non mono-component signals, the Hilbert-Huang transform was developed. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense. Therefore the Hilbert Huang transform add value to the Hilbert transform and both make it possible to correctly tackle problems with frequency and amplitude modulation. A concise exposition of the Hilbert-Huang transform is given in chapter 3. 
 \justify
 To sum up: The Hilbert transform act as a linear filter in the frequency domain, where it imposes a phase shift to every Fourier component. In the time domain, it extends a real valued function to a complex function which is an analytic signal. The imaginary part of the latter is the Hilbert transform of the original signal. By using the analytic signal, the instantaneous frequency and the instantaneous amplitude of the original signal is derived. To have a meaning instantaneous amplitude and frequency, the original signal must be a mono-component signal, meaning that it must not be the superposition of signals. The Hilbert Huang transform, makes it possible to decompose any signal to a set of (nearly) mono-components signals called intrinsic mode function. Thus, the Hilbert transform, coupled with the Hilbert Huang transform provide a complete set of tools to analyze frequency and amplitude modulated signals.
   
