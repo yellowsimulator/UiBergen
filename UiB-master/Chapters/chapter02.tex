@@ -299,7 +299,8 @@ The Fourier transform not only computes the frequency spectrum of a signal. It i
 %\label{sec:filters}
 \subsection{The Hilbert Transform and filters}
 \label{sec:hilbert-transform}
-The Hilbert transform is an integral transform, first introduced by David Hilbert to solve integral equations in mathematical physics (\cite{gabor1982}). Its physical interpretation is equivalent to a special kind of linear filter, which shift a signal spectral component phase by $\frac{\pi}{2}$, while keeping its amplitude unchanged (\cite{feldman2010}). This is the physical meaning behind expressing the Hilbert transform of a signal as its convolution with the function $\frac{1}{\pi t}$ (\cite{feldman2010}). Moreover, the generalization of Euler formula
+The Hilbert transform is an integral transform, first introduced by David Hilbert to solve integral equations in mathematical physics (\cite{gabor1982}). Its physical interpretation is equivalent to a special kind of linear filter, which shift a signal spectral component phase by $\frac{\pi}{2}$, while keeping its amplitude unchanged (\cite{feldman2010}). This is the physical meaning behind expressing the Hilbert transform of a signal as its convolution with the function $\frac{1}{\pi t}$ (\cite{feldman2010}). 
+Moreover, the generalization of Euler formula
 \begin{equation}
 	e^{i\theta} = \cos(\theta) + i\sin(\theta)
 \end{equation}
@@ -307,47 +308,48 @@ The Hilbert transform is an integral transform, first introduced by David Hilber
  \begin{equation}\label{eq:gab}
  	  Y(t) = u(t) +iv(t),
  \end{equation}
-due to Gabor in 1946, was made possible by the Hilbert transform (\cite{feldman2010}). In equation (\ref{eq:gab}), the real value function $v(t)$ is the Hilbert transform of the real value function $u(t)$. Furthermore, if $Y(t)$ is a signal which depends on time $t$, then $Y(t)$ is an analytic signal, which is the complex representation of the signal $u(t)$ in the upper half complex plane.
+due to Gabor, was made possible by the Hilbert transform (\cite{feldman2010}). In equation (\ref{eq:gab}), the real value function $v(t)$ is the Hilbert transform of the real value function $u(t)$. Furthermore, if $Y(t)$ is a signal which depends on time $t$, then $Y(t)$ is an analytic signal, which is the complex representation of the signal $u(t)$ in the upper half complex plane.
 \justify
 Equation (\ref{eq:gab}), has a profound implication in signal processing, notably in problems pertaining to non-stationary signal analysis. In the latter,  spectral properties such as amplitude and frequency are modulated in time. Therefore, it is safe to posit that, an appropriate representation of such signals, should incorporate instantaneous amplitude and frequency. The former and the latter, are akin to amplitude and frequency variation in time. This is precisely achieved through the Hilbert transform, in part.
 
 
 \justify
-Before expanding the mathematical formulation of the Hilbert transform, a definition of an analytical signal, and the reason why it is important for non-stationary problems, are required.
-Formally, an analytic signal is a complex signal whose imaginary part is the Hilbert transform of its real part. A real valued signal $x(t)$ , can be extended to a well defined complex signal $s(t)$, given by
+Before expanding the mathematical formulation of the Hilbert transform, a definition of an analytic signal, and the reason why it is important for non-stationary problems, are required.
+Formally, an analytic signal is a complex signal whose imaginary part is the Hilbert transform of its real part. A real valued signal $s(t)$ , can be extended to a well defined complex signal $Y(t)$, given by
 \begin{equation}\label{eq:ana}
-s(t) = x(t) + i H\{ x(t)\}
+Y(t) = s(t) + i H\{ s(t)\}
 \end{equation}
-where $H\{ x(t)\}$ is the Hilbert transform of $x(t)$. If (\ref{eq:ana}) holds, then $s(t)$ is said to be an analytic signal. In addition, if $s(t)$ is a mono-component signal, its instantaneous amplitude (envelop) $a(t)$ and instantaneous frequency $\omega(t)$ as a function of the time variable $t$, are given by
+where $H\{ s(t)\}$ is the Hilbert transform of $s(t)$. If (\ref{eq:ana}) holds, then $Y(t)$ is said to be an analytic signal. In addition, if $s(t)$ is a mono-component signal, its instantaneous amplitude (envelop) $a(t)$ and instantaneous frequency $\omega(t)$ as a function of the time variable $t$, are well defined and given by
 
 \begin{equation}\label{eq:amplitude}
-a(t) = \sqrt{x(t)^{2} + H\{x(t) \}^{2} }
+a(t) = \sqrt{s(t)^{2} + H\{s(t) \}^{2} }
 \end{equation}
 \begin{equation}\label{eq:frequency}
 \omega(t) = \frac{d \Psi(t)}{dt} 
 \end{equation}
 where 
 \begin{equation}\label{eq:phase}
-\Psi(t) = \tan^{-1}\left(\frac{H\{x(t) \}}{x(t)} \right)
+\Psi(t) = \tan^{-1}\left(\frac{H\{s(t) \}}{s(t)} \right)
 \end{equation}
 is the instantaneous phase. With these formulations, $s(t)$ can be expressed simultaneously in the time and frequency domain (a mixed representation) as 
 \begin{equation}\label{eq:modulation}
-s(t) = a(t)e^{i \Psi(t)} 
+s(t) = \mathbf{R}_{e}\left[|a(t)|e^{i \Psi(t)} \right]
 \end{equation}
-In this case, the signal $s(t)$ is well defined in the sense that its existence and uniqueness are guaranteed.
-Recall that a mono-component signal is a sinusoidal with relatively slow amplitude and frequency variation.
-In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined de facto.
- The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a satisfactory representation of non-stationary signals, where obviously the frequency and the amplitude varies continuously with time.
+where $\mathbf{R}_{e}$ is the real part of the enclosed complex function. Recall that a mono-component signal is a sinusoidal with relatively slow amplitude and frequency variation. 
 \justify
-Mathematically, the Hilbert transform $H\{ x(t) \}$ of a signal $x(t)$, is define as its convolution with the function $\frac{1}{\pi t}$ expressed as
+The Hilbert transform of a signal is say to be in quadrature with the original target signal. Although they differ in form, a signal and its Hilbert transform contain the same spectral component. That is, a human ear could not distinguish between a sound wave and its Hilbert transform (\cite{gabor1944}).
+\justify
+In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined de facto. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a satisfactory representation of non-stationary signals, where obviously the frequency and the amplitude varies continuously with time.
+\justify
+Mathematically, the Hilbert transform $H\{ s(t) \}$ of a signal $s(t)$, is define as its convolution with the function $\frac{1}{\pi t}$ expressed as
 \begin{equation}\label{eq:conv}
-H\{ x(t) \} = \frac{1}{\pi t}* x(t) = 	\frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}.
+H\{ s(t) \} = \frac{1}{\pi t}* s(t) = 	\frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{s(\eta)}{t-\eta}\mathrm{d\eta}.
 \end{equation}
 Because of the singularity at $t=\eta$ in (\ref{eq:conv}), the indefinite integral might not converge. As a circumvention, it is evaluated by applying the Cauchy principal value method, as indicated by the letter $P$ in front the integral. Furthermore (\ref{eq:conv}), can be written as
 \begin{equation}
 \begin{split}
-H\{ x(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{x(\eta)}{t-\eta}\mathrm{d\eta}\\
-&= \frac{1}{\pi}\lim_{\epsilon\rightarrow 0^{+}} \left( \int_{-\infty}^{-\epsilon} \frac{x(\eta)}{t-\eta}\mathrm{d\eta} +   \int_{\epsilon}^{\infty} \frac{x(\eta)}{t-\eta}\mathrm{d\eta}     \right)
+H\{ s(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{s(\eta)}{t-\eta}\mathrm{d\eta}\\
+&= \frac{1}{\pi}\lim_{\epsilon\rightarrow 0^{+}} \left( \int_{-\infty}^{-\epsilon} \frac{s(\eta)}{t-\eta}\mathrm{d\eta} +   \int_{\epsilon}^{\infty} \frac{s(\eta)}{t-\eta}\mathrm{d\eta}     \right)
 \end{split}
 \end{equation}
 \justify
