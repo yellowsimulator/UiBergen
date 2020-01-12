@@ -333,11 +333,11 @@ where
 \end{equation}
 is the instantaneous phase. With these formulations, $s(t)$ can be expressed simultaneously in the time and frequency domain (a mixed representation) as 
 \begin{equation}\label{eq:modulation}
-s(t) = \mathbf{R}_{e}\left[|a(t)|e^{i \Psi(t)} \right]
+s(t) = \mathbf{R}_{e}\left[|a(t)|e^{i \Psi(t)} \right],
 \end{equation}
 where $\mathbf{R}_{e}$ is the real part of the enclosed complex function. Recall that a mono-component signal is a sinusoidal with relatively slow amplitude and frequency variation. 
 \justify
-The Hilbert transform of a signal is say to be in quadrature with the original target signal. Although they differ in form, a signal and its Hilbert transform contain the same spectral component. That is, a human ear could not distinguish between a sound wave and its Hilbert transform (\cite{gabor1944}).
+An alternative way to describe a signal and its Hilbert transform, is to say that they are in quadrature. Although they differ in form, a signal and its Hilbert transform contain the same spectral component. In layman's terms, that is to say for example that, a human ear could not distinguish between a sound wave and its Hilbert transform (\cite{gabor1944}).
 \justify
 In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined de facto. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a satisfactory representation of non-stationary signals, where obviously the frequency and the amplitude varies continuously with time.
 \justify
@@ -403,9 +403,9 @@ Formally, a mono-component signal say $z(t)$ has an analytic (complex) represent
 where $a(t)$ and $\Psi(t)$ are the instantaneous amplitude and phase respectively,
 and the pair $a(t)$, $e^{i \Psi(t)}$ are spectrally disjoint.
 \justify
- To address the issue faced by the Hilbert transform for non mono-component signals, the Hilbert-Huang transform was developed. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense. Therefore the Hilbert Huang transform add value to the Hilbert transform and both make it possible to correctly tackle problems with frequency and amplitude modulation. A concise exposition of the Hilbert-Huang transform is given in chapter 3. 
+ To address the issue faced by the Hilbert transform for non mono-component signals, the Hilbert-Huang transform was developed. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense. Therefore, the Hilbert Huang transform adds value to the Hilbert transform, and both make it possible to correctly tackle problems with frequency and amplitude modulation. A concise exposition of the Hilbert-Huang transform is given in chapter 3, where it is applied in a proposed new method, for bearing fault detection. 
 \justify
-To sum up: The Hilbert transform act as a linear filter in the frequency domain, where it imposes a phase shift to every Fourier component. In the time domain, it extends a real valued function to a complex function which is an analytic signal. The imaginary part of the latter is the Hilbert transform of the original signal. By using the analytic signal, the instantaneous frequency and the instantaneous amplitude of the original signal is derived. To have a meaning instantaneous amplitude and frequency, the original signal must be a mono-component signal, meaning that it must not be the superposition of signals. The Hilbert Huang transform, makes it possible to decompose any signal to a set of (nearly) mono-components signals called intrinsic mode function. Thus, the Hilbert transform, coupled with the Hilbert Huang transform provide a complete set of tools to analyze frequency and amplitude modulated signals.
+To sum up: The Hilbert transform acts as a linear filter in the frequency domain, where it imposes a phase shift to every Fourier component. In the time domain, it extends a real valued function to a complex function which is an analytic signal. The imaginary part of the latter is the Hilbert transform of the original signal. By using the analytic signal, the instantaneous frequency and the instantaneous amplitude of the original signal is derived. To have a meaning instantaneous amplitude and frequency, the original signal must be a mono-component signal, meaning that it must not be the superposition of signals. The Hilbert Huang transform, makes it possible to decompose any signal to a set of (nearly) mono-components signals called intrinsic mode function. Thus, the Hilbert transform, coupled with the Hilbert Huang transform provide a complete set of tools, in analyzing frequency and amplitude modulated signals.
   
 
 
