@@ -6,11 +6,11 @@
 \begin{document}
 \chapter[Application of the High frequency resonance technique in bearing Fault detection]{Application of the High frequency resonance technique in bearing Fault detection}
 \label{sec:chapter2}
-This chapter covers the application of the high frequency resonance technique (HFRT), to bearing fault detection. It starts with the background materials in section \ref{sec:background-material}, where section \ref{sec:fouurier-analysis} presents an overview of the Fourier analysis, while section \ref{sec:filters} describes signal filtering operations such as the Hilbert transform, low and band pass filtering. 
+This chapter covers the application of the high frequency resonance technique (HFRT), to bearing fault detection. It starts with the background materials in section \ref{sec:background-material}, where section \ref{sec:fouurier-analysis} presents an overview of the Fourier analysis, while section \ref{sec:hilbert-transform} describes signal filtering in general, and in particular the Hilbert Huang transform, which is a special kind of linear filter.
 \justify
-It should be noted that the Hilbert transform filters out negative frequencies, per its application in the high frequency resonance technique. Beyond that, it is an important tool in the Hilbert Huang transform, in analyzing signals with modulated spectral characteristics. Regarding the low pass filter, it removes high frequencies components of a signal, while a band pass filter get ride of signal components below and above predefined threshold values.
+It is worth noting that the Hilbert transform filters out negative frequencies, per its application in the high frequency resonance technique. Beyond that, it comes with a cluster of attributes, some of which being essential in the Hilbert Huang transform, at analyzing signals with modulated spectral characteristics.
 \justify
-After discussing the background materials, section \ref{sec:application} describes a case study where the high frequency resonance technique is applied to detecting bearing failure frequencies. The data for this case study, was provided by the intelligence system division, of the national aeronautics and Space administration (NASA), and is the subject of divers scientific publications.
+After discussing the background materials, section \ref{sec:application} instantiates a case study for the high frequency resonance technique, applied to detecting bearing failure frequencies. The data for this case study, was provided by the intelligence system division, of the national aeronautics and Space administration (NASA), and is the subject of divers scientific publications.
 
 \section{Background materials}
 \label{sec:background-material}
@@ -297,8 +297,33 @@ The Fourier transform not only computes the frequency spectrum of a signal. It i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\subsection{Filters}
 %\label{sec:filters}
-\subsection{The Hilbert Transform and filters}
+\subsection{Digital filters and Hilbert transform}
 \label{sec:hilbert-transform}
+\subsubsection{Filter}
+A digital filter can be defined as a dynamic system in general, and in particular as a discrete time system, that removes undesirable part of a signal such as noise, or extracts desirable components that reside within certain frequency ranges (band). The input signal to the system is some time refer to as the excitation, while the output is called the response. To be more specific, the discrete time system is a mathematical function that maps the input signal to the output. Furthermore, a discrete time system operates on discrete time signals.
+\justify
+A digital filter is characterized by its frequency response, which when known, completely defines the output signal frequency and phase variation. The frequency response is also defined as the transfer function of the system evaluated on the unit circle. The transfer function is the function that gives the relationship between the output signal produced by the filter and the input signal.
+\justify
+As illustration, let $\xi$ be the mapping that represents a discrete time linear system. Then by the eigenfunction property, 
+\begin{equation}\label{eq:lti}
+	\xi(z^{k}) = T(z)z^{k}
+\end{equation}
+where $z$ is a complex number, $k$ an integer and $T$ the transfer function of the discrete linear system. In addition, if $\xi$ is stable, meaning that it can be evaluated on the unit circle, ($z = e^{jk\theta}$) then (\ref{eq:lti}) becomes
+\begin{equation}\label{eq:lti1}
+\xi(e^{jk\theta}) = T(e^{j\theta})e^{jk\theta}
+\end{equation}
+where $\theta$ is the phase of the complex number $z$ lying on the unit circle.
+It worth noting that a stable system produces a bounded signal from an input input bounded signal. A desire property in real life application. Moreover, the response of a single frequency component of a sinusoidal $2\cos(\theta k)$ is given by
+\begin{equation}
+	\begin{split}
+	2\xi\left(\cos(\theta k)\right) &= 2\left(\xi\left(e^{jk\theta}\right) +  \xi\left(e^{-jk\theta}\right) \right)\\
+	&= 2\left( T(e^{j\theta})e^{jk\theta} + T(e^{-j\theta})e^{-jk\theta}\right)\\
+	&=2|T(e^{j\theta})|e^{j\theta k}\\
+	&=|T(e^{j\theta})|\cos(k\theta  + \angle(T(e^{j\theta}))
+	\end{split}
+\end{equation}
+\justify
+\subsubsection{Hilbert transform}
 The Hilbert transform is an integral transform, first introduced by David Hilbert to solve integral equations in mathematical physics (\cite{gabor1982}). Its physical interpretation is equivalent to a special kind of linear filter, which shift a signal spectral component phase by $\frac{\pi}{2}$, while keeping its amplitude unchanged (\cite{feldman2010}). This is the physical meaning behind expressing the Hilbert transform of a signal as its convolution with the function $\frac{1}{\pi t}$ (\cite{feldman2010}). 
 Moreover, the generalization of Euler formula
 \begin{equation}
@@ -314,7 +339,7 @@ Equation (\ref{eq:gab}), has a profound implication in signal processing, notabl
 
 
 \justify
-Before expanding the mathematical formulation of the Hilbert transform, a definition of an analytic signal, and the reason why it is important for non-stationary problems, are required.
+Before expanding the mathematical formulation of the Hilbert transform, a definition of an analytic signal, and the clarification as to why it is important for non-stationary problems, are required.
 Formally, an analytic signal is a complex signal whose imaginary part is the Hilbert transform of its real part. A real valued signal $s(t)$ , can be extended to a well defined complex signal $Y(t)$, given by
 \begin{equation}\label{eq:ana}
 Y(t) = s(t) + i H\{ s(t)\}
@@ -331,13 +356,13 @@ where
 \begin{equation}\label{eq:phase}
 \Psi(t) = \tan^{-1}\left(\frac{H\{s(t) \}}{s(t)} \right)
 \end{equation}
-is the instantaneous phase. With these formulations, $s(t)$ can be expressed simultaneously in the time and frequency domain (a mixed representation) as 
+is the instantaneous phase. With these formulations, $s(t)$ can be extended to the analytic signal
 \begin{equation}\label{eq:modulation}
-s(t) = \mathbf{R}_{e}\left[|a(t)|e^{i \Psi(t)} \right],
+Y(t) = \mathbf{R}_{e}\left[|a(t)|e^{i \Psi(t)} \right],
 \end{equation}
 where $\mathbf{R}_{e}$ is the real part of the enclosed complex function. Recall that a mono-component signal is a sinusoidal with relatively slow amplitude and frequency variation. 
 \justify
-An alternative way to describe a signal and its Hilbert transform, is to say that they are in quadrature. Although they differ in form, a signal and its Hilbert transform contain the same spectral component. In layman's terms, that is to say for example that, a human ear could not distinguish between a sound wave and its Hilbert transform (\cite{gabor1944}).
+An alternative way to describe a signal and its Hilbert transform, is to say that they are in quadrature. Although they differ in form, a signal and its Hilbert transform contain the same spectral component(s) (\cite{gabor1944}). In layman's terms, that is to say for example that, \say{a human ear could not distinguish between a sound wave and its Hilbert transform} (\cite{gabor1944}).
 \justify
 In contrast to (\ref{eq:modulation}), the Fourier analysis represents a signal in frequency domain, where the concept of instantaneous frequency and amplitude can not be defined de facto. The amplitude and frequency modulation expressed in (\ref{eq:modulation}) gives a satisfactory representation of non-stationary signals, where obviously the frequency and the amplitude varies continuously with time.
 \justify
@@ -361,7 +386,7 @@ H\{ s(t) \} &=  \frac{1}{\pi}P \int_{-\infty}^{\infty}\frac{s(\eta)}{t-\eta}\mat
 	\label{fig:hsin}
 \end{figure}
 \justify
-Figure \ref{fig:hsin} shows the Hilbert transform of $\sin(ct)$ which is $\sin\left(ct-\frac{\pi}{2}\right)$. In the same fashion, the Hilbert transform of $\cos(ct)$ is  $\cos\left(ct-\frac{\pi}{2}\right)$, where $c = 1$. Therefore, in the frequency domain, the Hilbert transform imposes a phase shift of $\frac{\pi}{2}$ to every Fourier component of a signal. 
+Figure \ref{fig:hsin} shows the Hilbert transform of $\sin(ct)$ which is $\sin\left(ct-\frac{\pi}{2}\right)$. In the same fashion, the Hilbert transform of $\cos(ct)$ is  $\cos\left(ct-\frac{\pi}{2}\right)$, where $c = 1$. Therefore, in the frequency domain, the Hilbert transform imposes a phase shift of $\frac{\pi}{2}$ to frequency components of a signal. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{../fig/cauchy_pulse_spectral}
@@ -454,7 +479,7 @@ At the end of the first experiment, an inner race defect occurred in bearing num
 
 \subsection{Bearing defects}
 \label{sec:fault}
-As pointed out earlier, bearing failure frequencies depend on their physical characteristics and the rotating speed of the motor housing them. Figure \ref{fig:bearing} shows a graphical representation of a bearing, with the outer ring, the cages that encircle the balls (rolling elements), and the inner ring, where the motor shaft is attached.
+As pointed out earlier, bearing failure frequencies depend on their physical characteristics as well as the rotating speed of the motor housing them. Figure \ref{fig:bearing} shows a graphical representation of a bearing, with the outer ring, the cages that encircle the balls (rolling elements), and the inner ring, where the motor shaft is attached. A bearing failure is instantiated in four different ways, each related to its parts : a fault in the inner, and outer ring, and defects in the cages and roller elements. As part of this section, only fault occurring in the inner ring and outer ring are considered.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=3.2in]{../fig/bearing}  
@@ -462,7 +487,7 @@ As pointed out earlier, bearing failure frequencies depend on their physical cha
    \label{fig:bearing}
 \end{figure}
 \justify
- an inner ring defect occurs at a frequency called ball pass frequency inner race (BPFI), while an outer race defect occurs at a frequency call ball pass outer race frequency (BPFO). They are expressed in Hz in terms of the bearing geometry characteristics and the shaft rotation speed as 
+ An inner ring defect occurs at a frequency called ball pass frequency inner race (BPFI), while an outer race defect occurs at a frequency named ball pass outer race frequency (BPFO). They are expressed in Hz in terms of the bearing geometry characteristics and the shaft rotation speed as 
 \begin{equation}\label{eq:bpfi}
 BPFI = \frac{nb}{2}S\left( 1 +  \frac{BD}{PD}\cos(\beta)  \right)
 \end{equation}
@@ -479,14 +504,16 @@ where
 \item $\beta$ is the contact angle
 \end{itemize}
 The pitch diameter is the perpendicular distance from the center of one ball to the center of the ball located at the end.
-The bearing type used in this experiment are manufactured by the company Rexnord, and are of type Rexnord ZA 2115, with BPFO and BPFI given by 236.4 Hz, 296.8 Hz respectively. 
+The bearing type used in this case study are manufactured by the company Rexnord, and are of type Rexnord ZA 2115, with BPFO and BPFI given by 236.4 Hz, 296.8 Hz, respectively. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{High frequency resonance technique application to failure detection}
+\subsection{The high frequency resonance technique application to bearing failure detection}
 \label{sec:method}
-The high frequency resonance technique consists of a series of operation whose goal is to extract frequency component from a time signal.
+The high frequency resonance technique is made of series of transformations aiming at, in one hand signal filtering, and on the other hand detecting incipient bearing failure. The latter relies on the former, as it reveals hidden failure characteristics.
+
+ whose goal is to extract frequency component from a time signal.
 There are four steps in transforming a time signal into frequency spectrum: A band pass filtering, enveloping, a low pass filtering and a fast Fourier transformation.
 Figure \ref{fig:fft-process} shows a schematic description of the entire process. 
 \justify
@@ -498,7 +525,7 @@ The band pass filter process allows signals within a prescribed frequency band t
   start chain=going below,]
      \node[punktchain, join] (intro) {Signal};
      \node[punktchain, join] (probf)      {Band pass filtering};
-     \node[punktchain, join] (investeringer)      {Hilbert transform'5};
+     \node[punktchain, join] (investeringer)      {Hilbert transform};
      \node[punktchain, join] (perfekt) {Low pass filtering};
      \node[punktchain, join, ] (emperi) {Fast Fourier transform};
      % \node (asym) [punktchain ]  {Asymmetrisk information};
