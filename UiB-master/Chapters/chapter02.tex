@@ -310,16 +310,16 @@ As illustration, let $\xi$ be the mapping that represents a discrete time linear
 \end{equation}
 where $z$ is a complex number, $k$ an integer and $T$ the transfer function of the discrete linear system. In addition, if $\xi$ is stable, meaning that it can be evaluated on the unit circle, ($z = e^{jk\theta}$) then (\ref{eq:lti}) becomes
 \begin{equation}\label{eq:lti1}
-\xi(e^{jk\theta}) = T(e^{j\theta})e^{jk\theta}
+\xi\left(e^{jk\theta}\right) = T\left(e^{j\theta}\right)e^{jk\theta}
 \end{equation}
 where $\theta$ is the phase of the complex number $z$ lying on the unit circle.
 It worth noting that a stable system produces a bounded signal from an input input bounded signal. A desire property in real life application. Moreover, the response of a single frequency component of a sinusoidal $2\cos(\theta k)$ is given by
 \begin{equation}
 	\begin{split}
 	2\xi\left(\cos(\theta k)\right) &= 2\left(\xi\left(e^{jk\theta}\right) +  \xi\left(e^{-jk\theta}\right) \right)\\
-	&= 2\left( T(e^{j\theta})e^{jk\theta} + T(e^{-j\theta})e^{-jk\theta}\right)\\
-	&=2|T(e^{j\theta})|e^{j\theta k}\\
-	&=|T(e^{j\theta})|\cos(k\theta  + \angle(T(e^{j\theta}))
+	&= 2\left( T\left(e^{j\theta}\right)e^{jk\theta} + T\left(e^{-j\theta}\right)e^{-jk\theta}\right)\\
+	&=2|T\left(e^{j\theta}\right)|e^{j\theta k}\\
+	&=|T\left(e^{j\theta}\right)|\cos\left(k\theta  + \angle(T(e^{j\theta})) \right)
 	\end{split}
 \end{equation}
 \justify
