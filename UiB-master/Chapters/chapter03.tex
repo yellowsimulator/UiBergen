@@ -4,32 +4,34 @@
 %%=========================================
 \documentclass[../Main/thesis.tex]{subfiles}
 \begin{document}
-\chapter[Hilbert Huang transform for high frequency pulse detection]{Hilbert Huang transform for high frequency pulse detection}
+\chapter[Hilbert-Huang transform applied to bearing fault detection]{Hilbert-Huang transform for bearing fault detection}
 \label{sec:hht}
 
-Most signal analysis methods such as Fourier transform, impose a-priory basis functions on the signal to be analyzed. In the case of Fourier analysis, the basis functions are trigonometric extensions. Although this implies a rigorous mathematical treatment, the resulting signal decomposition is limited by the mathematical assumptions (\cite{huang98}, \cite{huang08}). Two such assumptions are linearity and stationarity. As most phenomena in nature are non linear and non stationary, this mathematical approach, although rigorous, lacks an important property: Adaptivity (\cite{huang98}, \cite{huang08}). The latter refers to capturing the intrinsic properties of a signal, without imposing a-priory basis functions, (\cite{huang98}, \cite{huang08}). 
+Most signal decomposition methods such as Fourier transform, impose a-priory basis functions on the signal to be analyzed. In the case of Fourier analysis, the basis functions are trigonometric extensions. Although this implies a rigorous mathematical treatment, the resulting signal decomposition is limited by the mathematical assumptions (\cite{huang98}, \cite{huang08}). Limiting not in the sens of its mathematical truthfulness, rater in it ability to capture all intended salient physical properties of the target signal. Two such assumptions are linearity and stationary. As most phenomena in nature are nonlinear and non stationary, this mathematical approach, although rigorous, lacks an important property: Adaptivity (\cite{huang98}, \cite{huang08}). The latter refers to capturing the intrinsic properties of a signal, without imposing a-priory basis functions, (\cite{huang98}, \cite{huang08}). 
 \justify 
-The Hilbert Huang transform (HHT) was precisely developed to deal with non linear and non stationary processes, in an adaptive fashion (\cite{huang98}). It combines Hilbert spectral analysis with the so call empirical mode decomposition (EMD), to adaptively decompose a signal into its fundamental components called intrinsic mode functions (IMF), (\cite{huang98}).
+The Hilbert-Huang transform (HHT) was precisely developed to deal with nonlinear and non stationary processes, in an adaptive fashion (\cite{huang98}). It combines Hilbert spectral analysis with the so call empirical mode decomposition (EMD), to adaptively decompose a signal into its fundamental components called intrinsic mode functions (IMF), (\cite{huang98}).
 The richness of the HHT spans from the analysis of differential equations, to the study of geophysical phenomena, as well as bearings faults detection (\cite{huang08},\cite{li2009}, \cite{yan2006} ,\cite{soualhi2015}, \cite{sallo2019}), and by no mean limited to them.
 \justify
  The HHT has been successful applied to the analysis of solutions of nonlinear differential equations, such as the Duffing and the Lorentz equations. The intrinsic frequency, the forcing function and the low intensity subharmonics of the numerical solutions for the nonlinear Duffing equation has been extracted through the EMD process, (\cite{huang98}).
  \justify
-  The decomposition of the solutions of Lorentz equation, revealed \say{transient components with different frequencies and damping characteristics}, which agreed with previous studies, (\cite{huang98}). The HHT application to seismic waves propagation, made it possible to identified high and low frequency seismic waves (\cite{vasudevan2000}). In particular, its decomposition of the seismic waves induced by the 1999 Taiwan earthquake, revealed that \say{the Fourier transform underestimated low frequency energy} (\cite{huang2001}). 
+  The decomposition of the solutions of Lorentz equation, revealed \say{transient components with different frequencies and damping characteristics}, which agreed with previous studies, (\cite{huang98}). The HHT application to seismic waves propagation, identified high and low frequency seismic waves (\cite{vasudevan2000}). In particular, its decomposition of the seismic waves induced by the 1999 Taiwan earthquake, revealed that \say{the Fourier transform underestimated low frequency energy} (\cite{huang2001}). The Hilbert-Huang transform emerged as a general signal decomposition tool, and in theory can be applied to any signals.
 \justify
-The Hilbert Huang transform emerged as a general signal decomposition tool, and in theory can be applied to any signals.
-This chapter presents a new method for bearing fault detection. The method couples the HHT with a robust seasonal trend decomposition method called STL, to detect bearing faults. STL stands for seasonal trend decomposition based on LOESS. In short, the STL decomposes a target signal into a trend and an oscillatory component also called  seasonality. The trend is a monotone curve, while the seasonality is periodic.
-The bulk of this new method, consists of extracting the seasonality, from the Hilbert Huang transform of a bearing vibration signal. The idea is that the seasonality component which is a pulse like signal, contains all the diagnostic information in terms of bearings failure frequencies.
+
+This chapter presents a new method for bearing fault detection. The method couples the HHT with a robust seasonal trend decomposition method called STL, to detect bearing faults. STL stands for seasonal trend decomposition based on LOESS. In short, the STL decomposes a target signal into a trend and an oscillatory component also called  seasonality. The trend is a monotone curve, while the seasonal components are periodic oscillations.
+The bulk of this new method, consists of first decomposing a target signal into nearly mono components signals with the HHT, then extract their respective seasonal component through the STL. Moreover, the energy distribution of the frequency component of the seasonal component are computed. The latter is the so called power spectral density 
+\justify
+The ideas is that the power spectral density of the resulting seasonal component will generate conspicuous frequency peaks from which bearing failure frequencies can be identify. 
 \justify
 After giving an esquisse of the new method, the remaining of this chapter is organized in the following manner:
- Section \ref{sec:emd} presents the empirical mode decomposition (EMD), which is the back bone of the Hilbert Huang transform for decomposing a signal adaptively.
- Section \ref{sec:pulse}, through a concrete case study, shows that the HHT, coupled with the STL, are able to recover the high frequency pulse like signals, emitted by bearing defects. The section starts by recalling the characteristics of two bearing faults: The outer race defect and the inner race defect. Furthermore, the experiments that generated the data for this case study are described. Afterwards, the seasonal trend decomposition based on LOESS (STL) is presented, followed by a description of the proposed method for bearing fault detection. Finally, the results of the application to the case study are presented. In closing, section \ref{sec:limitation} presents a summary and discussion of the proposed new method.
+ Section \ref{sec:emd} presents the empirical mode decomposition (EMD), which is the back bone of the Hilbert-Huang transform for decomposing a signal adaptively.
+ Section \ref{sec:pulse}, through a concrete case study, shows that the HHT, coupled with the STL, are able to generate a signal whose power spectral density.... The section starts by recalling the characteristics of two bearing faults: The outer race defect and the inner race defect. Furthermore, the experiments that generated the data for this case study are described. Afterwards, the seasonal trend decomposition based on LOESS (STL) is presented, followed by a description of the proposed method for bearing fault detection. Finally, the results of the application to the case study are presented. In closing, section \ref{sec:limitation} presents a summary and discussion of the proposed new method.
 \justify
 
 
 
  
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \section{Hilbert Huang transform}
+ \section{The Hilbert-Huang transform}
  \label{sec:emd}
   The empirical mode decomposition (EMD), decomposes a given signal into sub-components call intrinsic mode functions (IMFs), such that every IMF produces physically meaningful amplitude and frequency modulation, (\cite{huang98}).
  For a target signal $S(t)$, the goal is to obtained its $n$ fundamental parts (IMFs), denoted here by $s_{j}, j =1,\cdots,n$, through the empirical mode decomposition, such that
