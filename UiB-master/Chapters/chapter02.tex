@@ -300,28 +300,44 @@ The Fourier transform not only computes the frequency spectrum of a signal. It i
 \subsection{Digital filters and Hilbert transform}
 \label{sec:hilbert-transform}
 \subsubsection{Filter}
-A digital filter can be defined as a dynamic system in general, and in particular as a discrete time system, that removes undesirable part of a signal such as noise, or extracts desirable components that reside within certain frequency ranges (band). The input signal to the system is some time refer to as the excitation, while the output is called the response. To be more specific, the discrete time system is a mathematical function that maps the input signal to the output. Furthermore, a discrete time system operates on discrete time signals.
+A digital filter can be defined as a dynamic system in general, and in particular a discrete time system, that removes undesirable part of a signal such as noise, or extracts desirable components that reside within certain frequency ranges (band). The input signal to the system is some time refer to as the excitation, while the output is called the response. To be more specific, the discrete time system is a mathematical function that maps the input signal to the output. Furthermore, a discrete time system operates on discrete time signals.
 \justify
-A digital filter is characterized by its frequency response, which when known, completely defines the output signal frequency and phase variation. The frequency response is also defined as the transfer function of the system evaluated on the unit circle. The transfer function is the function that gives the relationship between the output signal produced by the filter and the input signal.
+A digital filter is characterized by its frequency response, which when known, completely defines the output signal frequency and phase variation. The frequency response is also defined as the transfer function of the system evaluated on the unit circle. The transfer function is the function that gives the relationship between the output signal produced by the filter, and the input signal.
 \justify
-As illustration, let $\xi$ be the mapping that represents a discrete time linear system. Then by the eigenfunction property, 
+As illustration, let $\xi$ be the mapping that represents a discrete time linear system. From the eigenfunction property, 
 \begin{equation}\label{eq:lti}
 	\xi(z^{k}) = T(z)z^{k}
 \end{equation}
-where $z$ is a complex number, $k$ an integer and $T$ the transfer function of the discrete linear system. In addition, if $\xi$ is stable, meaning that it can be evaluated on the unit circle, ($z = e^{jk\theta}$) then (\ref{eq:lti}) becomes
+where $z$ is a complex number, $k$ an integer, and $T(\cdot)$ the transfer function of the discrete linear system. In addition, if $\xi$ is stable, meaning that it can be evaluated on the unit circle, ($z = e^{jk\theta}$) then (\ref{eq:lti}) becomes
 \begin{equation}\label{eq:lti1}
 \xi\left(e^{jk\theta}\right) = T\left(e^{j\theta}\right)e^{jk\theta}
 \end{equation}
 where $\theta$ is the phase of the complex number $z$ lying on the unit circle.
-It worth noting that a stable system produces a bounded signal from an input input bounded signal. A desire property in real life application. Moreover, the response of a single frequency component of a sinusoidal $2\cos(\theta k)$ is given by
-\begin{equation}
+It is worth noting that a stable system produces a bounded signal from an input bounded signal, which is a desire property in real life applications. Moreover, the response of a single frequency component of the sinusoidal $2\cos(\Omega k)$, with phase $\Omega$ is given by
+\begin{equation}\label{eq:frs}
 	\begin{split}
-	2\xi\left(\cos(\theta k)\right) &= 2\left(\xi\left(e^{jk\theta}\right) +  \xi\left(e^{-jk\theta}\right) \right)\\
-	&= 2\left( T\left(e^{j\theta}\right)e^{jk\theta} + T\left(e^{-j\theta}\right)e^{-jk\theta}\right)\\
-	&=2|T\left(e^{j\theta}\right)|e^{j\theta k}\\
-	&=|T\left(e^{j\theta}\right)|\cos\left(k\theta  + \angle(T(e^{j\theta})) \right)
+	2\xi\left(\cos(\Omega k)\right) &= 2\left(\xi\left(e^{jk\Omega}\right) +  \xi\left(e^{-jk\Omega}\right) \right)\\
+	&= 2\left( T\left(e^{j\Omega}\right)e^{jk\Omega} + T\left(e^{-j\Omega}\right)e^{-jk\Omega}\right)\\
+	&=2|T\left(e^{j\Omega}\right)|e^{j\Omega k}\\
+	&=\left\vert T\left(e^{j\Omega}\right)\right\vert\cos\left(k\Omega  + \angle T\left(e^{j\Omega}\right) \right)
 	\end{split}
 \end{equation}
+where $\angle T\left(e^{j\Omega}\right)$ is the angle of the frequency response  and $\left\vert T\left(e^{j\Omega}\right)\right\vert$ is the amplitude response. The observation that can be  made from equation (\ref{eq:frs}) is that, the response of a single phase sinusoidal function, is given by the amplitude of the frequency response, and the sum of the phase $k\Omega  + \angle T\left(e^{j\Omega}\right)$. In retrospect, equation (\ref{eq:lti1}) says that the frequency response of a filter, completely determined the excitation of an input signal.
+\justify
+In this thesis, the Butterworth filter is used in the implementation of the high frequency resonance technique. This filter tends to approximate an ideal one, which \say{should not only completely reject the unwanted frequencies (stopband) but should also have uniform sensitivity for the wanted frequencies (passband)} (\cite{butterworth1930}). Uniform sensitivity for the wanted frequencies means that, the wanted frequency band should be \say{flat}. As a low pass filter, the frequency response of the Butterworth filter in terms of frequency $\omega$ is given by    
+
+\begin{equation}
+	T(\omega) = \frac{1}{\sqrt{1 +\left( \frac{\omega}{\omega_{c}} \right)^(2n)}}
+\end{equation}
+where n is the order of the filter and $\omega_{c}$ is called cutoff frequency, and segregates the passband and the stopband. This low pass filter is the building block of other filters type(bandpass, highpass and so on). Figure \ref{fig:butterworth} shows the graph of a normalized Butterworth amplitude response in with respect to the angular frequency $\omega$, with cutoff frequency $\omega_{c} = 1$. As a low pass filter, the passband region includes frequency range from 0 to 1 radian per second. In this region, as the filter order $n$ increases, the passband region converges to a flat curve, and the amplitude response converges to a step function.   
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{../fig/butterworth}
+	\caption{}
+	\label{fig:butterworth}
+\end{figure}
+
 \justify
 \subsubsection{Hilbert transform}
 The Hilbert transform is an integral transform, first introduced by David Hilbert to solve integral equations in mathematical physics (\cite{gabor1982}). Its physical interpretation is equivalent to a special kind of linear filter, which shift a signal spectral component phase by $\frac{\pi}{2}$, while keeping its amplitude unchanged (\cite{feldman2010}). This is the physical meaning behind expressing the Hilbert transform of a signal as its convolution with the function $\frac{1}{\pi t}$ (\cite{feldman2010}). 
@@ -430,7 +446,7 @@ and the pair $a(t)$, $e^{i \Psi(t)}$ are spectrally disjoint.
 \justify
  To address the issue faced by the Hilbert transform for non mono-component signals, the Hilbert-Huang transform was developed. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense. Therefore, the Hilbert Huang transform adds value to the Hilbert transform, and both make it possible to correctly tackle problems with frequency and amplitude modulation. A concise exposition of the Hilbert-Huang transform is given in chapter 3, where it is applied in a proposed new method, for bearing fault detection. 
 \justify
-To sum up: The Hilbert transform acts as a linear filter in the frequency domain, where it imposes a phase shift to every Fourier component. In the time domain, it extends a real valued function to a complex function which is an analytic signal. The imaginary part of the latter is the Hilbert transform of the original signal. By using the analytic signal, the instantaneous frequency and the instantaneous amplitude of the original signal is derived. To have a meaning instantaneous amplitude and frequency, the original signal must be a mono-component signal, meaning that it must not be the superposition of signals. The Hilbert Huang transform, makes it possible to decompose any signal to a set of (nearly) mono-components signals called intrinsic mode function. Thus, the Hilbert transform, coupled with the Hilbert Huang transform provide a complete set of tools, in analyzing frequency and amplitude modulated signals.
+So much of what as been said concerning the Hilbert transform can be summarized as follow: The Hilbert transform acts as a linear filter in the frequency domain, where it imposes a phase shift to every Fourier component. In the time domain, it extends a real valued function to a complex function which is an analytic signal. The imaginary part of the latter is the Hilbert transform of the original signal. By using the analytic signal, the instantaneous frequency and the instantaneous amplitude of the original signal is derived. To have a meaning instantaneous amplitude and frequency, the original signal must be a mono-component signal, meaning that it must not be the superposition of signals. The Hilbert Huang transform, makes it possible to decompose any signal to a set of (nearly) mono-components signals called intrinsic mode function. Thus, the Hilbert transform, coupled with the Hilbert Huang transform provide a complete set of tools, in analyzing frequency and amplitude modulated signals.
   
 
 
@@ -512,13 +528,11 @@ The bearing type used in this case study are manufactured by the company Rexnord
 \subsection{The high frequency resonance technique application to bearing failure detection}
 \label{sec:method}
 The high frequency resonance technique is made of series of transformations aiming at, in one hand signal filtering, and on the other hand detecting incipient bearing failure. The latter relies on the former, as it reveals hidden failure characteristics.
-
- whose goal is to extract frequency component from a time signal.
-There are four steps in transforming a time signal into frequency spectrum: A band pass filtering, enveloping, a low pass filtering and a fast Fourier transformation.
+the hight frequency resonance technique is made of four basic steps: The input vibration signal is bandpassed, Hilbert transformed, low passed and finally fast Fourier transformed. 
 Figure \ref{fig:fft-process} shows a schematic description of the entire process. 
 \justify
-The band pass filter process allows signals within a prescribed frequency band to seep through, while attenuating non essential signals. The band of allowed frequencies is bounded bellow and above by two parameters: The low cut-off frequency and the high cut-off frequency, respectively. In this application a low cut-off frequency of 2000 Hz and a high cut-off frequency of 9990 Hz were used.
-%The intent is to only capture bearing vibration signal and ignore any other. Once this done, the demodulation extract the high frequency time domain signal and a low pass filter extract the low frequency. The Fast Fourier transform is then applied to the time domain signal to generate the frequency spectrum.
+The band pass filter process allows signals within a prescribed frequency band to seep through, while attenuating non essential components. This passband comprises typically bearing failure frequencies. The band of allowed frequencies is bounded bellow and above by two parameters: The low cut-off frequency and the high cutoff frequency, respectively. In this application a low cutoff frequency of 2000 Hz and a high cutoff frequency of 9990 Hz were applied.
+The Hilbert transform extract high amplitude or envelop of the bandpassed signal. Since the Bearing frequencies are within the lower end of the frequency spectrum, the Butterworth lowpass filter is applied to capture them. The Fast Fourier transform is then applied to transform the resulting time signal to its corresponding frequency spectrum, where potential bearing failure frequencies can be observed
 \begin{figure}[H]
 \begin{tikzpicture}
   [node distance=.8cm,
@@ -556,7 +570,7 @@ The band pass filter process allows signals within a prescribed frequency band t
 % After the enveloping process, the resulting signal is low pass filtered in order to remove the high frequency resonance components, leaving only the signal component that contain the bearing failure frequencies. Finally, the fast Fourier transform is applied on the filtered signal to obtain the frequency spectrum.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Ball pass outer race defect frequency detection}
+\subsubsection{Ball pass outer race(BPFO) defect frequency detection}
 %
 \begin{figure}[H]
 	\centering
@@ -597,7 +611,7 @@ Harmonics are evenly spaced frequency peaks that are integer multiple of the bal
 \end{figure}
 \clearpage
 
-\subsubsection{Ball pass inner race defect frequency detection}
+\subsubsection{Ball pass inner race (BPFI) defect frequency detection}
 Recall that in experiment 1, four bearings were run to failure, and at the end of the experiment, inner race defect occurred in bearing number 3. Figure \ref{fig:bpfi_signal} shows the vibration signals of bearing number 3, at the beginning (top) and at the end (bottom) of the experiment.
 \begin{figure}[H]
 	\centering
@@ -615,7 +629,7 @@ Recall that in experiment 1, four bearings were run to failure, and at the end o
 	\label{fig:bpfi_density}
 \end{figure}
 \justify
-It is clear that the variance of the time signal had increased significantly. This can be seen from the density plot in Figure \ref{fig:bpfi_density}, where the distribution of the signal at the end of the experiment exhibits a pronounced wide tail. In fact, the variance had increased 41 time its initial value. The frequencies spectrum at the beginning (top) and at the end (bottom) of the experiment can be seen in Figure \ref{fig:bpfi}. The frequency spectrum at the beginning of the experiment does not contain any high peaks frequencies. It is completely \say{clean}. This means that the bearing is relatively \say{healthy}.
+It is clear that the variance of the time signal had increased significantly. This can be seen from the density plot in Figure \ref{fig:bpfi_density}, where the distribution of the signal at the end of the experiment exhibits a pronounced wide tail. In fact, the variance had increased by 41 times its initial value. The frequencies spectrum at the beginning (top) and at the end (bottom) of the experiment can be seen in Figure \ref{fig:bpfi}. The frequency spectrum at the beginning of the experiment does not contain any high peaks frequencies. It is completely \say{clean}. This means that the bearing is relatively \say{healthy}.
 \justify
 However, at the end of the experiment, the frequency spectrum exhibits a ball pass inner race frequency and form sidebands together with surrounding peaks.
 Sidebands are series of (almost) evenly spaced frequency peaks, centered around a center peak called carrier (\cite{mobius2014}).
@@ -628,7 +642,10 @@ They are result of amplitude modulation between the shaft frequency and the ball
 	\label{fig:bpfi}
 \end{figure}
 \justify
-The high frequency resonance technique applied to inner race defect detection, can produce a confusion spectrum, with pattern of spectral line changing (\cite{mcfadden1984a}). This make identifying inner race defect difficult in situation where the defect is pronounced. In those cases the defect frequency values can vary up to $2\%$ (\cite{randal2010}). Although the rotating speed of the machine is set as a constant value, in practice however, there is always small variations, that will also generate a variation in the theoretical value of the frequency defect.
+The high frequency resonance technique applied to inner race defect detection, can produce a confusion spectrum, with pattern of spectral line changing (\cite{mcfadden1984a}). This make identifying inner race defect difficult in situation where the defect is pronounced. In those cases the defect frequency values can vary up to $2\%$ (\cite{randal2010}). Although the rotating speed of the machine is set as a constant value, in practice however, there is always small variations, that will also generate a variation in the theoretical value of the frequency defect. As can be seen from Figure \ref{fig:bpfi}, the frequency spectrum is some how noisy. This is one of the characteristics of the inner race defect when the defect is pronounced ((\cite{mcfadden1984a})). A noisy spectrum can render difficult the detection of failure frequencies.
+\justify
+In the next chapter a new method is presented in order to tackle the issue of noisy spectrum. As the high frequency resonance technique, through a series of transformation, a noiseless frequency spectrum is generated. As a result,  failure frequencies as well as informative machine characteristics are conspicuously displayed.
+
 
 
 \clearpage
@@ -640,7 +657,7 @@ The diagnostic information for bearing fault detection resides in the high frequ
 \justify
 The latter uses a series of filtering operations, aiming at isolating the bearing signal containing the failure frequencies. Furthermore, the frequency spectrum is extracted from the time signal through Fourier transform. If defects are initiated, the frequency spectrum will contain the defects frequencies. Although efficient, the high frequency resonance technique is only valid within the boundary of the assumptions upon which it is predicated. 
 \justify
-Due to slip of the roller elements in the bearing, the failure frequencies values can vary up to 2$\%$ from their theoretical values, or even more. In addition, bearing signal are relatively non periodic and stochastic in nature. Consequently, non-stationarity and non-linearity can be observed in bearing signal. The dependency of the failure frequency on the rotation speed of the machine shaft is also a limiting factor. For unknown or inaccurate rotation speed, the detection of failure become unreliable, or even impossible. The need for alternative methods for bearing fault detection is therefore justified and imperative. In particular, method that does not only rely on the frequency spectrum are important. In the next chapters, such methods are presented.
+Due to slip of the roller elements in the bearing, the failure frequencies values can vary up to 2$\%$ from their theoretical values, or even more. In addition, bearing signal are relatively non periodic and stochastic in nature. Consequently, non-stationarity and non-linearity can be observed in bearing signal. When inner race defects are pronounced, the frequency spectrum can contain a considerable amount of noise, rendering difficult failure detection. The need for alternative methods for bearing fault detection is therefore justified and imperative. In the next chapter, a new method which addresses some of the aforementioned issues is proposed.
 
 
 
