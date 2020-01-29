@@ -93,7 +93,7 @@ where this time, the amplitude $a_{j}$ and the frequency $\omega_{j}$ are consta
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Application for bearing fault detection: a case study}
+\section{Application to bearing fault detection: a case study}
 \label{sec:pulse}
 In this section, the proposed new method is applied to a case study, in order to demonstrate its ability in detecting bearing failure. As a reminder, Figure \ref{fig:bearing-architecture} shows a geometry of a bearing, with different parts.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
@@ -123,48 +123,27 @@ If $s(t)$ is a signal, the goal is to obtained the decomposition
 s(t) = T_{r}(t) + C_{y}(t) + R_{res}(t),
 \end{equation} 
 where $T_{r}(t)$ an $C_{y}(t)$ are the trend and cyclical components, and $R_{res}(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatterplot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. It therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. A detailed account of the STL can be found in  (\cite{Cleveland-et-al-1990}).
-
 \justify
-%By design, the STL is computational efficient, robust in the sense that it uses a robust statistical estimator, and deals very well with missing and distorted data points (\cite{Cleveland-et-al-1990}). In the subsequent paragraphs, an account of the LOESS procedure is presented.
-%\justify
-%Given a signal represented by a set of $n$ points, conveniently expressed by their coordinates
-%\begin{equation}
-%\{ (t_{j}, y_{j}), \quad j = 1, \cdots, n\},
-%\end{equation}
-%where $t_{j}$ is the independent variable on the time scale, and $y_{j}$ is the dependent variable. The LOESS procedure finds a smooth function $\hat{g}(t)$, defined everywhere on the scale of the independent variable, such that the estimate of $y_{j}$ denoted by $\hat{y}_{j}$ at $t_{j}$ is computed as 
-%\begin{equation}
-%\begin{split}
-%\hat{y}_{j} &= \hat{g}(t_{j}) \\
-%                &=\sum_{k=0}^{d}\hat{\alpha}_{k}(t_{j})t_{j}^{k}
-%\end{split}
-%\end{equation}
-%where the $\hat{\alpha}_{k}(t_{j})$ are the values $\alpha_{k}$ that minimize 
-%\begin{equation}
-%\sum_{k=1}^{n}w_{k}(t_{j})\left(y_{k}-\alpha_{0}-\alpha_{1}t_{k}-\cdots -\alpha_{d}t_{k}^{d}\right)^{2}
-%\end{equation}
-%with 
-%\begin{equation}
-%w_{k}(t_{j}) = W\left( \frac{t_{k}-t_{j}}{h_{j}} \right)
-%\end{equation}
-%
-%\begin{equation}
-%W(t) = 
-%  \begin{cases}
-%  \left(1-t^{3}\right)^{3} &\quad\text{for } 0\leq t \le 1\\
-%   0 &\quad\text{for} t\geq 1
-% \end{cases}
-%\end{equation}
-%and $h_{j}$ is the distance from $t_{j}$ to the nearest neighbor of $t_{j}$. 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Loess
+
 \subsection{Results }
 In this section we apply the empirical mode decomposition followed by the seasonal trend decomposition based on LOESS to extract pulses emitted by a failed bearing.
-Figure \ref{fig:pulse} shows a flow diagram, describing the methodology to obtaining pulse signals emitted from a bearing with ball pass frequency outer race defect. An input signal goes through the empirical mode decomposition to generate intrinsic mode functions. Furthermore, the STL is applied on the intrinsic mode functions to generate a periodic signal which looks like a pulse.
-
+Figure \ref{fig:pulse} shows a flow diagram, describing the methodology to obtaining pulse signals emitted from a bearing with ball pass frequency outer race defect. An input signal goes through the empirical mode decomposition to generate intrinsic mode functions. Furthermore, the STL is applied on the intrinsic mode functions to generate a periodic signal which looks like a pulse. And finally, the power spectral density of the resulting signal is approximated by the periodogram method.
+\justify
+The power spectral density is technically the power or energy distribution of the autocovariance function (ACF) frequency spectrum. (\cite{stoica2004}). The autocovariance function of a signal $s(t)$ is defined by 
+\begin{equation}
+	ACF(s(t)) = E\left[ s^{*}(t)s(t-k) \right] = COV\left(s(t), s^{*}(t-k)\right)\quad k = 0,1, \cdots
+\end{equation}
+where $E(\cdot)$ is the expectation or mean, COV($\cdot$) is the covariance and $s^{*}(t)$ is the complex conjugate of $s(t)$. The covariance of the signal $s(t)$ and its complex conjugate measures their joint variability. Thus the autocovariance function is a sequence of covariance between the signal and its complex conjugate. Now, the power spectrum density (PSD) of a signal s(t) can be defined by (\cite{stoica2004})
+\begin{equation}\label{eq:psd}
+	PSD\left(s(t)\right) = E\left[ \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-iwt}\right\vert^{2}   \right]
+\end{equation}
+where $N$ is a large integer, $i=\sqrt{-1}$, $E(\cdot)$ is the expected value, and $\omega$ is the angular frequency. The estimation $\widehat{PSD}$
+\begin{equation}
+		\widehat{PSD}\left(s(t)\right) =  \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-iwt}\right\vert^{2}
+\end{equation}
+of the power spectral density in equation (\ref{eq:psd}) is called the periodogram.
 \begin{figure}[H]
 \begin{tikzpicture}
   [node distance=.8cm,
@@ -189,28 +168,28 @@ Figure \ref{fig:pulse} shows a flow diagram, describing the methodology to obtai
    \label{fig:pulse}
 \end{figure}
 \justify
-The power spectral density of the resulting signal is approximated by a periodogram, which is the representation of the energy distribution of the most compelling frequency components in the signal. Recall that the power spectral density is the energy distribution of frequencies of a signal. The periodogram shows peaks that correspond to strong sinusoidal components. Some of the strong sinusoidal components that we expect to see are the bearing defect frequencies and the rotation frequency of the machine shaft.
+Figure \ref{fig:imf} shows the first, seventh and twelfth IMF of an input vibration signal for a bearing. As the IMF number increases, the corresponding frequency decreases. Thus, high frequency IMFs contain more information then low frequency one. Figure \ref{fig:emd-stl} shows  the input vibration signal (top), its fifth IMF (middle) and its seasonal component (bottom) obtained by applying the seasonal trend decomposition by LOESS (STL).   
+\justify
+The seasonal part of the fifth IMF is periodic and has a pulse like configuration. This is consistent with a bearing having a fault located in the inner ring. As the bearing rotates, when the bearing roller elements (balls) strike the faulty area, the amplitude increase rapidly, before decaying. This process is repeated throughout the bearing operation state, and is well captured by the proposed method. The pulses obtained represent the signal emitted by the faulty bearing.
 
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
 	\centering
-	\includegraphics[width=6in]{../fig/selected_imf.png} 
+	\includegraphics[width=8in]{../fig/selected_imf.png} 
 	\caption{Intrinsic mode function number 1, 7 and 12, generated by the empirical mode decomposition}
 	\label{fig:imf}
 \end{figure}
 \justify
-Figure \ref{fig:imf} shows three selected intrinsic mode functions (IMFs) generated by the empirical mode decomposition. The first IMF is a high frequency signal, while IMF number 7 and 12 are relatively low frequencies signals.
+
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=6in]{../fig/emd-stl.png} 
+   \includegraphics[width=8in]{../fig/emd-stl.png} 
    \caption{ A pulse signal extracted by applying EMD followed by STL. The top graph represents the vibration time signal. The middle graph is the fifth intrinsic mode function. The bottom graph is the signal resulting from applying the STL on the IMF. The pulses represents the periodic high frequency signal emitted by bearings defects.}
    \label{fig:emd-stl}
 \end{figure}
 \justify
-Figure \ref{fig:emd-stl} shows, the result from applying the EMD and the STL to an input signal. The top graph represents the input vibration signal. The middle graph shows the fifth intrinsic mode function obtained from applying the Hilbert Huang transform. The bottom graph is a signal resulting from applying the STL on the fifth intrinsic mode function. It is a periodic pulse like signal.
+The following sections bellow, show the periodogram, which is the estimation of the power spectral density, of the first intrinsic mode function of faulty bearing. The aim is to identify faulty frequency in the outer and inner ring of a defect bearing.
 
 \subsubsection{Ball pass frequency outer race detection} 
-%The middle graph shows the fifth intrinsic mode function generated from applying the EMD on the input signal. This IMF shows patterns.
-%This is precisely what is require to capture a pulse, which can be viewed as a periodic emanation of an event such as a bearing ball passing a crack.
  \begin{figure}[H]
  	\centering
  	\includegraphics[width=0.8\linewidth]{../fig/periodogram_bpfo/start_imf1_bpfo}
@@ -219,14 +198,16 @@ Figure \ref{fig:emd-stl} shows, the result from applying the EMD and the STL to 
  	\label{fig:startimf1bpfo}
  \end{figure}
 \justify
-Figure \ref{fig:startimf1bpfo} shows the periodogram of the pulse signal of the first IMF obtained at the beginning (top) and at the end of experiment number 2. The shaft frequency (33 Hz) and its first and second harmonics are clearly visible.
-The ball pass outer race frequency defect (236.4 Hz) and its first harmonic are also visible. An increase in energy is also noticeable at the end of the experiment, suggesting that the bearing degradation is pronounced.
+Figure \ref{fig:startimf1bpfo} shows the periodogram of the seasonal component from the first IMF obtained at the beginning (top) and at the end of experiment number 2. The periodogram shows conspicuous frequency peaks. At the beginning, the ball pass outer race frequency defect (236.4 Hz) is visible with a relatively low amplitude. At the end, there is a relatively high increase in the outer race frequency defect, showing an increase in the severity of the damage incurred by the bearing.
 \justify
-The difference between the theoretical value of the ball pass outer frequency defect (236.4 Hz) and the one on the periodogram (236.03 Hz) is about 0.16$\%$. While the difference between the theoretical shaft frequency (33.33 Hz) and the on the periodogram (33.63 Hz) is about 0.9 $\%$. This shows that the proposed method is quit accurate in detecting important diagnosis information from the vibration signal.
+In addition, the rotating speed (33.3Hz) of the machine shaft is visible in both cases. Harmonics of the defect frequency ar also visible. And the magnitude of the harmonics have also increased, as the bearing defect is accentuated. Recall that harmonics are characteristics of bearing outer race defect, and they are integer multiple of the defect frequency (236.4 Hz) and machine speed (33.3).
+
+\justify
+The difference between the theoretical value of the ball pass outer frequency defect (236.4 Hz) and the one from the periodogram (236.03 Hz) is about 0.16$\%$. While the difference between the theoretical shaft frequency (33.33 Hz) and the on the periodogram (33.63 Hz) is about 0.9 $\%$. This shows that the proposed method is quit accurate in detecting important diagnostic information from the vibration signal.
 \justify
 In general, the pulse signals extracted from the intrinsic mode functions through the STL method, had more diagnosis information for the fist two IMFs. This can been seen in Figure \ref{fig:startimf2bpfo}, which shows the periodogram of the pulse signals extracted from the second intrinsic mode function, at the beginning and at the end of experiment 2. At the end of the experiment, the energy of the ball pass outer race defect and its harmonic increased.
 \justify
-The highest intrinsic mode functions contain mostly the shaft rotation speed and sometimes its harmonics. This can been seen in Figure \ref{fig:startimf8shaft} which shows the Peridogram of the pulse signals obtained from IMF number 8, at the beginning (top) and at the end (bottom) of experiment number 2.
+%The highest intrinsic mode functions contain mostly the shaft rotation speed and sometimes its harmonics. This can been seen in Figure \ref{fig:startimf8shaft} which shows the Peridogram of the pulse signals obtained from IMF number 8, at the beginning (top) and at the end (bottom) of experiment number 2.
 
  \begin{figure}[H]
 	\centering
