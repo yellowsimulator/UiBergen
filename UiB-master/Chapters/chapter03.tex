@@ -16,15 +16,12 @@ The richness of the HHT spans from the analysis of differential equations, to th
  \justify
   The decomposition of the solutions of Lorentz equation, revealed \say{transient components with different frequencies and damping characteristics}, which agreed with previous studies, (\cite{huang98}). The HHT application to seismic waves propagation, identified high and low frequency seismic waves (\cite{vasudevan2000}). In particular, its decomposition of the seismic waves induced by the 1999 Taiwan earthquake, revealed that \say{the Fourier transform underestimated low frequency energy} (\cite{huang2001}). The Hilbert-Huang transform emerged as a general signal decomposition tool, and in theory can be applied to any signals.
 \justify
-
-This chapter presents a new method for bearing fault detection. The method couples the HHT with a robust seasonal trend decomposition method called STL, to detect bearing faults. STL stands for seasonal trend decomposition based on LOESS. In short, the STL decomposes a target signal into a trend and an oscillatory component also called  seasonality. The trend is a monotone curve, while the seasonal components are periodic oscillations.
-The bulk of this new method, consists of first decomposing a target signal into nearly mono components signals with the HHT, then extract their respective seasonal component through the STL. Moreover, the energy distribution of the frequency component of the seasonal component are computed. The latter is the so called power spectral density 
+This chapter presents a new method for bearing fault detection. Its couples the HHT with a robust seasonal trend decomposition method called STL, to detect bearing faults. STL stands for seasonal trend decomposition based on LOESS. In short, the STL decomposes a target signal into a trend and oscillatory components also called  seasonality. The trend is a monotone curve, while the seasonal components are periodic oscillations with a constant period.
 \justify
-The ideas is that the power spectral density of the resulting seasonal component will generate conspicuous frequency peaks from which bearing failure frequencies can be identify. 
+The bulk of this new method, consists of decomposing a target signal into (nearly) mono components signals with the HHT. Furthermore, their respective seasonal components are extracted through the STL. Moreover, the power spectral density of the resulting seasonal component will generate conspicuous frequency peaks, from which bearing failure frequencies can be identified.
 \justify
 After giving an esquisse of the new method, the remaining of this chapter is organized in the following manner:
- Section \ref{sec:emd} presents the empirical mode decomposition (EMD), which is the back bone of the Hilbert-Huang transform for decomposing a signal adaptively.
- Section \ref{sec:pulse}, through a concrete case study, shows that the HHT, coupled with the STL, are able to generate a signal whose power spectral density.... The section starts by recalling the characteristics of two bearing faults: The outer race defect and the inner race defect. Furthermore, the experiments that generated the data for this case study are described. Afterwards, the seasonal trend decomposition based on LOESS (STL) is presented, followed by a description of the proposed method for bearing fault detection. Finally, the results of the application to the case study are presented. In closing, section \ref{sec:limitation} presents a summary and discussion of the proposed new method.
+ Section \ref{sec:emd} presents the empirical mode decomposition (EMD), which is the back bone of the Hilbert-Huang transform for decomposing a signal adaptively. Section \ref{sec:pulse}, through a concrete case study, demonstrates the efficiency of the new method. It starts by recalling the characteristics of bearing faults such as outer race defect and inner race defect. Furthermore, the experiments that generated the data for this case study are described. Afterwards, the seasonal trend decomposition based on LOESS (STL) is presented, followed by a description of the proposed method for bearing fault detection. Finally, the results of the case study are presented. In closing, section \ref{sec:limitation} presents a summary and discussion of the proposed new method.
 \justify
 
 
@@ -33,10 +30,12 @@ After giving an esquisse of the new method, the remaining of this chapter is org
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \section{The Hilbert-Huang transform}
  \label{sec:emd}
-  The empirical mode decomposition (EMD), decomposes a given signal into sub-components call intrinsic mode functions (IMFs), such that every IMF produces physically meaningful amplitude and frequency modulation, (\cite{huang98}).
- For a target signal $S(t)$, the goal is to obtained its $n$ fundamental parts (IMFs), denoted here by $s_{j}, j =1,\cdots,n$, through the empirical mode decomposition, such that
+ The Hilbert-Huang transform, is the amalgam of the empirical mode decomposition (EMD) and the Hilbert transform.
+  The former decomposes a target signal into (nearly) mono component signals, call intrinsic mode functions (IMFs), while the latter enables the extension of a real valued signal to its complex counterpart. Together, the empirical mode decomposition and the Hilbert transform, form the basis for accurately (in the physical and mathematical sens), analyzing amplitude and frequency modulated signal in one hand (\cite{huang98}), and on the other hand, complex signals in general.
+\justify
+ For a target signal $s(t)$, the goal is to obtained its $n$ fundamental parts (IMFs), denoted here by $s_{j}, j =1,\cdots,n$, through the empirical mode decomposition, such that
 \begin{equation}\label{eq:emd-decomposition}
-S(t) = \sum_{j=1}^{n}s_{j}(t) + r(t),
+s(t) = \sum_{j=1}^{n}s_{j}(t) + r(t),
 \end{equation}
 where $r(t)$ is the residual, which is either a constant or a monotone function. The derivation of the intrinsic mode functions $s_{j}$, by means of the empirical mode decomposition, relies on the following key assumptions.
 \begin{definition}\label{def:emd}
@@ -46,15 +45,13 @@ An intrinsic mode function (IMF) must satisfy the following conditions:
 \item At any data point, the mean value of the envelope defined using the local maxima and the envelope defined by using the local minima is zero.
 \end{enumerate}
 \end{definition}
-The empirical mode decomposition is an iterative algorithm that generates intrinsic mode functions, each satisfying definition \ref{def:emd}.
-\justify
-The empirical mode decomposition can be described as follow:
+The empirical mode decomposition is an iterative algorithm that generates intrinsic mode functions, each satisfying definition \ref{def:emd}. It can be described as follow:
 \begin{enumerate}
-	\item Compute the upper and the lower envelope curve of the target signal $S(t)$
-	\item In the first iteration $i=1$, compute the mean $m_{i}(t)$ between the upper and the lower envelope cure of $S(t)$
-	\item Compute the fist pseudo IMF as 
+	\item Compute the upper and the lower envelope curve of the target signal $s(t)$
+	\item In the first iteration ($i=1$), compute the mean $m_{i}(t)$ between the upper and the lower envelope cure of $s(t)$
+	\item Compute the first (pseudo) IMF as 
 	\begin{equation}\label{eq:proto}
-		h_{i1}(t) = S(t)-m_{i}(t).
+		h_{i1}(t) = s(t)-m_{i}(t).
 	\end{equation}
 	If $h_{i1}$ satisfies definition \ref{def:emd}, then it is an IMF and it is denoted by 
 	\begin{equation}\label{eq:imf}
@@ -65,7 +62,7 @@ The empirical mode decomposition can be described as follow:
 	\item Set $h_{i1}(t)$ as the input signal and repeat step 1,2 and 3, $k$ time, until $h_{ik}(t)$ satisfies definition \ref{def:emd}.
 	\item After finding the first IMF, set the first IMF as input signal and repeat step 1,2,3 and 4 to obtain the remaining IMFs. If an IMF is monotone, set it as the residual and you are done.
 \end{enumerate}
-Figure \ref{fig:emd3} shows the the signal  $S(t) = \sin(10 \pi t) + \sin(20 \pi t) $ (top) and its IMFs as well as the residual. In most function approximation methods, a set of basis functions $\varphi_{j}(t), j = 1,\cdots,n$ coupled with coefficients $a_{j}$, are used to decomposing a function $f(t)$ as 
+ In most function (signal) decomposition methods, a set of predefined $n$ basis functions denote here by $\varphi_{j}(t), j = 1,\cdots,n$, coupled with coefficients $a_{j}$, are used to decomposing a function, say $f(t)$ as 
 \begin{equation}\label{eq:basis}
 	f(t) = \sum_{j=1}^{n}a_{j}\varphi_{j}(t).
 \end{equation}
@@ -73,30 +70,32 @@ However, the Hilbert Huang transform will decompose $f(t)$ as
 \begin{equation}\label{eq:hht1}
 f(t) = \sum_{j=1}^{n}c_{j}(t) + r(t).
 \end{equation}
-In equation (\ref{eq:basis}) the basis $\varphi_{j}(t)$ are chosen before hand (a-priory), and the coefficients are computed through an integral or summation operation. A sort of \say{bias} is imposed on the the function $f(t)$. On the hand, in equation (\ref{eq:hht1}) one can clearly state that the basis function are directly computed based on the function $f(t)$. This illustrates the concept of adaptivity, central to the Hilbert Huang transform.
+In equation (\ref{eq:basis}) the basis $\varphi_{j}(t)$ are chosen before hand (a-priory), and the coefficients are computed through an integral or summation operation. A kind of \say{bias} is imposed on the the function $f(t)$. A change of basis function will affect the resulting decomposition. On the hand, in equation (\ref{eq:hht1}) the basis function are directly derived from the properties of the function $f(t)$. This illustrates the concept of adaptivity, central to the Hilbert-Huang transform, which can be seen as basis function agnostic.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=6in]{../fig/imfEMD.png} 
+   \includegraphics[width=5in]{../fig/imfEMD.png} 
    \caption{The intrinsic mode functions (IMF ) and the residual (in red) generated from the input signal $S(t) = \sin(10 \pi t) + \sin(20 \pi t) $}
    \label{fig:emd3}
 \end{figure}
 \justify
-The intrinsic mode functions obtained through the EMD process constitute an adaptive basis that satisfies the mathematical properties of convergence, completeness, orthogonality and uniqueness, (\cite{huang98}). Furthermore, if $a_{j}(t)$ and $\omega_{j}(t)$ are amplitude and frequency modulation corresponding to IMF $j$, then the original signal $S(t)$ can also be recover as 
+Figure \ref{fig:emd3} shows the signal  $s(t) = \sin(10 \pi t) + \sin(20 \pi t) $ (top) and its IMFs as well as the residual. The target signal is the superposition of a high and a low amplitude component. Both are recovered by the empirical mode decomposition and labeled as $imf_{1}$ and $imf_{2}$, respectively. The residual component, which contain no oscillations, can be interpreted as noise or uncertainty incurred by the decomposition. 
+\justify
+The intrinsic mode functions obtained through the EMD process, constitutes an adaptive basis that satisfies the mathematical properties of convergence, completeness, orthogonality and uniqueness, (\cite{huang98}). Furthermore, if $a_{j}(t)$ and $\omega_{j}(t)$ are amplitude and frequency modulation corresponding to IMF $j$, then the original signal $s(t)$ can also be recover as 
 \begin{equation}\label{eq:recover2}
-S(t) = \Re{\left( \sum_{j=1}^{n}a_{j}(t)\exp\left(i\int\omega_{j}(t)\mathrm{dt}\right)  \right)},
+s(t) = \Re{\left( \sum_{j=1}^{n}a_{j}(t)\exp\left(i\int\omega_{j}(t)\mathrm{dt}\right)  \right)},
 \end{equation} 
-where the symbol $\Re(\cdot)$ represents the real part of the expression its encompasses, $i=\sqrt{-1}$, and $n$ is the total number of IMFs obtained from decomposing a signal $S(t)$. Recall that the amplitudes $a_{j}(t)$ and the frequencies $\omega_{j}(t)$ can be computed through the Hilbert transform from equations (\ref{eq:hilbert}, \ref{eq:amplitude}, and \ref{eq:frequency}). An analog representation of equation (\ref{eq:recover2}) in terms of Fourier expansion would be 
+where the symbol $\Re(\cdot)$ represents the real part of the expression its encompasses, $i=\sqrt{-1}$, and $n$ is the total number of IMFs obtained from decomposing a signal $s(t)$. Recall that the amplitudes $a_{j}(t)$ and the frequencies $\omega_{j}(t)$ can be computed through the Hilbert transform. An analog representation of equation (\ref{eq:recover2}) in terms of Fourier expansion would be 
 \begin{equation}\label{eq:recoverFourier}
-S(t) = \Re{\left( \sum_{j=1}^{n}a_{j}\exp\left(i\omega_{j}\right)  \right)},
+s(t) = \Re{\left( \sum_{j=1}^{n}a_{j}\exp\left(i\omega_{j}\right)  \right)},
 \end{equation} 
-where this time, the amplitude $a_{j}$ and the frequency $\omega_{j}$ are constant. The Hilbert Huang transform (HHT) offers two different approaches to recover a decomposed signal. The first one is described by equation (\ref{eq:hht1}) and include the IMFs, while the second approach is given by equation (\ref{eq:recover2}) and includes the instantaneous amplitude and the instantaneous frequency. This gives the HHT a leverage over Fourier transform in nonlinear an non stationary data analysis.
+where this time, the amplitude $a_{j}$ and the frequency $\omega_{j}$ are constant. The Hilbert-Huang transform (HHT) offers two different approaches to recover a decomposed signal. The first one is described by equation (\ref{eq:hht1}) and includes the IMFs, while the second approach is given by equation (\ref{eq:recover2}) and includes the instantaneous amplitude and the instantaneous frequency. This gives the HHT a leverage over Fourier transform in nonlinear an non stationary data analysis.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Application of the Empirical mode decomposition to pulse detection}
+\section{Application for bearing fault detection: a case study}
 \label{sec:pulse}
-After introducing the Hilbert Huang transform in the previous section, we are now ready to apply the empirical mode decomposition to a case study: Detecting pulses emitted by a bearing with crack in the outer and inner ring. First of all, a few recalls: Figure \ref{fig:bearing-architecture} shows a geometry of a bearing, with different parts.
+In this section, the proposed new method is applied to a case study, in order to demonstrate its ability in detecting bearing failure. As a reminder, Figure \ref{fig:bearing-architecture} shows a geometry of a bearing, with different parts.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=4in]{../fig/bearing.png} 
@@ -106,24 +105,24 @@ After introducing the Hilbert Huang transform in the previous section, we are no
 \justify
 A fault occurring at the outer ring is called a ball pass frequency outer ring (BPFO) defect. While a fault in the inner ring occurs at a frequency called ball pass inner race frequency (BPFI). They are given in Hz in terms of the bearing geometrical characteristics an the rotating speed of the shaft as
 \begin{equation}\label{eq:bpfo2}
-BPFO = \frac{nb}{2}R\left(1-\frac{BD}{PD}\cos\left(\beta\right)  \right) \nonumber,
+BPFO = \frac{nb}{2}R\left(1-\frac{BD}{PD}\cos\left(\beta\right)  \right) \nonumber
 \end{equation}
 \begin{equation}\label{eq:bpfi2}
-BPFI = \frac{nb}{2}R\left( 1 +  \frac{BD}{PD}\cos\left(\beta\right)   \right)
+BPFI = \frac{nb}{2}R\left( 1 +  \frac{BD}{PD}\cos\left(\beta\right)   \right),
 \end{equation}
-where R is the rotating speed of the motor on which the bearing is attached. nb is the number of rolling elements (balls), BD is a rolling element diameter. The pitch diameter PD is half the hight of the inner ring, and the contact angle $\beta$ is the angle formed when a rolling element touches the cage. 
+where R is the rotating speed of the motor on which the bearing is attached. nb is the number of rolling elements (balls), BD is a rolling element diameter. The pitch diameter PD is half the height of the inner ring, and the contact angle $\beta$ is the angle formed when a rolling element touches the cage. 
 \justify
-The data and the experimental setup used for this case study were described in chapter 2. In this setup, four bearings are mounted on a motor rotating at 2000 rotations per minutes (33.3 Hz). In the first experiment the motor runs until bearing
-bearing number 3 is severely damaged with inner race defect, while in the second experiment outer race defect occurs in bearing number 1. For each experiment, successive vibration signals where obtained, with a sample rate of 20 $KHz$ and corresponding Nyquist frequency of 10 $KHz$ (half the sampling rate). The Nyquist frequency define a lower bound limit in order to avoid aliasing, which is a loss of information due to under sampling. That is, if the sample contain frequency components that are higher then the Nyquist frequency, those frequency component wont be able to be seen.
+The data and the experimental setup used for this case study were described in chapter 2. In this setup, four bearings are mounted on a motor rotating at 2000 rotations per minutes (33.3 Hz). In the first experiment the motor runs until
+bearing number 3 is severely damaged with inner race defect, while in the second experiment outer race defect occurs in bearing number 1. For each experiment, successive vibration signals where obtained, with a sample rate of 20 $KHz$ and corresponding Nyquist frequency of 10 $KHz$ (half the sampling rate). The Nyquist frequency define a lower bound limit in order to avoid aliasing, which is a loss of information due to under sampling. That is, if the sample contain frequency components that are higher then the Nyquist frequency, those frequency components wont be able to be seen.
 
 \justify
 \subsection{Seasonal Trend decomposition based on Loess (STL)}
 The STL sequentially applies the locally estimated scatter plot smoother (LOESS) in order to obtain cyclical and trend components of a signal (\cite{Cleveland-1979}, \cite{Cleveland-et-al-1988}). Here a cyclical component is a periodically occurring pattern in a signal. The  locally estimated scatter is a non parametric curve fitting procedure.  It can be used for \say{Data exploration, diagnostic checking of parametric models and provides a non parametric regression surface}.
-If $S(t)$ is a signal, the goal is to obtained the decomposition 
+If $s(t)$ is a signal, the goal is to obtained the decomposition 
 \begin{equation}
-S(t) = T_{r}(t) + C_{y}(t) + R_{res}(t),
+s(t) = T_{r}(t) + C_{y}(t) + R_{res}(t),
 \end{equation} 
-where $T_{r}(t)$ an $C_{y}(t)$ are the trend and cyclical components, and $R_{res}(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatterplot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. Its therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. Since pulses emitted by a bearing roller elements passing a crack, are local periodic events on a global scale, the STL provides the necessary mathematical apparatus to capture them. A detailed account of the STL can be found in  (\cite{Cleveland-et-al-1990}).
+where $T_{r}(t)$ an $C_{y}(t)$ are the trend and cyclical components, and $R_{res}(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatterplot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. It therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. A detailed account of the STL can be found in  (\cite{Cleveland-et-al-1990}).
 
 \justify
 %By design, the STL is computational efficient, robust in the sense that it uses a robust statistical estimator, and deals very well with missing and distorted data points (\cite{Cleveland-et-al-1990}). In the subsequent paragraphs, an account of the LOESS procedure is presented.
@@ -161,8 +160,8 @@ where $T_{r}(t)$ an $C_{y}(t)$ are the trend and cyclical components, and $R_{re
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Results from applying empirical mode decomposition and seasonal trend decomposition base on Loess}
+Loess
+\subsection{Results }
 In this section we apply the empirical mode decomposition followed by the seasonal trend decomposition based on LOESS to extract pulses emitted by a failed bearing.
 Figure \ref{fig:pulse} shows a flow diagram, describing the methodology to obtaining pulse signals emitted from a bearing with ball pass frequency outer race defect. An input signal goes through the empirical mode decomposition to generate intrinsic mode functions. Furthermore, the STL is applied on the intrinsic mode functions to generate a periodic signal which looks like a pulse.
 
