@@ -154,7 +154,7 @@ If $s(t)$ is a signal, the goal is to obtained the decomposition
 \begin{equation}
 s(t) = T_{r}(t) + C_{y}(t) + R_{res}(t),
 \end{equation} 
-where $T_{r}(t)$ an $C_{y}(t)$ are the trend and cyclical components, and $R_{res}(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatterplot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. It therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. A detailed account of the STL can be found in  (\cite{Cleveland-et-al-1990}).
+where $T_{r}(t)$ an $C_{y}(t)$ are the trend and cyclical components, and $R_{res}(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatter plot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. It therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. A detailed account of the STL can be found in  (\cite{Cleveland-et-al-1990}).
 \justify
  In this thesis, the STL is used to address the mode mixing issue discussed earlier. This approach advantage is two folded: In one hand it solves the mode mixing issue by extracting the dominant frequency characteristic, and on the other hand its generates a clear frequency spectrum, as will be shown later.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -172,11 +172,11 @@ where $E(\cdot)$ is the expectation or mean, COV($\cdot$) is the covariance and 
 \begin{equation}\label{eq:psd}
 	PSD\left(s(t)\right) = E\left[ \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-iwt}\right\vert^{2}   \right]
 \end{equation}
-where $N$ is a large integer, $i=\sqrt{-1}$, $E(\cdot)$ is the expected value, and $\omega$ is the angular frequency. The estimation $\widehat{PSD}$
+where $N$ is an integer, $i=\sqrt{-1}$, $E(\cdot)$ is the expected value, and $\omega$ is the angular frequency. The estimate $\widehat{PSD}$ of the power spectral density and given by
 \begin{equation}
 		\widehat{PSD}\left(s(t)\right) =  \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-iwt}\right\vert^{2}
 \end{equation}
-of the power spectral density in equation (\ref{eq:psd}) is called the periodogram.
+is called the periodogram.
 \begin{figure}[H]
 \begin{tikzpicture}
   [node distance=.8cm,
@@ -197,7 +197,7 @@ of the power spectral density in equation (\ref{eq:psd}) is called the periodogr
       %\node (finans) [punktchain, on chain=going right] {Det finansielle system};
     \end{scope}
     \end{tikzpicture}
-  \caption{Schematic description of the methodology to obtaining a pulse like signal containing all diagnostic information for bearing fault detection}
+  \caption{Schematic description of the new scheme for bearing fault detection.}
    \label{fig:pulse}
 \end{figure}
 \justify
