@@ -156,25 +156,28 @@ s(t) = T_{r}(t) + C_{y}(t) + R_{res}(t),
 \end{equation} 
 where $T_{r}(t)$ an $C_{y}(t)$ are the trend and cyclical components, and $R_{res}(t)$ is the residual obtained from subtracting  the trend and the cyclical component from the signal. The key ingredient in the STL, is the locally estimated scatter plot smoother procedure. The latter being a non parametric regression method, does not rely on any a-priory assumption on the shape of the curve that needs to be fitted. It therefore provides a flexible approach to curve fitting, by capturing local, as well as global characteristics of a signal. A detailed account of the STL can be found in  (\cite{Cleveland-et-al-1990}).
 \justify
- In this thesis, the STL is used to address the mode mixing issue discussed earlier. This approach advantage is two folded: In one hand it solves the mode mixing issue by extracting the dominant frequency characteristic, and on the other hand its generates a clear frequency spectrum, as will be shown later.
+ In this thesis, the STL is applied to address the mode mixing issue discussed earlier. This approach advantage is two folded: In one hand it solves the mode mixing issue by extracting the dominant frequency mode, and on the other hand
+  its generates a clear frequency spectrum, as will be shown later.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Results }
-In this section we apply the empirical mode decomposition followed by the seasonal trend decomposition based on LOESS to extract pulses emitted by a failed bearing.
-Figure \ref{fig:pulse} shows a flow diagram, describing the methodology to obtaining pulse signals emitted from a bearing with ball pass frequency outer race defect. An input signal goes through the empirical mode decomposition to generate intrinsic mode functions. Furthermore, the STL is applied on the intrinsic mode functions to generate a periodic signal which looks like a pulse. And finally, the power spectral density of the resulting signal is approximated by the periodogram method.
+\subsection{Results and interpretation}
+In this section we apply the empirical mode decomposition followed by the seasonal trend decomposition based on LOESS to extract features containing bearings diagnostic information.
+Figure \ref{fig:pulse} shows the flow diagram describing the new method for bearing fault detection.
+\justify
+An input bearing vibration signal is subjected to the empirical mode decomposition in order to generate intrinsic mode functions (IMFs). To mitigate mode mixing, the seasonal component of each IMF is extracted through the seasonal trend decomposition based on LOESS. In order to expose potential bearing failure frequencies, the power spectral density of the resulting signal is approximated by the periodogram method.
 \justify
 The power spectral density is technically the power or energy distribution of the autocovariance function (ACF) frequency spectrum. (\cite{stoica2004}). The autocovariance function of a signal $s(t)$ is defined by 
 \begin{equation}
 	ACF(s(t)) = E\left[ s^{*}(t)s(t-k) \right] = COV\left(s(t), s^{*}(t-k)\right)\quad k = 0,1, \cdots
 \end{equation}
-where $E(\cdot)$ is the expectation or mean, COV($\cdot$) is the covariance and $s^{*}(t)$ is the complex conjugate of $s(t)$. The covariance of the signal $s(t)$ and its complex conjugate measures their joint variability. Thus the autocovariance function is a sequence of covariance between the signal and its complex conjugate. Now, the power spectrum density (PSD) of a signal s(t) can be defined by (\cite{stoica2004})
+where $E(\cdot)$ is the expectation or mean, COV($\cdot$) is the covariance and $s^{*}(t)$ is the complex conjugate of $s(t)$. The covariance of the signal $s(t)$ and its complex conjugate measure their joint variability. Thus the autocovariance function is a sequence of covariance between the signal and its complex conjugate. Now, the power spectrum density (PSD) of a signal s(t) can be defined by (\cite{stoica2004})
 \begin{equation}\label{eq:psd}
-	PSD\left(s(t)\right) = E\left[ \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-iwt}\right\vert^{2}   \right]
+	PSD\left(s(t)\right) = E\left[ \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-i\omega t}\right\vert^{2}   \right]
 \end{equation}
-where $N$ is an integer, $i=\sqrt{-1}$, $E(\cdot)$ is the expected value, and $\omega$ is the angular frequency. The estimate $\widehat{PSD}$ of the power spectral density and given by
+where $N$ is an integer, $i=\sqrt{-1}$, $E(\cdot)$ is the expected value, and $\omega$ is the angular frequency. The estimate $\widehat{PSD}$ of the power spectral density given by
 \begin{equation}
-		\widehat{PSD}\left(s(t)\right) =  \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-iwt}\right\vert^{2}
+		\widehat{PSD}\left(s(t)\right) =  \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-i\omega t}\right\vert^{2}
 \end{equation}
 is called the periodogram.
 \begin{figure}[H]
