@@ -4,9 +4,9 @@
 %%=========================================
 \documentclass[../Main/thesis.tex]{subfiles}
 \begin{document}
-	\chapter[Conclusions]{Conclusion, discussion, and recommendations for further Work}
+	\chapter[Conclusions]{Conclusion}
 	\label{sec:conclusions}
-	 This chapter sums up the ideas contain in the previous chapters and paragraphs. At first, a succinct summary is put forth in section \ref{sec:summary_and_conclusions}, followed by a discussion of the main results in section \ref{sec:discussion}. Section \ref{sec:recommendations_for_further_work}, presents a list of recommendations.
+	 This chapter sums up the ideas contain in the previous chapters and paragraphs. At first, a succinct summary is put forth, followed by a discussion of the main results, and a list of recommendations to possibly extend this thesis.
 	%%This is the last chapter
 	%In this final chapter you should sum up what you have done and which results you have got. 
 	%You should also discuss your findings, and give recommendations for further work.
@@ -28,71 +28,11 @@
 	The high frequency resonance technique can produce a very noisy spectrum, in particular when the bearing is subjected to a sever inner race defect. This can render fault detection very challenging. In this thesis therefore, a new method is presented to mitigate this issue.
 	This new scheme consists of decomposing an input bearing vibration signal into successive high to low frequency components called intrinsic mode functions (IMFs), through the so called empirical mode decomposition (EMD). The latter is part of the Hilbert-Huang transform, which couples the EMD with the Hilbert transform, in order to derive well define instantaneous frequencies and amplitude. The former and the latter are very important in frequency and amplitude modulated problems.
 	\justify
-	Once the intrinsic mode functions (IMFs) have been computed, the first IMF is selected and its seasonal trend is computed by means of the seasonal trend decomposition method by LOESS (STL). The latter is a computational efficient method to decomposition a signal into its trend and seasonal parts. The former is a monotone function, while the latter is a periodic oscillatory sinusoidal.
-	%To set a reference method, the Fourier transformed based method was introduced, followed by two new methods that extend the limitations of the latter.
+	Once the intrinsic mode functions (IMFs) have been computed, the first IMF is selected and its seasonal trend computed by means of the seasonal trend decomposition method by LOESS (STL). The latter is a computational efficient method to decomposition a signal into its trend and seasonal parts. The former is a monotone function, while the latter is a periodic oscillatory sinusoidal. Furthermore, the power spectrum density of the seasonal component of the first intrinsic mode function is approximated by the periodogram method. This result in a conspicuous energy distribution per frequency contribution, where bearing failure frequencies are clearly identifiable. In addition, bearing failure characteristics such harmonics, and the rotation speed of the motor housing the bearings, are all visible in the estimated spectrum.
 	\justify
-%	In Chapter 2, we introduced the Fourier transform (FT) based method, which was later applied to a case study.
-%	In the latter, a machine housing four bearings and rotating at 2000 revolutions per minute, was run to failure.
-%	At the end of the experiment, one of the bearing had a sever damage in its outer layer. This fault is know as ball pass frequency outer race defect. A sensor recording the vibration movement was placed on each bearing, in order to monitor any potential damages. This resulted in collecting 984 samples, where each sample containing 20 480 data points, was saved every 10 minutes.
-%	\justify
-%	Each sample, which we refer to as signal, was subjected to three filters: A band, high and low pass filter, to remove unwanted noise and frequencies. The resulting signal was decomposed into its frequency spectrum. The latter contains all frequencies at which the bearing is vibrating, including the ball pass outer race frequency, previously mentioned.
-%	The ball pass frequency outer race defect, (which is the defect frequency) is derived from the bearing physical characteristics, as well as the rotation speed of the motor. Conceptually, a bearing with a defect, will produce a sub-signal, which is a sinusoidal function with amplitude and frequency corresponding to the ball pass frequency outer race defect. After estimating that frequency, a search is performed in the frequency spectrum. Once it is found, we just keep track of the amplitude of the sub-signal it produced.
-%	\justify
-%	By applying the Fourier transform based method, we were able to detect the onset of failure in the bearings outer race and track its evolution over time. However, when using the Fourier transform method, the dependency of failure frequency on the rotational speed of the motor, can incur difficulties for continuously varying rotational speed or even poor data quality. In addition, the Fourier transform method is not well equipped in dealing with non-linear and non-stationary signals. The assumption of an a-priory trigonometrical basis, which are globally define, limits the FT based method in capturing local phenomenon such high frequency pulses emitted by a crack in bearings.
-%	\justify
-%	To circumvent some of the short coming of the Fourier transform, the Hilbert Huang transform (HHT) was introduced in Chapter 3.
-%	This method adaptively decomposes a signal into sub-signals called intrinsic mode functions (IMFs), by a process called empirical mode decomposition (EMD). It uses local properties (extrema, envelop) and statistical estimator (mean) to iteratively	\say{siffer} a signal into its sub-components. This allows decomposing non-stationary and nonlinear data with ease. In addition local phenomenon such as high frequency pulses emitted by cracks in bearing can be detected by this method. By applying the EMD coupled with a robust seasonal trend decomposition method, it was possible to extract high frequency, short duration pulses emitted by a crack located in the outer ring of a bearing.
-%	\justify
-%	In chapter 4, we introduced a method that uses the duo wavelet transform-support vector machine, to monitor and detect outer race defect for a system of four bearings attached to a motor. The new methodology consists of three stages: In the first stage, the wavelet transform decomposes a bearing vibration signal into two additional signals. They were called frequency and temporal features. The former and the latter encode frequency and temporal information, and together form the temporal-frequency feature space. In the second stage, the interquartile range (IQR) of the frequency and temporal feature are estimated, for successive vibration samples measured in time. The IQR which is a robust statistical estimator, measures the bulk of variability, and quantifies the health of a sample. A higher IQR implies an \say{unhealthy} sample. In doing so, we obtained several points in the temporal-frequency feature space.
-%	\justify
-%	In the last stage, a one class support vector machine (SVM) classifier was applied to the set of points generated in the temporal-frequency feature space. The SVM, which is a linear classification algorithm, was able to set a boundary between \say{healthy} and \say{unhealthy} samples.
-%	This new methodology was able to detect earlier the onset of failure for one of the bearings which was severely affected by a defect in the outer race.
-%	
-%	
-	
-	%%=========================================
-	\section{Discussion}
-	\label{sec:discussion}
-	The contribution of this thesis rests on two methods: Hilbert Huang transform coupled with the seasonal trend base on Loess (HHT-STL) and wavelet transform coupled with support vector machine (WT-SVM). Both methods are simple and require less transformation as opposed to the Fourier transform based method. In the latter the input signal needs to be filter by a band, high and low pass filter, before being decomposed into it frequency spectrum. Moreover, detecting fault requires the knowledge of the frequency spectrum which depends on bearings physical characteristics and rotation speed on the motor housing the bearings. In contrast, the two new methods are direct, and only rely on the signal.
+	The Hilbert-Huang transform, through the empirical mode decomposition (EMD), boasted in generated mono components intrinsic mode functions. However, the EMD suffers from what is known as mode mixing, which makes an IMF not exactly mono component. This is precisely the reason why in this thesis, the seasonal component of each IMF is extracted in order to circumvent the mode mixing issue.
 	\justify
-	The HHT-STL method was introduced as a tool to extract high frequency short duration pulses. It is used as a proof of concept. Once pulses are extracted, their frequency and amplitude represent the failure characteristics of a bearing. To monitor a bearing we just need to track the amplitude of a pulse. However, at this stage, for this method to be useful in application, two questions need to be answered 
-	\justify
-	How to choose the correct intrinsic mode function ?. Does the amplitude and the frequency of the pulse corresponds to the failure frequency on a bearing? 
-	The first question is related to the fact that the Hilbert Huang transform generates many intrinsic mode functions (IMFs). When a bearing mounted on a motor vibrates, the resulting signal encompasses multiple sub-signals that correspond to other components on the motor, including the bearing it self. This include but not limited to: the rotating motor shaft, other bearings, the motor cage, the belts, etc $\dots$, as well as a sub-signal generated by a potential defect. Conceptually, each intrinsic mode function represents a target component sub-signal.
-	Since we are only interested in a target bearing, we need to select the appropriate intrinsic mode functions related to that bearing only, and map them accordantly. Once we have done that, we can chose the IMF corresponding to a bearing sub-signal generated by a fault, such as a crack.
-	\justify
-	To assess the effectiveness of this method, more data is required. Acquiring data has been one of the most challenging thing. Most companies protect their data and can seldomely give access to it. Even if this is the case, most of the time a non disclosure agreement needs to be signed. The possible way of obtaining data would be to possess a testing equipment with various bearing.
-	\justify
-	The wavelet transform coupled with the support vector machine method, introduces the concept of health index. It was described as the statistical measure of variability of a signal and was given by the interquartile range. It is akin to the concept of entropy which measures the degree of disorder in the system. The entropy of an isolated system can only increase. A system is isolated if it does not interact with any other system. This idea can be applied to the health index. For an isolated machine, the health index will increase in time, if no maintenance is performed over time. This means that the health index is either a constant and/or in increasing function of time. The health index can then be used as a data quality assessment metric. Let illustrate this.
-	\justify
-	 Figure \ref{fig:dq1} shows the amplitude of ball pass frequency outer race defect for four bearing over time. Bearing number one (1) is severely damaged. The amplitude curve for bearing 1 increases and oscillate. This behavior shows that the data related to bearing 1 is not of good quality, since the amplitude of the fault should be constant or increase in time. The same behavior can be seen in Figure \ref{fig:dq2} which show the frequency feature health index from Chapter 4. The interquartile range can be used to estimate the quality of a vibration sample. any decreasing values following an higher value would indicate a \say{bad} sample or a sample with high uncertainty. 
-	
-%	\begin{figure}[H] 
-%		\centering
-%		\includegraphics[width=5.3in]{../fig/experiment2_bearing_fft_amp.png}
-%		% \includegraphics[width=4.4in]{../fig/experiment2_bearing_fft_trend.png} 
-%		\caption{BPFO amplitude evolution for all bearinags over time}
-%		\label{fig:dq1}
-%	\end{figure}
-%\begin{figure}[H] %  figure placement: here, top, bottom, or page
-%	\centering
-%	\includegraphics[width=5.3in]{../fig/frequency_feature_health.png} 
-%	\caption{Frequency feature health index as a function of time-}
-%	\label{fig:dq2}
-%\end{figure}
-	%	Here, you may discuss your findings based on your results, their strengths and limitations. 
-	%	Note that this discussion is more high level than discussions made in relation to results you have achieved and presented in the previous chapter. 
-	%	The discussion here should put your work in larger context. 
-	%	You may address if you achieved what you had intended to do, why not (if you did not), if you got results in which you did not expect, why the results are important, why there are limitations in using the results, or if there are opportunities to transfer your results and findings into other domains, and so on.
-	%%=========================================
-	\section{Recommendations for Further Work}
-	\label{sec:recommendations_for_further_work}
-	
-	
-	\begin{itemize}
-		\item Test bench to generate high quality data
-		\item Extend the methods developed here to all type of bearing faults.
-		\item Map IMFs to correct sub-signal and estimate failure amplitude and frequency for the HHT-STL method
-	\end{itemize}
+	The result obtained are satisfactory in the sens that, bearing failure frequencies are clearly identified. However, only two types of bearing failure were covered in this thesis: namely fault occurring in the inner and outer ring. The justification is that these are the prevalent faults encountered. Therefore the new scheme described in this thesis, could be tested on all types of bearing faults.
+
 	
 \end{document}
