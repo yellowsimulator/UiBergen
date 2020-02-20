@@ -6,11 +6,10 @@
 \begin{document}
 \chapter[Application of the High frequency resonance technique in bearing Fault detection]{Application of the High frequency resonance technique in bearing Fault detection}
 \label{sec:chapter2}
-This chapter covers the application of the high frequency resonance technique (HFRT), to bearing fault detection. It starts with the background materials in section \ref{sec:background-material}, where section \ref{sec:fouurier-analysis} presents an overview of the Fourier analysis, while section \ref{sec:hilbert-transform} describes signal filtering in general, and in particular the Hilbert Huang transform, which is a special kind of linear filter.
+This chapter covers the application of the high frequency resonance technique (HFRT), to bearing fault detection. It starts with the background materials in section \ref{sec:background-material}, where section \ref{sec:fouurier-analysis} presents an overview of the Fourier analysis, while section \ref{sec:hilbert-transform} describes signal filtering in general, and in particular the Hilbert transform, which is a special kind of linear filter.
+
 \justify
-It is worth noting that the Hilbert transform filters out negative frequencies, per its application in the high frequency resonance technique. Beyond that, it comes with a cluster of attributes, some of which being essential in the Hilbert Huang transform, at analyzing signals with modulated spectral characteristics.
-\justify
-After discussing the background materials, section \ref{sec:application} instantiates a case study for the high frequency resonance technique, applied to detecting bearing failure frequencies. The data for this case study, was provided by the intelligence system division, of the national aeronautics and Space administration (NASA), and is the subject of divers scientific publications.
+After discussing the background materials, section \ref{sec:application} instantiates a case study for the high frequency resonance technique, applied to detecting bearing failure frequencies. The data for this case study, was provided by the intelligence system division, of the national aeronautics and Space administration (NASA).
 
 \section{Background materials}
 \label{sec:background-material}
@@ -308,12 +307,12 @@ As illustration, let $\xi$ be the mapping that represents a discrete time linear
 \begin{equation}\label{eq:lti}
 	\xi(z^{k}) = T(z)z^{k}
 \end{equation}
-where $z$ is a complex number, $k$ an integer, and $T(\cdot)$ the transfer function of the discrete linear system. In addition, if $\xi$ is stable, meaning that it can be evaluated on the unit circle, ($z = e^{jk\theta}$) then (\ref{eq:lti}) becomes
+where $z$ is a complex number, $k$ an integer, and $T(\cdot)$ the transfer function of the discrete linear system. In addition, if $\xi$ is stable, meaning that it can be evaluated on the unit circle, ($z = e^{jk\Omega}$, $j=\sqrt{-1}$),  then (\ref{eq:lti}) becomes
 \begin{equation}\label{eq:lti1}
-\xi\left(e^{jk\theta}\right) = T\left(e^{j\theta}\right)e^{jk\theta}
+\xi\left(e^{jk\Omega}\right) = T\left(e^{j\Omega}\right)e^{jk\Omega}
 \end{equation}
-where $\theta$ is the phase of the complex number $z$ lying on the unit circle.
-It is worth noting that a stable system produces a bounded signal from an input bounded signal, which is a desire property in real life applications. Moreover, the response of a single frequency component of the sinusoidal $2\cos(\Omega k)$, with phase $\Omega$ is given by
+where $\Omega$ is the phase of the complex number $z$ lying on the unit circle.
+It is worth noting that a stable system produces a bounded signal from an input bounded signal, which is a desire property in real life applications. Moreover, the response of a single frequency component of the sinusoidal $ 2\cos(\Omega k)$, is given by
 \begin{equation}\label{eq:frs}
 	\begin{split}
 	2\xi\left(\cos(\Omega k)\right) &= 2\left(\xi\left(e^{jk\Omega}\right) +  \xi\left(e^{-jk\Omega}\right) \right)\\
@@ -327,9 +326,9 @@ where $\angle T\left(e^{j\Omega}\right)$ is the angle of the frequency response 
 In this thesis, the Butterworth filter is used in the implementation of the high frequency resonance technique. This filter tends to approximate an ideal one, which \say{should not only completely reject the unwanted frequencies (stopband) but should also have uniform sensitivity for the wanted frequencies (passband)} (\cite{butterworth1930}). Uniform sensitivity for the wanted frequencies means that, the wanted frequency band should be \say{flat}. As a low pass filter, the frequency response of the Butterworth filter in terms of frequency $\omega$ is given by    
 
 \begin{equation}
-	T(\omega) = \frac{1}{\sqrt{1 +\left( \frac{\omega}{\omega_{c}} \right)^(2n)}}
+	T(\omega) = \frac{1}{\sqrt{1 +\left( \frac{\omega}{\omega_{c}} \right)^{2n}}}
 \end{equation}
-where n is the order of the filter and $\omega_{c}$ is called cutoff frequency, and segregates the passband and the stopband. This low pass filter is the building block of other filters type(bandpass, highpass and so on). Figure \ref{fig:butterworth} shows the graph of a normalized Butterworth amplitude response in with respect to the angular frequency $\omega$, with cutoff frequency $\omega_{c} = 1$. As a low pass filter, the passband region includes frequency range from 0 to 1 radian per second. In this region, as the filter order $n$ increases, the passband region converges to a flat curve, and the amplitude response converges to a step function.   
+where n is the order of the filter and $\omega_{c}$ is called cutoff frequency, and segregates the passband and the stopband. This low pass filter is the building block of other filters type(bandpass, highpass and so on). Figure \ref{fig:butterworth} shows the graph of a normalized Butterworth amplitude response with respect to the angular frequency $\omega$, with cutoff frequency $\omega_{c} = 1$. As a low pass filter, the passband region includes frequency range from 0 to 1 radian per second. In this region, as the filter order $n$ increases, the passband region converges to a flat curve, and the amplitude response converges to a step function.   
 
 \begin{figure}[H]
 	\centering
@@ -360,10 +359,10 @@ Formally, an analytic signal is a complex signal whose imaginary part is the Hil
 \begin{equation}\label{eq:ana}
 Y(t) = s(t) + i H\{ s(t)\}
 \end{equation}
-where $H\{ s(t)\}$ is the Hilbert transform of $s(t)$. If (\ref{eq:ana}) holds, then $Y(t)$ is said to be an analytic signal. In addition, if $s(t)$ is a mono-component signal, its instantaneous amplitude (envelop) $a(t)$ and instantaneous frequency $\omega(t)$ as a function of the time variable $t$, are well defined and given by
+where $H\{ s(t)\}$ is the Hilbert transform of $s(t)$. If (\ref{eq:ana}) holds, then $Y(t)$ is said to be an analytic signal. In addition, if $s(t)$ is a mono component signal, its instantaneous amplitude (envelop) $a(t)$ and instantaneous frequency $\omega(t)$ as a function of the time variable $t$, are well defined and given by
 
 \begin{equation}\label{eq:amplitude}
-a(t) = \sqrt{s(t)^{2} + H\{s(t) \}^{2} }
+a(t) = \sqrt{s(t)^{2} + Y(t)^{2} }
 \end{equation}
 \begin{equation}\label{eq:frequency}
 \omega(t) = \frac{d \Psi(t)}{dt} 
@@ -376,7 +375,7 @@ is the instantaneous phase. With these formulations, $s(t)$ can be extended to t
 \begin{equation}\label{eq:modulation}
 Y(t) = \mathbf{R}_{e}\left[|a(t)|e^{i \Psi(t)} \right],
 \end{equation}
-where $\mathbf{R}_{e}$ is the real part of the enclosed complex function. Recall that a mono-component signal is a sinusoidal with relatively slow amplitude and frequency variation. 
+where $\mathbf{R}_{e}$ is the real part of the enclosed complex function. 
 \justify
 An alternative way to describe a signal and its Hilbert transform, is to say that they are in quadrature. Although they differ in form, a signal and its Hilbert transform contain the same spectral component(s) (\cite{gabor1944}). In layman's terms, that is to say for example that, \say{a human ear could not distinguish between a sound wave and its Hilbert transform} (\cite{gabor1944}).
 \justify
@@ -416,7 +415,7 @@ Figure \ref{fig:cauchy_pulse} shows the Cauchy pulse, which is given by ($c=1$)
 \end{equation}
 as well as its instantaneous (inst) amplitude and frequency on the interval $[-30, 30]$. Considering the Cauchy pulse on the time interval $[0,30]$, its amplitude and frequency decay in time. This is well captured by the instantaneous amplitude and frequency in Figure \ref{fig:cauchy_pulse}.
 \justify
-Le further illustrate the importance of the Hilbert transform for frequency and amplitude modulated signals. This example is taken from (\cite{scipy2019}), the official page of the Python implementation of the Hilbert transform. It depicts the strength, as well as the short coming of the Hilbert transform. Consider the signal given in Figure \ref{fig:mode}. 
+Le further illustrate the importance of the Hilbert transform for frequency and amplitude modulated signals. This example is taken from (\cite{scipy2019}), the official page of the Python implementation of the Hilbert transform. It depicts the strength of the Hilbert transform. Consider the signal given in Figure \ref{fig:mode}. 
 
 \begin{figure}[H]
 	\centering
@@ -429,7 +428,7 @@ As one can can observe, its frequency changes from 20 Hz to 100 Hz from 0 to 1 s
 \justify
 Figure \ref{fig:inst} shows the corresponding instantaneous amplitude and frequency. It is clear from this that the frequency changes (nearly) from 20 Hz in the neighborhood of $t=0$, to 100 Hz in the neighborhood of $t = 1$ . This demonstrates the efficiency of the Hilbert transform in dealing with signals with modulated spectral characteristics. 
 \justify
-Although the Hilbert transform provides a tool to analyze signals with modulated spectral characteristics, the instantaneous frequency obtained does not always provide a physical meaning (\cite{huang98}, \cite{huang08}). As one can observe in Figure \ref{fig:inst}, at the endpoints of the interval $[0,1]$, the instantaneous frequency is not a single-valued function of time. It means that at a single point in time, multiple frequency values are defined. This obviously violate physical laws. The explanation as to why this occurred, is found in the signal not being mono-component. That is, the target signal is a superposition of elementary sub-signals.
+Although the Hilbert transform provides a tool to analyze signals with modulated spectral characteristics, the instantaneous frequency obtained does not always provide a physical meaning (\cite{huang98}, \cite{huang08}, unless the input signal is mono component (single frequency characteristics).
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{../fig/inst}
@@ -437,16 +436,9 @@ Although the Hilbert transform provides a tool to analyze signals with modulated
 	\label{fig:inst}
 \end{figure}
 \justify
-Formally, a mono-component signal say $z(t)$ has an analytic (complex) representation 
-\begin{equation}
-	z(t) = a(t)e^{i \Psi(t)} 
-\end{equation}
-where $a(t)$ and $\Psi(t)$ are the instantaneous amplitude and phase respectively,
-and the pair $a(t)$, $e^{i \Psi(t)}$ are spectrally disjoint.
+ To address the issue faced by the Hilbert transform for non mono component signals, the Hilbert-Huang transform was developed. Through the empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono component signals called intrinsic mode functions, for which instantaneous amplitude and frequency are well defined in a physical sense. Therefore, the Hilbert-Huang transform adds value to the Hilbert transform, and both make it possible to correctly tackle problems with frequency and amplitude modulation. A concise exposition of the Hilbert-Huang transform is given in chapter 3, where it is applied in a proposed new method, for bearing fault detection. 
 \justify
- To address the issue faced by the Hilbert transform for non mono-component signals, the Hilbert-Huang transform was developed. Through the so called empirical mode decomposition (EMD), which is a series of transformation, a target signal is decomposed into (nearly) mono-component signals called intrinsic mode function, for which instantaneous amplitude and frequency are well defined in a physical sense. Therefore, the Hilbert Huang transform adds value to the Hilbert transform, and both make it possible to correctly tackle problems with frequency and amplitude modulation. A concise exposition of the Hilbert-Huang transform is given in chapter 3, where it is applied in a proposed new method, for bearing fault detection. 
-\justify
-So much of what as been said concerning the Hilbert transform can be summarized as follow: The Hilbert transform acts as a linear filter in the frequency domain, where it imposes a phase shift to every Fourier component. In the time domain, it extends a real valued function to a complex function which is an analytic signal. The imaginary part of the latter is the Hilbert transform of the original signal. By using the analytic signal, the instantaneous frequency and the instantaneous amplitude of the original signal is derived. To have a meaning instantaneous amplitude and frequency, the original signal must be a mono-component signal, meaning that it must not be the superposition of signals. The Hilbert Huang transform, makes it possible to decompose any signal to a set of (nearly) mono-components signals called intrinsic mode function. Thus, the Hilbert transform, coupled with the Hilbert Huang transform provide a complete set of tools, in analyzing frequency and amplitude modulated signals.
+The Hilbert transform acts as a linear filter in the frequency domain, where it imposes a phase shift to every Fourier component. In the time domain, it extends a real valued function to a complex function which is an analytic signal. The imaginary part of the latter is the Hilbert transform of the original signal. By using the analytic signal, the instantaneous frequency and the instantaneous amplitude of the original signal is derived. To have a meaning instantaneous amplitude and frequency, the original signal must be a mono component signal. The Hilbert-Huang transform, makes it possible to decompose any signal to a set of (nearly) mono components called intrinsic mode function. Thus, the Hilbert transform, coupled with the Hilbert-Huang transform provide a complete set of tools, in analyzing frequency and amplitude modulated signals.
   
 
 
