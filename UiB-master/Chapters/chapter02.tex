@@ -487,7 +487,7 @@ At the end of the first experiment, an inner race defect occurred in bearing num
 
 \subsection{Bearing defects}
 \label{sec:fault}
-As pointed out earlier, bearing failure frequencies depend on their physical characteristics as well as the rotating speed of the motor housing them. Figure \ref{fig:bearing} shows a graphical representation of a bearing, with the outer ring, the cages that encircle the balls (rolling elements), and the inner ring, where the motor shaft is attached. A bearing failure is instantiated in four different ways, each related to its parts : a fault in the inner, and outer ring, and defects in the cages and roller elements. As part of this section, only fault occurring in the inner ring and outer ring are considered.
+Bearing failure frequencies depend on their physical characteristics as well as the rotating speed of the motor housing them. Figure \ref{fig:bearing} shows a graphical representation of a bearing, with the outer ring, the cages that encircle the balls (rolling elements), and the inner ring, where the motor shaft is attached. A bearing failure is instantiated in four different ways, each related to its parts : a fault in the inner, and outer ring, and defects in the cages and roller elements. As part of this section, only fault occurring in the inner ring and outer ring are considered.
 \begin{figure}[H] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=3.2in]{../fig/bearing}  
@@ -573,7 +573,7 @@ The Hilbert transform extract high amplitude or envelop of the bandpassed signal
 \end{figure}
 In experiment 2, four bearings were run to failure, resulting in outer race defect in bearing  number 1.
 Figure \ref{fig:bpfo_signal} shows the vibration time signals of bearing number 1, at the beginning (top) and six days after (bottom), from experiment number 2. A significant increase in the variance can be observed.
-I fact, the variance has increased 28 time after 6 days. This can be seen in Figure \ref{fig:bpfo_density}, which shows a density plot at the beginning and six days after.
+In fact, the variance has increased 28 time after 6 days. This can be seen in Figure \ref{fig:bpfo_density}, which shows a density plot at the beginning and six days after.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{../fig/bpfo/density_bpfo_signal}
@@ -635,8 +635,7 @@ They are result of amplitude modulation between the shaft frequency and the ball
 \end{figure}
 \justify
 The high frequency resonance technique applied to inner race defect detection, can produce a confusion spectrum, with pattern of spectral line changing (\cite{mcfadden1984a}). This make identifying inner race defect difficult in situation where the defect is pronounced. In those cases the defect frequency values can vary up to $2\%$ (\cite{randal2010}). Although the rotating speed of the machine is set as a constant value, in practice however, there is always small variations, that will also generate a variation in the theoretical value of the frequency defect. As can be seen from Figure \ref{fig:bpfi}, the frequency spectrum is some how noisy. This is one of the characteristics of the inner race defect when the defect is pronounced ((\cite{mcfadden1984a})). A noisy spectrum can render difficult the detection of failure frequencies.
-\justify
-In the next chapter a new method is presented in order to tackle the issue of noisy spectrum. As the high frequency resonance technique, through a series of transformation, a noiseless frequency spectrum is generated. As a result,  failure frequencies as well as informative machine characteristics are conspicuously displayed.
+In the next chapter a new method is presented in order to tackle the issue of noisy spectrum. 
 
 
 
@@ -649,7 +648,7 @@ The diagnostic information for bearing fault detection resides in the high frequ
 \justify
 The latter uses a series of filtering operations, aiming at isolating the bearing signal containing the failure frequencies. Furthermore, the frequency spectrum is extracted from the time signal through Fourier transform. If defects are initiated, the frequency spectrum will contain the defects frequencies. Although efficient, the high frequency resonance technique is only valid within the boundary of the assumptions upon which it is predicated. 
 \justify
-Due to slip of the roller elements in the bearing, the failure frequencies values can vary up to 2$\%$ from their theoretical values, or even more. In addition, bearing signal are relatively non periodic and stochastic in nature. Consequently, non-stationarity and non-linearity can be observed in bearing signal. When inner race defects are pronounced, the frequency spectrum can contain a considerable amount of noise, rendering difficult failure detection. The need for alternative methods for bearing fault detection is therefore justified and imperative. In the next chapter, a new method which addresses some of the aforementioned issues is proposed.
+Due to slip of the roller elements in the bearing, the failure frequencies values can vary up to 2$\%$ from their theoretical values, or even more. In addition, bearing signal are relatively non periodic and stochastic in nature. Consequently, non-stationarity and non linearity can be observed in bearing signal. When inner race defects are pronounced, the frequency spectrum can contain a considerable amount of noise, rendering difficult failure detection. The need for alternative methods for bearing fault detection is therefore justified. In the next chapter, a new method which addresses some of the aforementioned issues is proposed.
 
 
 
