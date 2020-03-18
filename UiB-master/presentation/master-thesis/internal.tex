@@ -115,14 +115,30 @@
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-	\frametitle{Bearing faults generate high frequency shock}
+	\frametitle{Bearing faults depends on their physical characteristics}
+\begin{equation}
+	BPFI = \frac{nb}{2}R\left(  1+ \frac{BD}{PD}\cos(\beta) \right)
+\end{equation}
+
+\begin{equation}
+BPFO = \frac{nb}{2}R\left(  1- \frac{BD}{PD}\cos(\beta) \right)
+\end{equation}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{frame}
+	\frametitle{Bearing faults generate high frequency shock and amplitude modulates the raw vibration signal}
 	\begin{figure}[H]
 		\centering
 		%\includegraphics[width=0.8\linewidth]{motor}
-		\includegraphics[width=0.8\linewidth]{outer-race1}
-		\includegraphics[width=0.8\linewidth]{inner-race1}
+		\includegraphics[width=0.5\linewidth]{outer-race1}
+		\includegraphics[width=0.6\linewidth]{bpfi_density}
 		%\caption{}
 		%\label{fig:datascience}
 	\end{figure}
@@ -147,12 +163,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{The High frequency Resonance Technique isolates bearing fault vibration}
+	\frametitle{The High frequency Resonance Technique isolates bearing faults }
 	\begin{figure}[H]
 		\centering
 		%\includegraphics[width=0.8\linewidth]{motor}
-		\includegraphics[width=0.8\linewidth]{outer-race1}
-		\includegraphics[width=0.8\linewidth]{outer-race2}
+		%\includegraphics[width=0.8\linewidth]{outer-race1}
+		\includegraphics[width=1.\linewidth]{inner-race2}
 		%\caption{}
 		%\label{fig:datascience}
 	\end{figure}
@@ -171,6 +187,34 @@
 		%\caption{}
 		%\label{fig:datascience}
 	\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{The Hilbert transform extracts the envelop of the filtered signal }
+	\begin{equation}
+		H(s(t)) = \frac{1}{\pi t}*s(t) = \frac{1}{\pi}P\int_{-\infty}^{+\infty}\frac{s(\eta)}{t-\eta}d\eta
+	\end{equation}
+	
+	\begin{equation}
+		y(t) = s(t) + iH(s(t))
+	\end{equation}
+	
+	\begin{equation}
+Envelop(s(t)) = \sqrt{s(t)^{2} + H(s(t))^{2}} 
+	\end{equation}
+	
+	\begin{figure}[H]
+		\centering
+		
+		\includegraphics[width=0.4\linewidth]{env}
+		%\includegraphics[width=0.8\linewidth]{inner-race2}
+		%\caption{}
+		%\label{fig:datascience}
+	\end{figure}
+	
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -223,7 +267,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{The new method is a combination of transformations}
+	\frametitle{Advantage and disadvantage of the Fourier Transform}
+	\begin{itemize}
+		\item \textcolor{green}{Recovers frequency content of a signal}
+		\item \textcolor{orange}{Valid in the frequency domain}
+		\item \textcolor{orange}{Ignores events}
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Hilbert-Huang Transform for bearing fault detection}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\linewidth]{new_method}
@@ -237,10 +294,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{The Empirical mode decomposition (EMD) splits a signal into Intrinsic mode function(IMF)}
+	\frametitle{The Hilbert-Huang transform (HHT) splits a signal into Intrinsic Mode Function(IMF)}
+		\begin{equation}
+	c_{j} = \sum_{j=1}^{N}s_{j}(t) + r(t)
+	\end{equation}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\linewidth]{selected_imf}
+		\includegraphics[width=0.6\linewidth]{selected_imf}
 		%\includegraphics[width=0.45\linewidth]{bpfi_sidebands}
 		%\includegraphics[width=0.8\linewidth]{inner-race2}
 		%\caption{}
@@ -251,10 +311,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{The Seasonal Trend Decomposition (STL) extracts relevant information }
+	\frametitle{The Seasonal Trend Decomposition (STL) extracts cyclical components }
+	\begin{equation}
+		s(t) = T(t) + C(t) + T(t)
+	\end{equation}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\linewidth]{emd-stl}
+		\includegraphics[width=0.6\linewidth]{emd-stl}
 		%\includegraphics[width=0.45\linewidth]{bpfi_sidebands}
 		%\includegraphics[width=0.8\linewidth]{inner-race2}
 		%\caption{}
@@ -267,7 +330,22 @@
 
 
 \begin{frame}
-	\frametitle{Bearing inner race fault is exposed through the periodogram }
+	\frametitle{Bearing faults are exposed through the power spectral density }
+	\begin{equation}\label{eq:psd}
+	PSD\left(s(t)\right) = E\left[ \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-i\omega t}\right\vert^{2}   \right]
+	\end{equation}
+
+	\begin{equation}
+	\widehat{PSD}\left(s(t)\right) =  \frac{1}{N} \left\vert \sum_{t=1}^{N} s(t)e^{-i\omega t}\right\vert^{2}
+	\end{equation}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{A bearing inner race fault is exposed through the power spectral density }
+	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.45\linewidth]{start_imf1_bpfi}
@@ -281,15 +359,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+
 \begin{frame}
-	\frametitle{Bearing outer race fault is exposed through the periodogram }
+	\frametitle{A bearing outer race fault is exposed through the power spectral density }
+
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.45\linewidth]{start_imf1_bpfo}
 		\includegraphics[width=0.45\linewidth]{end_imf1_bpfo}
-		%\includegraphics[width=0.8\linewidth]{inner-race2}
-		%\caption{}
-		%\label{fig:datascience}
 	\end{figure}
 \end{frame}
 
@@ -312,5 +390,20 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+	\frametitle{Conclusion }
+	\begin{itemize}
+		\item The High Frequency resonance is still the state-of-the-art method 
+		\item The proposed method adds value to bearing fault detection 
+		\item Extend the thesis to other bearing faults
+		\item Apply the method to bearings in industrial production
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \end{document}
 
